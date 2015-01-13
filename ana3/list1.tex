@@ -1,0 +1,180 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
+]{hyperref}
+\usepackage[
+  paper=a4paper,
+  top=1.5cm,
+  bottom=1.5cm,
+%    textheight=24cm,
+  textwidth=18cm,
+  ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{enumerate}}
+
+\newcommand{\mytitle}{}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Jure Slak}}
+\hypersetup{pdfsubject={}}
+
+\pagestyle{empty}
+
+\setlength{\parindent}{0pt}
+
+\newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
+\let\oldint\int
+\renewcommand{\int}{\oldint \!}
+
+\begin{document}
+
+\subsubsection*{NDE 1. reda}
+Ločljive spremeljivke: $y' = f(x)g(y)$ \\
+Linearna: $y' = a(x)y + b(x)$, rešujemo $y_s = y_h + y_p$ \\
+Trik: $y(x) \leftrightarrow x(y) \implies y' = 1/\dot{x}$ \\
+Homogena: $f(tx, ty) = t^\alpha f(x, y)$, v posebnem $f(x, y) = f(1, x/y)
+  \implies z = y/x, y' = z + xz' \implies$ linearna \\
+Bernoullijeva: $y' = a(x)y + b(x)y^\alpha$, rešujemo $z = y^{1-\alpha}$,
+  $\implies \frac{1}{1-\alpha}z' = a(x)z + b(x)$ \\
+Ricattijeva: $y' = a(x)y^2 + b(x)y + c(x)$, ena rešitev $y_1$. Nova spr. $y = y_1 + z
+  \implies$ Bernoullijeva \\
+Integrirajoči množitelj: $Pdx + Qdy = 0$, iščemo $\mu$: $(\mu P)_y = (\mu Q)_x$.
+Rešitev $u(x, y) = \int Pdx = \int Qdy = 0$ \\
+\hspace*{20pt} $\mu = \mu(x) \iff \frac{\mu_x}{\mu} = \frac{P_y - Q_x}{Q}$ odvisno samo od $x$.
+               $\mu = \mu(y) \iff \frac{\mu_y}{\mu} = \frac{Q_x - P_y}{P}$ odvisno samo od $y$. \\
+\hspace*{20pt} Če $\mu = f(x, y)$, pazi, da odvajaš kot kompozitum.\\
+Parametrično: $x = X(u, v), y = Y(u, v), y' = Z(u, v)$. Rešujemo: $dY = Z \, dX$ \\
+\hspace*{20pt} Triki: $\cos^2 + \sin^2 = 1, ch^2 - sh^2 = 1, y' = tx.$\\
+Clairautova: $y = xy' + b(y')$. Rešitev: $y = C x + b(C)$. Tudi singularna
+rešitev (ogrinjača). \\
+Lagrangeeva: $y = a(y')x + b(y')$. Rešujemo parametrično: $X = u, Z = y' = v, Y =
+a(v)u + b(v) \implies$ linearna. \\
+\hspace*{20pt} Singularna rešitev: poiščemo fiksne točke $a$. Če $a(t_0) = t_0 \implies y = a(t_0) x + b(t_0)$ je singularna rešitev.\\
+Singularna rešitev: če $G(x, y, c) = 0$ splošna rešitev, sing. rešitev dobimo:
+$G(x, y, c) = 0, G_c(x, y, c) = 0$. \\
+\hspace*{20pt} Druga možnost: če $F(x, y, y') = 0$ dana enačba, sing. rešitev
+    dobimo: $F(x, y, y') = 0, F_{y'}(x, y, y') = 0$. Preveriti moramo, če rešitev res reši DE!!! \\
+Iskanje ortogonalne trajektorije družine krivulj:
+\begin{enumerate*}
+  \item odvajaj enačbo krivulje (če se znebiš konstante, nadaljuj s korakom 3.))
+  \item eliminiraj konstanto iz enačbe krivulje in odvajane enačbe
+  \item v novi enačbi zamenjaj $y'$ z $-1/y'$ in reši dobljeno DE.
+\end{enumerate*}
+
+
+
+\subsubsection*{NDE višjih redov}
+Ne nastopa $y$: uvedemo $z = y'$. \\
+Obe strani sta odvoda nečesa: integriramo in dodamo konstanto. \\
+\hspace*{20pt} Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} = (\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\
+Ne nastopa $x$: uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' =
+  \ddot{z}z^2 + \dot{z}^2z$. \\
+Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y', \dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\
+Z utežjo: $F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,  y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+
+\subsubsection*{Geometrija}
+Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
+Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$
+
+\begin{tabular}{ll}
+Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
+Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
+\end{tabular}
+
+\subsubsection*{Eksistenčni izrek}
+$y' = f(x, y), y(x_0) = y_0$: veljati mora $f \in C([x_0 - a, x_0 + a] \times
+[y_0 - b, y_0 + b])$ in $f$ Lipschitzeva na 2. spremenljivko ($\exists N>0:
+|f(x, y_1) - f(x, y_2)| \leq N |y_1 - y_2|$, dovolj je, da je $\partial
+f/\partial y$ definirana in zvezna na kompaktu ali omejena). Potem obstaja
+natanko ena $C^1$ rešitev C. naloge definirana na $[x_0 - c, x_0 + c]$,
+kjer $c = \min\{a, b/M\}$ in $M = \max|f|$.\\
+\hspace*{20pt}$y(x) = y_0 + \int_{x_0}^x f(t, y(t)) \dt$\\
+Naj bo $f \in C^1([a, b] \times\R)$, $y' = f(x, y), y(x_0) = y_0$. Če obstaja rešitev C. naloge na $[a, b]$, je enolična.\\
+Za kakšne ocene: $y(x) = \int_a^x y'(x) \, \dx + y(a)$\\
+Rešitev na robu maksimalnega intervala pobegne iz vsakega kompakta.\\
+
+Triki: Če želimo pokazati, da ima Cauchyjeva naloga rešitev na $\R$, potem je
+dovolj, če je $y' = f(x,y), f\in C^1(\R ^2)$, pokazati, da je $f$ omejena (ker
+potem tisti $c = \min\{ a, b/M\}$ navzdol omejen), to pokažemo s kako radialno
+limito ipd.\\ Če želimo enoličnost (in vemo, da nek $y$ reši, si zamislimo drugo
+Cauchyjevo nalogo z enako DE in drugim začetnim pogojem, ki jo bo $y$ tudi
+rešila pa še ena (morda konstantna) funkcija, tam pa imamo lokalno enoličnost...
+
+\newpage
+
+\subsubsection*{Integrali}
+$\int \log(x) \dx = x \log(x) - x + C$ \\
+$\int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} - \frac{1}{(m+1)^2}\right) + C$ \\
+$\int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) \\
+$\int e^{a x} \sin(b x) \dx = e^{a x} / (a^2 + b^2) (a \sin(b x) - b \cos(b x)) + C$\\
+$\int e^{a x} \cos(b x) \dx = e^{a x} / (a^2 + b^2) (a \cos(b x) + b \sin(b x)) + C$\\
+$\int \frac{1}{\sqrt{a^2 + x^2}} \dx = \text{arsh}\frac{x}{a} + C = \log|x + \sqrt{x^2 + 1}| + C$ \\
+$\int \frac{1}{\sqrt{a^2 - x^2}} \dx = \arcsin\frac{x}{a} + C$ \\
+$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a}$ \\
+$\int \frac{1}{ax^2 + bx + c} \dx =
+  \begin{cases}
+    \frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|, & a > 0 \\
+    \frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D}), & a < 0  \\
+  \end{cases}$ \\
+$\int \frac{1}{\sin(x)} \dx = \log(\tan(x/2)) + C$ \\
+$\int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2)) + C$ \\
+$\int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
+$\int \frac{1}{\cot(x)} \dx = - \log(\cos(x)) + C$ \\
+$\int \frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx + c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}} + D$ \\
+$\sin^2(x/2) = (1 - \cos(x))/2$ \\
+$\cos^2(x/2) = (1 + \cos(x))/2$ \\
+Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2), \dx = \dt/(1 + t^2)$\\
+Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2), \cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+
+\end{document}
+% vim: syntax=tex
+% vim: spell spelllang=sl
+% vim: foldlevel=99

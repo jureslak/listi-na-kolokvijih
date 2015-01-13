@@ -1,2 +1,3 @@
-# listi-na-kolokvijih
-Listi na kolokvijih pri različnih predmetih
+# Listi na kolokvijih
+
+Listi s snovjo na kolokvijih pri različnih predmetih.

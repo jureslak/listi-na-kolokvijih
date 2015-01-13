@@ -1,0 +1,234 @@
+\documentclass[a4paper, oneside, 10pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, %
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=1.8cm,
+    bottom=2cm,
+%    textheight=24cm,
+    textwidth=15cm,
+    ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+
+
+\newcommand{\mytitle}{Diskretna matematika 1}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Jure Slak}}
+\hypersetup{pdfsubject={}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{center}
+  \bf \Large Diskretna matematika 1
+\end{center}
+
+\textbf{Izbori $k$ elementov iz $n$ množice:} \\[6pt]
+\begin{tabular}[h]{|c|c|c|c|c|} 
+  \hline
+  urejeni/ponavljanje & DA/DA & DA/NE & NE/DA & NE/NE \\ \hline
+  število & $n^k$ & $n^{\underline{k}}$ & $\binom{n+k-1}{k}$ & $\binom{n}{k}$ \\ \hline
+\end{tabular}
+
+\textbf{Binomska in multinomska števila:} $\binom{n}{k} = \frac{n!}{(n-k)!k!} \qquad \binom{n}{n_1, \ldots, n_k} =
+\frac{n!}{n_1!\cdots n_k!}$ \\
+Velja: $(a+b)^n = \sum_{k=0}^n\binom{n}{k}a^{n-k}b^k \qquad \sum_{k=0}^n\binom{n}{k} =
+2^n \qquad \sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}$ \\
+Rekurzivna zveza: $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$.
+
+\textbf{Pravilo vključitev in izključitev:} $|A_1 \cup \cdots \cup A_n| = \alpha_1 - \alpha_2 + \dots +
+(-1)^{n+1}\alpha_n$ \\
+$\alpha_i = \text{vsota moči vseh možnih presekov po $i$ množic}$. \\
+V posebnem, če so vsi preseki po $i$ množic enako močni: 
+$\lvert\bigcup_{i=1}^nA_i\rvert = \sum_{i=1}^n (-1)^{i+1}\binom{n}{i}\lvert\bigcap_{j=1}^iA_j\rvert$
+
+\textbf{Trdnjavski polinomi:}
+$T(D, x) = \sum_{k=1}^{|D|}t_k(D)x^k$ je trdnjavski polinom deske $D$. Število $t_k(D)$ je
+število možnih različnih postavitev $k$ trdnjav na desko $D$.\\
+Če je $D$ polna deska: $t_k(D_{m, n}) = \binom{m}{k}\binom{n}{k}k!$ \\
+Če $D=D_1\oplus D_2$ ($D_1$ in $D_2$ nimata niti skupnih vrstic niti stolpcev (se pa ne
+držijo nujno skupaj)), potem velja $T(D, x) = T(D_1, x)T(D_2, x)$. \\
+V splošnem drži naslednja rekurzija: $T(D, x) = T(D\!\setminus\! a, x) + x\cdot T(D/a, x), a$
+polje na $D$. \\
+Prehod na komplementarno desko: $t_k(D) =
+\sum_{j=0}^n(-1)^j\binom{m-j}{k-j}\binom{n-j}{k-j}(k-j)!t_j(\overline{D})$ \\
+Število deranžmajev: $\# = n!(\frac{1}{2!} - \frac{1}{3!} + \cdots + (-1)^n\frac{1}{n!})$
+
+\textbf{Stirlingova števila 2. vrste:} \\
+$S(n, k)$ je število možnih razbitij $n$-množice na $k$ nepraznih kosov. \\
+Definiramo $S(0, 0)=1$ in $S(n, 0)= 0$ za $n\geq1$. \\
+Rekurzivna zveza: $S(n, k) = S(n-1, k-1) + k\cdot S(n-1, k)$ \\
+Velja: $x^n = \sum_{k=1}^nS(n, k)x^{\underline{k}} \qquad S(n+1, m+1) =
+\sum_{k=1}^n\binom{n}{k}S(k, m)$  \\
+Število surjekcij: $k!S(n, k) = \sum_{i=1}^n(-1)^i\binom{k}{i}(k-i)^n$
+
+\textbf{Lahova števila:} \\
+$L(n, k)$ je število možnih razbitij $n$-množice na $k$ linearno urejenih nepraznih kosov. \\
+Definiramo $L(0, 0)=1$ in $L(n, 0)= 0$ za $n\geq1$. \\
+Rekurzivna zveza: $L(n, k) = L(n-1, k-1) + (n+k-1)\cdot L(n-1, k)$ \\
+Eksplicitna formula: $L(n, k) = \frac{n!}{k!}\binom{n-1}{k-1} = \frac{(n-1)!}{(k-1)!}\binom{n}{k}$. \\
+Velja: $x^{\bar{n}} = \sum_{k=1}^nL(n, k)x^{\underline{k}}$
+
+\textbf{Stirlingova števila 1. vrste:} \\
+$s(n, k)$ je število permutacij $n$ množice, ki se zapišejo kot produkt $k$ disjunktnih
+ciklov. \\
+Definiramo $s(0, 0)=1$ in $s(n, 0)= 0$ za $n\geq1$. \\
+Rekurzivna zveza: $s(n, k) = s(n-1, k-1) + (n-1)\cdot s(n-1, k)$ \\
+Velja: $x^{\overline{n}} = \sum_{k=1}^ns(n, k)x^k$
+
+\textbf{Bellova števila:}\\
+$B(n)$ je število vseh možnih razbitij $n$ množice. 
+Očitno velja: $\sum_{k=0}^nS(n, k) = B(n)$. \\
+Rekurzivna zveza: $B(n+1) = \sum_{k=0}^n\binom{n}{k}B(k)$
+
+\textbf{Particije števila:}\\
+Particija števila $n$ je zapis $n = \lambda_1 + \dots + \lambda_k$, kjer velja $0 <
+\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_k$. $\lambda_i$ so kosi.\\
+Rekurzivna zveza: $p(n; k) = p(n-1; k-1) + p(n-k; k)$, št. particij $n$ na $k$ kosov. \\
+$p(n; k) = p(n-k; \leq k) = \sum_{i=1}^{n-k}p(n-k; i)$
+
+\textbf{Dvanajstera pot:}\\
+Razporejamo $n$ predmetov v $r$ predalov. Ali ločimo elemente,
+dopuščamo prazne predale, dopuščamo več kot en predmet v predalu?  Glejmo 
+$f\colon[n] \to [r]$.
+
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  predmeti/predali \textbackslash\ $f$ & poljubna & injektivna & surjektivna \\ \hline
+  DA/DA & $r^n$ & $r^{\underline{n}}$ & $r!S(n, r)$ \\ \hline
+  NE/DA & $\binom{r+n-1}{n}$ & $\binom{r}{n}$ & $\binom{n-1}{r-1}$ \\ \hline
+  DA/NE & $\sum_{k=1}^rS(n, r)$ & $n \leq r$ & $S(n, r)$ \\ \hline
+  NE/NE & $\sum_{k=1}^rp(n; r)$ & $n \leq r$ & $p(n; r)$ \\ \hline
+\end{tabular}
+
+{\footnotesize
+
+\textbf{Binomska števila:} $\binom{n}{k}$ \\
+\begin{tabular}{|*{16}{c|}}
+  \hline
+  $n \backslash k$ & 0&1&2&3&4&5&6&7&8&9&10&11&12&13&14\\ \hline
+  0 & 1 &  &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  1 & 1 & 1 &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  2 & 1 & 2 & 1 &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  3 & 1 & 3 & 3 & 1 &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  4 & 1 & 4 & 6 & 4 & 1 &  &  &  &  &  &  &  &  &  & \\ \hline
+  5 & 1 & 5 & 10 & 10 & 5 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+  6 & 1 & 6 & 15 & 20 & 15 & 6 & 1 &  &  &  &  &  &  &  & \\ \hline
+  7 & 1 & 7 & 21 & 35 & 35 & 21 & 7 & 1 &  &  &  &  &  &  & \\ \hline
+  8 & 1 & 8 & 28 & 56 & 70 & 56 & 28 & 8 & 1 &  &  &  &  &  & \\ \hline
+  9 & 1 & 9 & 36 & 84 & 126 & 126 & 84 & 36 & 9 & 1 &  &  &  &  & \\ \hline
+  10 & 1 & 10 & 45 & 120 & 210 & 252 & 210 & 120 & 45 & 10 & 1 &  &  &  & \\ \hline
+  11 & 1 & 11 & 55 & 165 & 330 & 462 & 462 & 330 & 165 & 55 & 11 & 1 &  &  & \\ \hline
+  12 & 1 & 12 & 66 & 220 & 495 & 792 & 924 & 792 & 495 & 220 & 66 & 12 & 1 &  & \\ \hline
+  13 & 1 & 13 & 78 & 286 & 715 & 1287 & 1716 & 1716 & 1287 & 715 & 286 & 78 & 13 & 1 & \\ \hline
+  14 & 1 & 14 & 91 & 364 & 1001 & 2002 & 3003 & 3432 & 3003 & 2002 & 1001 & 364 & 91 & 14 & 1\\ \hline
+\end{tabular}
+
+\textbf{Stirlingova števila 2. vrste:} $S(n, k)$ in \textbf{Bellova števila} $B(n)$\\
+\begin{tabular}{|*{12}{c|}}
+  \hline
+  $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10&$B(n)$ \\ \hline
+  1 & 1 &  &  &  &  &  &  &  &  & & 1 \\ \hline
+  2 & 1 & 1 &  &  &  &  &  &  &  & & 2 \\ \hline
+  3 & 1 & 3 & 1 &  &  &  &  &  &  & & 5 \\ \hline
+  4 & 1 & 7 & 6 & 1 &  &  &  &  &  & & 15 \\ \hline
+  5 & 1 & 15 & 25 & 10 & 1 &  &  &  &  & & 52 \\ \hline
+  6 & 1 & 31 & 90 & 65 & 15 & 1 &  &  &  & & 203\\ \hline
+  7 & 1 & 63 & 301 & 350 & 140 & 21 & 1 &  &  & & 877 \\ \hline
+  8 & 1 & 127 & 966 & 1701 & 1050 & 266 & 28 & 1 &  & & 4140 \\ \hline
+  9 & 1 & 255 & 3025 & 7770 & 6951 & 2646 & 462 & 36 & 1 & & 21147 \\ \hline
+  10 & 1 & 511 & 9330 & 34105 & 42525 & 22827 & 5880 & 750 & 45 & 1 & 115975 \\ \hline
+\end{tabular}
+
+\textbf{Stirlingova števila 1. vrste:} $s(n, k)$ \\
+\begin{tabular}{|*{11}{c|}}
+  \hline
+  $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10 \\ \hline
+  1 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+  2 & 1 & 1 &  &  &  &  &  &  &  & \\ \hline
+  3 & 2 & 3 & 1 &  &  &  &  &  &  & \\ \hline
+  4 & 6 & 11 & 6 & 1 &  &  &  &  &  & \\ \hline
+  5 & 24 & 50 & 35 & 10 & 1 &  &  &  &  & \\ \hline
+  6 & 120 & 274 & 225 & 85 & 15 & 1 &  &  &  & \\ \hline
+  7 & 720 & 1764 & 1624 & 735 & 175 & 21 & 1 &  &  & \\ \hline
+  8 & 5040 & 13068 & 13132 & 6769 & 1960 & 322 & 28 & 1 &  & \\ \hline
+  9 & 40320 & 109584 & 118124 & 67284 & 22449 & 4536 & 546 & 36 & 1 & \\ \hline
+  10 & 362880 & 1026576 & 1172700 & 723680 & 269325 & 63273 & 9450 & 870 & 45 & 1\\ \hline
+\end{tabular}
+
+\textbf{Lahova števila:} $L(n, k)$ \\
+\begin{tabular}{|*{11}{c|}}
+  \hline
+  $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10 \\ \hline
+  1 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+  2 & 1 & 1 &  &  &  &  &  &  &  & \\ \hline
+  3 & 1 & 5 & 1 &  &  &  &  &  &  & \\ \hline
+  4 & 1 & 26 & 11 & 1 &  &  &  &  &  & \\ \hline
+  5 & 1 & 157 & 103 & 19 & 1 &  &  &  &  & \\ \hline
+  6 & 1 & 1100 & 981 & 274 & 29 & 1 &  &  &  & \\ \hline
+  7 & 1 & 8801 & 9929 & 3721 & 593 & 41 & 1 &  &  & \\ \hline
+  8 & 1 & 79210 & 108091 & 50860 & 10837 & 1126 & 55 & 1 &  & \\ \hline
+  9 & 1 & 792101 & 1268211 & 718411 & 191741 & 26601 & 1951 & 71 & 1 & \\ \hline
+  10 & 1 & 8713112 & 16010633 & 10607554 & 3402785 & 590756 & 57817 & 3158 & 89 & 1\\ \hline
+\end{tabular}
+
+\textbf{Particije števila:} $p(n; k)$ \\
+\begin{tabular}{|*{16}{c|}}
+  \hline
+  $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10&11&12&13&14&15 \\ \hline
+  1 & 1 &  &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  2 & 1 & 1 &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  3 & 1 & 1 & 1 &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  4 & 1 & 2 & 1 & 1 &  &  &  &  &  &  &  &  &  &  & \\ \hline
+  5 & 1 & 2 & 2 & 1 & 1 &  &  &  &  &  &  &  &  &  & \\ \hline
+  6 & 1 & 3 & 3 & 2 & 1 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+  7 & 1 & 3 & 4 & 3 & 2 & 1 & 1 &  &  &  &  &  &  &  & \\ \hline
+  8 & 1 & 4 & 5 & 5 & 3 & 2 & 1 & 1 &  &  &  &  &  &  & \\ \hline
+  9 & 1 & 4 & 7 & 6 & 5 & 3 & 2 & 1 & 1 &  &  &  &  &  & \\ \hline
+  10 & 1 & 5 & 8 & 9 & 7 & 5 & 3 & 2 & 1 & 1 &  &  &  &  & \\ \hline
+  11 & 1 & 5 & 10 & 11 & 10 & 7 & 5 & 3 & 2 & 1 & 1 &  &  &  & \\ \hline
+  12 & 1 & 6 & 12 & 15 & 13 & 11 & 7 & 5 & 3 & 2 & 1 & 1 &  &  & \\ \hline
+  13 & 1 & 6 & 14 & 18 & 18 & 14 & 11 & 7 & 5 & 3 & 2 & 1 & 1 &  & \\ \hline
+  14 & 1 & 7 & 16 & 23 & 23 & 20 & 15 & 11 & 7 & 5 & 3 & 2 & 1 & 1 & \\ \hline
+  15 & 1 & 7 & 19 & 27 & 30 & 26 & 21 & 15 & 11 & 7 & 5 & 3 & 2 & 1 & 1\\ \hline
+\end{tabular}
+
+}
+
+\end{document}
+% vim: spell spelllang=sl
+% vim: foldlevel=99

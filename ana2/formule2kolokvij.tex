@@ -1,0 +1,72 @@
+\documentclass[a4paper,oneside,12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+%    textheight=24cm,
+    textwidth=15cm,
+    ]{geometry}
+
+\newcommand{\mytitle}{Formule za drugi kolokvij iz Analize IIb}
+\hypersetup{pdftitle={\mytitle}}
+
+\everymath{\displaystyle}
+\def\nl{\rule[-14pt]{0pt}{35pt}\\}
+\def\L{\mathcal{L}}
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{center}
+  \bf \Large \mytitle
+\end{center}
+
+\parbox{0.5\textwidth}{
+  \vspace{20pt}
+\begin{tabular}[h]{|c|c|}
+  \hline
+  $\boldsymbol{f(t)}$ & $\boldsymbol{\L(f)(z)}$ \nl \hline \hline
+  $1$ & $\frac{1}{z}$ \nl \hline
+  $t^n$ & $\frac{n!}{z^{n+1}}$ \nl \hline
+  $e^{at}$ & $\frac{1}{z-a}$ \nl \hline
+  $\sin(at)$ & $\frac{a}{z^2+a^2}$ \nl \hline
+  $\cos(at)$ & $\frac{z}{z^2+a^2}$ \nl \hline
+  $t\sin(at)$ & $\frac{2az}{(z^2+a^2)^2}$ \nl \hline
+  $t\cos(at)$ & $\frac{z^2-a^2}{(z^2+a^2)^2}$ \nl \hline
+  $\operatorname{sh}(at)$ & $\frac{a}{z^2-a^2}$ \nl \hline
+  $\operatorname{ch}(at)$ & $\frac{z}{z^2-a^2}$ \nl \hline
+  $\sin(at) - at\cos(at)$ & $\frac{2a^3}{(z^2+a^2)^2}$ \nl \hline
+\end{tabular}
+}
+\parbox{0.5\textwidth}{
+  Definicija:
+  \[ \L(f)(z) = \int_0^\infty\!\!f(t) e^{-zt}\text{d}t \]
+  Lastnosti:
+  \begin{align*}
+    \L(\alpha f + \beta g)(z) &= (\alpha \L(f) + \beta \L(g))(z)\\
+    \L(f(t)e^{\alpha t})(z) &= \L(f)(z-\alpha) \\
+    \L(f)'(z) &= -\L(tf(t))(z) \\
+    \L(f)^{(n)}(z) &= (-1)^n\L(t^nf(t))(z) \\
+    \L(f')(z) &= z\L(f)(z) - f(0)\\
+    \L(f^{(n)})(z) &= z^n\L(f)(z) - \sum_{i=1}^{n}z^{n-i}f^{(i-1)}(0)
+  \end{align*}
+  Inverz:
+  \[\L^{-1}(F)(t) = \lim_{R\to\infty}\frac{1}{2\pi
+  i}\int_{a-iR}^{a+iR}\!\!e^{zt}F(z)\text{d}z \]
+  \vspace{30pt}
+}
+
+
+\end{document}
+% vim: spell spelllang=sl
+% vim: foldlevel=99
