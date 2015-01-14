@@ -95,7 +95,8 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 \subsubsection*{Premočrtno gibanje}
 Osnovni vektorji: $\vr = r\er, \qquad \dr = \dot{r}\er + r\dot{\theta}\eq,
 \qquad \ddr = (\ddot{r} - r\dot{\theta}^2)\er + (2\dot{r}\dot{\theta} +
-r\ddot{\theta})\eq$
+r\ddot{\theta})\eq$ \\
+$\dot{\vec{e}}_r = \dot{\theta} \eq$ in $\dot{\vec{e}}_{\theta} = - \dot{\theta} \er$
 
 Newtonov zakon na krivulji: $m(\ddot{s}\vec{e}_T + \kappa\dot{s}^2\vec{e}_N)
 = \vec{F} + \vec{S}$
@@ -103,13 +104,13 @@ Newtonov zakon na krivulji: $m(\ddot{s}\vec{e}_T + \kappa\dot{s}^2\vec{e}_N)
 Sila je potencialna, če je $\vec{F} = -\grad U = - \frac{\partial F}{\partial
 r}\er$. \\
 Energijska enačba: $\frac12m\dot{x}^2 + U(x) = E_0$ \\
-Ravnovesna lega: $U'(x) = 0$, stabilna če $U''(x) > 0$. \\
+Ravnovesna lega: $U'(x) = 0$, stabilna če $U''(x) > 0$.
 
 \subsubsection*{Relativno gibanje}
 Količine s $'$ so zapisane v AKS. \\
 $P' = P_0' + Q(t)(P-P_0)$ \\
 $W = Q^T\dot{Q}, \qquad  W\va = \vomega \times \va$ \\
-$\vzeta = P - P_0, \qquad \vec{v}_{rel} = \dzeta, \qquad \vec{a}_{rel} =
+$\vzeta = P - P_0, \qquad \vec{v}_{rel} = \dzeta, \qquad \va_{rel} =
 \ddzeta$
 \\
 Newtonove enačbe v RKS: \\[6pt]
@@ -120,14 +121,19 @@ $m\ddzeta = \vec{F} -
 \underbrace{2m\vomega\times\dzeta}_{\eqref{sez:cor}}$
 
 \begin{enumerate*}
-  \item inercijska sila, $a_0$ je pospešek RKS glede na AKS,  \label{sez:in}
-  \item centrufugalna sila,                                   \label{sez:cen}
+  \item inercijska sila, $a_0$ je pospešek RKS glede na AKS,  določimo ga kot
+      $\vec{a}_0 = \ddot{\vec{r}}$, kjer $\vec{r}$ zapisan v AKS \label{sez:in}
+  \item centrifugalna sila,                                   \label{sez:cen}
   \item inercijska sila zaradi kotnega pospeška,              \label{sez:inrot}
   \item Coriolisova sila.                                     \label{sez:cor}
 \end{enumerate*}
 
+Sila vezi (če ni trenja): $\vec{S} \cdot \vec{v}_{rel} = \vec{0}.$
+
+Pospešek v AKS: $\va' = \va_0' + \domega' \times \vzeta' + \vomega' \times (\vomega' \times \vzeta') + 2 \vomega'\times\dzeta' + \va_{rel}'$
+
 \subsubsection*{Sistem materialnih točk in togo telo}
-Masno središče za Sistem točk $P_i$ z masami $m_i$ in homogeno togo telo: \\
+Masno središče za sistem točk $P_i$ z masami $m_i$ in homogeno togo telo: \\
 $ \displaystyle \Pt = O + \frac1m \sum_{i=1}^n (P_i - O) m_i \qquad \Pt =
 \frac1V \int_B (x\vec{\imath} + y\vec{\jmath} + z\vec{k})dV $
 
@@ -136,12 +142,25 @@ $m\ddot{\Pt}' = \vec{F}'$ \\
 $\displaystyle \frac{d\vec{L}'(O')}{dt} = \vec{N}'(O')$ \\
 $\vec{N}'(O') = \vec{N}(P_0') + (P_0' - O') \times \vec{F}'$
 
+Za vrtilno količino velja: $\vec{\mathcal{L}} = J \vec{\omega}$
+
 Za kinetično energijo velja:
-$T = T_\ast + T_r$, kjer je $T_\ast = \frac12 m\vec{v}_\ast$ in $T_r = \frac12 \vomega \cdot J \vomega$
+$T = T_\ast + T_r$, kjer je $T_\ast = \frac12 m\vec{v}_\ast$ in $T_r = \frac12 \vomega \cdot J \vomega$  (pri vrtenju okrog izhodišča) in \\
+$T = \frac{1}{2} m |\vec{v_*}|^2 + \frac{1}{2} \vec{\omega} \cdot J(\Pt) \vec{\omega}$
 
 Velja energijski zakon: $T + U = E_0$.
 
+Navor: $\vec{N} = \int \vec{r} \times d\vec{F}$ in npr.\ $d\vec{F} = \rho_F dS$
+
+Velja (za togo telo): $J \vec{\omega} = \vec{N}$
+
 \subsubsection*{Vztrajnostni tenzor}
+Splošna formula: $J(P_0) = \int_B (|\vec{\zeta}|^2 I - \vec{\zeta} \otimes \vec{\zeta} ) dm$\\
+
+Normala ravnine zrcalne simetrije telesa je glavna smer vztrajnostnega tenzorja $J(P_0)$, kjer je $P_0$ na ravnini simetrije.
+
+Presek dveh ravnin zrcalne simetrije je glavna smer vztrajnostnega tenzorja.\\
+
 V telesni bazi je vztrajnostni tenzor enak:
 \[ J = \int
   \begin{bmatrix}
@@ -159,25 +178,33 @@ elipsoid: $J =
   \begin{bmatrix}
     \frac15m(b^2+c^2) & & \\ & \frac15(a^2+c^2) & \\ & & \frac15m(a^2+b^2)
   \end{bmatrix}$ \\
-stožec ($x^2 + y^2 = z^2)$ z radijem $r$ in višino $h$ okrog $z$ osi:
+stožec ($\bigtriangledown$) z radijem $r$ in višino $h$:
   $\begin{bmatrix}
     \frac35 mh^2+\frac{3}{20}mr^2 & & \\ & \frac35mh^2 + \frac{3}{20}mr^2 & \\
     & & \frac{3}{10}mr^2
   \end{bmatrix}$ \\
-pokončen valj okrog $z$ osi:
+pokončen valj:
   $J = \begin{bmatrix}
     \frac{1}{12}m(3r^2+h^2) & & \\ & \frac{1}{12}m(3r^2 + h^2) & \\ & &
     \frac12 mr^2
+  \end{bmatrix}$ \\
+kvader:
+  $J = \begin{bmatrix}
+    \frac{1}{12}m(h^2+d^2) &  &  \\  & \frac{1}{12}m(w^2+d^2) &  \\  &  &
+    \frac{1}{12}m(w^2 + h^2)
   \end{bmatrix}$
 
 V prostorsko bazo ga pretvorimo: $J' = Q^TJQ$. \\
 Steinerjev izrek: $J(P_0) = J(\Pt) + m|\Pt - P_0|^2I - m(\Pt - P_0) \otimes (\Pt
 - P_0)$
 
+Če zarotiramo koordinate (da dobimo vztrajnostne momente okoli drugih osi): nove bazne vektorje izrazimo s starimi kot $\vec{e_1}' = \alpha_{11} \vec{e_1} + \alpha_{12} \vec{e_2} + \alpha_{13} \vec{e_3}$ in ostale podobno. Potem so elementi nove matrike vztrajnostnega tenzorja $J'$ enaki:
+$$J_{ij}' = \sum_k \sum_l \alpha_{ik} \alpha_{jk} J_{kl}.$$
+
 \subsubsection*{Rotacije}
 Rotacije okrog spremenljive osi:
-$R(\vec{e}(t),\varphi(t))\vec{r} = \cos\varphi\vec{r} +
-(\vec{e}\vec{r})(1-\cos\varphi)\vec{e} + \sin\varphi(\vec{e} \times \vec{r})$ \\
+$R(\vec{e}(t),\varphi(t))\vr = \cos\varphi\vr +
+(\vec{e}\vec{r})(1-\cos\varphi)\vec{e} + \sin\varphi(\vec{e} \times \vr)$ \\
 Rotacijska matrika za rotacijo: \\
 \[
   R(\vec{\imath}, \varphi) =
@@ -212,6 +239,23 @@ Vektorska oblika: $J(\Pt)\domega + \vomega \times J(\Pt)\vomega =
   J_2\dot{\omega}_2 - \omega_3\omega_1(J_3 - J_1) &= N_2 \\
   J_3\dot{\omega}_3 - \omega_1\omega_2(J_1 - J_2) &= N_3
 \end{align*}
+
+Oblika za vrtenje okoli stalne osi, $\vomega = \omega \vec{k} = \dot{\varphi} \vec{k}$:
+\begin{align*}
+  J_{13} \ddot{\varphi} - \dot{\varphi}^2 J_{23} &= N_1 \\
+  J_{23} \ddot{\varphi} - \dot{\varphi}^2 J_{13} &= N_2 \\
+  J_{33} \ddot{\varphi}  &= N_3
+\end{align*}
+
+
+\subsubsection*{Kotaljenje}
+Hitrost dotikališča = hitrost težišča + obodna hitrost, tj.\ $\vec{v_D} = \vec{v_*} + \vec{\omega} \times \vec{r}$.
+
+Pogoj kotaljenja: $\vec{v}_D = \vec{0}$
+
+Sila trenja: $\vec{F}_{tr} = - k \vec{F}_{\bot} \frac{\vec{v}_D}{|\vec{v}_D|}$
+
+Škripec: pogoj, da vrv drsi na kolutu: $F_2 = F_1 e^{k \theta}$.
 
 \end{document}
 % vim: syntax=tex
