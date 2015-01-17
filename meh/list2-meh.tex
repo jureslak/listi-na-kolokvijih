@@ -131,11 +131,16 @@ Sila vezi (če ni trenja): $\vec{S} \cdot \vec{v}_{\operatorname{rel}} = \vec{0}
 
 Pospešek v AKS: $\va' = \va_0' + \domega' \times \vzeta' + \vomega' \times (\vomega' \times \vzeta') + 2 \vomega'\times\dzeta' + \va_{\operatorname{rel}}'$
 
-\subsubsection*{Sistem materialnih točk in togo telo}
+\subsubsection*{Sistem materialnih točk}
 Masno središče za sistem točk $P_i$ z masami $m_i$ in homogeno togo telo: \\
 $ \displaystyle \Pt = O + \frac1m \sum_{i=1}^n (P_i - O) m_i \qquad \Pt =
 \frac1V \int_B (x\vec{\imath} + y\vec{\jmath} + z\vec{k})dV $
 
+Vrtilna količina za sistem: $ \vec{\mathscr L} = \sum_{i=1}^{n} (P_i - O) \times m_i \dot{P_i}$
+
+Prožen trk: ohranjata se gibalna količnina $\vec p_* = m\vec v_*$ in skupna kinetična energija.
+
+\subsubsection*{Togo telo}
 Aksiomi za togo telo: \\
 $m\ddot{\Pt}' = \vec{F}'$ \\
 $\displaystyle \frac{d\vec{L}'(O')}{dt} = \vec{N}'(O')$ \\
@@ -155,11 +160,16 @@ Navor: $\vec{N} = \int \vec{r} \times d\vec{F}$ in npr.\ $d\vec{F} = \rho_F dS$
 
 Velja (za togo telo): $\mathbf{J} \domega = \vec{N}$
 
-\subsubsection*{Vztrajnostni tenzor} Splošna formula: $\mathbf{J}(P_0) = \int_B
+Težišče stožca je na višini $h/4$, težišče polkrogle pa v $3 r / 8$.
+
+\subsubsection*{Vztrajnostni tenzor}
+Def: $(a \otimes b) r = (b \cdot r) a$ in $(a \otimes b)_{ij} = a_i b_j$
+
+ Splošna formula: $\mathbf{J}(P_0) = \int_B
 (|\vec{\zeta}|^2 \mathbf I - \vec{\zeta} \otimes \vec{\zeta} ) dm$\\
 
 Normala ravnine zrcalne simetrije telesa je glavna smer vztrajnostnega tenzorja
-$\mathbf{J}(P_0)$, kjer je $P_0$ na ravnini simetrije.
+$\mathbf{J}(P_0)$, kjer je $P_0$ na ravnini simetrije. Vrtenje togega telesa brez navora je mogoče samo in natanko samo okoli glavnih osi $\mathbf J.$
 
 Presek dveh ravnin zrcalne simetrije je glavna smer vztrajnostnega tenzorja.\\
 
@@ -179,7 +189,7 @@ elipsoid: $\mathbf{J} =
 \begin{bmatrix}
   \frac15m(b^2+c^2) & & \\ & \frac15(a^2+c^2) & \\ & & \frac15m(a^2+b^2)
 \end{bmatrix}$ \\
-stožec ($\bigtriangledown$) z radijem $r$ in višino $h$:
+stožec ($\bigtriangledown$) z radijem $r$ in višino $h$ okrog vrha:
 $\begin{bmatrix}
   \frac35 mh^2+\frac{3}{20}mr^2 & & \\ & \frac35mh^2 + \frac{3}{20}mr^2 & \\
   & & \frac{3}{10}mr^2
@@ -195,7 +205,7 @@ $\mathbf{J} = \begin{bmatrix}
   \frac{1}{12}m(w^2 + h^2)
 \end{bmatrix}$
 
-V prostorsko bazo ga pretvorimo: $\mathbf{J}' = Q^T\mathbf{J}Q$. \\
+V prostorsko bazo ga pretvorimo: $\mathbf{J}' = Q\mathbf{J}Q^T$. \\
 Steinerjev izrek: $\mathbf{J}(P_0) = \mathbf{J}(\Pt) + m|\Pt - P_0|^2\mathbf{I} - m(\Pt - P_0) \otimes (\Pt
 - P_0)$
 
@@ -256,9 +266,11 @@ Hitrost dotikališča = hitrost težišča + obodna hitrost, tj.\ $\vec{v}_D = \
 
 Pogoj kotaljenja: $\vec{v}_D = \vec{0}$
 
+Kaj mora veljati, da se res kotali brez drsenja: $|\vec{F}_K| \leq k |\vec{F}_P|$
+
 Sila trenja: $\vec{F}_{\operatorname{tr}} = - k \vec{F}_{\perp} \frac{\vec{v}_D}{|\vec{v}_D|}$
 
-Škripec: pogoj, da vrv drsi na kolutu: $F_2 = F_1 e^{k \theta}$.
+Škripec: pogoj, da vrv drsi na kolutu: $F_2 \ge F_1 e^{k \theta}$.
 
 \end{document}
 % vim: syntax=tex
