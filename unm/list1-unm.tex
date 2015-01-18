@@ -10,6 +10,7 @@
 \usepackage{amssymb,amsthm}
 \usepackage{enumerate}
 \usepackage{array}
+\usepackage{algpseudocode}
 \usepackage[bookmarks, colorlinks=true, %
 linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
 menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
@@ -108,8 +109,42 @@ druge pa direktno. Ta $r$ izberemo tako, da je $|\alpha^ra_{n-r}|$ maksimalen.
 x_k^{(r)} - \frac{p(x_k^{(r)})}{\prod_{\substack{j=1 \\ j \neq k}}^n (x_k^{(r)} -
 x_j^{(r)})}$. Kvadratična konvergenca. Za kompleksne ničle je treba začeti s kompleksnimi približki.
 
-
 \subsection*{Linearni sistemi}
+Rešujemo sistem $Ax=b$. Za napako $x$ velja ocena:
+\[ \frac{\|\Delta x\|}{\|x\|}  \leq \frac{\kappa(A)}{1-\kappa(A) \frac{\|\Delta
+A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta
+b\|}{\|b\|}\right) \]
+Količina $\kappa(A)$ se imenuje občutljivost matrike. $\kappa(A) =
+\|A\|\|A^{-1}\| = \frac{\sigma_1(A)}{\sigma_n(A)} \geq 1$
+
+\textsc{LU razcep} s kompletnim pivotiranjem: matriko $A$ zapišemo kot $PAQ =
+UL$, $L$ sp.\ trikotna z $1$ na diagnoali in $U$ zg.\ trikotna, ter $P, Q$
+permutacijski matriki stolpcev in vrstic. Algoritem:
+\begin{verbatim}
+Q = I, P = I
+for j = 1 to n:
+    r, q taka, da a_rq največji v podmatriki A(j+1:n)
+    zamenjaj vrstici r in j v A, L, P
+    zamenjaj stolpca q in j v A, L, Q
+    for i  = j+1 to n:
+        l_ij = a_ij / a_jj
+        for k = j+1 to n:
+            a_ik = a_ik - l_ij * a_jk
+\end{verbatim}
+
+Postopek na roke:
+\begin{enumerate*}
+  \item * Če delamo pivotiranje zamenjamo primerne vrstice in stolpce v
+    $A, P, Q$, da je $a_{00}$ največji. \label{enum:lu:pivot}
+  \item Prvi stolpec delimo z $a_{00}$, razen $a_{00}$, ki ga pustimo na miru.
+  \item Za vsak element v podmatriki $A(2, n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
+    a_{1j}$ (odštejemo produkt  $\leftarrow$ in $\uparrow$).
+  \item Ponovimo postopek na matriki $A(2, n)$.
+\end{enumerate*}
+
+Delno pivotiranje uporablja samo matriko $P$, za LU razcep brez pivotiranja pa
+preskočimo~\ref{enum:lu:pivot}.
+
 \subsection*{Nelinearni sistemi}
 \subsection*{Problem najmanjših kvadratov}
 \subsection*{Lastne vrednosti}
