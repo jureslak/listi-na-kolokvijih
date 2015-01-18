@@ -113,6 +113,13 @@ treba začeti s kompleksnimi približki.
 %%%%%%%%%%%%%%%%                   LINEARNI SISTEMI
 \subsection*{Linearni sistemi}
 
+\textsc{Norme:} $\|A\|_1 =
+\max_{j\in\{1..n\}}\left(\sum_{i=1}^n|a_{ij}|\right)$ = največji stolpec,
+$\|A\|_\infty = \|A^T\|_1$ = največja vrstica \\
+$\|A\|_2 = \sigma_1 = \sqrt{\lambda_{max}(A^HA)}$ = največja singularna vrednost,
+$\|A\|_F = \sqrt{\sum_{ij}a_{ij}^2}$ = gledamo kot vektor \\
+Neenakosti: $\lambda \leq \|A\|$. $\|Ax\| \leq \|A\|\|x\|$.
+
 Rešujemo sistem $Ax=b$. Za napako $x$ velja ocena:
 \[ \frac{\|\Delta x\|}{\|x\|}  \leq \frac{\kappa(A)}{1-\kappa(A) \frac{\|\Delta
 A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta
@@ -150,21 +157,49 @@ preskočimo~\ref{enum:lu:pivot}.
 
 Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
 potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepov potrebuje
-$\frac23n^3$ operacij.
+$\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
+
+Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
+nu|\hat{L}||\hat{U}|$.
 
 \textsc{Razcep Choleskega:}
+Za spd matriko $A$ obstaja razcep $A = VV^T$.
+\begin{verbatim}
+for k = 1 to n:
+    v_kk = sqrt(a_kk - sum(v_kj^2, j=1 to k))
+    for i = k+1 to n:
+        v_ik = 1/v_kk * (a_ik - sum(v_ij * v_kj, j = 1 to k))
+\end{verbatim}
+Postopek na roke po stolpcih:
+\begin{enumerate*}
+  \item Če sem diagonalen element: odštejem od sebe skalarni produkt vrstice na
+    levo same s sabo in se korenim.
+  \item Če nisem diagonalni: od sebe odštejem skalarni produkt vrstice levo od
+    sebe z vrstico levo od mojega diagonalnega. Nato se delim z
+    diagonalnim.
+\end{enumerate*}
 
-
+Razcep stane $\frac13n^3$ operacij. Je obratno stabilno.
 
 %%%%%%%%%%%%%%%%                   NELINEARNI SISTEMI
 \subsection*{Nelinearni sistemi}
 
+\textsc{Jacobijeva iteracija:}
+Posplošitev navadne iteracije. Naj velja $G(\alpha)= \alpha$. Metoda: $x^{(r+1)}
+= G(x^{(r)})$. Točka $\alpha$ je privlačna, če velja $\rho(DG(\alpha)) < 1$.
+Dovolj je $\|DG(\alpha)\| < 1$.  Konvergenca je linearna.
+
 \textsc{Newtonova metoda:}
+Posplošitev tangentne metode. Metoda: reši sistem $DF(x^{(r)})\Delta x^{(r)} =
+-F(x^{(r)})$. \\ $x^{(r+1)} = x^{(r)} + \Delta x^{(r)}$. Konvergenca je
+kvadratična.
 
 %%%%%%%%%%%%%%%%                   PROBLEM NAJMANJŠIH KVADRATOV
 \subsection*{Problem najmanjših kvadratov}
 
-\textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$ rešujemo normalni sistem $A^TAx=A^Tb$.
+\textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$
+rešujemo normalni sistem $A^TAx=A^Tb$.
+Število operacij: $n^2m + \frac13n^3$.
 
 
 %%%%%%%%%%%%%%%%                   LASTNE VREDNOSTI
