@@ -10,7 +10,6 @@
 \usepackage{amssymb,amsthm}
 \usepackage{enumerate}
 \usepackage{array}
-\usepackage{algpseudocode}
 \usepackage[bookmarks, colorlinks=true, %
 linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
 menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
@@ -106,10 +105,14 @@ uporabimo kombinirano metodo: do nekega $r$ uporabimo z ene strani obratno, z
 druge pa direktno. Ta $r$ izberemo tako, da je $|\alpha^ra_{n-r}|$ maksimalen.
 
 \textsc{Durand-Kernerjeva metoda:} Iščemo vse ničle naenkrat: $x_k^{(r+1)} =
-x_k^{(r)} - \frac{p(x_k^{(r)})}{\prod_{\substack{j=1 \\ j \neq k}}^n (x_k^{(r)} -
-x_j^{(r)})}$. Kvadratična konvergenca. Za kompleksne ničle je treba začeti s kompleksnimi približki.
+x_k^{(r)} - \frac{p(x_k^{(r)})}{\prod_{\substack{j=1 \\ j \neq
+k}}^n (x_k^{(r)} - x_j^{(r)})}$. Kvadratična konvergenca. Za kompleksne ničle je
+treba začeti s kompleksnimi približki.
 
+
+%%%%%%%%%%%%%%%%                   LINEARNI SISTEMI
 \subsection*{Linearni sistemi}
+
 Rešujemo sistem $Ax=b$. Za napako $x$ velja ocena:
 \[ \frac{\|\Delta x\|}{\|x\|}  \leq \frac{\kappa(A)}{1-\kappa(A) \frac{\|\Delta
 A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta
@@ -145,11 +148,70 @@ Postopek na roke:
 Delno pivotiranje uporablja samo matriko $P$, za LU razcep brez pivotiranja pa
 preskočimo~\ref{enum:lu:pivot}.
 
+Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
+potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepov potrebuje
+$\frac23n^3$ operacij.
+
+\textsc{Razcep Choleskega:}
+
+
+
+%%%%%%%%%%%%%%%%                   NELINEARNI SISTEMI
 \subsection*{Nelinearni sistemi}
+
+\textsc{Newtonova metoda:}
+
+%%%%%%%%%%%%%%%%                   PROBLEM NAJMANJŠIH KVADRATOV
 \subsection*{Problem najmanjših kvadratov}
+
+\textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$ rešujemo normalni sistem $A^TAx=A^Tb$.
+
+
+%%%%%%%%%%%%%%%%                   LASTNE VREDNOSTI
 \subsection*{Lastne vrednosti}
+
+\textsc{Gerschgorinov izrek:} Naj bo $A \in \C ^{n\times n}$, $C_i =
+\overline{K}(a_{ii}, r=\sum_{j=1, j \neq i}^n | a_{ij}|), i=1,2,\ldots ,n$.
+Potem vsaka lastna vrednost leži v vsaj enem Gerschgorinovem krogu. Če $m$
+krogov $C_i$ sestavlja povezano množico, ločeno od ostalih $n-m$ krogov, potem
+ta množica vsebuje natanko $m$ lastnih vrednosti.
+
+Diagonalno dominantna matrika ($|a_{ij}| > \sum_{j=1, j\neq i}^n|a_{ij}|$) je obrnljiva.
+
+%%%%%%%%%%%%%%%%                    INTERPOLACIJA
 \subsection*{Interpolacija}
+
+\textsc{Lagrangeev interpolacijski polinom:}
+
+$$l_{n,j}(x)=\frac{\prod_{i=0,i\neq j}^n(x-x_i)}{\prod_{i=0,i\neq j}^n(x_j-x_i)}$$
+
+Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$
+
+\textsc{Deljene diference:}
+
+\begin{itemize}
+
+\item Če so točke paroma različne: $D_{i,0} = y_i$, ostalo izračunamo po
+rekurzivni formuli: $D_{i,j} = \frac{D_{i,j-1}-D_{i-1,j-1}}{x_i-x_{i-j}}$. Če
+sta dve točki na $j$-tem koraku enaki, je $D_{i,j} = \frac{f^{(j)}(x_i)}{j!}$.
+
+Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_n)$
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%                    INTEGRIRANJE
 \subsection*{Integriranje}
+
+Ekvidistančne točke $a = x_0 < x_1 < \dots < x_n = b$, $x_i = x_0 + ih$.
+
+\textsc{Sest. trapezno pravilo:} $\int_{a}^{b} f(x) dx = \frac{h}{2} (f(x_0)+2f(x_1)
++2f(x_2)+\cdots + 2f(x_{m-1})+f(x_m))-\frac{h^2}{12}(b-a)f''(\xi)$
+
+\textsc{Sest. Simpsonovo:} $\int_{a}^{b} f(x) dx = \frac{h}{3} (f(x_0)+4f(x_1)
++2f(x_2)+\cdots + 2f(x_{2m-2})+4f(x_{2m-1})+f(x_{2m}))-\frac{h^4}{180}(b-a)f^{(4)}(\xi)$
+
+\textsc{3/8 pravilo:} $\int_a^b f(x) dx = \frac{3}{8} h(f(x_0) + 3f(x_1)
++ 3f(x_2) + f(x_3)) - \frac{3}{80} h^5f^{(4)}(\xi )$, $\quad \xi \in (x_0,x_3)$
 
 
 \end{document}
