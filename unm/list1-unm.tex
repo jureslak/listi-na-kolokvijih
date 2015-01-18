@@ -71,11 +71,44 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 \begin{document}
 
 \subsection*{Napake}
+Jih je veliko in so nasploh zelo depresivne in vse metode so slabe.
+
 \subsection*{Nelinearne enačbe}
 Iščemo ničle $\alpha$ funkcije $f$. Občutljivost $\frac{1}{f'(\alpha)}$, za
 dvojno ničlo $\sqrt{\frac{2}{f''(x)}}$.
-Bisekcija: razpolavljamo interval, na katerem imamo ničlo. Št korakov za
+
+\textsc{Bisekcija:} razpolavljamo interval, na katerem imamo ničlo. Št korakov za
 natančnost $\varepsilon$: $k \geq \log\left(\frac{|b-a|}{\varepsilon}\right)$.
+
+\textsc{Navadna iteracija:} Iščemo fiksno točno $g(\alpha) = \alpha$. Metoda: $x_{r+1} =
+g(x_r)$. Če je $|g'(\alpha)| < 1$ je točka privlačna, če $|g'(\alpha)| > 1$ je
+odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$.
+
+\textsc{Tangentna metoda:} $x_{r+1} = x_r - \frac{f(x_r)}{f'(x_r)}$. Konvergenca je za
+enojne ničle kvadratična, za večkratne ničle linearna. Če za enostavno ničlo
+velja $f''(\alpha) = 0$ je konvergenca kubična, itn\dots Vse ničle so privlačne.
+
+\textsc{Sekantna metoda:} $x_{r+1} = x_r - \frac{f(x_r)(x_r - x_{r-1})}{f(x_r) -
+f(x_{r-1})}$. Red konvergence: $\frac{1+\sqrt{5}}{2}$.
+
+\textsc{Laguerrova metoda} za iskanje ničel polinomov: $z_{r+1} = z_r -
+\frac{np(z_r)}{p'(z_r) \pm \sqrt{(n-1)((n-1)p'^2(z_r) - np(z_r)p''(z_r))}}$ \\
+Pri stabilni metodi izberemo predznak tako, da je absolutna vrednost imenovalca
+največja. Če izbiramo vedno $-$ ali  + skonvergiramo k levi oz. desni ničli, če
+so vse ničle realne. Konvergenca v bližini enostavne ničle je kubična. Metoda
+najde tudi kompleksne ničle.
+
+\textsc{Redukcija polinoma:} Imamo eno ničlo, radi bi jo faktorizirali ven.
+Poznamo obratno in direktno redukcijo, pri katerih je stabilno izločati ničle v
+padajočem in naraščajočem vrstnem redu po absolutni vrednosti. V praksi
+uporabimo kombinirano metodo: do nekega $r$ uporabimo z ene strani obratno, z
+druge pa direktno. Ta $r$ izberemo tako, da je $|\alpha^ra_{n-r}|$ maksimalen.
+
+\textsc{Durand-Kernerjeva metoda:} Iščemo vse ničle naenkrat: $x_k^{(r+1)} =
+x_k^{(r)} - \frac{p(x_k^{(r)})}{\prod_{\substack{j=1 \\ j \neq k}}^n (x_k^{(r)} -
+x_j^{(r)})}$. Kvadratična konvergenca. Za kompleksne ničle je treba začeti s kompleksnimi približki.
+
+
 \subsection*{Linearni sistemi}
 \subsection*{Nelinearni sistemi}
 \subsection*{Problem najmanjših kvadratov}
