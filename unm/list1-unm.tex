@@ -68,10 +68,25 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 
+\newcommand{\mybox}[1]{\frame{\rule{0pt}{10pt}\ #1\ }}
+
 \begin{document}
 
-\subsection*{Napake}
-Jih je veliko in so nasploh zelo depresivne in vse metode so slabe.
+\subsection*{Zapis števil in napake}
+Števila predstavimo kot elemente $P(b, t, L, U)$, to so vsa decimalna števila
+$0.c_1c_2\ldots c_t \cdot b^e$, $L \leq e \leq U, c_1 \neq 0$. Osnovna zaokrožitvena
+ napaka je $u = \frac12b^{-t}$.
+
+Standard IEEE single: $\mybox{s}\mybox{e}\mybox{f}$, $s$ predznak, 1 bit, $e$ je eksponent,
+8 bitov, $f$ je mantisa, 23 bitov. Število $x$ zapišemo kot $x = (-1)^s(1+f)2^{e-127}$.
+Denormalizirano število: $e = 0, f \neq 0, x = (-1)^s(0+f)2^{-126}$
+
+Za elementarne operacije velja $\operatorname{fl}(a \oplus b)$ se v praksi izračuna
+z relativno napako $|\delta| < u$ v $(a \oplus b)(1+\delta)$. Za zaporednje $n$ operacij
+je napaka manjša od $nu$.
+
+Direktna slabilnost: vedno majhna relativna napaka. \\
+Obratna stabilnost: izračunan rezultat je točen rezultat malo spremenjenih začetnih vrednosti.
 
 \subsection*{Nelinearne enačbe}
 Iščemo ničle $\alpha$ funkcije $f$. Občutljivost $\frac{1}{f'(\alpha)}$, za
@@ -82,7 +97,9 @@ natančnost $\varepsilon$: $k \geq \log\left(\frac{|b-a|}{\varepsilon}\right)$.
 
 \textsc{Navadna iteracija:} Iščemo fiksno točno $g(\alpha) = \alpha$. Metoda: $x_{r+1} =
 g(x_r)$. Če je $|g'(\alpha)| < 1$ je točka privlačna, če $|g'(\alpha)| > 1$ je
-odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$.
+odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$. Ocene za napako:
+$|x_r - \alpha| \leq m^r|x_0 - \alpha|$, $|x_{r+1} - \alpha|  \leq \frac{m}{1-m} |x_r - x_{r-1}|$, kje je $m$ Lipscitzeva
+konstanta za $g$ ($m = \max g'$).
 
 \textsc{Tangentna metoda:} $x_{r+1} = x_r - \frac{f(x_r)}{f'(x_r)}$. Konvergenca je za
 enojne ničle kvadratična, za večkratne ničle linearna. Če za enostavno ničlo
@@ -118,58 +135,73 @@ treba začeti s kompleksnimi približki.
 $\|A\|_\infty = \|A^T\|_1$ = največja vrstica \\
 $\|A\|_2 = \sigma_1 = \sqrt{\lambda_{max}(A^HA)}$ = največja singularna vrednost,
 $\|A\|_F = \sqrt{\sum_{ij}a_{ij}^2}$ = gledamo kot vektor \\
+Operatorska norma: $\|A\| = \max_{x\neq 0}\frac{\|Ax\|}{\|x\|}$.
 Neenakosti: $\lambda \leq \|A\|$. $\|Ax\| \leq \|A\|\|x\|$.
+\begin{alignat*}{4}
+\textstyle \frac{1}{\sqrt{n}}\|A\|_F &\leq \|A\|_2 &&\leq \|A\|_F \\
+\textstyle \frac{1}{\sqrt{n}}\|A\|_1 &\leq \|A\|_2 &&\leq \sqrt{n} \|A\|_1 \\
+\textstyle \frac{1}{\sqrt{n}}\|A\|_\infty &\leq \|A\|_2 &&\leq \sqrt{n} \|A\|_\infty \\
+N_\infty(A) &\leq \|A\|_2 &&\leq nN_\infty(A) \\
+            &\leq \|A\|_2 &&\leq \sqrt{\|A\|_1\|A\|_\infty} \\
+\|a_i\|_2, \|\alpha_i\|_2 &\leq \|A\|_2 &&
+\end{alignat*}
 
 Rešujemo sistem $Ax=b$. Za napako $x$ velja ocena:
 \[ \frac{\|\Delta x\|}{\|x\|}  \leq \frac{\kappa(A)}{1-\kappa(A) \frac{\|\Delta
 A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta
 b\|}{\|b\|}\right) \]
 Količina $\kappa(A)$ se imenuje občutljivost matrike. $\kappa(A) =
-\|A\|\|A^{-1}\| = \frac{\sigma_1(A)}{\sigma_n(A)} \geq 1$
+\|A\|\|A^{-1}\|$. Velja $\kappa_2(A) = \frac{\sigma_1(A)}{\sigma_n(A)} \geq 1$.
 
 \textsc{LU razcep} s kompletnim pivotiranjem: matriko $A$ zapišemo kot $PAQ =
 UL$, $L$ sp.\ trikotna z $1$ na diagnoali in $U$ zg.\ trikotna, ter $P, Q$
 permutacijski matriki stolpcev in vrstic. Algoritem:
+\scriptsize
 \begin{verbatim}
 Q = I, P = I
 for j = 1 to n:
     r, q taka, da a_rq največji v podmatriki A(j+1:n)
-    zamenjaj vrstici r in j v A, L, P
-    zamenjaj stolpca q in j v A, L, Q
+    zamenjaj vrstici r in j v A, L, P // za delno pivotiranje
+    zamenjaj stolpca q in j v A, L, Q // za kompletno pivotiranje
     for i  = j+1 to n:
         l_ij = a_ij / a_jj
         for k = j+1 to n:
             a_ik = a_ik - l_ij * a_jk
 \end{verbatim}
+\normalsize
 
 Postopek na roke:
 \begin{enumerate*}
   \item * Če delamo pivotiranje zamenjamo primerne vrstice in stolpce v
     $A, P, Q$, da je $a_{00}$ največji. \label{enum:lu:pivot}
   \item Prvi stolpec delimo z $a_{00}$, razen $a_{00}$, ki ga pustimo na miru.
-  \item Za vsak element v podmatriki $A(2, n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
+  \item Za vsak element v podmatriki $A(2:n, 2:n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
     a_{1j}$ (odštejemo produkt  $\leftarrow$ in $\uparrow$).
-  \item Ponovimo postopek na matriki $A(2, n)$.
+  \item Ponovimo postopek na matriki $A(2:n, 2:n)$.
 \end{enumerate*}
 
 Delno pivotiranje uporablja samo matriko $P$, za LU razcep brez pivotiranja pa
 preskočimo~\ref{enum:lu:pivot}.
 
 Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
-potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepov potrebuje
+potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepom (brez pivotiranja) potrebuje
 $\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
 
 Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
 nu|\hat{L}||\hat{U}|$.
 
+Pivotna rast: $g = \frac{\max u_{ij}}{\max a_{ij}}$. Pri delnem pivotiranju $g < 2^n$.
+
 \textsc{Razcep Choleskega:}
 Za spd matriko $A$ obstaja razcep $A = VV^T$.
+\scriptsize
 \begin{verbatim}
 for k = 1 to n:
     v_kk = sqrt(a_kk - sum(v_kj^2, j=1 to k))
     for i = k+1 to n:
         v_ik = 1/v_kk * (a_ik - sum(v_ij * v_kj, j = 1 to k))
 \end{verbatim}
+\normalsize
 Postopek na roke po stolpcih:
 \begin{enumerate*}
   \item Če sem diagonalen element: odštejem od sebe skalarni produkt vrstice na
@@ -179,7 +211,7 @@ Postopek na roke po stolpcih:
     diagonalnim.
 \end{enumerate*}
 
-Razcep stane $\frac13n^3$ operacij. Je obratno stabilno.
+Razcep stane $\frac13n^3$ operacij. Je obratno stabilno. Je enoličen.
 
 %%%%%%%%%%%%%%%%                   NELINEARNI SISTEMI
 \subsection*{Nelinearni sistemi}
@@ -198,9 +230,85 @@ kvadratična.
 \subsection*{Problem najmanjših kvadratov}
 
 \textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$
-rešujemo normalni sistem $A^TAx=A^Tb$.
-Število operacij: $n^2m + \frac13n^3$.
+rešujemo normalni sistem $A^TAx=A^Tb$. Če je $A$ polnega ranga, je $x$ enoličen.
+Rešujemo z razcepom Choleskega. Število operacij: $n^2m + \frac13n^3$.
 
+QR razcep je bolj stabilen. Za $A \in \R^{m\times n}$ obstaja enoličen razcep $A = QR$, $Q^TQ =
+I$ in $R$ zg. trikotna s pozitivnimi diagonalci. Za predoločen sistem rešimo $Rx
+= Q^Tb$.
+
+\textsc{CGS in MGS} Klasična GS ortogonalizacija. Od vsakega stolpca $a_k$
+odštejemo pravokotne projekcije $a_i, i < k$. Algoritem ni najbolj stabilen.
+\scriptsize
+\begin{verbatim}
+for k = 1 to n:
+    q_k = a_k
+    for i = 1 to k-1:
+        r_ik = q_i' * a_k (CGS) ALI = q_i' * q_k (MGS)
+        q_k = q_k - r_ik q_i
+    r_kk = ||q_k||
+    q_k = q_k / r_kk
+\end{verbatim}
+\normalsize
+Za večjo natančnost izračunamo $[A b] = [Q q_{n+1}] [R z; 0 p]$ in rešimo $Rx =
+z$. Porabi $2nm^2$ operacij.
+
+Razširjeni QR razcep: $A = \tilde{Q}\tilde{R}$, $Q \in \R^{m \times m}$
+ortogonalna, $R$ zgornje trapezna. $\tilde{Q} = [Q\ Q_1]$, $\tilde{R} = [R; 0]$.
+
+\textsc{Givensove rotacije}
+
+Elemente v $A$ po stolpcih enega po enega ubijamo z rotacijami. Rotacija, ki ubije element
+$a_{ki}$ je $R_{ik}^T([i k],[i,k]) = [c\ s; -s\ c]$, in ostalo identiteta.
+Parametre nastavimo: $c = x_{ii}/r$, $s =
+x_{ki}/r$, $r = \sqrt{x_{ii}^2+x_{ki}^2}$. $\tilde{Q}$ dobimo kot prokdukt vseh rotacij, potrebnih za genocid
+elementov $A$. Rotacija spremeni samo $i$-to in $k$-to vrstico.
+
+Število operacij: $3mn^2 -n^3$. Če potrebujemo $\tilde{Q}$, potem rabimo še dodatnih
+$6m^2n - 3mn^2$ operacij.
+
+\scriptsize
+\begin{verbatim}
+Q = I_m
+for i = 1 to n:
+    for k = i+1 to m:
+      r = sqrt(a_ii^2 + a_ki^2)
+      c = a_ii/r, s = a_ki/r
+      A([i,k], i:n) = [c s; -s c] A([i k], i:n)
+      b([i, k]) = [c s; -s c] b([i, k]) // za predoločen sistem
+      Q(i, [i k]) = Q(i, [i k]) [c -s; s c] // za matriko Q
+Q = Q'
+\end{verbatim}
+\normalsize
+
+\textsc{Hausholderjeva zrcaljenja}
+Definiramo $P = I - \frac{2}{w^Tw}ww^T$. $P$ je zrcaljenje prek ravnine z normalo
+$w$. $Px$ = $x - \frac{1}{m}(x^Tw)w$, $m = \frac12w^Tw$.
+
+Da vektor $x$ prezrcalimo tako, da mu uničimo vse razen prve komponente,
+uporabimo $w = [x_1 + \operatorname{sign}(x_1)\|x\|_2; x_2; \dots x_n]$ in $m =
+\|x\|_2(\|x\|_2 + |x_1|)$. Število operacij za $Pz$ je $4n$m za $w$ in $m$ pa
+potrebujemo $2n$ operacij.
+
+\scriptsize
+\begin{verbatim}
+Q = I_m
+for i = 1 to n:
+    w_i iz R^{m-i+1}, ki prezrcali A(i:m, i) v +-k e_1
+    A(i:m,i:n) = P_i * A(i:m, i:n)
+    b(i:m) = P_i * b(i:m)           // za predoločen sistem
+    Q(i:m, 1:n) = P_i * Q(i:m, 1:n) // za matriko Q
+Q = Q'
+\end{verbatim}
+\normalsize
+
+Reševanje predoločenega sistema tako stane $2mn^2 - \frac23n^3$. Za $\tilde{Q}$
+potrebujemo še $4m^2n-2mn^2$ operacij. Za kvadratne sisteme je stabilnejši, a
+rabimo $\frac43n^3$ operacij.
+
+Za napako pri reševanju predoločenega sistema velja:
+$\frac{\|\Delta x\|}{\|x\|} \leq \frac{\varepsilon\kappa_2(A)}{1-\varepsilon\kappa_2(A)}
+\left(2+(\kappa_2(A) + 1)\frac{\|r\|}{\|A\|\|x\|} \right), r = Ax -b$.
 
 %%%%%%%%%%%%%%%%                   LASTNE VREDNOSTI
 \subsection*{Lastne vrednosti}
@@ -230,7 +338,7 @@ Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$
 rekurzivni formuli: $D_{i,j} = \frac{D_{i,j-1}-D_{i-1,j-1}}{x_i-x_{i-j}}$. Če
 sta dve točki na $j$-tem koraku enaki, je $D_{i,j} = \frac{f^{(j)}(x_i)}{j!}$.
 
-Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_n)$
+Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_{n-1})$
 
 \end{itemize}
 
