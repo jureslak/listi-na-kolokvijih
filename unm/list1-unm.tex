@@ -1,0 +1,255 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
+]{hyperref}
+\usepackage[
+  paper=a4paper,
+  top=1.5cm,
+  bottom=1.5cm,
+%    textheight=24cm,
+  textwidth=18cm,
+  ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{enumerate}}
+
+\newcommand{\mytitle}{UNM list}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Jure Slak}}
+\hypersetup{pdfsubject={}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\subsection*{Napake}
+Jih je veliko in so nasploh zelo depresivne in vse metode so slabe.
+
+\subsection*{Nelinearne enačbe}
+Iščemo ničle $\alpha$ funkcije $f$. Občutljivost $\frac{1}{f'(\alpha)}$, za
+dvojno ničlo $\sqrt{\frac{2}{f''(x)}}$.
+
+\textsc{Bisekcija:} razpolavljamo interval, na katerem imamo ničlo. Št korakov za
+natančnost $\varepsilon$: $k \geq \log\left(\frac{|b-a|}{\varepsilon}\right)$.
+
+\textsc{Navadna iteracija:} Iščemo fiksno točno $g(\alpha) = \alpha$. Metoda: $x_{r+1} =
+g(x_r)$. Če je $|g'(\alpha)| < 1$ je točka privlačna, če $|g'(\alpha)| > 1$ je
+odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$.
+
+\textsc{Tangentna metoda:} $x_{r+1} = x_r - \frac{f(x_r)}{f'(x_r)}$. Konvergenca je za
+enojne ničle kvadratična, za večkratne ničle linearna. Če za enostavno ničlo
+velja $f''(\alpha) = 0$ je konvergenca kubična, itn\dots Vse ničle so privlačne.
+
+\textsc{Sekantna metoda:} $x_{r+1} = x_r - \frac{f(x_r)(x_r - x_{r-1})}{f(x_r) -
+f(x_{r-1})}$. Red konvergence: $\frac{1+\sqrt{5}}{2}$.
+
+\textsc{Laguerrova metoda} za iskanje ničel polinomov: $z_{r+1} = z_r -
+\frac{np(z_r)}{p'(z_r) \pm \sqrt{(n-1)((n-1)p'^2(z_r) - np(z_r)p''(z_r))}}$ \\
+Pri stabilni metodi izberemo predznak tako, da je absolutna vrednost imenovalca
+največja. Če izbiramo vedno $-$ ali  + skonvergiramo k levi oz. desni ničli, če
+so vse ničle realne. Konvergenca v bližini enostavne ničle je kubična. Metoda
+najde tudi kompleksne ničle.
+
+\textsc{Redukcija polinoma:} Imamo eno ničlo, radi bi jo faktorizirali ven.
+Poznamo obratno in direktno redukcijo, pri katerih je stabilno izločati ničle v
+padajočem in naraščajočem vrstnem redu po absolutni vrednosti. V praksi
+uporabimo kombinirano metodo: do nekega $r$ uporabimo z ene strani obratno, z
+druge pa direktno. Ta $r$ izberemo tako, da je $|\alpha^ra_{n-r}|$ maksimalen.
+
+\textsc{Durand-Kernerjeva metoda:} Iščemo vse ničle naenkrat: $x_k^{(r+1)} =
+x_k^{(r)} - \frac{p(x_k^{(r)})}{\prod_{\substack{j=1 \\ j \neq
+k}}^n (x_k^{(r)} - x_j^{(r)})}$. Kvadratična konvergenca. Za kompleksne ničle je
+treba začeti s kompleksnimi približki.
+
+
+%%%%%%%%%%%%%%%%                   LINEARNI SISTEMI
+\subsection*{Linearni sistemi}
+
+\textsc{Norme:} $\|A\|_1 =
+\max_{j\in\{1..n\}}\left(\sum_{i=1}^n|a_{ij}|\right)$ = največji stolpec,
+$\|A\|_\infty = \|A^T\|_1$ = največja vrstica \\
+$\|A\|_2 = \sigma_1 = \sqrt{\lambda_{max}(A^HA)}$ = največja singularna vrednost,
+$\|A\|_F = \sqrt{\sum_{ij}a_{ij}^2}$ = gledamo kot vektor \\
+Neenakosti: $\lambda \leq \|A\|$. $\|Ax\| \leq \|A\|\|x\|$.
+
+Rešujemo sistem $Ax=b$. Za napako $x$ velja ocena:
+\[ \frac{\|\Delta x\|}{\|x\|}  \leq \frac{\kappa(A)}{1-\kappa(A) \frac{\|\Delta
+A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta
+b\|}{\|b\|}\right) \]
+Količina $\kappa(A)$ se imenuje občutljivost matrike. $\kappa(A) =
+\|A\|\|A^{-1}\| = \frac{\sigma_1(A)}{\sigma_n(A)} \geq 1$
+
+\textsc{LU razcep} s kompletnim pivotiranjem: matriko $A$ zapišemo kot $PAQ =
+UL$, $L$ sp.\ trikotna z $1$ na diagnoali in $U$ zg.\ trikotna, ter $P, Q$
+permutacijski matriki stolpcev in vrstic. Algoritem:
+\begin{verbatim}
+Q = I, P = I
+for j = 1 to n:
+    r, q taka, da a_rq največji v podmatriki A(j+1:n)
+    zamenjaj vrstici r in j v A, L, P
+    zamenjaj stolpca q in j v A, L, Q
+    for i  = j+1 to n:
+        l_ij = a_ij / a_jj
+        for k = j+1 to n:
+            a_ik = a_ik - l_ij * a_jk
+\end{verbatim}
+
+Postopek na roke:
+\begin{enumerate*}
+  \item * Če delamo pivotiranje zamenjamo primerne vrstice in stolpce v
+    $A, P, Q$, da je $a_{00}$ največji. \label{enum:lu:pivot}
+  \item Prvi stolpec delimo z $a_{00}$, razen $a_{00}$, ki ga pustimo na miru.
+  \item Za vsak element v podmatriki $A(2, n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
+    a_{1j}$ (odštejemo produkt  $\leftarrow$ in $\uparrow$).
+  \item Ponovimo postopek na matriki $A(2, n)$.
+\end{enumerate*}
+
+Delno pivotiranje uporablja samo matriko $P$, za LU razcep brez pivotiranja pa
+preskočimo~\ref{enum:lu:pivot}.
+
+Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
+potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepov potrebuje
+$\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
+
+Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
+nu|\hat{L}||\hat{U}|$.
+
+\textsc{Razcep Choleskega:}
+Za spd matriko $A$ obstaja razcep $A = VV^T$.
+\begin{verbatim}
+for k = 1 to n:
+    v_kk = sqrt(a_kk - sum(v_kj^2, j=1 to k))
+    for i = k+1 to n:
+        v_ik = 1/v_kk * (a_ik - sum(v_ij * v_kj, j = 1 to k))
+\end{verbatim}
+Postopek na roke po stolpcih:
+\begin{enumerate*}
+  \item Če sem diagonalen element: odštejem od sebe skalarni produkt vrstice na
+    levo same s sabo in se korenim.
+  \item Če nisem diagonalni: od sebe odštejem skalarni produkt vrstice levo od
+    sebe z vrstico levo od mojega diagonalnega. Nato se delim z
+    diagonalnim.
+\end{enumerate*}
+
+Razcep stane $\frac13n^3$ operacij. Je obratno stabilno.
+
+%%%%%%%%%%%%%%%%                   NELINEARNI SISTEMI
+\subsection*{Nelinearni sistemi}
+
+\textsc{Jacobijeva iteracija:}
+Posplošitev navadne iteracije. Naj velja $G(\alpha)= \alpha$. Metoda: $x^{(r+1)}
+= G(x^{(r)})$. Točka $\alpha$ je privlačna, če velja $\rho(DG(\alpha)) < 1$.
+Dovolj je $\|DG(\alpha)\| < 1$.  Konvergenca je linearna.
+
+\textsc{Newtonova metoda:}
+Posplošitev tangentne metode. Metoda: reši sistem $DF(x^{(r)})\Delta x^{(r)} =
+-F(x^{(r)})$. \\ $x^{(r+1)} = x^{(r)} + \Delta x^{(r)}$. Konvergenca je
+kvadratična.
+
+%%%%%%%%%%%%%%%%                   PROBLEM NAJMANJŠIH KVADRATOV
+\subsection*{Problem najmanjših kvadratov}
+
+\textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$
+rešujemo normalni sistem $A^TAx=A^Tb$.
+Število operacij: $n^2m + \frac13n^3$.
+
+
+%%%%%%%%%%%%%%%%                   LASTNE VREDNOSTI
+\subsection*{Lastne vrednosti}
+
+\textsc{Gerschgorinov izrek:} Naj bo $A \in \C ^{n\times n}$, $C_i =
+\overline{K}(a_{ii}, r=\sum_{j=1, j \neq i}^n | a_{ij}|), i=1,2,\ldots ,n$.
+Potem vsaka lastna vrednost leži v vsaj enem Gerschgorinovem krogu. Če $m$
+krogov $C_i$ sestavlja povezano množico, ločeno od ostalih $n-m$ krogov, potem
+ta množica vsebuje natanko $m$ lastnih vrednosti.
+
+Diagonalno dominantna matrika ($|a_{ij}| > \sum_{j=1, j\neq i}^n|a_{ij}|$) je obrnljiva.
+
+%%%%%%%%%%%%%%%%                    INTERPOLACIJA
+\subsection*{Interpolacija}
+
+\textsc{Lagrangeev interpolacijski polinom:}
+
+$$l_{n,j}(x)=\frac{\prod_{i=0,i\neq j}^n(x-x_i)}{\prod_{i=0,i\neq j}^n(x_j-x_i)}$$
+
+Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$
+
+\textsc{Deljene diference:}
+
+\begin{itemize}
+
+\item Če so točke paroma različne: $D_{i,0} = y_i$, ostalo izračunamo po
+rekurzivni formuli: $D_{i,j} = \frac{D_{i,j-1}-D_{i-1,j-1}}{x_i-x_{i-j}}$. Če
+sta dve točki na $j$-tem koraku enaki, je $D_{i,j} = \frac{f^{(j)}(x_i)}{j!}$.
+
+Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_n)$
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%                    INTEGRIRANJE
+\subsection*{Integriranje}
+
+Ekvidistančne točke $a = x_0 < x_1 < \dots < x_n = b$, $x_i = x_0 + ih$.
+
+\textsc{Sest. trapezno pravilo:} $\int_{a}^{b} f(x) dx = \frac{h}{2} (f(x_0)+2f(x_1)
++2f(x_2)+\cdots + 2f(x_{m-1})+f(x_m))-\frac{h^2}{12}(b-a)f''(\xi)$
+
+\textsc{Sest. Simpsonovo:} $\int_{a}^{b} f(x) dx = \frac{h}{3} (f(x_0)+4f(x_1)
++2f(x_2)+\cdots + 2f(x_{2m-2})+4f(x_{2m-1})+f(x_{2m}))-\frac{h^4}{180}(b-a)f^{(4)}(\xi)$
+
+\textsc{3/8 pravilo:} $\int_a^b f(x) dx = \frac{3}{8} h(f(x_0) + 3f(x_1)
++ 3f(x_2) + f(x_3)) - \frac{3}{80} h^5f^{(4)}(\xi )$, $\quad \xi \in (x_0,x_3)$
+
+
+\end{document}
+% vim: syntax=tex
+% vim: spell spelllang=sl
+% vim: foldlevel=99
