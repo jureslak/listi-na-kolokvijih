@@ -67,11 +67,25 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
+\newcommand{\mybox}[1]{\frame{\rule{0pt}{10pt}\ #1\ }}
 
 \begin{document}
 
-\subsection*{Napake}
-Jih je veliko in so nasploh zelo depresivne in vse metode so slabe.
+\subsection*{Zapis števil in napake}
+Števila predstavimo kot elemente $P(b, t, L, U)$, to so vsa decimalna števila
+$0.c_1c_2\ldots c_t \cdot b^e$, $L \leq e \leq U, c_1 \neq 0$. Osnovna zaokrožitvena
+ napaka je $u = \frac12b^{-t}$.
+
+Standard IEEE single: $\mybox{s}\mybox{e}\mybox{f}$, $s$ predznak, 1 bit, $e$ je eksponent,
+8 bitov, $f$ je mantisa, 23 bitov. Število $x$ zapišemo kot $x = (-1)^s(1+f)2^{e-127}$.
+Denormalizirano število: $e = 0, f \neq 0, x = (-1)^s(0+f)2^{-126}$
+
+Za elementarne operacije velja $\operatorname{fl}(a \oplus b)$ se v praksi izračuna
+z relativno napako $|\delta| < u$ v $(a \oplus b)(1+\delta)$. Za zaporednje $n$ operacij 
+je napaka manjša od $nu$. 
+
+Direktna slabilnost: vedno majhna relativna napaka. \\
+Obratna stabilnost: izračunan rezultat je točen rezultat malo spremenjenih začetnih vrednosti.
 
 \subsection*{Nelinearne enačbe}
 Iščemo ničle $\alpha$ funkcije $f$. Občutljivost $\frac{1}{f'(\alpha)}$, za
@@ -82,7 +96,9 @@ natančnost $\varepsilon$: $k \geq \log\left(\frac{|b-a|}{\varepsilon}\right)$.
 
 \textsc{Navadna iteracija:} Iščemo fiksno točno $g(\alpha) = \alpha$. Metoda: $x_{r+1} =
 g(x_r)$. Če je $|g'(\alpha)| < 1$ je točka privlačna, če $|g'(\alpha)| > 1$ je
-odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$.
+odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$. Ocene za napako:
+$|x_r - \alpha| \leq m^r|x_0 - \alpha|$, $|x_{r+1} - \alpha|  \leq \frac{m}{1-m} |x_r - x_{r-1}|$, kje je $m$ Lipscitzeva
+konstanta za $g$ ($m = \max g'$).
 
 \textsc{Tangentna metoda:} $x_{r+1} = x_r - \frac{f(x_r)}{f'(x_r)}$. Konvergenca je za
 enojne ničle kvadratična, za večkratne ničle linearna. Če za enostavno ničlo
@@ -118,14 +134,23 @@ treba začeti s kompleksnimi približki.
 $\|A\|_\infty = \|A^T\|_1$ = največja vrstica \\
 $\|A\|_2 = \sigma_1 = \sqrt{\lambda_{max}(A^HA)}$ = največja singularna vrednost,
 $\|A\|_F = \sqrt{\sum_{ij}a_{ij}^2}$ = gledamo kot vektor \\
+Operatorska norma: $\|A\| = \max_{x\neq 0}\frac{\|Ax\|}{\|x\|}$. 
 Neenakosti: $\lambda \leq \|A\|$. $\|Ax\| \leq \|A\|\|x\|$.
+\begin{alignat*}{4}
+\textstyle \frac{1}{\sqrt{n}}\|A\|_F &\leq \|A\|_2 &&\leq \|A\|_F \\
+\textstyle \frac{1}{\sqrt{n}}\|A\|_1 &\leq \|A\|_2 &&\leq \sqrt{n} \|A\|_1 \\
+\textstyle \frac{1}{\sqrt{n}}\|A\|_\infty &\leq \|A\|_2 &&\leq \sqrt{n} \|A\|_\infty \\
+N_\infty(A) &\leq \|A\|_2 &&\leq nN_\infty(A) \\
+            &\leq \|A\|_2 &&\leq \sqrt{\|A\|_1\|A\|_\infty} \\
+\|a_i\|_2, \|\alpha_i\|_2 &\leq \|A\|_2 &&
+\end{alignat*}
 
 Rešujemo sistem $Ax=b$. Za napako $x$ velja ocena:
 \[ \frac{\|\Delta x\|}{\|x\|}  \leq \frac{\kappa(A)}{1-\kappa(A) \frac{\|\Delta
 A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta
 b\|}{\|b\|}\right) \]
 Količina $\kappa(A)$ se imenuje občutljivost matrike. $\kappa(A) =
-\|A\|\|A^{-1}\| = \frac{\sigma_1(A)}{\sigma_n(A)} \geq 1$
+\|A\|\|A^{-1}\|$. Velja $\kappa_2(A) = \frac{\sigma_1(A)}{\sigma_n(A)} \geq 1$.
 
 \textsc{LU razcep} s kompletnim pivotiranjem: matriko $A$ zapišemo kot $PAQ =
 UL$, $L$ sp.\ trikotna z $1$ na diagnoali in $U$ zg.\ trikotna, ter $P, Q$
@@ -147,20 +172,22 @@ Postopek na roke:
   \item * Če delamo pivotiranje zamenjamo primerne vrstice in stolpce v
     $A, P, Q$, da je $a_{00}$ največji. \label{enum:lu:pivot}
   \item Prvi stolpec delimo z $a_{00}$, razen $a_{00}$, ki ga pustimo na miru.
-  \item Za vsak element v podmatriki $A(2, n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
+  \item Za vsak element v podmatriki $A(2:n, 2:n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
     a_{1j}$ (odštejemo produkt  $\leftarrow$ in $\uparrow$).
-  \item Ponovimo postopek na matriki $A(2, n)$.
+  \item Ponovimo postopek na matriki $A(2:n, 2:n)$.
 \end{enumerate*}
 
 Delno pivotiranje uporablja samo matriko $P$, za LU razcep brez pivotiranja pa
 preskočimo~\ref{enum:lu:pivot}.
 
 Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
-potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepov potrebuje
+potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepom (brez pivotiranja) potrebuje
 $\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
 
 Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
 nu|\hat{L}||\hat{U}|$.
+
+Pivotna rast: $g = \frac{\max u_{ij}}{\max a_{ij}}$. Pri delnem pivotiranju $g < 2^n$.
 
 \textsc{Razcep Choleskega:}
 Za spd matriko $A$ obstaja razcep $A = VV^T$.
@@ -198,7 +225,7 @@ kvadratična.
 \subsection*{Problem najmanjših kvadratov}
 
 \textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$
-rešujemo normalni sistem $A^TAx=A^Tb$.
+rešujemo normalni sistem $A^TAx=A^Tb$. Če je $A$ polnega ranga, je $x$ enoličen.
 Število operacij: $n^2m + \frac13n^3$.
 
 
@@ -230,7 +257,7 @@ Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$
 rekurzivni formuli: $D_{i,j} = \frac{D_{i,j-1}-D_{i-1,j-1}}{x_i-x_{i-j}}$. Če
 sta dve točki na $j$-tem koraku enaki, je $D_{i,j} = \frac{f^{(j)}(x_i)}{j!}$.
 
-Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_n)$
+Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_{n-1})$
 
 \end{itemize}
 
