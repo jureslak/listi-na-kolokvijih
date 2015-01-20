@@ -90,15 +90,15 @@ Obratna stabilnost: izračunan rezultat je točen rezultat malo spremenjenih za�
 
 \subsection*{Nelinearne enačbe}
 Iščemo ničle $\alpha$ funkcije $f$. Občutljivost $\frac{1}{f'(\alpha)}$, za
-dvojno ničlo $\sqrt{\frac{2}{f''(x)}}$.
+dvojno ničlo velja ocena$\sqrt{\frac{2 \epsilon}{|f''(\alpha)|}}$, kjer $|f(\alpha)| \leq \epsilon$.
 
 \textsc{Bisekcija:} razpolavljamo interval, na katerem imamo ničlo. Št korakov za
 natančnost $\varepsilon$: $k \geq \log\left(\frac{|b-a|}{\varepsilon}\right)$.
 
 \textsc{Navadna iteracija:} Iščemo fiksno točno $g(\alpha) = \alpha$. Metoda: $x_{r+1} =
 g(x_r)$. Če je $|g'(\alpha)| < 1$ je točka privlačna, če $|g'(\alpha)| > 1$ je
-odbojna. Red konvergence je $p$, če je $\alpha$ $p$-kratna ničla $g$. Ocene za napako:
-$|x_r - \alpha| \leq m^r|x_0 - \alpha|$, $|x_{r+1} - \alpha|  \leq \frac{m}{1-m} |x_r - x_{r-1}|$, kje je $m$ Lipscitzeva
+odbojna. Red konvergence je $p$, če je $g^{(p)}(\alpha) \neq 0$, nižji odvodi pa so $0$ v $\alpha$. Ocene za napako:
+$|x_r - \alpha| \leq m^r|x_0 - \alpha|$, $|x_{r+1} - \alpha|  \leq \frac{m}{1-m} |x_r - x_{r+1}|$, kje je $m$ Lipscitzeva
 konstanta za $g$ ($m = \max g'$).
 
 \textsc{Tangentna metoda:} $x_{r+1} = x_r - \frac{f(x_r)}{f'(x_r)}$. Konvergenca je za
@@ -185,9 +185,7 @@ preskočimo~\ref{enum:lu:pivot}.
 
 Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
 potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepom (brez pivotiranja) potrebuje
-$\frac23n^3 + \frac32n^2 + \frac56n$ operacij. Za izračun $Lx$ potrebujemo $n^2$
-operacij, za $Ax$ potrebujemo $2n^2$ operacij. Za izračun inverza matrike preko
-LU razcepa potrebujemo $2n^3$ operacij.
+$\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
 
 Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
 nu|\hat{L}||\hat{U}|$.
