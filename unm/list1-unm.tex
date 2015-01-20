@@ -67,6 +67,7 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
 
 \newcommand{\mybox}[1]{\frame{\rule{0pt}{10pt}\ #1\ }}
 
@@ -333,7 +334,7 @@ for k = 1 to m: // m je veliko število
 \normalsize
 Če imamo lastni vektor $v$, potem želimo imeti lastno vrednost $\lambda$.
 Najboljši približek je Raylegihov kvocient: $\rho(A, v) = \frac{z^H\!\!Az}{z^Hz}$.
-Kot kriterij v potenčni metodi uporabimo \verb'|A * z - p(A, z| < eps'.
+Kot kriterij v potenčni metodi uporabimo \verb'|A * z - p(A, z)| < eps'.
 
 Če imamo dober približek $\tilde{\lambda}$ za lastno vrednost vrednost
 $\lambda_i$ uporabimo inverzno iteracijo. Iščemo največjo vrednost matrike
@@ -388,21 +389,36 @@ Diagonalno dominantna matrika ($|a_{ij}| > \sum_{j=1, j\neq i}^n|a_{ij}|$) je ob
 
 \textsc{Lagrangeev interpolacijski polinom:}
 
-$$l_{n,j}(x)=\frac{\prod_{i=0,i\neq j}^n(x-x_i)}{\prod_{i=0,i\neq j}^n(x_j-x_i)}$$
+\[ \ell_{n,j}(x)=\frac{\prod_{i=0,i\neq j}^n(x-x_i)}{\prod_{i=0,i\neq
+j}^n(x_j-x_i)} \]
 
-Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$.
+Polinom: $p(x) = \sum_{i=0}^nf(x_i)\ell_{n,i}(x)$. Definiramo $\omega(x) =
+(x-x_0)\dots(x-x_n)$. Velja $\ell_{n,i}(x) = \frac{\omega(x)}{(x-x_i)\omega'(x)}$.
+
+Ocena napake: $f(x) = p(x) + \frac{f^{(n+1)}(\xi)}{(n+1)!}\omega(x)$, kjer je
+$\xi$ nekje na intervalu, ki ga določajo $x_i$ in $x$. To se prevede na:
+$|f(x) - p(x)|  = |\omega(x) f[x_0, \ldots, x_n, x]| =
+|\omega(x) \frac{f^{(n+1)}(\xi)}{(n+1)!}| \leq \|\omega\|_\infty
+\frac{\|f^{(n+1)}\|_\infty}{(n+1)!}$
+
+
+Izračun vrednosti polinoma, ki je dan z $d_i = f[x_0, \ldots, x_i]$:
+\scriptsize
+\begin{verbatim}
+v = d_n
+for i = n-1:-1:0
+    v = d_i + (x - x_i) v
+\end{verbatim}
+\normalsize
 
 \textsc{Deljene diference:}
 
-\begin{itemize}
+Če so točke paroma različne: $f[x_i] = y_i$, ostalo izračunamo po
+rekurzivni formuli: $f[x_0, \ldots, x_k] = \frac{f[x_1, \ldots, x_k] -f[x_0, \ldots, x_{k-1}] }{x_k-x_0}$. Če
+so točke $x_0$ do $x_k$ enake, je $f[x_0, \ldots, x_k] = \frac{f^{(k)}(x_0)}{k!}$.
 
-\item Če so točke paroma različne: $D_{i,0} = y_i$, ostalo izračunamo po
-rekurzivni formuli: $D_{i,j} = \frac{D_{i,j-1}-D_{i-1,j-1}}{x_i-x_{i-j}}$. Če
-sta dve točki na $j$-tem koraku enaki, je $D_{i,j} = \frac{f^{(j)}(x_i)}{j!}$.
-
-Polinom: $p(x) = D_{1,1} + D_{2,2}(x-x_0) + D_{3,3}(x-x_0)(x-x_1) + \cdots D_{n,n}(x-x_0)\cdots (x-x_{n-1})$
-
-\end{itemize}
+Polinom: $p(x) = f[x_0] + f[x_0, x_1] (x-x_0) + f[x_0, x_1, x_2] (x-x_0)(x-x_1) +
+f[x_0, \dots, x_n](x-x_0)\cdots (x-x_{n-1})$
 
 %%%%%%%%%%%%%%%%                    INTEGRIRANJE
 \subsection*{Integriranje}
@@ -416,8 +432,15 @@ Ekvidistančne točke $a = x_0 < x_1 < \dots < x_n = b$, $x_i = x_0 + ih$.
 +2f(x_2)+\cdots + 2f(x_{2m-2})+4f(x_{2m-1})+f(x_{2m}))-\frac{h^4}{180}(b-a)f^{(4)}(\xi)$
 
 \textsc{3/8 pravilo:} $\int_a^b f(x) dx = \frac{3}{8} h(f(x_0) + 3f(x_1)
-+ 3f(x_2) + f(x_3)) - \frac{3}{80} h^5f^{(4)}(\xi )$, $\quad \xi \in (x_0,x_3)$
++ 3f(x_2) + f(x_3)) - \frac{3}{80} h^5f^{(4)}(\xi)$, Vedno $\xi \in (a, b)$.
+\\[-8pt]
 
+\textsc{Richardsonova ekstrapolacija:} $I = T_h(f) + R_h(f)$, kjer je $T$
+pravilo in $R$ napaka, npr. $h^2/12 f''(\xi)$.
+S pomočjo izračuna za $h$ in $h/2$ določimo $I(f) = T_h(f) + R_h(f) = T_{h/2}(f) +
+R_{h/2}(f)$ in ocenimo napako (če so odvodi baš enaki) in boljše izračunamo integral:
+$R_{h/2}(f) \approx \frac{S_{h/2}(f) - S_h(f)}{15}, \quad I(f) \approx
+\frac{16S_{h/2}(f) - S_h(f)}{15}$.
 
 \end{document}
 % vim: syntax=tex
