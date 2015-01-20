@@ -185,7 +185,9 @@ preskočimo~\ref{enum:lu:pivot}.
 
 Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
 potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepom (brez pivotiranja) potrebuje
-$\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
+$\frac23n^3 + \frac32n^2 + \frac56n$ operacij. Za izračun $Lx$ potrebujemo $n^2$
+operacij, za $Ax$ potrebujemo $2n^2$ operacij. Za izračun inverza matrike preko
+LU razcepa potrebujemo $2n^3$ operacij.
 
 Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
 nu|\hat{L}||\hat{U}|$.
