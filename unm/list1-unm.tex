@@ -132,7 +132,7 @@ treba začeti s kompleksnimi približki.
 
 \textsc{Norme:} $\|A\|_1 =
 \max_{j\in\{1..n\}}\left(\sum_{i=1}^n|a_{ij}|\right)$ = največji stolpec,
-$\|A\|_\infty = \|A^T\|_1$ = največja vrstica \\
+$\|A\|_\infty = \|A^\mathsf{T}\|_1$ = največja vrstica \\
 $\|A\|_2 = \sigma_1 = \sqrt{\lambda_{max}(A^HA)}$ = največja singularna vrednost,
 $\|A\|_F = \sqrt{\sum_{ij}a_{ij}^2}$ = gledamo kot vektor \\
 Operatorska norma: $\|A\| = \max_{x\neq 0}\frac{\|Ax\|}{\|x\|}$.
@@ -193,7 +193,7 @@ nu|\hat{L}||\hat{U}|$.
 Pivotna rast: $g = \frac{\max u_{ij}}{\max a_{ij}}$. Pri delnem pivotiranju $g < 2^n$.
 
 \textsc{Razcep Choleskega:}
-Za spd matriko $A$ obstaja razcep $A = VV^T$.
+Za spd matriko $A$ obstaja razcep $A = VV^\mathsf{T}$.
 \scriptsize
 \begin{verbatim}
 for k = 1 to n:
@@ -230,12 +230,12 @@ kvadratična.
 \subsection*{Problem najmanjših kvadratov}
 
 \textsc{Reševanje predoločenih sistemov:} Za dan predoločen sistem $Ax=b$
-rešujemo normalni sistem $A^TAx=A^Tb$. Če je $A$ polnega ranga, je $x$ enoličen.
+rešujemo normalni sistem $A^\mathsf{T}Ax=A^\mathsf{T}b$. Če je $A$ polnega ranga, je $x$ enoličen.
 Rešujemo z razcepom Choleskega. Število operacij: $n^2m + \frac13n^3$.
 
-QR razcep je bolj stabilen. Za $A \in \R^{m\times n}$ obstaja enoličen razcep $A = QR$, $Q^TQ =
+QR razcep je bolj stabilen. Za $A \in \R^{m\times n}$ obstaja enoličen razcep $A = QR$, $Q^\mathsf{T}Q =
 I$ in $R$ zg. trikotna s pozitivnimi diagonalci. Za predoločen sistem rešimo $Rx
-= Q^Tb$.
+= Q^\mathsf{T}b$.
 
 \textsc{CGS in MGS} Klasična GS ortogonalizacija. Od vsakega stolpca $a_k$
 odštejemo pravokotne projekcije $a_i, i < k$. Algoritem ni najbolj stabilen.
@@ -259,7 +259,7 @@ ortogonalna, $R$ zgornje trapezna. $\tilde{Q} = [Q\ Q_1]$, $\tilde{R} = [R; 0]$.
 \textsc{Givensove rotacije}
 
 Elemente v $A$ po stolpcih enega po enega ubijamo z rotacijami. Rotacija, ki ubije element
-$a_{ki}$ je $R_{ik}^T([i k],[i,k]) = [c\ s; -s\ c]$, in ostalo identiteta.
+$a_{ki}$ je $R_{ik}^\mathsf{T}([i k],[i,k]) = [c\ s; -s\ c]$, in ostalo identiteta.
 Parametre nastavimo: $c = x_{ii}/r$, $s =
 x_{ki}/r$, $r = \sqrt{x_{ii}^2+x_{ki}^2}$. $\tilde{Q}$ dobimo kot prokdukt vseh rotacij, potrebnih za genocid
 elementov $A$. Rotacija spremeni samo $i$-to in $k$-to vrstico.
@@ -282,8 +282,8 @@ Q = Q'
 \normalsize
 
 \textsc{Hausholderjeva zrcaljenja}
-Definiramo $P = I - \frac{2}{w^Tw}ww^T$. $P$ je zrcaljenje prek ravnine z normalo
-$w$. $Px$ = $x - \frac{1}{m}(x^Tw)w$, $m = \frac12w^Tw$.
+Definiramo $P = I - \frac{2}{w^\mathsf{T}w}ww^\mathsf{T}$. $P$ je zrcaljenje prek ravnine z normalo
+$w$. $Px$ = $x - \frac{1}{m}(x^\mathsf{T}w)w$, $m = \frac12w^\mathsf{T}w$.
 
 Da vektor $x$ prezrcalimo tako, da mu uničimo vse razen prve komponente,
 uporabimo $w = [x_1 + \operatorname{sign}(x_1)\|x\|_2; x_2; \dots x_n]$ in $m =
@@ -312,6 +312,68 @@ $\frac{\|\Delta x\|}{\|x\|} \leq \frac{\varepsilon\kappa_2(A)}{1-\varepsilon\kap
 
 %%%%%%%%%%%%%%%%                   LASTNE VREDNOSTI
 \subsection*{Lastne vrednosti}
+Desni in levi lastni vektorji: $y^HA = \mu y^H$ in $Ax = \lambda x$. Levi in
+desni vektorji za različne l. vrednosti so pravokotni. Občutljivost lastne
+vrednosti je $\frac{1}{y^Hx}$, kjer sta $x$ in $y$ normirana levi in desni
+lastni vektor.
+
+\textsc{Potenčna metoda:} Pravzaprav navadna iteracija. Izberemo si začetni
+vektor $z$ in tolčemo č\'{e}z matriko $A$ in normiramo, dokler ne postane lastni vektor. Ta
+metoda ima linearno konvergenco k lastnemu vektorju za dominantno lastno
+vrednost, če je le ena sama lastna vrednost največja.
+Hitrost konvergence je $\lambda_1 / \lambda_2$, kjer sta to dve
+največji lastni vrednosti.
+\scriptsize
+\begin{verbatim}
+z = ones(n, 1)  // naključen neničeln vektor
+for k = 1 to m: // m je veliko število
+    y = A * z
+    z = y / ||y||
+\end{verbatim}
+\normalsize
+Če imamo lastni vektor $v$, potem želimo imeti lastno vrednost $\lambda$.
+Najboljši približek je Raylegihov kvocient: $\rho(A, v) = \frac{z^H\!\!Az}{z^Hz}$.
+Kot kriterij v potenčni metodi uporabimo \verb'|A * z - p(A, z| < eps'.
+
+Če imamo dober približek $\tilde{\lambda}$ za lastno vrednost vrednost
+$\lambda_i$ uporabimo inverzno iteracijo. Iščemo največjo vrednost matrike
+$(A-\tilde{\lambda}I)^{-1}$, ki
+ima lastne vrednosti $\frac{1}{\lambda_i - \lambda}$.
+\scriptsize
+\begin{verbatim}
+z = ones(n, 1)
+for k = 0 to m:
+    reši (A - lambda I)y = z
+    z = y / ||y||
+\end{verbatim}
+\normalsize
+
+\textsc{Schurova forma:} Za vsako matriko $A$ obstaja Schurova forma $S$, da je $A = USU^H$,
+kjer je $U$ unitarna in $S$ zgornje trikotna. Na diagnoali so lastne vrednosti.
+V primeru kompleksnih lastnih vrednosti imamo 2x2 bloke.
+
+\textsc{Otrogonalna iteracija:} Za izračun Schurove forme. $Z$ je lahko $n\times
+p$ matrika z ortonormiranimi stolpci, tako dobimo prvih $p$ stolpcev Schurove
+forme. Za $p = 1$ je to potenčna metoda, za $p = n$, pa dobimo celo schurovo
+formo.
+\scriptsize
+\begin{verbatim}
+Z = eye(n) // naključna matrika z otronormiranimi stolpci
+for k = 0 to m:
+    Y = A * Z
+    [Q, R] = qr(Y)
+    Z = Q
+\end{verbatim}
+\normalsize
+
+\textsc{QR iteracija:} Najboljša metoda za izračun lastnih vrednosti $A$.
+\scriptsize
+\begin{verbatim}
+for k = 0 to m:
+    [Q, R]= qr(A)
+    A = R * Q
+\end{verbatim}
+\normalsize
 
 \textsc{Gerschgorinov izrek:} Naj bo $A \in \C ^{n\times n}$, $C_i =
 \overline{K}(a_{ii}, r=\sum_{j=1, j \neq i}^n | a_{ij}|), i=1,2,\ldots ,n$.
@@ -328,7 +390,7 @@ Diagonalno dominantna matrika ($|a_{ij}| > \sum_{j=1, j\neq i}^n|a_{ij}|$) je ob
 
 $$l_{n,j}(x)=\frac{\prod_{i=0,i\neq j}^n(x-x_i)}{\prod_{i=0,i\neq j}^n(x_j-x_i)}$$
 
-Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$
+Polinom: $p(x) = \sum_{i=0}^nf(x_i)l_{n,i}(x)$.
 
 \textsc{Deljene diference:}
 
