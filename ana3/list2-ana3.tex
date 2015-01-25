@@ -1,0 +1,212 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
+]{hyperref}
+\usepackage[
+  paper=a4paper,
+  top=0.8cm,
+  bottom=0.8cm,
+%    textheight=24cm,
+  textwidth=19cm,
+  ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{enumerate}}
+
+\newcommand{\mytitle}{List 2 za analizo 3}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Jure Slak}}
+\hypersetup{pdfsubject={}}
+
+\pagestyle{empty}
+
+\setlength{\parindent}{0pt}
+
+\newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
+\let\oldint\int
+\renewcommand{\int}{\oldint \!}
+
+\begin{document}
+
+\subsubsection*{NDE 1. reda}
+Ločljive spremeljivke: $y' = f(x)g(y)$ \\
+Linearna: $y' = a(x)y + b(x)$, rešujemo $y_s = y_h + y_p$ \\
+Trik: $y(x) \leftrightarrow x(y) \implies y' = 1/\dot{x}$ \\
+Homogena: $f(tx, ty) = t^\alpha f(x, y)$, v posebnem $f(x, y) = f(1, x/y)
+  \implies z = y/x, y' = z + xz' \implies$ linearna \\
+Bernoullijeva: $y' = a(x)y + b(x)y^\alpha$, rešujemo $z = y^{1-\alpha}$,
+  $\implies \frac{1}{1-\alpha}z' = a(x)z + b(x)$ \\
+Ricattijeva: $y' = a(x)y^2 + b(x)y + c(x)$, ena rešitev $y_1$. Nova spr. $y = y_1 + \frac{1}{u}$\\
+$y'=y_1'-\frac{u'}{u^2}$ po pretvorbi $u'=-u(2ay_1+b)-a$
+\\
+Integrirajoči množitelj: $Pdx + Qdy = 0$, iščemo $\mu$: $(\mu P)_y = (\mu Q)_x$.
+Rešitev $u(x, y) = \int Pdx = \int Qdy = 0$ \\
+\hspace*{20pt} $\mu = \mu(x) \iff \frac{\mu_x}{\mu} = \frac{P_y - Q_x}{Q}$ odvisno samo od $x$.
+               $\mu = \mu(y) \iff \frac{\mu_y}{\mu} = \frac{Q_x - P_y}{P}$ odvisno samo od $y$. \\
+\hspace*{20pt} Če $\mu = f(x, y)$, pazi, da odvajaš kot kompozitum.\\
+Parametrično: $x = X(u, v), y = Y(u, v), y' = Z(u, v)$. Rešujemo: $dY = Z \, dX$ \\
+\hspace*{20pt} Triki: $\cos^2 + \sin^2 = 1, ch^2 - sh^2 = 1, y' = tx.$\\
+Clairautova: $y = xy' + b(y')$. Rešitev: $y = C x + b(C)$. Tudi singularna
+rešitev (ogrinjača). \\
+Lagrangeeva: $y = a(y')x + b(y')$. Rešujemo parametrično: $X = u, Z = y' = v, Y =
+a(v)u + b(v) \implies$ linearna. \\
+\hspace*{20pt} Singularna rešitev: poiščemo fiksne točke $a$. Če $a(t_0) = t_0 \implies y = a(t_0) x + b(t_0)$ je singularna rešitev.\\
+Singularna rešitev: če $G(x, y, c) = 0$ splošna rešitev, sing. rešitev dobimo:
+$G(x, y, c) = 0, G_c(x, y, c) = 0$. \\
+\hspace*{20pt} Druga možnost: če $F(x, y, y') = 0$ dana enačba, sing. rešitev
+    dobimo: $F(x, y, y') = 0, F_{y'}(x, y, y') = 0$. Preveriti moramo, če rešitev res reši DE!!! \\
+Iskanje ortogonalne trajektorije družine krivulj:
+\begin{enumerate*}
+  \item odvajaj enačbo krivulje (če se znebiš konstante, nadaljuj s korakom 3.))
+  \item eliminiraj konstanto iz enačbe krivulje in odvajane enačbe
+  \item v novi enačbi zamenjaj $y'$ z $-1/y'$ in reši dobljeno DE.
+  \item (Če je potrebno poljuben kot izrazi nov $y'$ iz enačbe $\tan\alpha=\frac{k_1-k_2}{1+k_1k_2}$)
+\end{enumerate*}
+
+Če je enačba podana eksplicitno in je desna stran polinom lihe stopnje v $y$ s koeficienti funkcijami v $x$ uvedeš $u=y^2$.
+
+\subsubsection*{NDE višjih redov}
+Ne nastopa $y$: uvedemo $z = y'$. \\
+Obe strani sta odvoda nečesa: integriramo in dodamo konstanto. \\
+\hspace*{20pt} Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} = (\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\
+Ne nastopa $x$: uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' =
+  \ddot{z}z^2 + \dot{z}^2z$. \\
+Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y', \dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\
+Z utežjo: $F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,  y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+
+\subsubsection*{Geometrija}
+Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
+Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
+Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
+$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
+
+\begin{tabular}{ll}
+Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
+Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
+\end{tabular}
+
+\subsubsection*{Integrali}
+\begin{tabular}{ll}
+$\int \log(x) \dx = x \log(x) - x + C$ & $\int \frac{1}{\sin(x)} \dx = \log(\tan(x/2)) + C$\\
+$\int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} - \frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2)) + C$ \\
+$\int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$\\
+$\int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b \cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$\\
+$\int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b \sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$\\
+$\int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x + \sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int \sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
+$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int \cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$ \\
+$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
+\end{tabular}
+
+$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx =
+\begin{cases}
+\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & \text{a >0}\\
+ \frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0
+\end{cases} $\\
+$\int \frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx + c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+
+Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2), \dx = \dt/(1 + t^2)$\\
+Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2), \cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+
+\newpage
+
+
+\subsubsection*{Linearni sistemi}
+Homogeni: $\dot{\vec{x}} = A \vec{x}$ ima rešitev $\vec{x} = P e^{Jt} \vec{c}$, kjer $A = P J P^{-1}$ Jordan in $\vec{c}$ vektor konstant.
+
+\textsc{Definicija: }Naj bo $\dot{\vec{x}}(t) = A(t) \vec{x}(t)$ sistem in
+$A(t) \in \R^{n \times n}$. Rešitev matrične enačbe $\dot{X} = AX$, ki je obrnljiva, se
+imenuje \textbf{fundamentalna rešitev}. Dve fundamentalni rešitvi se
+razlikujeta samo za obrnljivo matriko. \textbf{Splošna rešitev} $\dot{\vec{x}}
+= A \vec{x}$ je $X\vec{c}$, kjer je $\vec{c}$ konstantni vektor. \\
+
+$X = [x_1,x_2,\ldots x_n] \quad  X\vec{c} = c_1\vec{x_1} + c_2\vec{x_2} + \cdots c_n\vec{x_n}$ \\
+
+Naj bo $A$ konstanta matrika. $\dot{\vec{x}} = A \vec{x}$ ima splošno rešitev
+$\vec{x} = Pe^{Jt}\vec{c}$, kjer je $A=PJP^{-1}$ Jordanska kanonična forma.
+
+\textsc{Postopek:}
+\begin{enumerate*}
+  \item Izračunaj lastne vrednosti
+    matrike $A$.
+    \begin{itemize*}
+      \item Če so vse lastne vrednosti različne,
+        izračunaj lastne vektorje za vse lastne vrednosti in določi $J$ in $P$ (pazi,
+        da vrstni red lastnih vrednosti v $J$ sovpada z vrstnim redom lastnih vektorjev
+        v $P$)
+      \item Če je lastna vrednost $\lambda$ večkratna in zanjo obstaja le en
+        lastni vektor, izračunaj korenski vektor in ga preslikaj z $A-\lambda I$
+    \end{itemize*}
+  \item Zapiši rešitev $\vec{x} = Pe^{Jt}\vec{c} = c_1
+    e^{\lambda_1t} v_1 + c_2 e^{\lambda_2t} v_2 + \cdots c_n e^{\lambda_nt} v_n$,
+    kjer $P = [v_1,v_2,\ldots ,v_n]$. Iz tega dobiš $X = [\vec{x_1},\vec{x_2},
+    \ldots, \vec{x_n}]$, kjer $x_i = e^{\lambda_it} v_i$.
+\end{enumerate*}
+
+\subsubsection*{LDE višjega reda}
+Enačba oblike $a_n y^{(n)} + \dots + a_1 y' + a_0 y = b$, kjer so $a_i$
+konstante, se rešuje z nastavkom $y = e^{\lambda x}$. Najdemo ničle
+karakterističnega polinoma $\sum a_i \lambda^i$. Rešitev je linearna kombinacija
+$A_1e^{\lambda x} + A_2 xe^{\lambda x} + \dots + A_k x^{k-1} e^{\lambda x}$,
+kjer je $k$ večkratnost $\lambda$.
+
+Partikularno rešitev prav tako poiščemo z nastavki. Za $b = q(x)e^{\mu x}$ je
+nastavek oblike $p(x)e^{\mu x}x^k$, kjer je $\text{st}(p) = \text{st}(q)$ in $k$
+večkratnost $\mu$ med ničlami $\lambda_i$.
+
+\subsubsection*{Nelinearni sistemi}
+Množimo, delimo z $x$, $y$. Seštevamo in odštevamo enačbe in iščemo algebraične
+zveze. Kdaj lahko enačbe zdelimo in dobimo DE za $y(x)$.
+
+\end{document}
+% vim: syntax=tex
+% vim: spell spelllang=sl
+% vim: foldlevel=99
