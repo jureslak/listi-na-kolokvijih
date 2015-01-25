@@ -79,17 +79,20 @@ right  = 0.5cm]{geometry}
 \section*{\textbf{Linearni sistemi}} %%%%% LINEARNI SISTEMI
 
 \textsc{Definicija: }Naj bo $\dot{\vec{x}}(t) = A(t) \vec{x}(t)$ sistem in $A(t)
-\in \R^{n \times n} \forall t$. Rešitev enačbe $\dot{X} = AX$, ki je obrnljiva,
+\in \R^{n \times n} \forall t$. Rešitev enačbe $\dot{X} = AX$, ki je obrnljiva (stolpci so neodvisni),
 se imenuje \textbf{fundamentalna rešitev}. Dve fundamentalni rešitvi se
 razlikujeta za obrnljivo matriko. \textbf{Splošna rešitev}
-$\dot{\vec{x}} = A \vec{x}$ je $X\vec{c}$, kjer je $\vec{c}$ konstantni vektor. \\
+$\dot{\vec{x}} = A \vec{x}$ je $X\vec{c}$, kjer je $\vec{c}$ konstantni vektor.  $X$ je fundamentalna rešitev tam, kjer je $\det{X} \neq 0.$\\
 
+\vspace{-0.3cm}
 $X = [x_1,x_2,\ldots x_n] \qquad X\vec{c} = c_1\vec{x_1} + c_2\vec{x_2} + \cdots
 c_n\vec{x_n}$ \\
 
+\vspace{-0.3cm}
 Naj bo $A$ matrika konstant. $\dot{\vec{x}} = A \vec{x}$ ima splošno rešitev
 $\vec{x} = Pe^{Jt}\vec{c}$, kjer je $A=PJP^{-1}$ jordanska kanonična forma.  \\
 
+\vspace{-0.3cm}
 \textsc{Postopek:}
 \begin{enumerate*}
   \item Izračunaj lastne vrednosti
@@ -111,7 +114,7 @@ $\vec{x} = Pe^{Jt}\vec{c}$, kjer je $A=PJP^{-1}$ jordanska kanonična forma.  \\
 \textsc{Opomba:} Pri kompleksnih lastnih vrednostih in vektorjih z uporabo
 $e^{\lambda + i\mu} = e^{\lambda}(\cos{\mu}+i\sin{\mu})$ loči realni in
 imaginarni del (hočemo realne lastne vektorje, konstante pred njimi pa so lahko
-kompleksne).
+kompleksne). Če $\lambda$ in $\overline{\lambda}$ lastni vrednosti, sta lastna vektorja $v$ in $\overline{v}$.
 
 % \textsc{Trditev:} Naj bo dan sistem  $\dot{\vec{x}} = A \vec{x}$, kjer $A:[a,b] \rightarrow \R^{n\times n}$ zvezna in $X_1,X_2$ fundamentalni rešitvi. Potem velja
 %
@@ -122,6 +125,7 @@ kompleksne).
 % za neko obrnljivo matriko $P$.
 % \\
 Ko rešuješ sistem
+\vspace{-0.3cm}
 $$
 \begin{bmatrix} \dot{x} \\ \dot{y} \end{bmatrix} =
 \begin{bmatrix} a(t) & b(t) \\ c(t) & d(t) \end{bmatrix}
@@ -131,15 +135,20 @@ $$
 iz prve enačbe izrazi $y$, enačbo odvajaj in vstavi dobljeni $\dot{y}$ v drugo. Dobiš diferencialno enačbo za $x$, iz katere izračunaš $x$ in $y$. Splošno rešitev sistema $X$ dobiš tako, da razpišeš $x$ in $y$ po bazi konstant $C_1,C_2$ (prvi stolpec: $C_1 = 1, C_2 = 0$ in drugi stolpec: $C_1 = 0, C_2 = 1$).
 \\
 
-\textsc{Liouvilleov izrek: }Naj bo $\dot{\vec{z}} = A \vec{z}$ in $A:[a,b] \rightarrow \R^{n\times n}$ zvezna za vsak $t$. Potem obstaja fundamentalna rešitev sistema, ki je obrnljiva na $[a,b]$ $X(t)$ taka, da velja:
+\vspace{-0.3cm}
+\textsc{Liouvilleov izrek: }Naj bo $\dot{\vec{z}} = A \vec{z}$ in $A:[a,b] \rightarrow \R^{n\times n}$ zvezna za vsak $t$. Potem obstaja fundamentalna rešitev sistema, ki je obrnljiva na $[a,b]$ $X(t)$ taka, da velja (to uporabiš, če imaš sistem in poznaš eno rešitev!):
 
+\vspace{-0.4cm}
 $$
-\det{X(t)} = \det{X(t_0)}e^{\int_{t_0}^t \text{sl}A(\xi)d\xi}.
+\det{(X(t))} = \det{(X(t_0))}e^{\int_{t_0}^t \text{sl}A(\xi)d\xi}.
 $$
+
+\vspace{-0.2cm}
+\textbf{Nehomogena}: $\vec{x} = X\vec{c} = X \int X^{-1}\vec{f}dt$
 
 \section*{\textbf{Linearne DE višjega reda}}  %%%%%%%%%%%%% LINEARNE DE VIŠJEGA REDA
 
-$y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y' + a_0(x)y = f(x)$
+$a_n(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y' + a_0(x)y = f(x)$
 
 Naj bo $y$ rešitev enačbe. Potem:
 
@@ -151,11 +160,11 @@ $ \quad \vec{z}' =  \begin{bmatrix} y' \\ y'' \\ y''' \\ \vdots \\ y^{(n)} \end{
   0 & 0 & 1 &  \cdots & 0 \\
   \vdots & \vdots & \vdots & \ddots & \vdots \\
   0 & 0 & 0 &  \cdots & 1 \\
-  -a_0 & -a_1 & -a_2 & \cdots & -a_{n-1}
+  -a_0/a_n & -a_1/a_n  & -a_2/a_n  & \cdots & -a_{n-1}/a_n 
 \end{bmatrix}
 \begin{bmatrix} y \\ y' \\ \vdots \\ y^{(n-2)} \\ y^{(n-1)} \end{bmatrix}
 +
-\begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ f \end{bmatrix}$
+\begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ f/a_n  \end{bmatrix}$
 
 $\vec{x} = X\vec{c} = X \int X^{-1}\vec{f}dt$, rabimo samo prvo vrstico ($y$).
 
@@ -171,7 +180,9 @@ x}$, kjer je $k_j$ večkratnost $\lambda_j$.
 
 Partikularni del:
 za $b$ oblike $e^{\mu x}q(x)$, $\mu \in \C$ in $q(x)$ polinom stopnje $m$.
-$y_p = p(x)e^{\mu x}x^k$, kjer $k$ večkratnost $\mu$ kot $\lambda$ in $p$ stopnje $m$.
+$y_p = p(x)e^{\mu x}x^k$, kjer $k$ večkratnost $\mu$ kot $\lambda$ in $p$ stopnje $m$.\\
+Par $x^k e^{(a + bi) x},  x^k e^{(a - bi) x}$ gre v $x^k e^{ax} \cos(bx), x^k e^{ax} \sin(bx)$.\\
+Za b oblike $e^{ax} (p_{m1}(x) \cos(bx) + p_{m2} \sin(bx))$, kjer $a + bi$ $k$-kratna ničla in $m = \max{m1, m2}$ stopnja pol.: $y_p =x^k e^{ax} (q_{m}(x) \cos(bx) +r_{m} \sin(bx))$.
 
 \textsc{Cauchy-Eulerjeva enačba:} $x^n y^{(n)}+a_{n-1}x^{n-1}y^{(n-1)}+\cdots +
 a_1xy' + a_0 y = b$. Uvedemo novo spremenljivko $x = e^t$, enačba se prevede na
@@ -181,9 +192,11 @@ enačbo s konstantnimi koeficienti. V praksi porabimo nastavek $y = x^{\lambda}$
 x^{\lambda_j}+c_2 \log(x) x^{\lambda_j}+\cdots + c_{k_j} \log^{k_j -1}(x)
 x^{\lambda_j}$, kjer je $k_j$ večkratnost $\lambda_j$.
 
-Partikularni del: za $b$ oblike $(\ln{t})t^{\mu}$. Nastavek $y_p =
+Partikularni del: za $b$ oblike $p(\ln{t})t^{\mu}$. Nastavek $y_p =
 q(\ln{t})t^{\mu}\ln^k{t}$, kjer $\text{st}(q)= \text{st}(p)$ in $k$ večkratnost
-$\mu$ med $\lambda_i$, ki rešijo ``karakteristični polinom''.
+$\mu$ med $\lambda_i$, ki rešijo ``karakteristični polinom''.\\
+Par $A x^i + B x^{-i} = A e^{i \log x} + Be^{-i \log x}$ gre v $(A + B) \cos(\log x) + (i A - i B) \sin(\log x)$.\\
+Par $(\log x)^k x^{a + bi},  (\log x)^k x^{a - bi}$ gre v $(\log x)^k x^{a} \cos(b \log x), (\log x)^k x^{a} \sin(b \log x)$.
 
 
 \section*{\textbf{Variacijski račun}}
@@ -201,11 +214,11 @@ Za Banachova prostora $(C[a,b],\|.\|_\infty)$ in $(C^1[a,b],\|.\|_1)$ je $\|f\|_
 
 \textsc{Definicija: }Naj bosta $X$ in $Y$ Banachova, $\mathcal{U}^{odp} \subseteq X$ in $F:\mathcal{U}\longrightarrow Y$. $F$ je:
 \begin{enumerate}[a)]
-\item \textbf{krepko (Fréchetjevo) odvedljiva} v točki $x$, če obstaja $(DF)(x)$ omejen linearni operator iz $X$ v $Y$, da velja:
+\item \textbf{krepko (Fréchetjevo) odvedljiva} v točki $x$, če obstaja $(DF)(x)$ \underline{omejen linearni operator} iz $X$ v $Y$, da velja:
 $$ \frac{\|F(x+h)-F(x)-(DF)(x)(h)\|}{\|h\|} \xrightarrow[h \to 0]{} 0 $$
 
 \item \textbf{šibko (Gâuteauxjevo) odvedljiva}, če obstaja
-$ g_x(h):= \lim_{t \to 0} \frac{F(x+th)-F(x)}{t} $
+$ g_x(h):= \lim_{t \to 0} \frac{F(x+th)-F(x)}{t} = (\frac{d}{dt}F(x + th)) |_{t = 0}$
 \end{enumerate}
 
 \textsc{Izrek:} Če je $F$ krepko odvedljiva $\Longrightarrow$ $F$ šibko odvedljiva in odvoda sta enaka.
@@ -213,11 +226,11 @@ $ g_x(h):= \lim_{t \to 0} \frac{F(x+th)-F(x)}{t} $
 \textsc{Opomba:} Izračunamo šibkega, dobimo kandidata za krepkega. Po definiciji
 izračunamo limito krepkega. Dokažemo omejenost $g_x$.
 
-Uporabno: $| \int (f+f')dx| \leq \int (|f|+|f'|)dx \leq \int (\|f\|_\infty + \|f'\|_\infty)dx = \int \|f\|_1dx$
+Uporabno: $| \int (f+f')dx| \leq \int (|f|+|f'|)dx \leq \int (\|f\|_\infty + \|f'\|_\infty)dx = \int \|f\|_1dx$ in  $I$ in $f(I)$, kjer $f$ strogo naraščajoča, imata pri istih robnih pogojih iste ekstremale.
 
 \textsc{Trditev:} Naj bo $X$ Banachov prostor in $F,G:X \longrightarrow \R$
 krepko odvedljivi v $x_0 \in X$. Potem je $F G:X \longrightarrow \R $ krepko
-odvedljiva v $x_0$ in velja $D(FG)(x_0)=F(x_0)DG(x_0)+G(x_0)DF(x_0)$
+odvedljiva v $x_0$ in velja $D(FG)(x_0)=F(x_0)DG(x_0)+G(x_0)DF(x_0)$ in (druge predpostavke) $(D(G \circ F))(h) = DG(F(h)) \cdot DF(h)$.
 
 \textsc{Razmadzejev izrek:} Naj bosta $M$ in $N$ zvezni funkciji na $[a,b]$.
 Denimo, da za vsako testno funkcijo $\varphi \in \mathcal{D}([a,b])$ velja:
@@ -227,31 +240,34 @@ $
 $
 Tedaj je $N$ odvedljiva in velja $N'=M$.
 
-\textsc{Euler-Lagrangeeva enačba:} $L_y - \frac{d}{dx}L_{y'}=0$
+\textsc{Euler-Lagrangeeva enačba:} $L_y - \frac{d}{dx}L_{y'}=0$ + robni pogoji $L_{y'} |_a^b = 0$
 
 Naj velja $L_y=\frac{d}{dx}L_{y'}$ in $L_{y'}h |_a^b = 0$ za vse dopustne variacije.
 \begin{itemize}
 \item če poznamo $y(a),y(b) \Longrightarrow h(a)=h(b)=0$ za vse dopustne variacije.
 \item če poznamo $y(a) \Longrightarrow h(a)=0$ za vse dopustne variacije ($L_{y'}(b)=0$).
 \item če poznamo $y(b) \Longrightarrow h(b)=0$ za vse dopustne variacije ($L_{y'}(a)=0$).
-\item če $y(a),y(b)$ ne poznamo $\Longrightarrow$ ...
+\item če $y(a),y(b)$ ne poznamo $\Longrightarrow$ $L_{y'}(a)=0$ in $L_{y'}(b)=0$ (?????)
+\item če $y(a) = y(b)$ $\Longrightarrow$ $L_{y'}(a)= L_{y'}(b)$
 \end{itemize}
 
 \textsc{Klasični problem:} $I[y]=\int_a^bL(x,y,y')dx$.
 \begin{enumerate}
 \item Če $L=L(x,y') \Longrightarrow L_{y'}=C$ (Iz te enačbe izrazi $y' = f(x)$, z integracijo izračunaj $y = \int f(c) $ in vstavi robne pogoje, da določiš konstante.)
-\item $L=L(y,y') \Longrightarrow L-y'L_{y'}=C$ (ločljive spremenljivke, verjetno potrebna obravnava glede na vrednost $C$)
+\item $L=L(y,y') \Longrightarrow L-y'L_{y'}=C$ (ločljive spremenljivke, verjetno potrebna obravnava glede na vrednost $C = 0, >0, <0$)
 \end{enumerate}
 
 \textsc{Izoperimetrični polinom:} $A:$ $I[y]=\int_a^bL(x,y,y')dx +$ robni pogoji + dodatni pogoji: $\int_a^bG_1(x,y,y')dx = A_1, \ldots \int_a^bG_n(x,y,y')dx=A_n \Longrightarrow $ obstajajo $\lambda_1,\ldots \lambda_n: \int_a^b(L-\lambda_1G_1-\cdots \lambda_nG_n)dx = \tilde{I}[y]$. Ekstremali za $A$ so ekstremali za $\tilde{I}$ z nekaterimi robnimi pogoji. (Da dobiš $\lambda $ izračunaj najprej $y (x,\lambda)$, nato pa uporabi dodatni pogoj. Dodatno: Če $y(a)$ ni podan: $\tilde{L}_{y'}(a)=0$)
 \\
 
-$I[y]=\int_a^bL(x,y,y',\ldots ,y^{(n)})dx \Longrightarrow L_y -\frac{d}{dx}L_{y'} - \cdots + (-1)^n \frac{d^n}{dx^n}L_{y^{(n)}}=0$
+$I[y]=\int_a^bL(x,y,y',\ldots ,y^{(n)})dx \Longrightarrow L_y -\frac{d}{dx}L_{y'} - \cdots + (-1)^n \frac{d^n}{dx^n}L_{y^{(n)}}=0$ in $(DI)[y](h) = \int_a^b (L_y h + L_{y'} h' + \cdots + L_{y^{(n)}} h^{(n)}) dx = 0$ + dodatni robni pogoji, ki jih dobiš s per partesom (npr. za $n = 2$ pride $((L_{y'} - \frac{d}{dx} L_{y''}) h + L_{y''} h')|_a^b = 0$)
 \\
 
-$I[y_1,y_2,\ldots ,y_n] = \int_a^b L(x,y_1,\ldots y_n, y_1',\ldots y_n')dx$ in podani $y_1(a),\ldots y_n(a), y_1(b),\ldots y_n(b)$. Potem za $i = 1,\ldots ,n$ velja: $L_{y_i} = \frac{d}{dx}L_{y_i'}$.
+$I[y_1,y_2,\ldots ,y_n] = \int_a^b L(x,y_1,\ldots y_n, y_1',\ldots y_n')dx$ in podani $y_1(a),\ldots y_n(a), y_1(b),\ldots y_n(b)$. Potem za $i = 1,\ldots ,n$ velja: $L_{y_i} = \frac{d}{dx}L_{y_i'}$ + per partes za ostale robne pogoje.
 
-\textsc{Nelinearni sistemi:} Če $\dot{x} = f(x,y), \dot{y} = g(x,y) \Longrightarrow y'(x)=\frac{g(x,y)}{f(x,y)}$, $(\frac{y}{x})\dot{ } = \frac{x\dot{y}-y\dot{x}}{x^2}$, $(xy)\dot{ } = \dot{x}y+x\dot{y}$
+\textsc{Neklasična naloga:} kaj so dopustne variacije + $(DI)[y](h) = 0 (\star)$ za vse dop.\ var.\ + $(\star)$ obstreljuješ s testnimi funk.\ + Razmadze, da dobiš DE za ekstremale + uporabiš vezi in $(\star)$ obstreljuješ z izbranimi dop.\ var.\ 
+
+\textbf{\textsc{Nelinearni sistemi:}} Če $\dot{x} = f(x,y), \dot{y} = g(x,y) \Longrightarrow y'(x)=\frac{g(x,y)}{f(x,y)}$, $(\frac{y}{x})\dot{ } = \frac{x\dot{y}-y\dot{x}}{x^2}$, $(xy)\dot{ } = \dot{x}y+x\dot{y}$
 %
 %Naloge tipa znajdi-se-sam ali bolje rečeno manage-it-on-your-own. Malo množi/deli, seštevaj/odštevaj enačbe s pravimi stvarmi in poskusi zagledati odvod produkta/kvocienta:
 %
@@ -326,11 +342,11 @@ Z utežjo: $F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots
 
 \section*{\textbf{Integrali in formule}}
 \begin{tabular}{llll}
-$\int \ln{x} \dx = x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ & $t \mapsto (\alpha (t), \beta (t), \gamma (t))$:$\int_{t_o}^{t_1}\sqrt{\dot{\alpha}^2+\dot{\beta}^2+\dot{\gamma}^2}dt$\\
+$\int \ln{x} \dx = x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ & $t \mapsto (\alpha (t), \beta (t), \gamma (t))$:$\int_{t_o}^{t_1}\sqrt{\dot{\alpha}^2+\dot{\beta}^2+\dot{\gamma}^2}dt$ (dol.\ krivulje)\\
 
 $ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} - \frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2)) + C$  & $G(y)=\int_0^1(y^2+y'^2)dx \Longrightarrow DG(y)(h)= \int_0^1(2yh+2y'h')dx$\\
 
-$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ & $\sin{x} = \frac{e^{ix}-e^{-ix}}{2i}$\\
+$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ & $\sin{x} = \frac{e^{ix}-e^{-ix}}{\textbf{2i}}$\\
 
 $ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b \cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ & $\cos{x} = \frac{e^{ix}+e^{-ix}}{2}$\\
 
@@ -344,9 +360,9 @@ $\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int \cos^2
 
 $\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
 
+Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ & $d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$\\
+
 \end{tabular}
-
-
 
 $\displaystyle \int \frac{1}{a x^2 + bx + c} \dx =
 \begin{cases}
@@ -354,8 +370,25 @@ $\displaystyle \int \frac{1}{a x^2 + bx + c} \dx =
  \frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0
 \end{cases} $\\
 $\int \frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx + c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+$\displaystyle \frac{d}{dx} \int_{a(t)}^{b(t)} f(t) dt = f(b(x) b'(x) - f(a(x)) a'(x))$
 
 Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2), \dx = \dt/(1 + t^2)$\\
 Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2), \cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+
+\begin{tabular}{lll}
+Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ & Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$\\
+Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$ & Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$
+\end{tabular}
+
+\begin{tabular}{l l l l}
+dolžina loka & ploščina izseka & prostornina vrtenine (okoli x osi) & površina vrtenine (okoli x osi)\\
+$s = \int \sqrt{\dot{x}^2 + \dot{y}^2}dt$ & $p = 1/2 \int(x \dot{y} - y \dot{x}) dt$ & $V = \pi \int y^2 \dot{x} dt$ & $P =2 \pi \int y \sqrt{\dot{x}^2 + \dot{y}^2} dt$\\
+$s = \int \sqrt{r^2 + \dot{r}^2}dt$ & $p = 1/2 \int r^2 dt$ & $V = \pi \int r^2 \sin^2(t) (\dot{r} \cos(t) - r \sin(t)) dt$ & $P = 2 \pi \int r \sin(t) \sqrt{r^2 + \dot{r}^2} dt$\\
+
+\end{tabular}
+
+
+
+
 
 \end{document}
