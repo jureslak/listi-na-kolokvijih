@@ -1,47 +1,49 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[8pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
 \usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{url}
-\usepackage{graphicx}
-\usepackage[usenames]{color}
-\usepackage[reqno]{amsmath}
-\usepackage{amssymb,amsthm}
+%\usepackage[normalem]{ulem}
 \usepackage{enumerate}
-\usepackage{array}
-\usepackage[bookmarks, colorlinks=true, %
-linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
-menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
-]{hyperref}
+\usepackage[dvipsnames,usenames]{color}
+
+
 \usepackage[
-  paper=a4paper,
-  top=0.8cm,
-  bottom=0.8cm,
-%    textheight=24cm,
-  textwidth=19cm,
-  ]{geometry}
+top    = 1cm,
+bottom = 1cm,
+left   = .5cm,
+right  = 0.5cm]{geometry}
+%
+%% ne spreminjaj podatkov, ki vplivajo na obliko strani
+%\textwidth 19cm
+%\textheight 27cm
+%\oddsidemargin-1.5cm
+%\evensidemargin-1.5cm
+%\topmargin-30mm
+%%\addtolength{\footskip}{10pt}
+%\pagestyle{plain}
+%%\overfullrule=15pt % oznaci predlogo vrstico
 
-\usepackage{icomma}
-\usepackage{units}
 
-\newtheorem{izrek}{Izrek}
-\newtheorem{posledica}{Posledica}
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
 
-\theoremstyle{definition}
-\newtheorem{definicija}{Definicija}
-\newtheorem{opomba}{Opomba}
-\newtheorem{zgled}{Zgled}
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
 
-\def\R{\mathbb{R}}
-\def\N{\mathbb{N}}
-\def\Z{\mathbb{Z}}
-\def\C{\mathbb{C}}
-\def\Q{\mathbb{Q}}
 
 \newenvironment{itemize*}%
 {
-\vspace{-6pt}
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{1pt}
@@ -50,33 +52,220 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 \newenvironment{enumerate*}%
 {
-\vspace{-6pt}
 \begin{enumerate}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{1pt}
 }
 {\end{enumerate}}
 
-\newcommand{\mytitle}{List 2 za analizo 3}
-\title{\mytitle}
-\author{Jure Slak}
-\date{\today}
-\hypersetup{pdftitle={\mytitle}}
-\hypersetup{pdfauthor={Jure Slak}}
-\hypersetup{pdfsubject={}}
-
-\pagestyle{empty}
-
-\setlength{\parindent}{0pt}
 
 \newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
 \newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
 \let\oldint\int
 \renewcommand{\int}{\oldint \!}
 
-\begin{document}
 
-\subsubsection*{NDE 1. reda}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\pagestyle{empty}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\section*{\textbf{Linearni sistemi}} %%%%% LINEARNI SISTEMI
+
+\textsc{Definicija: }Naj bo $\dot{\vec{x}}(t) = A(t) \vec{x}(t)$ sistem in $A(t)
+\in \R^{n \times n} \forall t$. Rešitev enačbe $\dot{X} = AX$, ki je obrnljiva,
+se imenuje \textbf{fundamentalna rešitev}. Dve fundamentalni rešitvi se
+razlikujeta za obrnljivo matriko. \textbf{Splošna rešitev}
+$\dot{\vec{x}} = A \vec{x}$ je $X\vec{c}$, kjer je $\vec{c}$ konstantni vektor. \\
+
+$X = [x_1,x_2,\ldots x_n] \qquad X\vec{c} = c_1\vec{x_1} + c_2\vec{x_2} + \cdots
+c_n\vec{x_n}$ \\
+
+Naj bo $A$ matrika konstant. $\dot{\vec{x}} = A \vec{x}$ ima splošno rešitev
+$\vec{x} = Pe^{Jt}\vec{c}$, kjer je $A=PJP^{-1}$ jordanska kanonična forma.  \\
+
+\textsc{Postopek:}
+\begin{enumerate*}
+  \item Izračunaj lastne vrednosti
+    matrike $A$.
+    \begin{itemize*}
+      \item Če so vse lastne vrednosti različne,
+        izračunaj lastne vektorje za vse lastne vrednosti in določi $J$ in $P$ (pazi,
+        da vrstni red lastnih vrednosti v $J$ sovpada z vrstnim redom lastnih vektorjev
+        v $P$)
+      \item Če je lastna vrednost $\lambda$ večkratna in zanjo obstaja le en
+        lastni vektor, izračunaj korenski vektor in ga preslikaj z $A-\lambda I$
+    \end{itemize*}
+  \item Zapiši rešitev $\vec{x} = Pe^{Jt}\vec{c} = c_1
+    e^{\lambda_1t} v_1 + c_2 e^{\lambda_2t} v_2 + \cdots c_n e^{\lambda_nt} v_n$,
+    kjer $P = [v_1,v_2,\ldots ,v_n]$. Iz tega dobiš $X = [\vec{x_1},\vec{x_2},
+    \ldots, \vec{x_n}]$, kjer $x_i = e^{\lambda_it} v_i$.
+\end{enumerate*}
+
+\textsc{Opomba:} Pri kompleksnih lastnih vrednostih in vektorjih z uporabo
+$e^{\lambda + i\mu} = e^{\lambda}(\cos{\mu}+i\sin{\mu})$ loči realni in
+imaginarni del (hočemo realne lastne vektorje, konstante pred njimi pa so lahko
+kompleksne).
+
+% \textsc{Trditev:} Naj bo dan sistem  $\dot{\vec{x}} = A \vec{x}$, kjer $A:[a,b] \rightarrow \R^{n\times n}$ zvezna in $X_1,X_2$ fundamentalni rešitvi. Potem velja
+%
+% $$
+% X_1 = X_2 P,
+% $$
+%
+% za neko obrnljivo matriko $P$.
+% \\
+Ko rešuješ sistem
+$$
+\begin{bmatrix} \dot{x} \\ \dot{y} \end{bmatrix} =
+\begin{bmatrix} a(t) & b(t) \\ c(t) & d(t) \end{bmatrix}
+\begin{bmatrix} x \\ y \end{bmatrix},
+$$
+
+iz prve enačbe izrazi $y$, enačbo odvajaj in vstavi dobljeni $\dot{y}$ v drugo. Dobiš diferencialno enačbo za $x$, iz katere izračunaš $x$ in $y$. Splošno rešitev sistema $X$ dobiš tako, da razpišeš $x$ in $y$ po bazi konstant $C_1,C_2$ (prvi stolpec: $C_1 = 1, C_2 = 0$ in drugi stolpec: $C_1 = 0, C_2 = 1$).
+\\
+
+\textsc{Liouvilleov izrek: }Naj bo $\dot{\vec{z}} = A \vec{z}$ in $A:[a,b] \rightarrow \R^{n\times n}$ zvezna za vsak $t$. Potem obstaja fundamentalna rešitev sistema, ki je obrnljiva na $[a,b]$ $X(t)$ taka, da velja:
+
+$$
+\det{X(t)} = \det{X(t_0)}e^{\int_{t_0}^t \text{sl}A(\xi)d\xi}.
+$$
+
+\section*{\textbf{Linearne DE višjega reda}}  %%%%%%%%%%%%% LINEARNE DE VIŠJEGA REDA
+
+$y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y' + a_0(x)y = f(x)$
+
+Naj bo $y$ rešitev enačbe. Potem:
+
+$\vec{z} = \begin{bmatrix} y \\ y' \\ y'' \\ \vdots \\ y^{(n-1)} \end{bmatrix}$,
+$ \quad \vec{z}' =  \begin{bmatrix} y' \\ y'' \\ y''' \\ \vdots \\ y^{(n)} \end{bmatrix}
+=
+\begin{bmatrix}
+  0 & 1 & 0 &  \cdots & 0 \\
+  0 & 0 & 1 &  \cdots & 0 \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & 0 &  \cdots & 1 \\
+  -a_0 & -a_1 & -a_2 & \cdots & -a_{n-1}
+\end{bmatrix}
+\begin{bmatrix} y \\ y' \\ \vdots \\ y^{(n-2)} \\ y^{(n-1)} \end{bmatrix}
++
+\begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ f \end{bmatrix}$
+
+$\vec{x} = X\vec{c} = X \int X^{-1}\vec{f}dt$, rabimo samo prvo vrstico ($y$).
+
+\textsc{Linearna NDE s konstantnimi koeficienti:}
+$y^{(n)}+a_{n-1}y^{(n-1)}+\cdots + a_0y = b(t)$, $a_0,\ldots ,a_{n-1} \in \R$.
+
+Homogen del: substitucija $y = e^{\lambda x}$. Dobimo $\lambda_1, \ldots \lambda_k$ paroma
+različne.
+
+\hspace{3em} Rešitev: $y = y_1+\cdots +y_k$, kjer $y_j$ ustreza $\lambda_j$ in $y_j = c_1
+e^{\lambda_j x}+c_2 x e^{\lambda_j x}+\cdots + c_{k_j} x^{k_j -1} e^{\lambda_j
+x}$, kjer je $k_j$ večkratnost $\lambda_j$.
+
+Partikularni del:
+za $b$ oblike $e^{\mu x}q(x)$, $\mu \in \C$ in $q(x)$ polinom stopnje $m$.
+$y_p = p(x)e^{\mu x}x^k$, kjer $k$ večkratnost $\mu$ kot $\lambda$ in $p$ stopnje $m$.
+
+\textsc{Cauchy-Eulerjeva enačba:} $x^n y^{(n)}+a_{n-1}x^{n-1}y^{(n-1)}+\cdots +
+a_1xy' + a_0 y = b$. Uvedemo novo spremenljivko $x = e^t$, enačba se prevede na
+enačbo s konstantnimi koeficienti. V praksi porabimo nastavek $y = x^{\lambda}$.
+
+\hspace{3em} Rešitev: $y = y_1+\cdots +y_k$, kjer $y_j$ ustreza $\lambda_j$ in $y_j = c_1
+x^{\lambda_j}+c_2 \log(x) x^{\lambda_j}+\cdots + c_{k_j} \log^{k_j -1}(x)
+x^{\lambda_j}$, kjer je $k_j$ večkratnost $\lambda_j$.
+
+Partikularni del: za $b$ oblike $(\ln{t})t^{\mu}$. Nastavek $y_p =
+q(\ln{t})t^{\mu}\ln^k{t}$, kjer $\text{st}(q)= \text{st}(p)$ in $k$ večkratnost
+$\mu$ med $\lambda_i$, ki rešijo ``karakteristični polinom''.
+
+
+\section*{\textbf{Variacijski račun}}
+
+\textsc{Definicija: }Naj bo $A:X \longrightarrow Y$ linearna preslikava med
+normiranima vektorskima prostoroma. $A$ je omejena, če obstaja $M \geq 0$, da
+velja $\| Ax \|_Y \leq M \|x \|_X$. Če je $A$ omejena, potem $\| A \| := \sup_{x
+\neq 0}{\frac{\| Ax \|}{\| x \|}} := \sup_{\| x\| \leq 1}{\| Ax \|} := \sup_{\|
+x\| = 1}{\| Ax \|}$.
+
+\textsc{Trditev:} $A$ je omejena $\Longleftrightarrow A$ zvezna. $\| Ax \|_Y
+\leq \|A\| \|x\|_X$ ($\|A\|$ je norma v prostoru operatorjev)
+
+Za Banachova prostora $(C[a,b],\|.\|_\infty)$ in $(C^1[a,b],\|.\|_1)$ je $\|f\|_1 := \|f\|_\infty + \|f'\|_\infty$
+
+\textsc{Definicija: }Naj bosta $X$ in $Y$ Banachova, $\mathcal{U}^{odp} \subseteq X$ in $F:\mathcal{U}\longrightarrow Y$. $F$ je:
+\begin{enumerate}[a)]
+\item \textbf{krepko (Fréchetjevo) odvedljiva} v točki $x$, če obstaja $(DF)(x)$ omejen linearni operator iz $X$ v $Y$, da velja:
+$$ \frac{\|F(x+h)-F(x)-(DF)(x)(h)\|}{\|h\|} \xrightarrow[h \to 0]{} 0 $$
+
+\item \textbf{šibko (Gâuteauxjevo) odvedljiva}, če obstaja
+$ g_x(h):= \lim_{t \to 0} \frac{F(x+th)-F(x)}{t} $
+\end{enumerate}
+
+\textsc{Izrek:} Če je $F$ krepko odvedljiva $\Longrightarrow$ $F$ šibko odvedljiva in odvoda sta enaka.
+
+\textsc{Opomba:} Izračunamo šibkega, dobimo kandidata za krepkega. Po definiciji
+izračunamo limito krepkega. Dokažemo omejenost $g_x$.
+
+Uporabno: $| \int (f+f')dx| \leq \int (|f|+|f'|)dx \leq \int (\|f\|_\infty + \|f'\|_\infty)dx = \int \|f\|_1dx$
+
+\textsc{Trditev:} Naj bo $X$ Banachov prostor in $F,G:X \longrightarrow \R$
+krepko odvedljivi v $x_0 \in X$. Potem je $F G:X \longrightarrow \R $ krepko
+odvedljiva v $x_0$ in velja $D(FG)(x_0)=F(x_0)DG(x_0)+G(x_0)DF(x_0)$
+
+\textsc{Razmadzejev izrek:} Naj bosta $M$ in $N$ zvezni funkciji na $[a,b]$.
+Denimo, da za vsako testno funkcijo $\varphi \in \mathcal{D}([a,b])$ velja:
+
+$
+\int_a^b (M\varphi + N\varphi')dx = 0.
+$
+Tedaj je $N$ odvedljiva in velja $N'=M$.
+
+\textsc{Euler-Lagrangeeva enačba:} $L_y - \frac{d}{dx}L_{y'}=0$
+
+Naj velja $L_y=\frac{d}{dx}L_{y'}$ in $L_{y'}h |_a^b = 0$ za vse dopustne variacije.
+\begin{itemize}
+\item če poznamo $y(a),y(b) \Longrightarrow h(a)=h(b)=0$ za vse dopustne variacije.
+\item če poznamo $y(a) \Longrightarrow h(a)=0$ za vse dopustne variacije ($L_{y'}(b)=0$).
+\item če poznamo $y(b) \Longrightarrow h(b)=0$ za vse dopustne variacije ($L_{y'}(a)=0$).
+\item če $y(a),y(b)$ ne poznamo $\Longrightarrow$ ...
+\end{itemize}
+
+\textsc{Klasični problem:} $I[y]=\int_a^bL(x,y,y')dx$.
+\begin{enumerate}
+\item Če $L=L(x,y') \Longrightarrow L_{y'}=C$ (Iz te enačbe izrazi $y' = f(x)$, z integracijo izračunaj $y = \int f(c) $ in vstavi robne pogoje, da določiš konstante.)
+\item $L=L(y,y') \Longrightarrow L-y'L_{y'}=C$ (ločljive spremenljivke, verjetno potrebna obravnava glede na vrednost $C$)
+\end{enumerate}
+
+\textsc{Izoperimetrični polinom:} $A:$ $I[y]=\int_a^bL(x,y,y')dx +$ robni pogoji + dodatni pogoji: $\int_a^bG_1(x,y,y')dx = A_1, \ldots \int_a^bG_n(x,y,y')dx=A_n \Longrightarrow $ obstajajo $\lambda_1,\ldots \lambda_n: \int_a^b(L-\lambda_1G_1-\cdots \lambda_nG_n)dx = \tilde{I}[y]$. Ekstremali za $A$ so ekstremali za $\tilde{I}$ z nekaterimi robnimi pogoji. (Da dobiš $\lambda $ izračunaj najprej $y (x,\lambda)$, nato pa uporabi dodatni pogoj. Dodatno: Če $y(a)$ ni podan: $\tilde{L}_{y'}(a)=0$)
+\\
+
+$I[y]=\int_a^bL(x,y,y',\ldots ,y^{(n)})dx \Longrightarrow L_y -\frac{d}{dx}L_{y'} - \cdots + (-1)^n \frac{d^n}{dx^n}L_{y^{(n)}}=0$
+\\
+
+$I[y_1,y_2,\ldots ,y_n] = \int_a^b L(x,y_1,\ldots y_n, y_1',\ldots y_n')dx$ in podani $y_1(a),\ldots y_n(a), y_1(b),\ldots y_n(b)$. Potem za $i = 1,\ldots ,n$ velja: $L_{y_i} = \frac{d}{dx}L_{y_i'}$.
+
+\textsc{Nelinearni sistemi:} Če $\dot{x} = f(x,y), \dot{y} = g(x,y) \Longrightarrow y'(x)=\frac{g(x,y)}{f(x,y)}$, $(\frac{y}{x})\dot{ } = \frac{x\dot{y}-y\dot{x}}{x^2}$, $(xy)\dot{ } = \dot{x}y+x\dot{y}$
+%
+%Naloge tipa znajdi-se-sam ali bolje rečeno manage-it-on-your-own. Malo množi/deli, seštevaj/odštevaj enačbe s pravimi stvarmi in poskusi zagledati odvod produkta/kvocienta:
+%
+%\begin{itemize}
+%\item $(xy)\dot{ } = \dot{x}y+x\dot{y}$
+%\item $(\frac{y}{x})\dot{ } = \frac{x\dot{y}-y\dot{x}}{x^2}$
+%\item Če $\dot{x} = f(x,y), \dot{y} = g(x,y) \Longrightarrow y'(x)=\frac{g(x,y)}{f(x,y)}$
+%\end{itemize}
+
+
+%%%%%% PRVI LIST
+
+
+\section*{\textbf{NDE 1. reda}}
 Ločljive spremeljivke: $y' = f(x)g(y)$ \\
 Linearna: $y' = a(x)y + b(x)$, rešujemo $y_s = y_h + y_p$ \\
 Trik: $y(x) \leftrightarrow x(y) \implies y' = 1/\dot{x}$ \\
@@ -98,22 +287,23 @@ Clairautova: $y = xy' + b(y')$. Rešitev: $y = C x + b(C)$. Tudi singularna
 rešitev (ogrinjača). \\
 Lagrangeeva: $y = a(y')x + b(y')$. Rešujemo parametrično: $X = u, Z = y' = v, Y =
 a(v)u + b(v) \implies$ linearna. \\
-\hspace*{20pt} Singularna rešitev: poiščemo fiksne točke $a$. Če $a(t_0) = t_0 \implies y = a(t_0) x + b(t_0)$ je singularna rešitev.\\
-Singularna rešitev: če $G(x, y, c) = 0$ splošna rešitev, sing. rešitev dobimo:
-$G(x, y, c) = 0, G_c(x, y, c) = 0$. \\
-\hspace*{20pt} Druga možnost: če $F(x, y, y') = 0$ dana enačba, sing. rešitev
-    dobimo: $F(x, y, y') = 0, F_{y'}(x, y, y') = 0$. Preveriti moramo, če rešitev res reši DE!!! \\
-Iskanje ortogonalne trajektorije družine krivulj:
-\begin{enumerate*}
-  \item odvajaj enačbo krivulje (če se znebiš konstante, nadaljuj s korakom 3.))
-  \item eliminiraj konstanto iz enačbe krivulje in odvajane enačbe
-  \item v novi enačbi zamenjaj $y'$ z $-1/y'$ in reši dobljeno DE.
-  \item (Če je potrebno poljuben kot izrazi nov $y'$ iz enačbe $\tan\alpha=\frac{k_1-k_2}{1+k_1k_2}$)
-\end{enumerate*}
+%\hspace*{20pt} Singularna rešitev: poiščemo fiksne točke $a$. Če $a(t_0) = t_0 \implies y = a(t_0) x + b(t_0)$ je singularna rešitev.\\
+%Singularna rešitev: če $G(x, y, c) = 0$ splošna rešitev, sing. rešitev dobimo:
+%$G(x, y, c) = 0, G_c(x, y, c) = 0$. \\
+%\hspace*{20pt} Druga možnost: če $F(x, y, y') = 0$ dana enačba, sing. rešitev
+%    dobimo: $F(x, y, y') = 0, F_{y'}(x, y, y') = 0$. Preveriti moramo, če rešitev res reši DE!!! \\
+%Iskanje ortogonalne trajektorije družine krivulj:
+%\begin{enumerate}
+%  \item odvajaj enačbo krivulje (če se znebiš konstante, nadaljuj s korakom 3.))
+%  \item eliminiraj konstanto iz enačbe krivulje in odvajane enačbe
+%  \item v novi enačbi zamenjaj $y'$ z $-1/y'$ in reši dobljeno DE.
+%  \item (Če je potrebno poljuben kot izrazi nov $y'$ iz enačbe $\tan\alpha=\frac{k_1-k_2}{1+k_1k_2}$)
+%\end{enumerate}
 
 Če je enačba podana eksplicitno in je desna stran polinom lihe stopnje v $y$ s koeficienti funkcijami v $x$ uvedeš $u=y^2$.
 
-\subsubsection*{NDE višjih redov}
+
+\section*{\textbf{NDE višjih redov}}
 Ne nastopa $y$: uvedemo $z = y'$. \\
 Obe strani sta odvoda nečesa: integriramo in dodamo konstanto. \\
 \hspace*{20pt} Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} = (\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\
@@ -121,34 +311,46 @@ Ne nastopa $x$: uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' 
   \ddot{z}z^2 + \dot{z}^2z$. \\
 Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y', \dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\
 Z utežjo: $F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,  y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+%
+%\subsubsection*{Geometrija}
+%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
+%Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
+%Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
+%$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
 
-\subsubsection*{Geometrija}
-Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
-Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
-Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
-$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
+%\begin{tabular}{ll}
+%Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
+%Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
+%\end{tabular}
 
-\begin{tabular}{ll}
-Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
-Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
-\end{tabular}
 
-\subsubsection*{Integrali}
-\begin{tabular}{ll}
-$\int \log(x) \dx = x \log(x) - x + C$ & $\int \frac{1}{\sin(x)} \dx = \log(\tan(x/2)) + C$\\
-$\int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} - \frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2)) + C$ \\
-$\int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$\\
-$\int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b \cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$\\
-$\int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b \sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$\\
-$\int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x + \sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int \sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
-$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int \cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$ \\
+\section*{\textbf{Integrali in formule}}
+\begin{tabular}{llll}
+$\int \ln{x} \dx = x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ & $t \mapsto (\alpha (t), \beta (t), \gamma (t))$:$\int_{t_o}^{t_1}\sqrt{\dot{\alpha}^2+\dot{\beta}^2+\dot{\gamma}^2}dt$\\
+
+$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} - \frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2)) + C$  & $G(y)=\int_0^1(y^2+y'^2)dx \Longrightarrow DG(y)(h)= \int_0^1(2yh+2y'h')dx$\\
+
+$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ & $\sin{x} = \frac{e^{ix}-e^{-ix}}{2i}$\\
+
+$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b \cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ & $\cos{x} = \frac{e^{ix}+e^{-ix}}{2}$\\
+
+$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b \sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ & $\sinh{x} = \frac{e^{x}-e^{-x}}{2}$\\
+
+$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x + \sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ & $\cosh{x} = \frac{e^{x}+e^{-x}}{2}$\\
+
+$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int \sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ & $\cosh^2{x}-\sinh^2{x}=1$ & $1+\tan^2{x} = \frac{1}{\cos^2{x}}$\\
+
+$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int \cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  & $\tan^2{x} = \tan'{x}-1$\\
+
 $\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
+
 \end{tabular}
+
+
 
 $\displaystyle \int \frac{1}{a x^2 + bx + c} \dx =
 \begin{cases}
-\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & \text{a >0}\\
+\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
  \frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0
 \end{cases} $\\
 $\int \frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx + c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
@@ -156,57 +358,4 @@ $\int \frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 
 Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2), \dx = \dt/(1 + t^2)$\\
 Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2), \cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
 
-\newpage
-
-
-\subsubsection*{Linearni sistemi}
-Homogeni: $\dot{\vec{x}} = A \vec{x}$ ima rešitev $\vec{x} = P e^{Jt} \vec{c}$, kjer $A = P J P^{-1}$ Jordan in $\vec{c}$ vektor konstant.
-
-\textsc{Definicija: }Naj bo $\dot{\vec{x}}(t) = A(t) \vec{x}(t)$ sistem in
-$A(t) \in \R^{n \times n}$. Rešitev matrične enačbe $\dot{X} = AX$, ki je obrnljiva, se
-imenuje \textbf{fundamentalna rešitev}. Dve fundamentalni rešitvi se
-razlikujeta samo za obrnljivo matriko. \textbf{Splošna rešitev} $\dot{\vec{x}}
-= A \vec{x}$ je $X\vec{c}$, kjer je $\vec{c}$ konstantni vektor. \\
-
-$X = [x_1,x_2,\ldots x_n] \quad  X\vec{c} = c_1\vec{x_1} + c_2\vec{x_2} + \cdots c_n\vec{x_n}$ \\
-
-Naj bo $A$ konstanta matrika. $\dot{\vec{x}} = A \vec{x}$ ima splošno rešitev
-$\vec{x} = Pe^{Jt}\vec{c}$, kjer je $A=PJP^{-1}$ Jordanska kanonična forma.
-
-\textsc{Postopek:}
-\begin{enumerate*}
-  \item Izračunaj lastne vrednosti
-    matrike $A$.
-    \begin{itemize*}
-      \item Če so vse lastne vrednosti različne,
-        izračunaj lastne vektorje za vse lastne vrednosti in določi $J$ in $P$ (pazi,
-        da vrstni red lastnih vrednosti v $J$ sovpada z vrstnim redom lastnih vektorjev
-        v $P$)
-      \item Če je lastna vrednost $\lambda$ večkratna in zanjo obstaja le en
-        lastni vektor, izračunaj korenski vektor in ga preslikaj z $A-\lambda I$
-    \end{itemize*}
-  \item Zapiši rešitev $\vec{x} = Pe^{Jt}\vec{c} = c_1
-    e^{\lambda_1t} v_1 + c_2 e^{\lambda_2t} v_2 + \cdots c_n e^{\lambda_nt} v_n$,
-    kjer $P = [v_1,v_2,\ldots ,v_n]$. Iz tega dobiš $X = [\vec{x_1},\vec{x_2},
-    \ldots, \vec{x_n}]$, kjer $x_i = e^{\lambda_it} v_i$.
-\end{enumerate*}
-
-\subsubsection*{LDE višjega reda}
-Enačba oblike $a_n y^{(n)} + \dots + a_1 y' + a_0 y = b$, kjer so $a_i$
-konstante, se rešuje z nastavkom $y = e^{\lambda x}$. Najdemo ničle
-karakterističnega polinoma $\sum a_i \lambda^i$. Rešitev je linearna kombinacija
-$A_1e^{\lambda x} + A_2 xe^{\lambda x} + \dots + A_k x^{k-1} e^{\lambda x}$,
-kjer je $k$ večkratnost $\lambda$.
-
-Partikularno rešitev prav tako poiščemo z nastavki. Za $b = q(x)e^{\mu x}$ je
-nastavek oblike $p(x)e^{\mu x}x^k$, kjer je $\text{st}(p) = \text{st}(q)$ in $k$
-večkratnost $\mu$ med ničlami $\lambda_i$.
-
-\subsubsection*{Nelinearni sistemi}
-Množimo, delimo z $x$, $y$. Seštevamo in odštevamo enačbe in iščemo algebraične
-zveze. Kdaj lahko enačbe zdelimo in dobimo DE za $y(x)$.
-
 \end{document}
-% vim: syntax=tex
-% vim: spell spelllang=sl
-% vim: foldlevel=99
