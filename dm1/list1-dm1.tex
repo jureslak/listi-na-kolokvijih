@@ -58,7 +58,7 @@ menucolor=black, runcolor=black, urlcolor=black%
 \end{center}
 
 \textbf{Izbori $k$ elementov iz $n$ množice:} \\[6pt]
-\begin{tabular}[h]{|c|c|c|c|c|} 
+\begin{tabular}[h]{|c|c|c|c|c|}
   \hline
   urejeni/ponavljanje & DA/DA & DA/NE & NE/DA & NE/NE \\ \hline
   število & $n^k$ & $n^{\underline{k}}$ & $\binom{n+k-1}{k}$ & $\binom{n}{k}$ \\ \hline
@@ -73,7 +73,7 @@ Rekurzivna zveza: $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$.
 \textbf{Pravilo vključitev in izključitev:} $|A_1 \cup \cdots \cup A_n| = \alpha_1 - \alpha_2 + \dots +
 (-1)^{n+1}\alpha_n$ \\
 $\alpha_i = \text{vsota moči vseh možnih presekov po $i$ množic}$. \\
-V posebnem, če so vsi preseki po $i$ množic enako močni: 
+V posebnem, če so vsi preseki po $i$ množic enako močni:
 $\lvert\bigcup_{i=1}^nA_i\rvert = \sum_{i=1}^n (-1)^{i+1}\binom{n}{i}\lvert\bigcap_{j=1}^iA_j\rvert$
 
 \textbf{Trdnjavski polinomi:}
@@ -111,7 +111,7 @@ Rekurzivna zveza: $s(n, k) = s(n-1, k-1) + (n-1)\cdot s(n-1, k)$ \\
 Velja: $x^{\overline{n}} = \sum_{k=1}^ns(n, k)x^k$
 
 \textbf{Bellova števila:}\\
-$B(n)$ je število vseh možnih razbitij $n$ množice. 
+$B(n)$ je število vseh možnih razbitij $n$ množice.
 Očitno velja: $\sum_{k=0}^nS(n, k) = B(n)$. \\
 Rekurzivna zveza: $B(n+1) = \sum_{k=0}^n\binom{n}{k}B(k)$
 
@@ -123,7 +123,7 @@ $p(n; k) = p(n-k; \leq k) = \sum_{i=1}^{n-k}p(n-k; i)$
 
 \textbf{Dvanajstera pot:}\\
 Razporejamo $n$ predmetov v $r$ predalov. Ali ločimo elemente,
-dopuščamo prazne predale, dopuščamo več kot en predmet v predalu?  Glejmo 
+dopuščamo prazne predale, dopuščamo več kot en predmet v predalu?  Glejmo
 $f\colon[n] \to [r]$.
 
 \begin{tabular}{|c|c|c|c|}
