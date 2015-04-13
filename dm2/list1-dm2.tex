@@ -1,0 +1,236 @@
+\documentclass[8pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{bbold}
+
+\usepackage[
+top    = 1cm,
+bottom = 1cm,
+left   = .5cm,
+right  = 0.5cm]{geometry}
+%
+%% ne spreminjaj podatkov, ki vplivajo na obliko strani
+%\textwidth 19cm
+%\textheight 27cm
+%\oddsidemargin-1.5cm
+%\evensidemargin-1.5cm
+%\topmargin-30mm
+%%\addtolength{\footskip}{10pt}
+%\pagestyle{plain}
+%%\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\section{Delno urejene množice}
+
+\textsc{Definicija:} Relacija $R$ \underline{delno ureja} množico $A$, če je refleksivna, antisimetrična in tranzitivna.
+
+\textsc{Definicija:} \underline{Veriga} je podmnožica v $A$ (kjer je $(A, \leq)$ delna urejenost), v kateri so paroma primerljivi elementi. \underline{Antiveriga} je množica paroma neprimerljivih elementov. \underline{Višina} delne urejenosti je moč njene največje verige. \underline{Širina} delne urejenosti je moč njene največje antiverige.
+
+\textsc{Definicija:} $(A, \leq)$ delna urejenost. Tedaj je $x \in A$:
+ \begin{itemize}
+ \item \underline{minimalni element}, če ne obstaja $y \in A, y \neq x$, da velja $y \leq x$;
+ \item \underline{maksimalni element},  če ne obstaja $y \in A, y \neq x$, da velja $x \leq y$;
+ \item \underline{najmanjši element}, če za vse $y \in A$ velja $x \leq y$;
+ \item \underline{največji element}, če za vse $y \in A$ velja $y \leq x$;
+ \end{itemize}
+
+ \textsc{Trditev:} Naj bo $(A, \leq)$ \underline{končna} delna urejenost. Tedaj $A$ premore vsaj en minimalni in vsaj en maksimalni element.
+
+ \textsc{Definicija:} Delni urejenosti $(A,\leq),(A',\leq')$ sta \underline{izomorfni}, če obstaja bijekcija $f:A \longrightarrow A'$, taka da je
+ $$
+ x\leq y \Longleftrightarrow f(x) \leq' f(y) \forall x,y \in A.
+ $$
+
+ \textsc{Trditev:} Če je $(A,R)$ veriga, $|A|=n$, tedaj je $(A,R)$ izomorfna $([n],\leq)$.
+
+ \section{Linearne razširitve in dimenzija delne urejenosti}
+
+ \textsc{Definicija:} $L=(A,\leq)$ je \underline{linearna urejenost}, če je delna urejenost, ki je veriga.
+
+ \textsc{Definicija:} Naj bo $P=(A,\leq)$ delna urejenost. Tedaj je linearna urejenost $L=(A,\leq')$ \underline{linearna razširitev} delne urejenosti $P$, če velja: $x\leq y \Longrightarrow x \leq' y$.
+
+\textsc{Izrek:} Naj bo $P=(A,\leq)$ končna delna urejenost. Tedaj $P$ premore linearno razširitev. Celo več, če sta $x$ in $y\in A$ neprimerljiva elementa, tedaj obstaja taka linearna razširitev $L=(A,\leq')$, da velja $x \leq' y$.
+
+\textsc{Posledica:} Naj bo $P=(A,\leq )$ končna delna urejenost in naj bosta $x,y\in A$. Tedaj je $x\leq y$ natanko tedaj, ko je $x \leq' y$ v vsaki linearni razširitvi $L=(A,\leq')$.
+
+\textsc{Definicija:} Naj bo $P=(A,\leq )$ delna urejenost. Tedaj je družina $\mathcal{L} = \{ L=(A,\leq_L) \}$ linearnih razširitev od $P$ \underline{realizator za $P$}, če velja:
+$$
+\forall x,y:\quad  x \leq y \Longleftrightarrow x \leq_L y \quad \forall L=(A,\leq_L).
+$$
+\textsc{Trditev:} Naj bo $P=(A,\leq)$ delna urejenost. Tedaj je družina linearnih razširitev $\mathcal{L}$ realizator za $P$ natanko tedaj, ko za vsak par neprimerljivih elementov $x$ in $y$ obstajata $L, L' \in \mathcal{L}$, taka da je $x \leq_L y$ in $y \leq_L x$.
+
+\textsc{Opomba:} $\mathcal{L}$ je realizator pomeni: $\cap_{L \in \mathcal{L}}L = P$.
+
+\textsc{Definicija:} \underline{Dimenzija delne urejenosti} je moč njenega najmanjšega realizatorja.
+
+\textsc{Trditev:} Naj bo $P_n = (\{ a_1,\ldots ,a_n\} \cup \{b_1, \ldots ,b_n \},\leq)$, kjer $\leq: a_i \leq b_j$ za vse $i \neq j$ in $a_i \leq a_i, b_i \leq b_i \forall i$. $\dim{P_n}=n$ za $n \geq 2$.
+
+\textsc{Definicija:} Naj bo $P=(A,\leq )$ delna urejenost. Tedaj je \underline{vložitev} $P$ v $\R^n$ taka injektivna preslikava $f: A \longrightarrow \R^n $, da velja:
+$$
+x \leq y \quad (\text{v } P) \Longleftrightarrow f(x) \leq f(y) \quad (\text{v } \R^n).
+$$
+\textsc{Izrek:} Naj bo $P=(A,\leq)$ (končna) delna urejenost. Tedaj je $\dim{P}$ enaka najmanjšemu $n$, za katerega obstaja vložitev $P$ v $\R^n$.
+
+\section{Trije klasični izreki}
+
+\textsc{Trditev:} Naj bo $P=(A,\leq)$ končna delna urejenost in naj bo $n$ velikost največje verige v $P$. Tedaj lahko $P$ pokrijemo z $n$ antiverigami. (Te antiverige vsebujejo vse elemente iz $A$)
+
+\textsc{Dilworthov izrek:} Naj bo $P=(A,\leq)$ končna delna urejenost. Tedaj je najmanjše število disjunktnih verig, s katerimi lahko pokrijemo $A$ enako velikosti največje antiverige v $P$.
+
+\textsc{Hallov izrek:} Če je $G$ dvodelen graf z biparticijo $X,Y$, potem je problem popolnega prirejanja za $X$ rešljiv natanko tedaj, ko velja:
+$$
+\forall A \subseteq X: |N(A)| \geq |A|.
+$$
+\textsc{Spernerjev izrek:} Naj bo $\mathcal{A}$ antiveriga v $P=(2^{[n]},\subseteq)$. Tedaj je:
+$$
+|\mathcal{A}| \leq \binom{n}{\lfloor \frac{n}{2} \rfloor }.
+$$
+\textsc{Opomba:} Izrek je najboljši možen (EVER!): Če za $\mathcal{A}$ izberemo vse podmnožice moči $\lfloor \frac{n}{2} \rfloor $ bo širina $P=(2^{[n]},\subseteq)$ enaka $\binom{n}{ \lfloor \frac{n}{2} \rfloor}$.
+
+\section{Schnyderjev izrek}
+
+\textsc{Definicija:} $G=(V,E)$ graf. \underline{Incidenčna urejenost} je definirana na $V \cup E$, in sicer:
+$$
+e = uv \in E \Longrightarrow u \leq e, v \leq e + \text{refleksivnost}.
+$$
+\textsc{Definicija:} \underline{Dimenzija grafa $G$} je dimenzija njegove incidenčne urejenosti.
+
+\textsc{Schnyderjev izrek:} Graf $G$ je ravninski natanko tedaj, ko je $\dim{G} \leq 3$.
+
+Naj bo $h_i(u)$ višina vozlišča $u$ v $\leq_i$ (glede na višino vozlišča) in $\leq_1, \leq_2, \leq_3$ realizator incidenčne urejenosti grafa $G$. $f: V \longrightarrow \R^2$ s predpisom $f(u)=(2^{h_1(u)},2^{h_2(u)})$ je injektivna.
+
+\textsc{Definicija:} \underline{Triangulacija} je taka vložitev ravninskega grafa v ravnino, da so vsa njegova lica trikotniki. Vsak ravninski graf je vpet podgraf neke triangulacije.
+
+\textsc{Definicija:} \underline{Schnyderjeva označitev triangulacije} je prireditev oznak iz $[3]$ notranjim kotom, tako da velja:
+\begin{itemize}
+\item vsi koti pri $v_i$ so označeni z $i$,
+\item vsak notranji trikotnik ima oznake $1,2,3$ v smeri urinega kazalca,
+\item koti okrog notranjega vozlišča imajo oznake: nekaj 1 (vsaj 1), nekaj 2 (vsaj 1), nekaj 3 (vsaj 1).
+\end{itemize}
+
+Iz $T$ naredimo digraf tako, da vsako povezavo usmerimo proti enakima kotoma. Povezavo označimo: ime = smer (kot v katerega kaže).
+
+\section{Načrti in $t$-načrti}
+
+\textsc{Definicija:} Naj bo $X$ $v$-množica. Tedaj je družina $\mathcal{B}$ $k$-podmnožic množice $X$ \underline{načrt s parametri $(v,k,\lambda )$}, če se vsak element iz $X$ pojavi v natanko $\lambda$ množicah iz $\mathcal{B}$. Elementi družine $\mathcal{B}$ so \underline{bloki načrta}.
+
+\textsc{Trditev:} Če je $\mathcal{B}$ $(v,k,\lambda)$-načrt (in $|\mathcal{B}|=b$), tedaj je $bk=v\lambda$.
+
+$x$ je v kvečjemu $\binom{b-1}{k-1}$ blokih. $\lambda \leq \binom{v-1}{k-1}$, z uporabo trditve dobimo $b \leq \binom{v}{k}$.
+
+\textsc{Izrek:} Načrt s parametri $(v,k,\lambda)$ obstaja natanko tedaj, ko $k | v\lambda$ in je $\lambda \leq \binom{v-1}{k-1}$.
+
+\textsc{Definicija:} Družina $\mathcal{B}$ $k$-podmnožic $v$-množice $X$ je \underline{$t$-načrt s parametri $(v,k,\lambda_t)$}, če se vsaka $t$-podmnožica od $X$ pojavi v natanko $\lambda_t$ blokih.
+
+\textsc{Izrek:} Če je $\mathcal{B}$ $t$-načrt, tedaj je $\mathcal{B}$ tudi $s$-načrt za $1 \leq s < t$.
+
+\textsc{Posledica:} Če je $\mathcal{B}$ $t$-načrt s parametri $(v,k,\lambda_t)$, potem je $\mathcal{B}$ tudi $s$-načrt s parametri $(v,k,\lambda_s)$ in velja:
+$$
+\lambda_s = \lambda_t \frac{(v-s)(v-s-1)\cdots (v-t+1)}{(k-s)(k-s-1)\cdots (k-t+1)}.
+$$
+
+\section{Ciklične konstrukcije načrtov in Fisherjeva neenakost}
+
+\textsc{Trditev:} Naj bo $S \subseteq \Z_m$ in naj bodo $S+i, i\in \Z_n$, paroma različni. Tedaj ti odseki tvorijo $(m,|S|,|S|)$-načrt.
+
+\textsc{Definicija:} $S\subseteq \Z_m$ je \underline{množica razlik}, če se vsak neničelni element iz $\Z_m$ pojavi enakokrat kot razlika dveh elementov iz $S$.
+
+\textsc{Izrek:} Naj bo $S \subseteq \Z_m$ množica razlik in naj bo $k=|S|$. Če so odseki $S+i$ paroma različni, tedaj $\{ S+i; i \in \Z_m \}$ tvori 2-načrt s parametri $(m,k,\frac{k(k-1)}{m-1})$.
+
+\textsc{Izrek: Fisherjeva neenakost} Naj bo $\mathcal{B}$ 2-načrt s parametri $(v,k,\lambda_2)$, kjer je $v > k$. Tedaj je $b \geq v$.
+
+\textsc{Opomba 1:} Prejšnji izrek pravi, da je neenakost najboljša možna (EVER!), saj je v prejšnjem izreku dosežena enakost.
+
+\textsc{Opomba 2:} Predpostavka $v > k $ je zato, da se izognemo trivialnemu primeru, ko je $v = k$: $X$ $v$-množica, tedaj je $\mathcal{B}$ $t$-načrt za vsak $t$.
+
+\section{VAJE}
+
+\textsc{Lema:} Vsak izomorfizem delnih urejenosti slika najmanjši element v najmanjši element.
+
+Catalanova števila: $C_n = \frac{1}{n+1}\binom{2n}{n}$.
+
+$P=(A,\leq)$, $x,y \in A$ neprimerljiva. Potem $(A,\leq \cup \{ (x,y) \} )$ ni delna urejenost.
+
+\textsc{Definicija:} Naj bo $P=(A,\leq)$ delna urejenost in $x,y \in A$ neprimerljiva. Pravimo, da sta $x$ in $y$ \underline{kritičen par}, če je tudi $(A,\leq \cup \{ (x,y)\} )$ delna urejenost.
+
+\textsc{Lema:} Če je $(A, \leq )$ končna delna urejenost, kritičen par vedno obstaja.
+
+\textsc{Lema:} Vsak dvodelen regularen graf ima popolno prirejanje.
+
+\textsc{Lema:} Vsak dvodelen biregularen (stopnje vozlišč v $X$ so $d_1$, stopnje vozlišč v $Y$ pa $d_2$) graf $G(X \cup Y,E)$ ima popolno prirejanje iz $X$ v $Y$, če je $|X| < |Y|$.
+
+\textsc{Definicija:} Urejena $n$-terica $(a_1,\ldots ,a_n)$ je \underline{sistem različnih predstavnikov} za množice $S_1,\ldots ,S_m \subseteq [n]$, če velja:
+\begin{itemize}
+\item $a_i \in S_i; i=1,\ldots m$
+\item $a_i \neq a_j$.
+\end{itemize}
+
+\textsc{Lema:} Sistem različnih predstavnikov za $S_1,\ldots ,S_m$ obstaja natanko tedaj, ko ima unija poljubnih $k$ množic vsaj $k$ elementov za $k = 1,\ldots , m$.
+
+\textsc{Lema:} Če so $A_1, \ldots A_k$ različne podmnožice $[n]$ in $A_i \cap A_j \neq \emptyset$ za vsaka $i,j$, je $k \leq 2^{n-1}$.
+
+\textsc{Lema:} Naj bo $\mathcal{B}$ načrt s parametri $(n,k,\lambda)$ nad množico $X$ in $\mathcal{B}' = \{ X \backslash B ; B \in \mathcal{B} \}$. Tedaj je $\mathcal{B}'$ načrt s parametri $(b,n-k,\frac{n-k}{k}\lambda)$.
+
+\textsc{Trditev:} Če je $S$ množica razlik v $\Z_m$, potem je tudi $\Z_m \backslash S$ množica razlik v $\Z_m$.
+
+\textsc{Lema:} Naj za 2-načrt s parametri $(v,k,\lambda_2)$ velja $b=v$. Tedaj je $k-\lambda_2$ popoln kvadrat, če je $v$ sod.
+
+\textsc{Trditev:} Naj bo $A$ incidenčna matrika 2-načrta $\mathcal{B}$, za katerega velja $b=v$. Tedaj je tudi $A^T$ incidenčna matrika nekega 2-načrta.
+
+\textsc{Definicija:} Steinerjev trojček je 2-načrt s parametri $(v,3,1)$.
+
+\textsc{Lema:} Steinerjev trojček obstaja le v primeru, ko je $v \equiv 1 (6)$ ali $v \equiv 3 (6)$.
+
+Velja $\lambda_1 = \lambda_2 \frac{v-1}{k-1}$
+
+Naj bo $A$ incidenčna matrika 2-načrta, za katerega velja $b=v$. Velja:
+\begin{itemize}
+\item $\det{AA^T}=k^2(k-\lambda_2)^{v-1}$
+\item
+$$
+AA^T =  \left[ \begin{matrix}
+k & \lambda_2 & \cdots & \lambda_2 \\
+\lambda_2 & k & \ddots & \vdots \\
+\vdots & \ddots &  \ddots & \lambda_2 \\
+\lambda_2 & \cdots & \lambda_2 & k
+\end{matrix} \right]
+$$
+\item če velja $A^TA = AA^T$, imata $A$ in $A^T$ natanko $\lambda_2$ skupnih enic.
+\item $AA^T = (k-\lambda_2)I_v + \lambda_2 \mathbb{1}_v$.
+\end{itemize}
+
+\end{document}
+
