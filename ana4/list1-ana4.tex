@@ -1,0 +1,495 @@
+\documentclass[8pt,a4paper]{amsart}
+\usepackage[slovene]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\titleformat*{\section}{\sc\bfseries\centering}
+
+\usepackage[
+top    = 0.7cm,
+bottom = 1cm,
+left   = 0.5cm,
+right  = 0.5cm]{geometry}
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{enumerate}}
+
+
+\newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dy}{\ensuremath{\,\mathrm{d}y}}
+\newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
+\newcommand{\dd}[1]{\ensuremath{\,\mathrm{d}#1}}
+\let\oldint\int
+\renewcommand{\int}{\oldint \!}
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\pagestyle{empty}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\fontsize{7pt}{7pt}
+
+\section*{PDE}
+
+Dana je PDE $a(x,y)u_x + b(x,y)u_y = 0$, kjer sta $a,b \in {\infty}(\R^2)$. NDE,
+ki ji morajo zadostiti nivojnice rešitvene ploskve $u = u(x,y)$ je $a\dy =
+b\dx$. Iz dobljene enačbe izrazimo splošno konstanto $C$, splošna rešitev pa je
+$u = u(x,y) = F(C)$. Uporabimo še začetni pogoj.
+
+Uvedba novih spremenljivk $s,t$: $u_x = u_s s_x + u_t t_x$, $u_y = u_s s_y + u_t
+t_y$.
+
+\underline{Poseben primer novih spremenljivk:}
+
+Če za PDE $a(x,y)u_x + b(x,y)u_y + c(x,y)u = d(x,y)$, $a,b,c,d \in
+C^{\infty}(\R^2)$ uvajamo novi spremenljivki $t$ in $s$, za kateri velja $as_x +
+bs_y = 0$ in $at_x + bt_y \neq 0$, dobimo NDE 1. reda: $$ u_t + \frac{c}{at_x +
+bt_y}u = \frac{d}{at_x + bt_y}.  $$
+
+\textbf{Krajšanje metode z nivojnicami:} $\text{d}s = 0 = s_x \dx + s_y \dy$. Iz
+pogoja $as_x + bs_y = 0$ izrazimo npr. $s_x$ z $s_y$, nesemo v enačbo $\text{d}s
+= 0$, krajšamo $s_y$, rešimo NDE in dobimo splošno rešitev: $s = F(C)$.
+Potrebujemo neko rešitev, torej lahko izberemo kar $F = \text{id}$. Za $t$ si
+izberemo tako funkcijo $x,y$ (čim enostavnejšo), da bo izpolnjen pogoj $at_x +
+bt_y \neq 0$ in da bosta $s$ in $t$ neodvisni, torej da velja: $$ \det
+\begin{bmatrix} s_x & s_y \\ t_x & t_y \end{bmatrix} \neq 0.  $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Kvaziliniearna PDE}
+
+Oblika: $a(x,y,u)u_x + b(x,y,u)u_y = c(x,y,u)$. Začetni pogoj: rešitev vsebuje
+krivuljo $\Gamma (s) = (x_0(s),y_0(s),u_0(s))$. $u = u(x,y)$ je ploskev z
+normalo $\vec{n} = (e_x,u_y,-1)$. Zaradi tipa enačbe velja $(a,b,c)\cdot \vec{n}
+= 0$, torej rešitvena ploskev sestoji iz krivulj, za katere velja $\dot{\gamma}
+= (a,b,c)$. Rešujemo \underline{karakteristični sistem}: $ \dot{x}
+=a(x,y,u),\quad \dot{y} =b(x,y,u),\quad \dot{u} =c(x,y,u).  $ Rešitvam
+karakterističnega sistema pravimo \underline{karakteristike} in načeloma
+napolnijo cel $\R^3$. Rešitev sestavimo iz krivulj (karakteristik), ki sekajo
+začetno krivuljo $\Gamma$: $x(0) = x_0(s)$, $y(0) = y_0(s)$, $u(0) = u_0(s)$.
+Dobimo parametrično rešitev: $ x =x(t,s) ,\quad y =y(t,s) ,\quad u =u(t,s).  $
+Če se da, iz parametrične rešitve izrazimo eksplicitno rešitev $u = u(x,y)$.
+
+\textsc{Definicija:} \underline{Transverzalnostni pogoj:} $$ (T) = \det{
+  \begin{bmatrix} a(x_0,y_0) & b(x_0,y_0) \\ x_0'(s) & y_0'(s) \end{bmatrix} }
+  \neq 0, $$ kjer je $(a,b)$ tangenta karakteristik (prvi dve komponenti),
+  $(x_0',y_0')$ pa tangenta začetne krivulje (prvi dve komponenti).
+
+\textsc{Izrek:}
+\begin{enumerate}[(i)]
+  \item Če je $(T)$ izpolnjen za vsak $s
+    \in \R$, obstaja \underline{natanko ena} rešitev začetnega problema,
+    definirana na okolici začetne krivulje $\Gamma (s),$ $s \in \R$.
+  \item če je $(T)$ prekršen za vsak $s \in \R$, imamo dve možnosti:
+    \begin{enumerate}[a)]
+      \item ne obstaja rešitev, če $\Gamma$ ni karakteristika ($\Gamma$ je
+        karakteristika, če je izpolnjen pogoj v točki b),
+      \item imamo neskončno rešitev, če je $\Gamma' \| (a,b,c)$.
+    \end{enumerate}
+\end{enumerate}
+
+Če ima enačba neskončno rešitev (sledimo točki b) iz zgornjega izreka) in iščemo
+več kot eno, se lahko zgodi, da nam metoda karakteristik ponudi le eno. Ideja:
+izberemo si začetno krivuljo $\Gamma_1$, ki zadošča naslednjima pogojema:
+\begin{enumerate}
+  \item netangentno seka $\Gamma$,
+  \item izpolnjuje $(T)$ za originalno enačbo.
+\end{enumerate}
+
+\textsc{Lema:} $(ax + by) u_x + (bx + dy) u_y = 0$, $a,b,d \in \R$, $ad-b^2 >
+0$, $a+d < 0$. Naj bo $u$ rešitev enačbe razreda $C^1 (\R^2)$. Tedaj je $u$
+konstantna.
+
+\textbf{Trik} za neskončne sisteme NDE za $x_n(t)$: rešimo ga s pomočjo rodovne
+funkcije $Q(y,t) = \sum_{n=1}^\infty x_n(t) y^n$. Velja: $yQ_y =
+\sum_{n=1}^\infty nx_n(t)y^n, Q_y - Q / y = \sum_{n=1}^\infty nx_{n+1}y^n$.
+Z upoštevanjem rekurzivne zveze dobimo PDE za $Q$, rešimo, razvijemo rešitev v
+vrsto po $y$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Lagrangeeva metoda za kvazilinearne PDE}
+
+\textsc{Trditev:} Naj bo $F : \R^3 \longrightarrow \R$ $C^{\infty}$ z
+lastnostma:
+\begin{enumerate}[(i)]
+  \item obstaja $p \in \R^3$: $F(p)=0$ in
+    $F_u(p) \neq 0$,
+  \item $F$ je prvi integral karakterističnega sistema $
+      \dot{x} =a(x,y,u),\quad \dot{y} =b(x,y,u) ,\quad \dot{u} =c(x,y,u).$
+\end{enumerate}
+Potem je z enačbo $F(x,y,u)=0 $ dobro definirana implicitna
+  rešitev enačbe $a(x,y,u)u_x + b(x,y,u)u_y )= c(x,y,u)$ na okolici točke $p$.
+
+\textbf{Metoda:} Naj bosta $F$ in $G$ gladka, funkcijsko neodvisna integrala
+karakterističnega sistema. Potem je splošna rešitev $\Psi (F(x,y,u),G(x,y,u)) =
+0$, kjer je $\Psi$ poljubna funkcija. $F(x,y,u) = C$, $G(x,y,u) = D$. Metoda nam
+generira splošne rešitve, nimamo pa relacije med začetno krivuljo in
+enoličnostjo rešitve ter metode ne moremo posplošiti za nelinearne PDE.
+
+Iz parametrične rešitve karakterističnega sistema izrazimo konstanti $C$ in $D$.
+To sta naša prva integrala $F$ in $G$, ki sta zdaj odvisna le od $x,y,u$, ne pa
+od $C,D$. Dobimo $\Psi$ in upoštevamo še začetni pogoj (ga vstavimo v $\Psi$).
+Navadno lahko uganemo predpis za $\Psi$, da bo res enak 0. Če hočemo vedeti kaj
+o enoličnosti, se lotimo naloge z metodo karakteristik in preverimo
+transverzalnostni pogoj.
+
+Zanimivi vzorci: $(x^2)^. = 2x\dot{x}$, $(xy)^. = \dot{x}y + x\dot{y}$,
+$(\ln{x})^. = \frac{\dot{x}}{x}$.
+
+\textsc{Trditev:} Naj bosta $\vec{P}_j:\R^3 \longrightarrow \R^3$, $j \in
+\{1,2\}$, vektorski polji ortogonalni na $Q(x,y,u) =
+(a(x,y,u),b(x,y,u),c(x,y,u))$, neodvisni in $\text{rot}\vec{P}_j$. Tedaj sta
+njuna potenciala prva integrala karakterističnega sistema.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Nelinearne PDE 1. reda}
+
+Oblika: $F(x,y,u, u_x,u_y) = 0$, označimo $p = u_x$, $q = u_y$. Iščemo rešitev
+pri pogojih $u(\alpha(t),\beta(t)) = \gamma(t)$.
+
+\textbf{Metoda karakteristik:} Za karakteristike vzamemo \underline{tvorilke}
+stožca, tj. ''središčne premice''. To so rešitve sistema $ \dot{x} =F_p ,\quad
+\dot{y} =F_q ,\quad \dot{u} =pF_p + qF_q,\quad \dot{p} =-F_x - F_u p,\quad
+\dot{q} =-F_y - F_u q.  $ Za določanje konstant upoštevamo začetno krivuljo in
+dva naravna pogoja: \begin{itemize} \item $F(x,y,u,p,q)|_{t=0} = 0$, \item
+      $\Gamma' \perp \vec{n}|_{t=0}$: $(p(0),q(0),-1) \cdot \Gamma'(s) = 0$.
+  \end{itemize}
+
+Če $u = u(x,y)$ določa ploskev v prostoru, je enačba tangentne ravnine na to
+ploskev v točki $(x,y,u(x,y))$ enaka: $u_x (X-x) + u_y (Y-y) - (U-u)=0$ (normala
+ravnine je $(A,B,C) = (u_x,u_y,-1)$). Razdalja od tangentne ravnine do točke
+$(a,b,c)$ je: $$ \text{d}(AX+BY+CU+D=0, (a,b,c)) =
+\frac{|Aa+Bb+Cc+D|}{\sqrt{A^2+B^2+C^2}}.  $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Eksistenčni izrek za nelinearne PDE 1. reda}
+
+\textsc{Izrek:} Naj bo $u=u(x, y)$ rešitev začetnega problema $$
+F(x,y,u,u_x,u_y)=0, \quad u(\alpha(s),\beta(s))=\gamma(s), \quad \text{za } s
+\in \mathcal{I}.  $$ Če sta $p(s)=u_x(\alpha(s),\beta(s))$ in $q(s) =
+u_y(\alpha(s),\beta(s))$ edini funkciji, za kateri velja: \begin{enumerate}
+  \item $ (T) = \det{\begin{bmatrix} \alpha' & \beta' \\ F_p & F_q
+  \end{bmatrix}}(s) \neq 0 \quad \forall s \in \mathcal{I},$ \item
+    $F(\alpha(s),\beta(s),\gamma(s),p(s),q(s))=0 \quad \forall s \in
+    \mathcal{I},$ \item $(p(s),q(s),-1) \cdot (\alpha'(s),\beta'(s),\gamma'(s))
+      = 0 \quad \forall s \in \mathcal{I}.$ \end{enumerate} Potem je rešitev $u$
+  enolična.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Pfaffova enačba}
+
+Oblika: $p(x,y,z)\dx+q(x,y,z)\dy+r(x,y,z)\text{d}z = 0$. Geometrijski pomen:
+$\vec{F} = (p,q,r)$. Iščemo družino ploskev $G(x,y,z) = C \in \R$, ki je
+pravokotna na $\vec{F}$, tj. obstaja $\mu = \mu(x,y,z)$: $\text{grad}(G) = \mu
+\vec{F}$.
+
+\textsc{Lema:} Potreben in zadosten pogoj za rešitev Pfaffove PDE je $\vec{F}
+\cdot \text{rot}\vec{F} = 0$.
+
+Velja: $\text{rot}(\mu \vec{F}) = \text{grad}\mu \times \vec{F} + \mu \text{rot}
+\vec{F}$.
+
+\textbf{Metoda za reševanje:} Predpostavimo, da iščemo rešitve, katerih presek z
+ravnino $z = konst.$ je krivulja brez samopresečišč. Na tem preseku velja $p\dx
++ q \dy=0$. Torej imamo rešitev te NDE: $u(x,y,z) = C(z).$ Rešitev iščemo z
+nastavkom $G(x,y,z) = u(x,y,z) - C(z)$. Če je potreben pogoj izpolnjen,
+obstajata $C$ in $\mu$, da je grad$(G) = \mu \vec{F}$.
+
+Ko iz zveze grad$(G) = \mu \vec{F}$ izračunamo $C(z)$, ga vstavimo v $G(x,y,z) =
+u(x,y,z) - C(z)$. Rešitev je družina ploskev $G)x,y,z) = 0$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Linearne PDE 2. reda}
+
+Oblika: $a(x,y)u_{xx} + 2b(x,y)u_{xy} + c(x,y)u_{yy} + 1. \text{ red} = 0$.
+$\delta = b^2 -ac$. Ločimo tri tipe PDE:
+
+\begin{enumerate}[(i)]
+  \item če je $\delta > 0 $ na $D$, je PDE \underline{hiperbolična} na $D$,
+  \item če je $\delta = 0 $ na $D$, je PDE \underline{parabolična} na $D$,
+  \item če je $\delta < 0 $ na $D$, je PDE \underline{eliptična} na $D$.
+\end{enumerate}
+
+Vsi trije tipi se prevedejo na kanonično obliko z vpeljavo novih koordinat
+$(t,s)$:
+
+\begin{enumerate}[(i)]
+  \item Za $(t,s)$ vzamemo neki rešitvi enačb $ at_x + (b+\sqrt{\delta})t_y=0,
+    \quad as_x + (b-\sqrt{\delta})s_y =0.$ Dobimo: $u_{st} + 1. \text{ red} = 0.$
+  \item Za $t$ vzamemo neko rešitev enačbe $ at_x + bt_y = 0, $ za $s$ pa poljubno
+    funkcijo, neodvisno od $t$. Dobimo: $u_{ss}+ 1. \text{ red}=0$.
+  \item Poiščemo (kompleksno) rešitev $av_x + (b+\sqrt{\delta})v_y = 0$. Vzamemo
+    $t = \operatorname{Re}v$ in $s = \operatorname{Im}v$. Dobimo: $u_{tt}+u_{ss}+
+    1. \text{ red}=0$.
+\end{enumerate} Za računanje enačb, ki porodijo nove spremenljivke, uporabiš
+čisto prvo (najbolj na začetku, prvi list, prvi način reševanja za prvo obliko)
+metodo z nivojnicami. Tj. iz enačbe v zgornjih točkah izraziš npr. $v_x$ in jo
+neseš v $\text{d}v = 0 = v_x\dx + v_y \dy$, krajšaš $v_y$, rešiš NDE $et$
+$voil\grave{a}$!
+
+Pomoč: $u_x = u_s s_x + u_t t_x$, $u_y = u_s s_y + u_t t_y$, $u_{xx} = (u_x)_s
+s_x + (u_x)_t t_x$, $u_{xy} = (u_x)_s s_y + (u_x)_t t_y$,  $u_{yy} = (u_y)_s s_x
++ (u_y)_t t_x$.
+
+Pri iskanju rešitev PDE v kanonični obliki dobiš splošni funkciji $C(t)$ in
+$D(s)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Valovna enačba}
+
+Oblika: $u_{tt} - c^2u_{xx} = 0$. $x \in \R$ je točka na struni, $t \geq 0$. $u
+= u(x,t)$ predstavlja odmik točke v danem času. Novi spremenljivki: $\xi =
+x+ct$, $\eta = x-ct$. Splošna rešitev: $u = F(\xi) + G(\eta) = F(x+ct) +
+G(x-ct)$.
+
+\textbf{d'Alembertova formula} za homogeno valovno enačbo pri pogojih $u(x,0) =
+f(x)$, $u_t(x,0)=g(x)$: $ u(x,t) = \frac{1}{2}(f(x+ct)+f(x-ct)) + \frac{1}{2c}
+\int_{x-ct}^{x+ct} g(s) \dd{s}.  $
+
+Trikotnik vpliva označimo z $\bigtriangleup(x_0,t_0)$ in je določen s točkami
+$(x_0-ct_0,0), (x_0+ct_0,0), (x_0,t_0)$. Na grafu je $x$ na $x$- osi, $t$ pa na
+$y$-osi.
+
+\textbf{Nehomogena valovna enačba:} $u_{tt} - c^2u_{xx} = F(x,t)$. Rešitev je
+oblike: $u(x,t) = u_{\text{\textsc{hom}}}(x,t) + u_{\text{\textsc{part}}}(x,t)$,
+kjer je $ u_{\text{\textsc{part}}}(x,t) = \frac{1}{2c} \iint_{\bigtriangleup
+(x,t)}F(\xi,\tau)\dd{\xi} \dd{\tau}$.
+
+Za partikularni del torej integriramo: $ u_{\text{\textsc{part}}}(x,t) =
+\frac{1}{2c} \int_0^t \dd{\tau}
+\int_{x-c(t-\tau)}^{x+c(t-\tau)}F(\xi,\tau)\dd{\xi}$.
+
+\textsc{Odvod integrala:} $F(x) = \int_{u(x)}^{v(x)}f(x,s)\dd{s}$. Potem
+$F'(x) =  \int_{u(x)}^{v(x)} \frac{\partial}{\partial x}f(x,s)\dd{s} +
+f(x,(v(x))v'(x) - f(x,u(x))u'(x)$.
+
+\textsc{Trditev:} Naj bodo $f, g$ in $F(\cdot ,t)$ lihe za $t \geq 0$. Tedaj je
+d'Alembertova rešitev tudi liha. Ob predpostavkah $f \in \mathcal{C}^2(\R ), g
+\in \mathcal{C}^1(\R ), F, \frac{\partial F}{\partial x} \in \mathcal{C}(\R^2 )$
+dobimo klasično rešitev, tj. $u \in \mathcal{C}^2(\R^2 )$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Separacija spremenljivk}
+
+$L^2([-\pi,\pi]) = \{f:[-\pi,\pi]\longrightarrow \R, \int_{-\pi}^\pi |f|^2
+\dx < \infty \}$ je vektorski prostor s skalarnim produktom $\langle f, g\rangle =
+\int_{-\pi}^\pi f(x)g(x)\dx$. Množica funkcij
+
+  $\{\frac{1}{2\pi},
+  \frac{1}{\pi}\sin{x},\frac{1}{\pi}\cos{x},\frac{1}{\pi}\sin{2x},\frac{1}{\pi}\cos{2x},\ldots
+\}$. je \underline{kompleten} (vsako funkcijo se da na enoličen način razviti v
+tem sistemu),  \underline{ortonormiran} sistem za ta produkt.
+
+\textbf{Fourierjev razvoj:} $f \in L^2([-\pi,\pi])$:
+
+$\tilde{f}(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}(a_n\cos{nx} + b_n\sin{nx})$,
+
+$a_n = \langle f,\frac{1}{\pi}\cos{nx} \rangle =
+\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos{nx}\dx, \quad n \in \N \cup
+\{0\}$,
+
+$b_n = \langle f,\frac{1}{\pi}\sin{nx} \rangle =
+\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin{nx}\dx, \quad n \in \N$.
+
+$\tilde{f}$ je $2\pi$-periodična razširitev $f$, ki v točkah nezveznosti zavzame
+aritmetično sredino. V prostoru $L^2$ je $f=\tilde{f}$ oz. sta v istem
+ekvivalenčnem razredu.
+
+\textbf{Sinusna in kosinusna vrsta:} $f \in L^2([0,\pi])$. Za tako funkcijo
+obstaja liha in soda razširitev na $[-\pi,\pi]$. Za $\tilde{f}^S$ so $b_n = 0$,
+za $\tilde{f}^L$ pa $a_n = 0$.
+
+\textsc{Posledica:} Na $[0,\pi]$ za $f$ obstajata dva razvoja: \textbf{sinusna
+vrsta}: $\tilde{f}(x) =  \sum_{n=1}^{\infty} \tilde{b}_n\sin{nx}$ in
+\textbf{kosinusna vrsta}:  $\tilde{f}(x) =
+\frac{\tilde{a}_0}{2}\sum_{n=1}^{\infty}\tilde{a}_n\cos{nx}$, kjer sta:
+
+$\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N
+\cup \{0\}$,
+
+$\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in
+\N$.
+
+S substitucijo lahko razvoje prevedemo na poljuben interval $[-L,L]$ oz.
+$[0,L]$, $L > 0$. V tem primeru je $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
+x}{L}},\frac{1}{L}\cos{\frac{n\pi x}{L}},\ldots \}$
+
+% K.O.N.S. (4) (Boston obsoja
+% Einsteina, Einstein prepovedan. Relativiteta nevarna? V Berlinu zapirajo
+% kitajske študente. Kitajski študentje nevarni?...).
+
+\textbf{Metoda separacije:} Kdaj jo uporabimo: \underline{Trivialen pogoj:}
+Imamo eno spremenljivko na omejenem območju in s homogenimi robnimi pogoji, npr.
+
+$x \in [0,L]$: $\alpha u(0,t) + \beta u_x(0,t) = 0, \quad \gamma u(_,t)+\delta
+u_x(L,t) = 0, \quad \alpha, \beta, \gamma, \delta \in \R.$
+
+\underline{Netrivialen pogoj:} Diferencialni operator, ki določa PDE, zadošča
+Sturm-Liouvillovi teoriji, tj. množica lastnih funkcij, ki jih dobimo iz robnega
+problema tvori K.O.N.S.
+
+% (SHS menja vlado. Dosti vlad je že menjala. Francija.
+% Španija. Maroko. Frajtar terorizira. Žandar terorizira.)
+
+\underline{Štirje koraki metode:} (zato K.O.N.S. 4)
+
+$\#1$: Separacija: nastavek $u(x,t)=X(x)T(t)$. (Nastavek vstavi v enačbo in loči
+spremenljivke, dobljeno enačbo pa enači z $\mu \in \R$.)
+
+$\#2$: Določanje lastnih funkcij $\{X_n\}_{n\in \N}$ iz robnega problema za NDE.
+(Reši NDE za X, homogeni robni pogoji ti dajo začetne pogoje za NDE. Obravnavati
+moraš možnosti $\mu >0, \mu = 0, \mu < 0$. Če je v kakšnem primeru $X \equiv 0$,
+lastnih funkcij v tem primeru ni. Pri izbire množice lastnih funkcij, lahko
+splošno konstanto za vsak člen BŠS postaviš na 1.)
+
+$\#3$: Iskanje pripadajočih $\{T_n \}_{n \in \N}$. (Z $\mu$, ki ga dobiš v $\#2$
+in določa družino lastnih funkcij, reši še NDE za $T$. Splošno konstanto lahko
+tu pustiš, lahko si misliš, za je v njej spravljena konstanta iz množice lastnih
+funkcij za $X$.)
+
+$\#4$: Splošna rešitev $u = \sum_{n=1}^\infty X_nT_n$. (Rešitev naj bi bila
+odvisna od števno mnogo konstant, ki jih določiš iz nehomogenega robnega pogoja.
+Dobro je opaziti morebitne sinusne/kosinusne vrste, ki jih dobiš z robnim
+pogojem, in upoštevati zvezo s koeficienti iz razvoja v sinusno/kosinusnov
+vrsto, torej $C_n = a_n \text{ ali } b_n$.)
+
+Če za nobeno od spremenljivk nimamo homogenega robnega pogoja, razbijemo problem
+na dva dela, npr: $\triangle u = 0$ razbijemo na $u = v+w$, $\triangle v = 0$ in
+$\triangle w = 0$, pri čemer $v$-ju in $w$-ju damo vsakemu en homogen robni
+pogoj in en pogoj, ki je od $u$-ja.
+
+% (Veliki ljudje živijo po svoje duše zakonih. Majhni po paragrafih. $\S$
+% \textbf{X}: 14 dni v zapor. $\S$ \textbf{Y}: na vislice. $\S$ \textbf{Z}: v
+% pregnanstvo. 21 let sem bil zaprt 10x na vislicah. Pregnan sem za vedno. Hej
+% ljubica, ti bi jokala? A jaz ne morej jokati. Trd sem kot jeklo, ki mora srce
+% prebosti.)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\section*{NDE višjih redov} Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
+%strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
+%Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
+%(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
+%uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
+%\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
+%\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
+%$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
+%y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+%%
+%%\subsubsection*{Geometrija}
+%%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
+%%Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
+%%Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
+%%$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
+%
+%%\begin{tabular}{ll}
+%%Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
+%%Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
+%%\end{tabular}
+%
+%
+%\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
+%= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ & $t
+%\mapsto (\alpha (t), \beta (t), \gamma
+%(t))$:$\int_{t_o}^{t_1}\sqrt{\dot{\alpha}^2+\dot{\beta}^2+\dot{\gamma}^2}dt$\\
+%
+%$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
+%\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
+%+ C$  & $G(y)=\int_0^1(y^2+y'^2)dx \Longrightarrow DG(y)(h)=
+%\int_0^1(2yh+2y'h')dx$\\
+%
+%$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
+%\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ & $\sin{x} =
+%\frac{e^{ix}-e^{-ix}}{2i}$\\
+%
+%$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
+%\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ & $\cos{x} =
+%\frac{e^{ix}+e^{-ix}}{2}$\\
+%
+%$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
+%\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ & $\sinh{x} =
+%\frac{e^{x}-e^{-x}}{2}$\\
+%
+%$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
+%\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ &
+%$\cosh{x} = \frac{e^{x}+e^{-x}}{2}$\\
+%
+%$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
+%\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ &
+%$\cosh^2{x}-\sinh^2{x}=1$ & $1+\tan^2{x} = \frac{1}{\cos^2{x}}$\\
+%
+%$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
+%\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  & $\tan^2{x} =
+%\tan'{x}-1$\\
+%
+%$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
+%
+%\end{tabular}
+%
+%
+%
+%$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
+%\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
+%\frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0 \end{cases} $\\ $\int
+%\frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx
+%+ c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj
+%kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+%
+%Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),
+%\dx = \dt/(1 + t^2)$\\ Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2),
+%\cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+%
+%
+%
+
+\vfill
+\hfill avtor: Klemen Sajovec, malo sprememb: Jure Slak
+
+\end{document}
+
