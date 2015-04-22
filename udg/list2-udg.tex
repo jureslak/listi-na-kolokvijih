@@ -1,0 +1,308 @@
+\documentclass[8pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+\usepackage[dvipsnames,usenames]{color}
+
+
+\usepackage[
+top    = 1cm,
+bottom = 1cm,
+left   = .5cm,
+right  = 0.5cm]{geometry}
+%
+%% ne spreminjaj podatkov, ki vplivajo na obliko strani
+%\textwidth 19cm
+%\textheight 27cm
+%\oddsidemargin-1.5cm
+%\evensidemargin-1.5cm
+%\topmargin-30mm
+%%\addtolength{\footskip}{10pt}
+%\pagestyle{plain}
+%%\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\section*{\textbf{Druga fundamentalna forma}} %%%%% 2FF in ukrivljenosti
+
+\textsc{Definicija: }Naj bo $\sigma (u,v)$ karta ploskve $S$ in naj bo $\textbf{N}(u,v)$ zvezno vektorsko polje, ki predstavlja normalo na $S$. (torej je $N = \sigma _u \times \sigma _v)/\| \sigma _u \times \sigma _v \|$) \textbf{Drugo fundamentalno formo} ($IIFF$) $S$ glede na karto $\sigma $ predstavljajo skalarni produkti:
+
+\begin{itemize}
+
+\item $L=\sigma _{uu} \cdot \textbf{N}$;
+
+\item $M=\sigma _{uv} \cdot \textbf{N}$;
+
+\item $N=\sigma _{vv} \cdot \textbf{N}$.
+
+\end{itemize}
+
+
+
+\textsc{Definicija: }Naj bo $\gamma$ pot na ploskvi $S$ in naj bo $\varphi $ kot med normalo krivulje $\textbf{n}$ in normalo ploskve $\textbf{N}$. \textbf{Normalno ukrivljenost} poti $\gamma$ na $S$ je
+
+$$
+\kappa_n = \gamma ''\textbf{N} = \kappa \cos \varphi .
+$$
+
+\textbf{Geodetska ukrivljenost }poti $\gamma$ na $S$ je
+
+$$
+\kappa_g = \gamma ''(\textbf{N} \times \gamma ')=\pm \kappa \sin \varphi .
+$$
+
+\textsc{Opomba: }$\kappa_n$ in $\kappa_g$ spremenita predznak, če izberemo drugo normalo. Prav tako $\kappa_g$ spremeni predznak ($\kappa_n$ pa se ohrani), če pot $\gamma$ parametriziramo v `drugo smer'.
+
+\textsc{Trditev: }Za poljubno ploskev $S$ in poljubno pot $\gamma (t)=(u(t),v(t))$ na $S$ veljajo naslednje formule:
+\begin{itemize}
+\item $\kappa ^2 = \kappa _g^2+\kappa_n^2$,
+\item $\kappa_n = Lu'^2+2Mu'v'+Nv'^2$,
+\item $\kappa_n=\frac{L\dot{u}^2+2M\dot{u}\dot{v}+N\dot{v}^2}{E\dot{u}^2+2F\dot{u}\dot{v}+G\dot{v}^2}$
+\end{itemize}
+
+\textsc{Definicija: }Naj bosta 
+
+$$
+F_I=\left( \begin{array}{cc} E & F \\ F & G \end{array} \right)
+\qquad
+F_{II}=\left( \begin{array}{cc} L & M \\ M & N \end{array} \right)
+$$
+matriki, ki predstavljata fundamentalni formi ploskve $S$ v bazi $\{ \sigma_u,\sigma_v\}$. Vrednosti $\kappa_1,\kappa_2$, za kateri ima determinanta $|F_{II}-\kappa F_I|$ vrednost $0$, se imenujeta \textbf{glavni ukrivljenosti} ploskve $S$, bazna vektorja iz $TS$ pripadajočih ničelnih prostorov matrike pa \textbf{glavna vektorja}. Matrika $\mathcal{W}=-F_I^{-1}F_{II}$ se imenuje \textbf{Weingartnova matrika}.
+
+\textsc{Opomba:} V nekaterih primerih dobimo le eno glavno ukrivljenost (glavna ukrivljenost vedno obstaja), kar pomeni, da so vsi vektorji tangentnega prostora v omenjeni točki glavni.
+\\
+
+\textsc{Trditev:}
+\begin{enumerate}
+\item Glavna vektorja v vsaki točki na ploskvi tvorita bazo tangentnega prostora.
+\item Če velja $\kappa_1 \neq \kappa_2$, sta glavna vektorja pravokotna.
+\item $K = \det(\mathcal{W})$.
+\item Glavni ukrivljenosti sta lastni vrednosti $\mathcal{W}$, glavna vektorja sta lastna vektorja $\mathcal{W}$.
+\end{enumerate}
+
+\textsc{Definicija:} \textbf{Gaussova ukrivljenost} ploskve je enaka
+
+$$
+K = \kappa_1\kappa_2 = \frac{LN-M^2}{EG-F^2}.
+$$
+
+\textbf{Povprečna ukrivljenost} ploskve je enaka
+
+$$
+H = \frac{\kappa_1+\kappa_2}{2} = \frac{LG-2MF+NE}{2(EG-F^2)}.
+$$
+
+Ploskev je \textbf{minimalna}, če zanjo velja $H=0$.
+\\
+
+Gaussova ukrivljenost sfere: $K = \frac{1}{R^2}$
+
+\section*{\textbf{Geodetke}} %%%%%%%GEODETKE
+
+\textsc{Definicija: }Pot $\gamma$ na ploskvi $S$ je \textbf{geodetka}, če velja $\ddot{\gamma} \perp S$ (to je ekvivalentno pogoju $\ddot{\gamma} \parallel \textbf{N}$).
+\\
+
+\textsc{Trditev:} Vsaka geodetka ima konstantno hitrost: $\frac{d}{dt} \| \dot{\gamma} \| = 2\ddot{\gamma}\dot{\gamma} = 0$, (ker $\dot{\gamma} \in TS$).
+\\
+
+\textsc{Opomba: }V definiciji je geodetka parametrizirana pot, trditev pa pove, da mora imeti ta parametrizacija konstantno hitrost. Izkaže se: pot $\gamma$ je geodetka natanko tedaj, ko je njena reparametrizacija z naravnim parametrom geodetka. 
+
+Za poljuben $k \neq 0$ velja tudi sledeče: $s \mapsto \gamma (s)$ je geodetka natanko tedaj, ko je $s \mapsto \gamma (ks)$ geodetka. 
+\\
+
+\textsc{Trditev: }Geodetke imajo naslednje lastnosti:
+
+\begin{enumerate}
+
+\item linearne poti so geodetke;
+
+\item geodetke so lokalno najkrajše poti med dvema točkama;
+
+\item $\forall x \in S, \forall v \in T_xS$ obstaja natanko ena parametrizirana geodetka $\gamma$ na $S$, za katero velja $\gamma (0) = x, \dot{\gamma} (0)=v$;
+
+\item naj bo $\sigma (u,v)$ karta ploskve $S$. Pot $\gamma (t) = \sigma (u(t),v(t))$ je parametrizirana geodetka na $S$ natanko tedaj, ko zadošča sistemu
+
+$$
+\frac{d}{dt}(E\dot{u} + F\dot{v}) = \frac{1}{2}(E_u \dot{u}^2+2F_u\dot{u}\dot{v} + G_u\dot{v}^2)
+$$
+$$
+\frac{d}{dt}(F\dot{u} + G\dot{v}) = \frac{1}{2}(E_v \dot{u}^2+2F_v\dot{u}\dot{v} + G_v\dot{v}^2).
+$$
+
+\item izometrije ploskve slikajo geodetke v geodetke.
+
+\end{enumerate}
+
+\textsc{Lastnosti geodetk: }
+
+\begin{itemize}
+
+\item $\gamma$ je geodetka natanko tedaj, ko je $\kappa_g = 0$
+
+\item Normalni presek ploskve $S$ in ravnine je vedno geodetka.
+
+\item Na stožcu poteka skozi poljubni dve točki geodetka (ni samo ena), poljubni dve geodetki se ne sekata nujno v eni točki, obstajata geodetki, ki se ne sekata, geodetka lahko seka samo sebe.
+
+\end{itemize}
+
+\section*{\textbf{Risanje geodetk na vrteninah}} %%%%%% RISANJE
+
+\textsc{Trditev: }
+\begin{itemize}
+
+\item Naj bo $\sigma (u,v) = (f(u)\cos v, f(u) \sin v, g(u))$ parametrizacija vrtenine, pri čemer je $u$ naravni parameter poti $(f,g)$, tj. $f'^2+g'^2=1$.
+
+\item Označimo oddaljenost točke $\sigma (u,v)$ od osi vrtenja kot $\rho = \rho (u) := f(u).$
+
+\item Naj bo $\psi (s)$ kot med geodetko $\gamma$ in poldnevnikom $\sigma (t,v(s))$ skozi $\gamma (s) = \sigma (u(s),v(s))$ in definirajmo $\Omega := \rho \sin \psi.$
+\end{itemize}
+
+Tedaj za geodetke na vrtenini veljajo naslednje lastnosti:
+
+\begin{enumerate}
+
+\item Poldnevnik (pot pri konstantnem $v$) je vedno geodetka.
+
+\item Vzporednik (pot pri konstantnem $u$) je geodetka natanko tedaj, ko je $\rho'(u) = 0$.
+
+\item Clairotov princip: $\Omega := \rho \sin \psi$ je konstanta vzdolž vsake geodetke.
+
+\item Če je $\Omega$ konstanta vzdolž poti $\gamma$ in $\gamma$ ni vzporednik, potem je $\gamma$ geodetka.
+
+\item Zaradi fleksibilnosti pri izbiri orientacije je $\sin \psi$ določen le do predznaka natančno. Z upoštevanjem simetričnosti je dovolj obravnavati le nenegativne vrednosti $\Omega$.
+
+\item Vzdolž geodetke velja $(u')^2 = 1-\Omega^2 \rho^{-2}$. Torej velja $\rho \geq \Omega$.
+
+\item Če v točki $\gamma (s)$ velja $\rho (s) > \Omega (s)$, potem je $u'(s) \neq 0$ in geodetka zato seka vzporednik skozi $\gamma (s)$.
+
+\item Če v točki $\gamma (s)$ velja $\rho (s) = \Omega (s)$, potem je $u'(s) = 0$, zato se geodetka v tej točki dotika vzporednika. Če poleg tega velja $\rho'(s) = 0$, je zaradi enoličnosti geodetk $\gamma$ kar omenjeni vzporednik.
+
+\end{enumerate}
+
+\section*{\textbf{Površina ploskve}} %%%% POVRŠINE
+
+Če je $\sigma (u,v)$ parametrizacija ploskve, njeno površino izračunamo po naslednji formuli:
+
+$$
+P(A) = \iint_{A} \| \sigma_u \times \sigma_v \| du dv = \iint_A \sqrt{EG-F^2} dudv
+$$
+V zgornji formuli ne rabiš Jacobijeve determinante!
+\\
+
+\textsc{Trditev: }Naj bo $\textbf{N}$ normala ploskve $\sigma (u,v)$. Potem velja:
+
+\begin{itemize}
+
+\item $\textbf{N}_u \cdot \sigma_u = -L$
+\item $\textbf{N}_u \cdot \sigma_v = -M$
+\item $\textbf{N}_v \cdot \sigma_v = -N$
+\end{itemize}
+
+\textsc{Trditev: }Če velja $IIFF = 0$, potem je ploskev vsebovana v ravnini.
+\\
+
+\textsc{Definicija:} Pot $\gamma$ na ploskvi $S$ je \textbf{pot ukrivljenosti}, če je $\dot{\gamma}$ glavni vektor za vsak $t$ (neodvisno od parametrizacije).
+
+\section*{\textbf{Gauss-Bonnet}}  %%%%%%%%% GAUSS BONNET
+
+\textsc{Izrek:} Naj bo $\gamma (s)$ enostavna (omejuje disk oz. nekaj disku homeomorfnega), sklenjena, orientirana enotska pot na orientabilni ploskvi $S$. Potem velja:
+
+$$
+\int_0^{l(\gamma)}\kappa_g ds = 2 \pi - \iint_{int \gamma} K dA,
+$$
+
+kjer je $\kappa_g$ geodetska ukrivljenost, $l(\gamma)$ dolžina krivulje $\gamma$, $int \gamma$ območje, ki ga $\gamma$ omejuje in $K$ Gaussova ukrivljenost.
+\\
+
+Pri uporabi izreka pazi, da izbereš pravo smer $\gamma$ in glede na to smer še normalo na ploskev tako, da bo $int \gamma$ na levi strani.
+\\
+
+\textsc{Trditev: }Če je Gaussova ukrivljenost $K \leq 0$, potem na $S$ ne obstaja enostavna sklenjena geodetka.
+\\
+
+\textsc{Izrek: }Naj bo $\gamma (s)$ enostaven sklenjen orientiran enotski poligon na orientirani ploskvi $S$ z notranjimi koti $\alpha_1, \alpha_2, \ldots ,\alpha_n \in (0,2 \pi)$. Potem velja:
+
+$$
+\int_0^{l(\gamma)} \kappa_g ds = \sum_{i=1}^n \alpha_i - (n-2)\pi - \iint_{int \gamma}K dA.
+$$
+
+\textsc{Izrek (Eulerjeva karakteristika): }Naj bo $S$ orientirana, sklenjena ploskev. Tedaj velja:
+
+$$
+\iint_S KdA = 2\pi \chi ,
+$$
+
+kjer je $\chi = T_E+V$, $T$ je število trikotnikov v simplicialnem kompleksu, $E$ število stranic in $V$ število točk (oglišč).
+
+$\chi (\text{sfera}) = 2, \quad \chi(\text{torus}) = 0$
+
+Gaussova ukrivljenost sfere: $K = \frac{1}{R^2}$
+
+\section*{\textbf{Frenetove formule in podobno}} %%%%%%%% FRENET
+
+Naj bo $\vec{t}$ tangentni vektor poti $\gamma$ in $\vec{N}$ normala na ploskev. Definiramo $\vec{B}:=\vec{t} \times \vec{N}$. 
+\\
+
+Frenetove formule:
+
+\begin{enumerate}
+
+\item $\vec{t}' = \kappa \vec{n}$
+
+\item $\vec{n}'= -\kappa \vec{t} + \tau \vec{b}$
+
+\item $\vec{b}' = -\tau \vec{n}$
+
+\end{enumerate}
+
+Veljajo naslednje enakosti:
+
+\begin{enumerate}
+
+\item $\vec{t}' = \kappa_n \vec{N} - \kappa_g \vec{B}$
+
+\item $\vec{N}' = -\kappa_n \vec{t} + \tau_g \vec{B}$
+
+\item $\vec{B}' = \kappa_g \vec{t} - \tau_g \vec{N}$
+
+\item $\gamma$ je pot ukrivljenosti $\Longleftrightarrow \tau_g = 0$
+
+\end{enumerate}
+
+$\tau_g = \tau + \varphi' $, kjer je $\varphi$ kot med normalo krivulje $\vec{n}$ in normalo ploskve $\vec{N}$ (odvod po naravnem parametru) se imenuje \textbf{geodetska torzija}.
+\\
+
+\textsc{Trditev: }Naj bosta $S_1,S_2$ ploskvi in $\gamma = S_1 \cap S_2$ pot, ki je tudi pot ukrivljenosti na $S_1$. Potem je $\gamma$ pot ukrivljenosti na $S_2 \Longleftrightarrow$ kot med ploskvama je konstanten vzdolž preseka.
+
+\end{document}
+
