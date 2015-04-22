@@ -1,0 +1,249 @@
+\documentclass[10pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage[dvipsnames,usenames]{color}
+
+\usepackage[bottom=-10mm]{geometry}
+
+
+% ne spreminjaj podatkov, ki vplivajo na obliko strani
+\textwidth 18.5cm
+\textheight 28cm
+\oddsidemargin-1.5cm
+\evensidemargin-1.5cm
+\topmargin-25mm
+%\addtolength{\footskip}{10pt}
+\pagestyle{plain}
+\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\section{Konveksnost}
+
+ $A \subseteq \R^n$ je konveksna, če za vsaka $x,y \in A$ in vsak $\lambda  \in [0,1]$ velja: $\lambda x + (1-\lambda )y \in A.$
+
+Naj bodo $k\in \N ,x_1,\dots ,x_k \in \R^n , \lambda_1 ,\dots , \lambda_k \in \R$. Potem je \emph{konveksna kombinacija} $\sum \limits_{i=1}^{k} \lambda_i x_i$, pri čemer je $\sum \limits_{i=1}^{k} \lambda_i = 1$.
+
+ Lastnosti konveksnih množic:
+
+\begin{itemize}
+\item $A,B$ konveksni $\Longrightarrow A \cap B$ konveksen.
+\item $\forall  \lambda \in \mathcal{J} : A_{\lambda}$ konveksna $\Longrightarrow \cap_{\lambda \in \mathcal{J}} A_{\lambda}$ konveksna.
+\item $A,B$  konveksni $ \Longrightarrow A+B = \{ x+y | x\in A, y \in B\} $konveksna (vsota Minkowskega).
+\item Konveksna množica vsebuje vse konveksne kombinacije svojih elementov.
+\item $A \subseteq \R^n \Longleftrightarrow \forall \alpha , \beta \geq 0$ velja: $\{ \alpha x + \beta y | x,y \in A\} = \{(\alpha + \beta )z | z \in A \}. $
+\item $A \subseteq \R^m , B \subseteq \R^n$ konveksni $\Longrightarrow A \times B$ konveksna.
+\item $ A \times B$ konveksna in $A,B$ neprazni  $\Longrightarrow A, B$ konveksni.
+\item $A,B \subseteq \R^n $ konveksni $\Longrightarrow A+B$ konveksna (vsota Minkowskega).
+\item $\mathcal{C}(A+B) = \mathcal{C}(A) + \mathcal{C}(B)$ (vsota Minkowskega).
+\item $A,B \subseteq \R^n \Longrightarrow \mathcal{C}(\mathcal{C}(A)\cup \mathcal{C}(B)) = \mathcal{C}(A \cup B).$
+\end{itemize}
+
+$A \subseteq \R^n$. Konveksna ovojnica množice $A$ je $\mathcal{C}(A)=\cap \{ K \subseteq \R^n |K$  konveksna, $A \subseteq K\}$.
+
+Lastnosti konveksnih ovojnic:
+
+\begin{itemize}
+\item $A \subseteq \mathcal{C}(A)$.
+\item $\mathcal{C}(A)$ je konveksna.
+\item $A \subseteq B$, $B$ konveksna $\Longrightarrow \mathcal{C}(A) \subseteq B$.
+\item Konveksna ovojnica množice $A$ je najmanjša konveksna množica, ki vsebuje $A$.
+\item $\mathcal{C}(A)$ je množica vseh konveksnih kombinacij elementov množice $A$.
+\item $A$ konveksna $\Longleftrightarrow \mathcal{C}(A) = A$.
+\item $\mathcal{C}(A\cap B) \subseteq \mathcal{C}(A) \cap \mathcal{C}(B)$.
+\item $A \subseteq \R^n$ konveksna $ \Longrightarrow Cl(A)$ konveksna.
+\item $A \subseteq \R^n$ konveksna $\Longrightarrow Int(A)$ konveksna.
+\item Če $A \subseteq B$, tedaj $ \mathcal{C})(A) \subseteq \mathcal{A}( B)$.
+\end{itemize}
+
+Funkcija $f:\R^n \rightarrow \R$ je konveksna, če za poljubna $x,y \in \R^n$ in $\lambda \in [0,1]$ velja: $f(\lambda x + (1- \lambda )y) = \lambda f(x) + (1-\lambda )f(y)$.
+
+Lastnosti konveksnih funkcij:
+
+\begin{itemize}
+\item $A\in \R^{n\times n}$ simetrična. Kvadratna forma $F:\R^n \rightarrow \R$ s predpisom $F(x) = <Ax,x>$. $F$ je konveksna funkcija $\Longleftrightarrow A$ pozitivno semidefinitna.
+\item $A \subseteq \R^n$  konveksna, $f,g:A \rightarrow \R$ konveksni $\Longrightarrow f+g:A \rightarrow \R$ konveksna.
+\item $A \subseteq \R^n$  konveksna, $g:A \rightarrow \R$ konveksna, $f:\mathcal{C}(g(A)) \rightarrow \R$ konveksna, nepadajoča $\Longrightarrow f\circ g:A \rightarrow \R$ konveksna.
+\item $A \subseteq \R^n$  konveksna, $f:A \rightarrow \R$ konveksna, $x_1,x_2 \in A, x_1 \neq x_2, x\in \lambda x_1 + (1-\lambda )x_2$, $x$ različen od $x_1, x_2$. Potem velja:
+
+$$
+\frac{f(x)-f(x_1)}{||x-x_1||} \leq \frac{f(x_2)-f(x_1)}{||x_2-x_1||} \leq \frac{f(x_2)-f(x)}{||x_2-x||}.
+$$.
+
+\item $A \subseteq \R^n$  konveksna, $f:A \rightarrow \R$ konveksna funkcija $\Longrightarrow f^{-1}(-\infty ,a)$ konveksna množica za vsak $a \in \R$.
+
+\item  $A \subseteq \R^n$  konveksna, $f,g:A \rightarrow \R$ konveksni funkciji $\Longrightarrow \max \{ f,g \} : A \rightarrow \R$ konveksna funkcija.
+\end{itemize}
+
+$A \subseteq \R^n$  konveksna. Točka $a \in A$ je \emph{ekstremna (skrajna) točka} množice $A$, če $A \backslash \{a\}$ konveksna.
+
+$A \subseteq \R^n$  je \emph{konveksni stožec}, če za vse $x,y \in A$ in $\lambda ,\mu \geq 0$ velja: $\lambda x+\mu y \in A$.
+
+Za $a_1,\dots ,a_k \in \R^n$ označimo $\mathcal{S}(a_1, \dots ,a_k) = \{ \sum \limits_{i=1}^{k} \lambda_i a_i | \lambda_i ,\dots , \lambda_k \geq 0 \}$. To je konveksni stožec, ki ga razpenjajo $a_1,\dots , a_k.$
+
+$K  \subseteq \R^n$ je \emph{konveksni polieder}, če obstaja $m \in \N , A \in \R^{m \times n}$ in $b \in \R^m$, tako da je $K = \{ x \in \R^n | Ax \leq b \}$.
+
+Konveksni polieder v $\R^n$ je presek končno mnogo zaprtih polprostorov v $\R^n$.
+
+$K$ konveksni polieder $\Longleftrightarrow K=A+B$, kjer sta $A$ konveksna ovojnica končne množice in $B$ konveksni stožec $S(a_1,\dots ,a_k)$.
+
+Polieder $Ax \leq b$ vsebuje premico, če rang matrike $A$ ni maksimalen.
+
+
+
+\section{Linearno programiranje}
+
+Linearni program (LP) v standardni obliki je optimizacijska naloga oblike:
+
+\begin{itemize}
+\item Podatki: $A \in \R^{m \times n}, b \in \R^m, c\in \R^n$
+\item Iščemo: $\max <c,x>$ pri pogojih $Ax \leq b, x\geq 0$.
+\end{itemize}
+
+\thispagestyle{empty}
+
+Slovar $\mathcal{S}$ je dopusten, če so prosti členi v $\mathcal{S}$ nenegativni.
+
+Dopustna rešitev $x$ je bazna dopustna rešitev (bdr), če obstaja dopusten slovar $\mathcal{S}$, tako da velja:
+ \begin{enumerate}
+ \item vrednosti nebaznih spremenljivk v x so 0,
+ \item vrednosti baznih spremenljivk v x so enake ustreznim prostim členom v $\mathcal{S}$.
+ \end{enumerate}
+
+ \emph{sx} metoda:
+
+ Izbira \emph{vstopajoče} spremenljivke: katerakoli spremenljivka v funkcionalu pod črto s pozitivnim koeficientom. (izrazimo iz enačbe, v kateri je izstopajoča spremenljivka bazna)
+
+ Izbira \emph{izstopajoče} spremenljivke: Tista, ki najbolj omejuje povečanje vstopajoče spremenljivke.
+
+ Naj bo $\mathcal{S}$ dopusten slovar, v katerem imajo vse spremenljivke v funkcionalu pod črto koeficiente manjše ali enake $0$. Potem je bdr $x^*$, ki jo določa $\mathcal{S}$, optimalna.
+
+ Naj bo $\mathcal{S}$ dopusten slovar s funkcionalom $<c,x> = z = v^* + \sum \limits_{k=1}^{n+m}\tilde{c_k} x_k$, kjer so vsi $\tilde{c_k} \leq 0$. Potem je $x$ optimalna rešitev natanko tedaj, ko:
+
+ \begin{enumerate}
+ \item $x$ zadošča $\mathcal{S}$,
+ \item $x \geq 0$,
+ \item $x_k = 0$ za vse tiste $k$, za katere je $\tilde{c_k} < 0.$
+ \end{enumerate}
+
+ Naj bo $\Pi$ LP. Potem sta $D(\Pi), Opt(\Pi)$ konveksna poliedra v $\R^n$.
+
+ Bdr $x$ je \emph{izrojena}, če ima v njej vsaj ena bazna spremenljivka vrednost $0$.
+
+ Če nobena bazna spremenljivka ne omejuje povečanja vstošajoče spremenljivke, je LP \emph{neomejen}.
+
+ \thispagestyle{empty}
+
+ DVOFAZNA \emph{SX} METODA:
+
+ $I.$ FAZA (poiščemo začetno bdr ali pa ugotovimo, da LP nedopusten) - prvotni LP je dopusten natanko tedaj, ko ima pomožni LP optimalno vrednost 0.
+
+ Pravila:
+ \begin{enumerate}
+ \item Na prvem koraku v bazo vstopi $x_0$, izstopi pa bazna spremenljivka z najmanjšo vrednostjo.
+
+\item V nadaljnjih korakih:
+\begin{enumerate}
+\item Če je $x_0$ kandidatka (na kakšnem koraku) za izstopajočo spremenljivko, jo izberemo.
+\item Če dobimo funkcional z vrednostjo $0$, končamo.
+\end{enumerate}
+\end{enumerate}
+
+Začetnemu slovarju prištejemo v vsaki vrstici $x_0$, novi funkcional je $w=-x_0$.
+
+$II.$ FAZA
+
+V zadnjem slovarju $I.$ faze izpustimo vse člene, ki vsebujejo $x_0$. Funkcional nadomestimo s prvotnim funkcionalom, kjer vse bazne spremenljivke izrazimo z nebaznimi (s pomočjo slovarja).
+
+Tako dobimo dupusten slovar za prvotni LP.
+
+
+PREPREČITEV NESKONČNE \emph{SX} METODE
+
+1. Kadar imamo več kandidatk za vstopajočo spremenljivko, izberemo tisto z minimalnim indeksom. Enako za izstopajočo.
+
+
+PREVEDBA NA ENAKOVREDEN LP V STANDARDNI OBLIKI:
+
+$opt<c,x>+d$ pri pogojih $Ax \leq b, A'x \geq b' A''x = b'', x_i \geq 0$ za nekatere $i$.
+\begin{enumerate}
+\item $d$ lahko izpustimo
+\item $\min <c,x> = - \max <-c,x>$
+\item $A'x \geq b' \Longleftrightarrow -A'x \leq -b'$
+\item $A''x = b'' \Longleftrightarrow A''x \leq b'', -A''x \leq -b''$
+\item Če $x_i$ nima pogoja nenegativnosti, jo razcepimo:
+$$
+x_i = x_i^+ - x_i^-, x_i^+,x_i^- \geq 0.
+$$
+\end{enumerate}
+
+Za vsak LP velja:
+\begin{enumerate}
+\item je bodisi nedopusten bodisi neomejen bodisi ima optimalno rešitev,
+\item če ima dopustno rešitev, ima bazno dopustno rešitev,
+\item če ima optimalno rešitev, ima bazno optimalno rešitev.
+\end{enumerate}
+
+MINIMIZACIJA VSOTE ABSOLUTNIH VREDNOSTI:
+
+Poišči $y_i, i = 1,\dots , m$, ki minimizira
+
+$$
+\sum \limits_{i=1}^{p}|\sum \limits_{i=1}^{m}y_ib_{ij}-c_j|
+$$
+pri splošnih linearnih pogojih.
+
+Uvedemo $p$ novih spremenljivk $y_{m+1},\dots ,y_{m+p}$. $y_{m+j}$ je zgornja meja $j-$tega člena, ki minimizira $\sum \limits_{i=1}^{p}y_{m+i}$. Pogoj za $y_{m+j}$:
+$$
+y_{m+j} \geq \sum \limits_{i=1}^{m}y_ib_{ij} -c_j, \quad y_{m+j} \geq -(\sum \limits_{i=1}^{m}y_ib_{ij} -c_j)
+$$
+
+MINIMIZACIJA MAKSIMUMA ABSOLUTNIH VREDNOSTI:
+
+Poišči $y$, ki minimizira $\max \limits_{1\leq j \leq p} |\sum \limits_{i=1}^{m}y_ib_{ij} -c_j |$ pri splošnih linearnih pogojih.
+
+Dodamo novo spremenljivko $\mu$:
+
+$$
+|\sum \limits_{i=1}^{m}y_ib_{ij} -c_j | \leq \mu \quad \forall j
+$$
+in minimiziramo $\mu$ pri pogojih
+
+$$
+\sum \limits_{i=1}^{m}y_ib_{ij} -c_j \leq \mu \quad \text{in }\quad -(\sum \limits_{i=1}^{m}y_ib_{ij} -c_j ) \leq \mu.
+$$
+
+
+\vfill\hfill avtor: Klemen Sajovec
+
+\end{document}
+

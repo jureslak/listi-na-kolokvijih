@@ -1,0 +1,282 @@
+\documentclass[8pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+\usepackage[dvipsnames,usenames]{color}
+
+
+\usepackage[
+top    = 1cm,
+bottom = 1cm,
+left   = .5cm,
+right  = 0.5cm]{geometry}
+%
+%% ne spreminjaj podatkov, ki vplivajo na obliko strani
+%\textwidth 19cm
+%\textheight 27cm
+%\oddsidemargin-1.5cm
+%\evensidemargin-1.5cm
+%\topmargin-30mm
+%%\addtolength{\footskip}{10pt}
+%\pagestyle{plain}
+%%\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\section{Dualni linearni program}
+
+Če je linearni program $\Pi : \max c^Tx$ pri pogojih $Ax\leq b, x\geq 0$, je njegov dualni program $\Pi$' $: \min b^Ty$ pri pogojih $A^Ty \geq c, c\geq 0$.
+
+\textbf{Šibki izrek o dualnosti:} Naj bo $x \in D(\Pi )$ in $y \in D(\Pi $'$)$. Potem je $c^Tx  \leq  b^Ty$.
+
+\textbf{Posledica ŠID:} Naj bo $x^* \in  D(\Pi )$ in $y^* \in D(\Pi $'$)$. Če $c^Tx^*  =  b^Ty^*$, je $x^* \in  Opt(\Pi )$ in $y^* \in Opt(\Pi $'$)$
+
+\textbf{Krepki izrek dualnosti:} Če ima $\Pi$ optimalno rešitev, jo ima tudi $\Pi$' in njuni vrednosti sta enaki.
+
+Za par $(\Pi, \Pi$'$)$ velja natanko ena od treh možnosti:
+\begin{enumerate}[i]
+\item oba sta nedopustna,
+\item eden od njiju je neomejen, drugi pa nedopusten,
+\item oba imata optimalno rešitev.
+\end{enumerate}
+
+\textbf{Izrek o dualnem dopolnjevanju:} Naj bo $\Pi$ LP $\max c^Tx$ pri pogojih $Ax\leq b, x\geq 0$. Naj bo $x \in D(\Pi )$ in $y \in D(\Pi $'$)$. Potem $x \in  Opt(\Pi )$ in $y \in Opt(\Pi $'$) \Longleftrightarrow$
+\begin{enumerate}
+\item za $i=1,\ldots ,m$ je $\sum_{j=1}^{n}a_{ij}x_j=b_i$ ali $y_i=0$ in
+\item za $j=1,\ldots ,n$ je  $\sum_{i=1}^{m}a_{ij}y_i=c_j$ ali $x_j=0$.
+\end{enumerate}
+
+\textbf{Posledica IDD:} Naj bo $x \in  Opt(\Pi )$. Potem vsaka optimalna rešitev $y$ programa $\Pi$' zadošča sistemu enačb:
+
+\begin{enumerate}
+\item $y_i=0$, če $x_{n+1} \neq 0, (i=1,\ldots ,m)$ (uvedemo dodatne spremenljivke $x_{n+i}$,
+\item $\sum_{i=1}^{m}a_{ij}y_i=c_j$, če $x_j \neq 0 (j=1,\ldots ,n)$,
+\item $y$ ni nujno optimalna rešitev $\Pi '$, preveriti je potrebno, da je $y \in D(\Pi '$$)$!
+\end{enumerate}
+
+\textbf{PAZI:} Če pri pogojih LP nastopa enačba, lahko iz nje izraziš eno od spremenljivk, vendar mora še vedno veljati, da je ta spremenljivka $\geq 0$, torej pridobiš nov pogoj.
+
+\section{Matrične igre}
+
+\begin{definicija}
+\emph{\underline{Matrična igra}} je igra za dva igralca, pri kateri ima prvi igralec $n$ izbir $(1,2,\ldots ,n)$, drugi igralec $m$ izbir $(1,2,\ldots ,m)$. Izid igre določa \emph{\underline{plačilna matrika}} $A\in \R^{n\times m}$, kjer je $a_{ij}$ plačilo drugega igralca prvemu, če je prvi izbral izbiro $i$, drugi pa izbiro $j$.
+\end{definicija}
+
+\textbf{Načelo najmanjšega tveganja:}
+\begin{enumerate}[1.]
+\item igralec: če izbere $i$, dobi vsaj $\min a_{ij}$. Torej lahko vselej dobi vsaj $$M_1 = \max_{i} \min_{j} a_{ij} \qquad \text{(največji vrstični minimum).}$$
+\item igralec: če izbere $j$, ne izgubi več kot $\max a_{ij}$. Torej mu ni treba izgubiti več kot $$M_2 = \min_{j} \max_{i} a_{ij} \qquad \text{(najmanjši stolpčni maksimum).}$$
+\end{enumerate}
+
+
+\textbf{Trditev:}Pri vsaki matrični igri je $M_1 \leq M_2$.
+
+\textbf{Definicija:}
+ Element matrike $A$ na mestu $(i_0,j_0)$ je \emph{\underline{sedlo}} matrike, če je najmanjši svoji vrstici in največji v svojem stolpcu, torej:
+ $$
+ \min_{j} a_{i_0j} = a_{i_0j_0} = \max_{i} a_{ij_o}.
+ $$
+
+\textbf{Izrek:} $A$ ima sedlo $\Longleftrightarrow M_1 = M_2$.
+
+\textbf{Definicija:} \underline{\emph{Strategija 1. igralca}} je verjetnostna porazdelitev $(x_1,\ldots ,x_n)$, kjer je $x_i$ verjetnost, da 1. igralec izbere $i$. Velja:
+$$
+x\geq 0, \quad \sum_{i=1}^{n}x_i=1.
+$$
+\emph{Strategija 2. igralca} je verjetnostna porazdelitev $(y_1,\ldots ,y_m)$, kjer je $y_i$ verjetnost, da 2. igralec izbere $j$. Velja:
+$$
+y\geq 0, \quad \sum_{i=1}^{m}y_j=1.
+$$
+\emph{$i$-ta čista strategija prvega igralca} je $c^{(i)}=(0,\ldots ,0,1,0,\ldots ,0)$, kjer je 1 na $i$-tem mestu.
+
+$E(x,y)$ označuje povprečni dobitek 1. igralca, če 1. igralec uporablja strategijo $x$, 2. igralec pa strategijo $y$.
+$$
+E(x,y)=\sum_{i=1}^{n}\sum_{j=1}^{m}a_{ij}x_iy_j=\sum_{i=1}^{n}x_i\sum_{j=1}^{m}a_{ij}y_j= <x,Ay>=<A^Tx,y>.
+$$
+Če prvi igralec uporablja strategijo $x$, bo dobil v povprečju vsaj $\min_yE(x,y)$, torej lahko dobi v povprečju vsaj $\max_x\min_yE(x,y)$.
+
+Če drugi igralec uporablja strategijo $y$, izgubi v povprečju kvečjemu $\max_xE(x,y)$, torej mu ni treba izgubiti več kot $\min_y\max_xE(x,y)$.
+
+\textbf{Trditev:} $\max_x\min_yE(x,y) \leq \min_y\max_xE(x,y)$. Obe vrednosti vedno obstajata.
+
+\textbf{Lema:} Za vsako strategijo $x$ obstaja $\min_y<x,Ay>$ in velja $\min_y<x,Ay> = \min_{1\leq j\leq m}\sum_{i=1}^na_{ij}x_i.$
+
+\textbf{Lema:} Za vsako strategijo $y$ obstaja $\max_x<x,Ay>$ in velja $\max_x<x,Ay> = \max_{1\leq i\leq n}\sum_{j=1}^ma_{ij}y_j.$
+
+\textbf{Definicija:} Število  $ v(A)=\max_x\min_yE(x,y) = \max_x\min_y <x,Ay>$ imenujemo \emph{\underline{vrednost igre}} z matriko $A$. Igra je \emph{\underline{poštena}}, če $v(A)=0$.
+\textbf{Preverjanje optimalnosti strategij:}
+
+\textbf{Trditev:} Naj bo $x$ strategija 1. igralca, $y$ strategija 2. igralca, $s = \min_j\sum_{i=1}^{n}a_{ij}x_i, \quad \max_i\sum_{j=1}^{m}a_{ij}y_j$. Potem: $x,y$ optimalni $\Longleftrightarrow s=t$. V tem primeru je $v(A)=s=t$.
+
+\textbf{Posebni primeri matričnih iger:}
+\begin{enumerate}
+\item \textbf{Igre s sedlom}
+
+\indent \textbf{Trditev} Naj bo $(i_0,j_0)$ sedlo matrike $A$. Potem je $v(A)=a_{i_0j_0}$ in čisti strategiji $x^{i_0},y^{j_0}$ sta optimalni.
+\item textbf{Simetrične igre}
+
+\indent \textbf{Definicija:} Igra z matriko $A$ je \emph{\underline{simetrične}}, če je $A^T=-A$.
+
+\indent \textbf{Trditev:} Simetrična igra je poštena, množici optimalnih strategij prvega in drugega igralca sta enaki.
+
+\item \textbf{Igre z dominacijo}
+
+\textbf{Definicija:} $a,b \in \R^k.$ $a$ \emph{\underline{dominira}} nad $b$, če $a \geq b$.
+
+
+\setlength{\parindent}{0pt}
+
+\textbf{Trditev:} Naj bo $A$ plačilna matrika igre.
+
+\begin{enumerate}
+\item Če v $A$ vrstica $i$ dominira nad vrstico $i_0 \neq i$, se vrednost igre ne spremeni, če vrstico $i_0$ izpustimo.
+\item Če v $A$ stolpec $j_0$ dominira nad stolpcem $j \neq j_0$, se vrednost igre ne spremeni, če stolpec $j_0$ izpustimo.
+\end{enumerate}
+\end{enumerate}
+
+\thispagestyle{empty}
+\section{Problem razvoza}
+\thispagestyle{empty}
+$G = (V,E), V = \{ v_1,v_2,\ldots ,v_m\} ,E = \{e_1,e_2,\ldots ,e_n \}$.
+Uvedemo vektorje $b,c,x$: (pišemo $b_{v_i}=b_i$ povpraševanje/ponudba v vozlišču $v_i$, $c_{e_j}=c_j$ stroški prevoza vzdolž $e_j$, $x_{e_j}=x_j$ količina dobrine, prepeljane po $e_j$).
+Iščemo
+$\min c^Tx$ p.p. $Ax=b, x\geq 0$, kjer $A$ incidenčna matrika usmerjenega grafa.
+
+
+\noindent \textbf{Definicija:} \emph{\underline{Drevo}} je povezan graf brez ciklov.
+
+\emph{\underline{Vpet podgraf}} grafa $G$ je podgraf, ki vsebuje vsa vozlišča $G$.
+
+\emph{\underline{Vpeto drevo}} je vpet podgraf, ki je drevo ($m$ vozlišč, $m-1$ povezav).
+
+Dopustna rešitev $x\in \R^n$ za PR je \emph{\underline{drevesna (ddr)}}, če v $G$ obstaja vpeto drevo $T$, da velja $e \notin E(T) \Longrightarrow x_e = 0.$
+
+\textbf{IZBOLJŠAVA DDR:}
+
+Najprej preveri, če se skupna ponudba in povpraševanje seštejeta v 0. Če se, nadaljuj takole:
+\begin{enumerate}[1.]
+\item Naj bo $T$ vpeto drevo. Razvozi dobrine tako, da zadostiš povpraševanju in Kirchhoffovim zakonom.
+\item Izberemo vstopajočo povezavo $e=ij \notin E(T)$ med povezavami, za katere je $y_i + c_{ij} < y_j$. Vstopajočo povezavo $e$ dodamo drevesu $T$. V grafu $T+e$ nastane natanko en cikel $C$.
+\item Povezave na ciklu $C$ so preme (določajo isto orientacijo $C$ kot $e$) in obratne (sicer). Na vsaki premi povezavi razvoz povečamo za $t$, na vsaki obratni pa zmanjšamo za $t$, kjer je $t = \min \{x_{uv} | uv \text{obratna povezava na } C \}$.
+
+Za izstopajočo povezavo $f$ izberemo obratno povezavo, na kateri je $x=t$. Odstranimo jo iz grafa $t+e$ in dobimo novo vpeto drevo $T+e-f$.
+\item postopek ponavljamo, dokler ne moremo dodati nobene povezave več.
+\end{enumerate}
+
+\textbf{Dvofazna sx metoda:} Če se ponudba in povpraševanje ne seštejeta v 0, dodaš novo vozlišče (skladišče), v katerega iz vozlišč s ponudbo napelješ povezave s ceno 0 in rešuješ ta PR.
+Stroške razvoza dobiš tako, da množiš ceno povezave na vpetem grafu $T$ z istoležno ceno povezave v $G$ in produkte sešteješ.
+
+\textbf{Izrek} Če za vse povezave $ij \in E(g)$ velja: $y_i + c_{ij} \geq y_j$, je trenutna ddr optimalna. Če pri reševanju PR z $sx$ metodo ne moremo izbrati vstopajoče povezave, je trenutna ddr optimalna.
+
+\textbf{Trditev:} Če na ciklu $C$ v grafu $T+e$ ni obratnih povezav, je PR neomejen in je $C$ usmerjeni cikel z negativno vsoto prevoznih stroškov.
+
+\section{Prirejanja in pokritja}
+
+\textbf{Definicija:} $G=(V,E)$ neusmerjen graf.
+\begin{enumerate}[1.]
+\item $M \subseteq E$ je \emph{\underline{prirejanje}} v $G$, če povezave iz $M$ nimajo skupnih krajišč.
+\item $P \subseteq V$ je \emph{\underline{pokritje}} v $G$, če ima vsaka povezava $G$ vsaj eno krajišče v $P$.
+\item Oznake: $\mu (G)$ je \emph{\underline{moč največjega prirejanja v G}}, $\tau (G)$ pa \emph{\underline{moč najmanjšega pokritja v G}}.
+\end{enumerate}
+\textbf{Trditev:} $G$ graf.
+
+\begin{enumerate}
+\item Za vsako prirejanje $M$ v $G$ in vsako pokritje $P$ v $G$ je $|M| \leq |P|$.
+\item $|M|=|P| \Longrightarrow M$ največje prirejanje in $P$ najmanjše pokritje v $G$.
+\item $\mu (G) \leq \tau (G)$.
+\end{enumerate}
+
+\textbf{Definicija:} $G$ graf, $M$ prirejanje v$G$.
+\begin{enumerate}
+\item Povezave iz $M$ so \emph{\underline{vezane}}, ostale so \emph{\underline{proste}}.
+\item Vozlišče $v$ je \emph{\underline{vezano}}, če je krajišče kakšne povezave iz $M$, sicer je \emph{\underline{prosto}}.
+\item prosta$(M) = \{v \in V(G) | v \text{prosto za} M \}$.
+\item Če $uv \in M$, je $u = par(v), v= par(u)$.
+\end{enumerate}
+
+\textbf{Definicija:} $G$ graf, $M$ prirejanje v $G$. Pot $P$ v $G$ je \emph{\underline{izmenična}} za $M$, če se na $P$ izmenjujejo proste in vezane povezave.
+Izmenična pot za $M$ je \emph{\underline{povečujoča}} za $M$, če ima prosti krajišči.
+Prirejanje $M$ je \emph{\underline{popolno}}, če so vsa vozlišča $G$ vezana glede na $M$
+
+\textbf{Lastnosti popolnih prirejanj:}
+\begin{itemize}
+\item $K_{n,n}$ ima $n!$ popolnih prirejanj.
+\item $G$ ima popolno prirejanje $\Longleftrightarrow \mu (G) = |V(G)|/2$.
+\item $K_n$: $\mu (K_n) = \lfloor \frac{n}{2} \rfloor$, (če $n$ sod, je to popolno prirejanje), $\tau (K_n) = n-1$.
+\item $K_{m,n}$: $\mu (K_{m,n}) = \min \{ m,n \} = \tau (K_{m,n})$
+\item Pot $P_n$: $\mu (P_n)=\lfloor \frac{n}{2} \rfloor = \tau (P_n)$
+\item Cikel $C_n$: $\mu (C_n)=\lfloor \frac{n}{2} \rfloor$, (če n sod je to popolno prirejanje), $\tau (C_n) = \lfloor \frac{n+1}{2} \rfloor$
+\end{itemize}
+
+\textbf{Trditev:} $G$ graf, $M$ prirejanje v $G$, $P$ povečujoča pot za $M$ v $G$. Potem je $M \oplus E(P)$ prirejanje v $G$ in $|M\oplus E(P)|= |M|+1$. ($A \oplus B = (A\backslash B) \cup (B \backslash A)$)
+
+\textbf{Bergev izrek:} Naj bo $M$ prirejanje v $G$. $M$ največje prirejanje v $G \Longleftrightarrow$ v $G$ ni povečujočih poti za $M$.
+
+\textbf{Konstrukcija največjega prirejanja v $G$:}
+\begin{enumerate}[1.]
+\item $M=$ poljubno prirejanje v $G$ (čim večje)
+\item \underline{dokler} obstaja povečujoča pot $P$ v $G$ za $M$, \underline{ponavljaj}: $M = M \oplus E(P)$
+\item vrni M
+\end{enumerate}
+
+\textbf{Madžarska metoda (MM)} za dvodelne grafe brez uteži poišče največje prirejanje in najmanjše pokritje v dvodelnem grafu $G=(X \cup Y,E)$. Postopek:
+\textbf{König-Egerváryjev izrek:} V dvodelnem grafu $F$ je $\mu (G)=\tau (G).$
+
+\textbf{Madžarska metoda z utežmi (MMU):} za iskanje najcenejšega popolnega prirejanja v $G=K_{n,n}$ (Najcenejše popolno prirejanje opravil). $C \in \R^{n\times n}, c_{ij}=\text{cena povezave } x_iy_j$
+\begin{enumerate}[1.]
+\item korak:
+\begin{enumerate}[a]
+\item Od elementov vsake vrstice odštejemo njen najmanjši element.
+\item Od elementov vsakega stolpca odštejemo njegov najmanjši element.
+\end{enumerate}
+\item korak:
+\begin{enumerate}[a]
+\item Če lahko v $C$ izberemo $n$ ničel, v vsaki vrstici in vsakem stolpcu natanko eno, potem indeksi izbranih elementov določajo najcenejše popolno prirejanje v $G$.
+\item Sicer izberemo množico $<n$ vrstic in/ali stolpcev $C$. ki skupaj vsebujejo vse ničle v $C$. Naj bo to množica $P$.
+\end{enumerate}
+\item Naj bo $\epsilon$ najmanjši nepokriti element v $C$. Vsem nepokritim elementom v $C$ $\epsilon$ odštejemo, dvakrat pokritim pa prištejemo. Nazaj na korak 2.
+\end{enumerate}
+
+\section{Pretoki in prerezi}
+Iščemo največji pretok $f$ iz $s$ -- izvor v $t$ -- ponor v grafu $G$ s prepustnostmi povezav $c_{ij}$.
+
+\textbf{Definicija:} Naj bo $F$ pretok v $(G,s,t,c)$. Oprežje $(G_f,s,t,r)$, kjer je $V(G_f)=V(G)$, $E(G_f)={ij\in E(G) | r_{ij} > 0}$, $r:V\times V \longrightarrow \R_+$, $r_{ij}=c_{ij}-f(i,j)$ za vse $i,j \in V$, je \emph{\underline{residualno omrežje}} $G$ glede na $f$. \emph{\underline{Povečujoča pot}} za $f$ v $(G,s,t,c)$ je vsaka usmerjene pot $s \longrightarrow t$ v $(G_f,s,t,r)$.
+
+\textbf{Trditev:} Naj bo $f$ pretok v $G$, $f'$ pretok v $G_f$. Potem: $f+f'$ pretok v $G$ in $|f+f'| = |f|+|f'|$.
+\textbf{Posledica:} Usmerjena pot $s \longrightarrow t$ v $(G,s,t,c)$ je povečujoča, če ne vsebuje zasičenih povezav.
+
+
+\vfill \hfill Avtor: Klemen Sajovec
+
+\end{document}
+
