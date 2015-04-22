@@ -1,4 +1,4 @@
-\documentclass[8pt,a4paper]{amsart}
+\documentclass[10pt,a4paper]{amsart}
 \usepackage[slovene]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -67,7 +67,7 @@ right  = 0.5cm]{geometry}
 \thispagestyle{empty}
 \setlength{\parindent}{0pt}
 
-\fontsize{7pt}{7pt}
+% \fontsize{9pt}{9pt}
 
 \section*{PDE}
 
@@ -415,24 +415,50 @@ na dva dela, npr: $\triangle u = 0$ razbijemo na $u = v+w$, $\triangle v = 0$ in
 $\triangle w = 0$, pri čemer $v$-ju in $w$-ju damo vsakemu en homogen robni
 pogoj in en pogoj, ki je od $u$-ja.
 
+\textbf{Polarne koordinate:}
+$u_x = \cos (\varphi ) u_r-\frac{\sin (\varphi)}{r}u_\varphi,
+u_y = \sin (\varphi)u_r+\frac{\cos (\varphi )}{r}u_\varphi, \\
+u_{xx} =
+\cos^2(\varphi) u_{rr}
+- \frac{\sin(2\varphi)}{r}u_{r\varphi}
++ \frac{\sin^2(\varphi)}{r^2}u_{\varphi\varphi}
++ \frac{\sin^2(\varphi)}{r}u_r
++ \frac{\sin(2\varphi)}{r^2}u_\varphi, \\
+u_{xy} =
+\frac{1}{2} \sin (2 \varphi) u_{rr}
++ \frac{\cos (2 \varphi )}{r}u_{r\varphi}
+-\frac{\sin (2 \varphi)}{2 r^2} u_{\varphi\varphi}
+- \frac{\sin (2 \varphi)}{2 r}u_r
+- \frac{\cos (2 \varphi)}{r^2}u_\varphi, \\
+u_{yy} =
+\sin ^2(\varphi ) u_{rr}
++\frac{\sin (2\varphi )}{r} u_{r\varphi}
++ \frac{\cos ^2(\varphi )}{r^2} u_{\varphi\varphi}
++\frac{\cos ^2(\varphi )}{r} u_r
+-\frac{\sin(2\varphi)}{r^2} u_{\varphi},
+\Delta u = u_{rr} + \frac1r u_r + \frac{1}{r^2}u_{\varphi\varphi}
+$
+
 % (Veliki ljudje živijo po svoje duše zakonih. Majhni po paragrafih. $\S$
 % \textbf{X}: 14 dni v zapor. $\S$ \textbf{Y}: na vislice. $\S$ \textbf{Z}: v
 % pregnanstvo. 21 let sem bil zaprt 10x na vislicah. Pregnan sem za vedno. Hej
 % ljubica, ti bi jokala? A jaz ne morej jokati. Trd sem kot jeklo, ki mora srce
 % prebosti.)
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%\section*{NDE višjih redov} Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
-%strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
-%Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
-%(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
-%uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
-%\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
-%\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
-%$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
-%y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+
+\newpage
+
+\section*{NDE višjih redov}
+Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
+strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
+Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
+(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
+uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
+\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
+\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
+$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
+y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
 %%
 %%\subsubsection*{Geometrija}
 %%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
@@ -446,43 +472,51 @@ pogoj in en pogoj, ki je od $u$-ja.
 %%\end{tabular}
 %
 %
-%\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
-%= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ & $t
-%\mapsto (\alpha (t), \beta (t), \gamma
-%(t))$:$\int_{t_o}^{t_1}\sqrt{\dot{\alpha}^2+\dot{\beta}^2+\dot{\gamma}^2}dt$\\
-%
-%$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
-%\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
-%+ C$  & $G(y)=\int_0^1(y^2+y'^2)dx \Longrightarrow DG(y)(h)=
-%\int_0^1(2yh+2y'h')dx$\\
-%
-%$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
-%\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ & $\sin{x} =
-%\frac{e^{ix}-e^{-ix}}{2i}$\\
-%
-%$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
-%\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ & $\cos{x} =
-%\frac{e^{ix}+e^{-ix}}{2}$\\
-%
-%$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
-%\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ & $\sinh{x} =
-%\frac{e^{x}-e^{-x}}{2}$\\
-%
-%$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
-%\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ &
-%$\cosh{x} = \frac{e^{x}+e^{-x}}{2}$\\
-%
-%$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
-%\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ &
-%$\cosh^2{x}-\sinh^2{x}=1$ & $1+\tan^2{x} = \frac{1}{\cos^2{x}}$\\
-%
-%$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
-%\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  & $\tan^2{x} =
-%\tan'{x}-1$\\
-%
-%$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
-%
-%\end{tabular}
+\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
+= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
+
+$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
+\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
++ C$ \\
+
+$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
+\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
+
+$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
+\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
+
+$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
+\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+
+$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
+\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+
+$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
+\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
+
+$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
+\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
+
+$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
+
+\end{tabular}
+
+\vspace{1ex}
+
+\parbox{0.4\textwidth}{
+\textbf{Faktorizacija:} \\
+$\sin{x} + \sin{y} = 2\sin\frac{x+y}{2}\cos\frac{x-y}{2}$\\
+$\sin{x} - \sin{y} = 2\cos\frac{x+y}{2}\sin\frac{x-y}{2}$\\
+$\cos{x} + \cos{y} = 2\cos\frac{x+y}{2}\cos\frac{x-y}{2}$\\
+$\cos{x} - \cos{y} =-2\sin\frac{x+y}{2}\sin\frac{x-y}{2}$
+}
+\parbox{0.4\textwidth}{
+\textbf{Antifaktorizacija:} \\
+$\sin\alpha\cos\beta = \frac{1}{2}\left[\sin(\alpha+\beta)+\sin(\alpha-\beta) \right]  $ \\
+$\cos\alpha\sin\beta = \frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta) \right]  $ \\
+$\cos\alpha\cos\beta = \frac{1}{2}\left[\cos(\alpha+\beta)+\cos(\alpha-\beta) \right]  $ \\
+$\sin\alpha\sin\beta = -\frac{1}{2}\left[\cos(\alpha+\beta)-\cos(\alpha-\beta)  \right]$ \\
+}
 %
 %
 %
