@@ -1,0 +1,252 @@
+\documentclass[8pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{dsfont}
+
+\usepackage[
+top    = 1cm,
+bottom = 1cm,
+left   = .5cm,
+right  = 0.5cm]{geometry}
+%
+%% ne spreminjaj podatkov, ki vplivajo na obliko strani
+%\textwidth 19cm
+%\textheight 27cm
+%\oddsidemargin-1.5cm
+%\evensidemargin-1.5cm
+%\topmargin-30mm
+%%\addtolength{\footskip}{10pt}
+%\pagestyle{plain}
+%%\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{enumerate}}
+
+
+\newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
+\let\oldint\int
+\renewcommand{\int}{\oldint \!}
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\pagestyle{empty}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\section*{Pogojna verjetnost}
+
+\textsc{Izrek o polni verjetnosti:} Če $H_1, H_2, H_3,\ldots$ tvorijo \textbf{popoln sistem dogodkov} (tj. vedno se zgodi natanko eden izmed njih), velja:
+$$
+P(A) = P(H_1)P(A|H_1)+P(H_2)P(A|H_2)+P(H_3)P(A|H_3)+\cdots
+$$
+
+\textsc{Bayesova formula:}  Če $H_1, H_2, H_3,\ldots$ tvorijo popoln sistem dogodkov, velja:
+$$
+P(H_i|A)=\frac{P(H_i)P(A|H_i)}{P(H_1)P(A|H_1)+P(H_2)P(A|H_2)+P(H_3)P(A|H_3)+\cdots}
+$$
+
+\textsc{Definicija:} Dogodka $A$ in $B$ sta \textbf{neodvisna}, če velja $P(A\cap B)=P(A)P(B)$.
+
+\section*{Kvantili} %%%%% KVANTILI
+
+\textsc{Definicija: }Število $x_\alpha$ je \textbf{kvantil} slučajne spremenljivke $X$ za verjetnost $\alpha$, če velja:
+
+$$
+P(X < x_\alpha) \leq \alpha, \quad P(X \leq x_\alpha) \geq \alpha.
+$$
+
+Kvantilu za verjetnost $1/2$ pravimo \textbf{mediana}, kvantiloma za verjetnosti $1/3$ in $2/3$ pravimo prvi in drugi \textbf{tercil}, kvantili za verjetnosti $1/4, 2/4, 3/4$ so \textbf{kvartili}, kvantili za verjetnosti $0.1, 0.2,\ldots, 0.9$ so \textbf{decili}, kvantili za verjetnosti $0.01, 0.02,\ldots, 0.09$ pa so \textbf{centili} ali \textbf{percentili}.
+
+Če je $X$ zvezno porazdeljena in je $x_\alpha$ kvantil za verjetnost $\alpha$, velja kar $F_X(x_\alpha)=\alpha$. Če ima $X$ v okolici točke $x_\alpha$ strogo pozitivno gostoto, je $x_\alpha$ edini kvantil za verjetnost $\alpha$. Brž, ko je torej gostota na nekem intervalu strogo pozitivna, izven tega intervala pa enaka noč, so kvantili za vse verjetnosti iz $(0,1)$ natančno določeni.
+
+\section*{Slučajne spremenljivke}
+
+\textsc{Izrek:} Naj bo $X$ zvezno porazdeljena slučajna spremenljivka z zalogo vrednosti v odprti množici $A \subseteq \R^n$ in gostoto $f_X$. Nadalje naj bo dana zvezno odvedljiva bijekcija $h: A \longrightarrow B$, pri čemer naj bo $h'(x) \neq 0$ za vse $x \in A$. Tedaj ima slučajni vektor $Y := h(X)$ gostoto:
+$$
+f_Y(y) = \begin{cases} f_X(h^{-1}(y))|(h^{-1})'(y)| & y\in B \\ 
+0 & \mbox{sicer} \end{cases}
+$$
+
+\textsc{Izrek:} Naj bo $X$ zvezno porazdeljena slučajna spremenljivka z gostoto $f_X$, skoncentrirana na dovolj lepi množici $A$. Če je $h: A \longrightarrow \R$ lokalno Lipschitzeva:
+$$
+|h(x)-h(y)| \leq k |x-y|
+$$
+in $P(h\text{ v $X$ ni odvedljiva ali }h'(X)=0)=0$, je slučajna spremenljivka $Y$ porazdeljena zvezno z gostoto
+$$
+f_Y(y)= \sum_{x\in A;h(x)=y}\frac{f_X(x)}{|h'(x)|}.
+$$
+
+\textsc{Definicija:} Porazdelitev slučajnega vektorja $(X,Y)$ podamo z verjetnostmi $P((X,Y)=(x,y))=P(X=x,Y=y)$ (\textbf{skupna ali navzkrižna porazdelitev} slučajnih spremenljivk $X$ in $Y$). Porazdelitve komponent imenujemo \textbf{robne porazdelitve}: $P(X=x)=\sum_yP(X=x,Y=y)$, $P(Y=y)=\sum_xP(X=x, Y=y)$. $X$ in $Y$ sta \textbf{neodvisni}, brž ko za poljuvna $x$ in $y$ velja $P(X=x,Y=y)=P(X=x)P(Y=y)$.
+
+\textsc{Posledica:} Će sta $S \sim Bin(m,p)$ in $T \sim Bin(n,p)$ neodvisni slučajni spremenljivki, je $U := S+T \sim Bin(m+n,p)$.
+
+\textsc{Posledica:}Če sta $S \sim NegBin(m,p)$ in $T \sim NegBin(n,p)$ neodvisni slučajni spremenljivki, je $U := S+T \sim NegBin(m+n,p)$.
+
+\textsc{Definicija:} Porazdelitev zveznega dvorazsežnega vektorja $(X,Y)$ lahko opišemo z \textbf{dvorazsežno gostoto} $f_{X,Y}$, za katero velja:
+$$
+P(a \leq X \leq b, c \leq Y \leq d) = \int_a^b\int_c^d f_{X,Y}(x,y=dy dx.
+$$
+Splošneje, porazdelitev zveznega slučajnega vektorja $X \in \R^n$ lahko opišemo z $n$-\textbf{razsežno gostoto} $f_X$, ki ima to lastnost, da za vsako merljivo množico $A \subseteq \R^n$ velja:
+$$
+P(X \in A) = \int_A f_X(x)dx.
+$$
+Seveda velja: $\int_{\R^n}f_X(x)dx=1.$
+
+Če sta $X$ in $Y$ slučajna vektorja z vrednostmi v $\R^m$ in $\R^n$ in je slučajni vektor $(X,Y)$ porazdeljen zvezno z $(m+n)$-razsežno \textbf{skupno} gostoto $f_{X,Y}$, sta tudi njegovi komponenti $X$ in $Y$ porazdeljeni zvezno, in sicer z \textbf{robnima gostotama}:
+$$
+f_X(x) = \int_{\R^n}f_{X,Y}(x,y)dy \qquad f_Y(y) = \int_{\R^m}f_{X,Y}(x,y)dx.
+$$
+Zvezno porazdeljena slučajna vektorja $X$ in $Y$ sta neodvisna natanko tedaj, ko je tudi slučajni vektor $(X,Y)$ porazdeljen zvezno z gostoto: $f_{X,Y}(x,y) = f_X(x)f_Y(y).$
+
+\textsc{Izrek:} Naj bo $X$ zvezno porazdeljen slučajni vektor z zalogo vrednosti v odprti množici $A \subseteq \R^n$ in gostoto $f_X$. Nadalje naj bo $h: A \longrightarrow B$ difeomorfizem razreda $C^(1)$. Tedaj ima slučajni vektor $Y:=h(X)$ gostoto:
+$$
+f_Y(y) = \begin{cases} f_X(h^{-1}(y))|J(h^{-1})(y)| & y\in B \\ 
+0 & \mbox{sicer} \end{cases}
+$$
+\textsc{Izrek:} Naj bo $X$ zvezno porazdeljen $n$-razsežen slučajni vektor z gostoto $f_X$, skoncentriran na merljivi množici $A$. Če je $h: A \longrightarrow \R^n$ lokalno Lipschitzeva in $P(h\text{ v $X$ nidiferenciabilna ali }Jh(X)=0)=0$, je slučajni vektor $Y$ porazdeljena zvezno z gostoto
+$$
+f_Y(y)= \sum_{x\in A;h(x)=y}\frac{f_X(x)}{|Jh(x)|}.
+$$
+
+\textsc{Porazdelitev vsote in razlike:} 
+\begin{itemize}
+\item $Z=X+Y$: $f_Z(z) = \int_{-\infty}^{\infty}f_{X,Y}(x,z-x)dx = \int_{-\infty}^{\infty}f_{X,Y}(z-y,y)dy$
+
+ \item  $W=X-Y$: $f_W(w) = \int_{-\infty}^{\infty}f_{X,Y}(x,x-w)dx = \int_{-\infty}^{\infty}f_{X,Y}(w+y,y)dy$
+\end{itemize}
+
+\section*{Matematično upanje (pričakovana vrednost)}
+
+\textsc{Definicija:} Za diskretne slučajne spremenljivke: $E(X)=\sum_x xP(X=x)$, $E[h(X)]=\sum_x h(x)P(X=x).$ Če je vrednosti neskončno, matematično upanje obstaja, če je vrsta absolutno konvergentna. 
+
+Velja: $E(aX+b)=aE(X)+b$.
+
+\textsc{Definicija:} Za zvezne slučajne spremenljivke: $E(X) = \int_{-\infty}^{\infty}xf_X(x)dx$,x $E[h(X)] = \int_{-\infty}^{\infty}h(x)f_X(x)dx$. Spet le-to obstaja, če integral absolutno konvergira.
+
+\textsc{Definicija:} \textbf{Varianca (disperzija)}: $\text{var}(X) = E((X-E(X))^2) = E(X^2)-(E(X))^2$. \textbf{Standardni odklon}: $\sigma (X) = \sqrt{\text{var}(X)}$.
+
+Velja: $\text{var}(aX+b)=a^2\text{var}(X).$
+$$
+E[h(X,Y)] = \sum_x \sum_y h(x,y)P(X=x,Y=y)
+$$
+$$
+E[h(X,Y)] = \iint_{\R^2}h(x,y)f_{X,Y}(x,y)dx dy.
+$$
+$$
+E(X+Y)=E(X)+E(Y)
+$$
+\textsc{Definicija:} \textbf{Indikator} dogodka je slučajna spremenljivka, ki je na danem dogodku enaka 1, zunaj njega pa 0. Indikator dogodka $A$ bomo označevali z $\mathds{1}_\mathcal{A}.$ Indikator dogodka, da je izjava $\mathcal{A}$ pravilna, bomo označevali z $\mathds{1}(\mathcal{A}).$ Velja $E(\mathds{1}_\mathcal{A}) = P(\mathcal{A}).$
+
+\textsc{Definicija: }Slučajni spremenljivki $X$ in $Y$ sta \textbf{nekorelirani}, če velja $E(XY) = E(X)E(Y).$ Poljubni neodvisni slučajni spremenljivki sta nekorelirani, obratno pa ni nujno res!
+
+Slučajni spremenljivki $X$ in $Y$ sta zagotovo neodvisni v naslednjih treh primerih:
+\begin{itemize}
+\item če sta nekorelirani in posamezna slučajna spremenljivka lahko zavzame kvečjemu dve vrednosti;
+\item če sta nekorelirani in je njuna skupna porazdelitev dvorazsežna normalna;
+\item če za poljubni omejeni merljivi funkciji $g$ in $h$ velja, da sta slučajni spremenljivki $g(X)$ in $h(Y)$ nekorelirani.
+\end{itemize}
+
+Brž ko sta $X$ in $Y$ nekorelirani in imata varianco, velja: $\text{var}(X+Y) = \text{var}(X)+\text{var}(Y)$.
+
+\textsc{Definicija:} \textbf{Kovarianca}: $\text{cov}(X,Y):=E((X-E(X))(Y-E(Y)))=E(XY)-E(X)E(Y)$. 
+
+Velja $\text{cov}(X,X) = \text{var}(X)$ in $\text{cov}(X,Y) = \text{cov}(Y,X)$. Če sta $a$ in $b$ konstanti, velja $\text{cov}(X+a,Y+b)=\text{cov}(X,Y)$ in $\text{cov}(aX+bY,Z) = a\text{cov}(X,Z) + b\text{cov}(Y,Z)$. 
+
+Slučajni spremenljivki $X$ in $Y$ sta nekorelirani natanko tedaj, ko je $\text{cov}(X,Y)=0$. 
+
+\textsc{Definicija:} \textbf{Korelacijski koeficient}: $\text{corr}(X,Y)=\frac{\text{cov}(X,Y)}{\sigma (X) \sigma (Y)}$.
+
+Velja: $-1 \leq \text{corr}(X,Y)\leq 1$. Če so $a,b,c$ in $d$ konstante ter $a,c > 0$, velja $\text{corr} (aX+b,cY+d) = \text{corr}(X,Y)$.
+
+\section*{Pogojne porazdelitve}
+
+\textsc{Definicija:} \textbf{Pogojno porazdelitev} slučajne spremenljivke $X$ glede na dogodek $B$ opišemo s pogojnimi verjetnostmi $P(X\in C | B)$, kjer $C$ preteče vse merljive množice. Če je $X$ diskretna, lahko njeno pogojno porazdelitev opišemo s \textbf{pogojno porazdelitveno shemo}:
+$$
+\begin{pmatrix}
+a_1 & a_2 & \cdots \\
+P(X=a_1 | B) & P(X=a_2 | B) & \cdots
+\end{pmatrix}
+$$
+
+\textsc{Definicija:} Za vsako realno slučajno spremenljivko in vsak dogodek $B$ s pozitivno verjetnostjo lahko pogojno porazdelitev slučajne spremenljivke $X$ glede na $B$ opišemo s \textbf{pogojno kumulativno porazdelitveno funkcijo}:
+$$
+F_{X|B}(x) = P(X \leq x | B).
+$$
+Če je pogojna porazdelitev zvezna, obstaja tudi \textbf{pogojna porazdelitvena gostota}:
+$$
+f_{X|B}(x) = F_{X|B}'(x).
+$$
+Brž ko je $X$ zvezno porazdeljena, je tudi njena pogojna porazdelitev zvezna glede na vsak dogodek s pozitivno verjetnostjo.
+
+Če je $X$ porazdeljena zvezno z gostoto $f_X$ in $P(X \in C) > 0$, je:
+$$
+f_{X|X\in C}(x) = \begin{cases} \frac{f_X(x)}{P(X \in C)}; & x\in C \\ 
+0; & \mbox{sicer} \end{cases}
+$$
+Podobno velja tudi za zvezne slučajne vektorje.
+
+\textsc{Definicija:} \textbf{Pogojno matematično upanje} slučajne spremenljivke $X$ glede na dogodek $B$ je matematično upanje, ki pripada ustrezni pogojni porazdelitvi, in ga označimo z $E(X | B)$. Tako velja:
+$$
+E(X | B) = \sum_x xP(X=x | B)
+$$
+in splošneje:
+$$
+E(h(X) | B) = \sum_x h(X) P(X=x | B)
+$$
+Pogojno matematično upanje ima vse lastnosti običajnega matematičnega upanja, npr. linearnost. 
+
+\textsc{Izrek:} Za vsako slučajno spremenljivko $X$ z matematičnim upanjem in vsak popoln sistem dogodkov $H_1, H_2, H_3, \ldots $ velja \textbf{izrek o polnem matematičnem upanju}:
+$$
+E(X) = P(H_1)E(X|H_1) + P(H_2)E(X | H_2) + P(H_3)E(X | H_3) + \cdots
+$$
+
+
+
+\end{document}
+
