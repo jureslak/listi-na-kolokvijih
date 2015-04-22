@@ -330,15 +330,10 @@ tem sistemu),  \underline{ortonormiran} sistem za ta produkt.
 $\tilde{f}(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}(a_n\cos{nx} + b_n\sin{nx})$,
 
 $a_n = \langle f,\frac{1}{\pi}\cos{nx} \rangle =
-\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos{nx}\dx, \quad n \in \N \cup
-\{0\}$,
+\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos{nx}\dx, \quad n \in \N_0$,
 
 $b_n = \langle f,\frac{1}{\pi}\sin{nx} \rangle =
 \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin{nx}\dx, \quad n \in \N$.
-
-$\tilde{f}$ je $2\pi$-periodična razširitev $f$, ki v točkah nezveznosti zavzame
-aritmetično sredino. V prostoru $L^2$ je $f=\tilde{f}$ oz. sta v istem
-ekvivalenčnem razredu.
 
 \textbf{Sinusna in kosinusna vrsta:} $f \in L^2([0,\pi])$. Za tako funkcijo
 obstaja liha in soda razširitev na $[-\pi,\pi]$. Za $\tilde{f}^S$ so $b_n = 0$,
@@ -349,15 +344,32 @@ vrsta}: $\tilde{f}(x) =  \sum_{n=1}^{\infty} \tilde{b}_n\sin{nx}$ in
 \textbf{kosinusna vrsta}:  $\tilde{f}(x) =
 \frac{\tilde{a}_0}{2}\sum_{n=1}^{\infty}\tilde{a}_n\cos{nx}$, kjer sta:
 
-$\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N
-\cup \{0\}$,
+$\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N$,
 
-$\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in
-\N$.
+$\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in \N_0$.
 
 S substitucijo lahko razvoje prevedemo na poljuben interval $[-L,L]$ oz.
 $[0,L]$, $L > 0$. V tem primeru je $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
-x}{L}},\frac{1}{L}\cos{\frac{n\pi x}{L}},\ldots \}$
+x}{L}},\frac{1}{L}\cos{\frac{n\pi x}{L}},\ldots \}$ KONS.
+
+\textbf{Uporabni integrali:}
+$\int_a^b \sin(\frac{n\pi x}{b-a})^2 \dx = \int_a^b \cos(\frac{n\pi x}{b-a})^2 \dx =
+\frac{(b-a) \left(\sin \left(\frac{2 \pi  a n}{b-a}\right)-\sin \left(\frac{2
+\pi  b n}{b-a}\right)+2 \pi  n\right)}{4 \pi  n}, n \in \C$
+
+$(\int_a^bx^i \sin(kx)\dx)_{1,2} = (\frac{-\sin (a k)+a k \cos (a k)+\sin (b k)-b k \cos (b k)}{k^2},\frac{(a^2 k^2-2) \cos (a k)-2 a k \sin (a k)+(2-b^2 k^2) \cos (b k)+2 b k \sin (b k)}{k^3})$
+
+$(\int_a^bx^i \cos(kx)\dx)_{1,2} = (\frac{-a k \sin (a k)-\cos (a k)+b k \sin (b k)+\cos (b k)}{k^2},\frac{(2-a^2 k^2) \sin (a k)-2 a k \cos (a k)+(b^2 k^2-2) \sin (b k)+2 b k \cos (b k)}{k^3})$
+
+$\int_a^b (x-a)(b-x)\sin(kx)\dx = \frac{k (a-b) (\sin (a k)+\sin (b k))+2 \cos (a k)-2 \cos (b k)}{k^3}$
+
+$\int_a^b (x-a)(b-x)\cos(kx)\dx = \frac{k (a-b) (\cos (a k)+\cos (b k))-2 \sin (a k)+2 \sin (b k)}{k^3}$
+
+$\int_a^b \sin(mx)\cos(kx)\dx = \frac{-k \sin (a k) \sin (a m)-m \cos (a k) \cos (a m)+k \sin (b k) \sin (b m)+m \cos (b k) \cos (b m)}{k^2-m^2}$
+
+$\int_a^b \sin(mx)\sin(kx)\dx = \frac{-m \sin (a k) \cos (a m)+k \cos (a k) \sin (a m)+m \sin (b k) \cos (b m)-k \cos (b k) \sin (b m)}{k^2-m^2}$
+
+$\int_a^b \cos(mx)\cos(kx)\dx = \frac{-k \sin (a k) \cos (a m)+m \cos (a k) \sin (a m)+k \sin (b k) \cos (b m)-m \cos (b k) \sin (b m)}{k^2-m^2}$, povsod so $m, n, k \in \C$
 
 % K.O.N.S. (4) (Boston obsoja
 % Einsteina, Einstein prepovedan. Relativiteta nevarna? V Berlinu zapirajo
