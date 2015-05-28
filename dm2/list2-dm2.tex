@@ -1,0 +1,223 @@
+\documentclass[8pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{bbold}
+
+
+
+\usepackage[
+top    = 1cm,
+bottom = 1cm,
+left   = .5cm,
+right  = 0.5cm]{geometry}
+%
+%% ne spreminjaj podatkov, ki vplivajo na obliko strani
+%\textwidth 19cm
+%\textheight 27cm
+%\oddsidemargin-1.5cm
+%\evensidemargin-1.5cm
+%\topmargin-30mm
+%%\addtolength{\footskip}{10pt}
+%\pagestyle{plain}
+%%\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\section{Permutacijske grupe}
+
+\textsc{Definicija:} Naj bo $G$ množica nekaterih permutacij nad množico $X$. Če
+$G$ tvori grupo za komponiranje, pravimo, da je $G$ \textbf{permutacijska
+grupa}, ki deluje na $X$.
+
+Naj grupa $G$ deluje na $X$. Definiramo relacijo: $x \sim y \Longleftrightarrow
+\exists g \in G: g(x)=y$.
+
+\textsc{Trditev:} $\sim$ je ekvivalenčna relacija na $X$.
+
+\textsc{Definicija:} \textbf{Orbite} (glede na delovanje $G$ na $X$) so
+ekvivalenčni razredi relacije $\sim$, velja torej: $Gx = \{ y \in X; g(y) = x
+\}$.
+
+$Gx$... orbita elementa $x$
+
+$G(x \rightarrow y) = \{ g \in G; g(x)=y \}$
+
+$G_x$... stabilizator elementa $x$: $G(x \rightarrow x)$
+
+\textsc{Izrek:} Če je $G$ končna permutacijska grupa, ki deluje na $X$, tedaj je
+za vsak $x \in X$:  $|G| = |Gx| |G_x|$.
+
+\textsc{Definicija}: Naj bo $G$ grupa, ki deluje na $X$. Za $g \in G$ je $F(g) =
+\{ x\in X; g(x) = x \}$ množica negibnih točk permutacije $g$.
+
+\textsc{Izrek:} Število orbit pri delovanju $G$ na $X$ je enako:  $\frac{1}{|G|}
+\sum_{g \in G}|F(g)|$.
+
+\textsc{Definicija:} Naj bo $G$ grupa in $X$ množica. \textbf{Reprezentacija}
+$G$ s permutacijami nad $X$ je predpis $g \in G \mapsto \hat{g} \text{
+permutacija } X$, tako da je $\widehat{g_1g_2} = \widehat{g_1}\widehat{g_2}$ za
+vse $g_1,g_2 \in G$.
+
+$\widehat{G} = \{ \widehat{g} ; g\in G \}$ je (permutacijska) grupa.
+
+\textsc{Definicija:} Reprezentacija je \textbf{zvesta}, če je $\widehat{g_1} =
+\widehat{g_2} \Longleftrightarrow g_1 = g_2$.
+
+\textsc{Trditev:} Vsaka končna grupa premore zvesto reprezentacijo.
+
+
+%%%%%%%% SIMETRIJE IN ŠTETJE
+\section{Simetrije in štetje}
+
+Naj bo $\alpha_i$ število disjunktnih ciklov dolžine $i$ v $\pi$ zapisanem kot
+produkt disjunktnih ciklov. ($\alpha_1 = $ število negibnih točk $\pi$.)
+
+Če $|\pi| = n$, potem $\alpha_i + 2\alpha_2 + \ldots + n\alpha_n= n$.
+
+$z(\pi ; x_1,\ldots ,x_n)=x_1^{\alpha_1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}$
+imenujemo \textbf{ciklični indeks permutacije $\pi$}
+
+\textsc{Definicija:} $G$ permutacijska grupa, tedaj je \textbf{ciklični indeks
+grupe} $G$:
+$$ Z(G;x_1,\ldots ,x_n) = \frac{1}{|G|} \sum_{g\in G} z(g;x_1,\ldots ,x_n).$$
+
+Vrtiljaku ustreza ciklična grupa, ogrlici pa diedrska. $D_{2n}$ je grupa
+simetrij pravilnega $n$-kotnika.
+
+\textsc{Izrek:} $Z(C_n; x_1,\ldots, x_n) = \frac{1}{n} \displaystyle \sum_{d
+\mid n} \phi
+(d)x_d^{\frac{n}{d}}$, \quad $\phi(2^n) = 2^n-1$.
+
+\textsc{Izrek:} $Z(D_{2n}; x_1,\ldots,x_n) = \frac{1}{2} Z(C_n;x_1,\ldots,x_n) +
+\begin{cases} \frac{1}{4}(x_1^2x_2^{\frac{n}{2}-1}+x_2^{\frac{n}{2}});& n \text{
+  sod} \\ \frac{1}{2}x_1x_2^{\frac{n-1}{2}};& n \text{ lih} \end{cases}$
+
+Delovanje na ploskve nekega telesa je enako kot delovanje na oglišča dualnega
+telesa. Telesa in njihovi duali:
+\begin{itemize}
+  \item kocka $\leftrightarrow$ oktaeder
+  \item tetraeder $\leftrightarrow$ tetraeder
+  \item ikozaeder (12 oglišč, ploskve trikotniki) $\leftrightarrow$ dodekaeder (20
+    oglišč, ploskve petkotniki)
+\end{itemize}
+
+\begin{tabular}{| c || c | c | c |}\hline
+  polieder & $|X|$ & $|G|$ & $Z$ \\ \hline\hline
+  tetraeder & 4 & 12 & $\frac{1}{12}(x_1^4+8x_1x_3 + 3x_2^2$\\ \hline
+  oktaeder & 6 & 24 & $\frac{1}{24}(x_1^6+6x_1^2x_4 + 3x_1^2x_2^2+6x_2^3+8x_3^2$\\ \hline
+  kocka & 8 & 24 & $\frac{1}{24}(x_1^8+8x_1^2x_2^2 + 9x_2^4 + 6x_4^2)$ \\ \hline
+  ikozaeder & 12 & 60 & $\frac{1}{60}(x_1^{12} + 24x_1^2x_5^2 + 15x_2^6 + 20x_3^4)$ \\ \hline
+  dodekaeder & 20 & 60 & $\frac{1}{60}(x_1^{20} + 20x_1^2x_3^6 + 15x_2^{10} + 24x_5^4)$ \\ \hline
+\end{tabular}
+
+\section{Število neekvivalentnih barvanj}
+
+$G$ grupa, ki deluje na $X$, $|X|=n$, $K$ naj bo množica $r$-barv, $w: X
+\longrightarrow K$ je $r$-barvanje $X$, $\Omega = \{ w: X \longrightarrow K \}$,
+$|\Omega| = r^n$
+
+$\widehat{g}: \Omega \longrightarrow \Omega$ ($w \mapsto \widehat{g}(w)$). $g$
+je avtomorfizem grafa. Velja: $(\widehat{g}(w))(x) = w(g^{-1}(x))$.
+
+\textsc{Lema:} Preslikava~~$\widehat{\cdot}$~~je zvesta reprezentacija grupe
+$G$.
+
+Grupi $G$ in $\widehat{G} = \{ \widehat{g}: \Omega \longrightarrow \Omega \}$
+sta izomorfni.
+
+\textsc{Definicija:} Barvanji sta \textbf{ekvivalentni}, če sta v isti orbiti
+grupe $\widehat{G}$, oz. število neekvivalentnih barvanj $X$ glede na $G$ je
+število orbit $G$.
+
+\textsc{Izrek:} Naj bo $G$ grupa, ki deluje na $X$ in $r\geq 2$. Tedaj je
+število neekvivalentnih barvanj $X$ enako $Z(G;r,\ldots ,r)$.
+
+$K = \{ a,b,\ldots k\}$, $U(a,b,\ldots, k)$... rodovna funkcija za vsa
+neekvivalentna barvanja glede na delovanje grupe $G$ na $n$-množico $X$.
+
+\textsc{Izrek Polya:} Če $G$ deluje na $n$-množico $X$ in je $K = \{ a,b,\ldots
+,k\}$ množica barv, tedaj je $$ U(a,b,\ldots, k) = Z(G;\sigma_1,\ldots
+,\sigma_n),\text{ kjer je } \sigma_i = a^i + b^i + \cdots + k^i \quad (1\leq i
+\leq n) $$
+
+\section{Ramseyeva teorija}
+
+\textsc{Trditev:} Naj bodo povezave $K_n$ pobarvane z dvema barvama in naj bo
+$r_i$ število povezav iz $i$-tega vozlišča barve 1. Tedaj je število
+monokromatičnih trikotnikov enako $\binom{n}{3} - \frac{1}{2}\sum_{i=1}^n
+r_i(n-1-r_i)$.
+
+\textsc{Posledica:} V situaciji iz zadnje trditve imamo vsaj $\binom{n}{3} -
+\lfloor \frac{n}{2} \lfloor (\frac{n-1}{2})^2 \rfloor \rfloor $ monokromatičnih
+trikotnikov.
+
+\textsc{Ramseyev izrek:} Naj bo $r \geq 1$ in $a_1, a_2 \geq r$. Tedaj obstaja
+tako najmanjše naravno število $N(a_1,a_2;r)$, da velja naslednje: naj bo $S$
+$n$-množica, kjer je $n \geq N(a_1,a_2;r)$ in recimo, da smo vse njene
+$r$-podmnožice pobarvali z barvo 1 oz. barvo 2. Tedaj $S$ premore
+$a_1$-podmnožico, tako da so vse njene $r$-podmnožice barve 1, ali pa $S$
+premore $a_2$-podmnožico, da so vse njene $r$-podmnožice barve 2.
+
+\textsc{Posledica:} $N(a_1,a_2;r)\leq N(N(a_1-1,a_2;r),N(a_1,a_2-1;r);r-1)+1$.
+
+\textsc{Izrek:} $N(a_1,a_2;2) \leq \binom{a_1+a_2-2}{a_1-1}$.
+
+$r=2$:
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|} \hline
+$a_1 \backslash a_2$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline \hline
+3 & 6 & 9 & 14 & 18 & 23 & 28 & 36 & 40/42 \\ \hline
+4 &   & 18 & 25 & 36/41 & 49/61 & 58/84 & 73/115 & 92/149 \\ \hline
+5 & & & 43/49 & 58/87 & 80/143 & 101/216 & 126/316 & 144/442 \\ \hline
+6 & & & & 102/165 & 113/298 & 132/495 & 169/780 & 179/1171 \\ \hline
+
+\end{tabular}
+
+\textsc{Izrek:} Če je $a \geq 3$, tedaj je $N(a,a;2) \geq 2^{\frac{a}{2}}$.
+
+\textsc{Izrek (Erdős, Szekeres):} Za vsak $n \geq 3$ obstaja tako najmanjše
+naravno število $N$, tako da če imamo $N$ točk v ravnini v splošni legi (nobene
+3 niso kolinearne), potem med njimi obstaja $n$ točk, ki določajo konveksen
+$n$-kotnik.
+
+\textsc{Definicija:} Naj bodo $G_1,\ldots ,G_k$ grafi. \textbf{Grafovsko
+Ramseyevo število} $N(G_1,\ldots ,G_k)$ je najmanjši tak $N$, da če povezave
+polnega grafa $K_N$ pobarvamo poljubno z barvami $1, 2, \ldots ,k$, tedaj v tem
+$K_N$ najdemo vsaj en $G_i$, ki je barve $i$.
+
+\textsc{Izrek:} Če je $T$ drevo z $n$ vozlišči, tedaj je $N(T,K_n) = (n-1)(n-1)+1$.
+
+
+\hfill Avtor: Klemen Sajovec, manjši popravki: Jure Slak
+
+\end{document}
