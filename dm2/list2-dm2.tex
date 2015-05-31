@@ -10,6 +10,7 @@
 \usepackage{enumerate}
 \usepackage[dvipsnames,usenames]{color}
 \usepackage{bbold}
+\usepackage{stmaryrd}
 
 
 
@@ -81,7 +82,7 @@ za vsak $x \in X$:  $|G| = |Gx| |G_x|$.
 \textsc{Definicija}: Naj bo $G$ grupa, ki deluje na $X$. Za $g \in G$ je $F(g) =
 \{ x\in X; g(x) = x \}$ množica negibnih točk permutacije $g$.
 
-\textsc{Izrek:} Število orbit pri delovanju $G$ na $X$ je enako:  $\frac{1}{|G|}
+\textsc{Burnsideova lema:} Število orbit pri delovanju $G$ na $X$ je enako:  $\frac{1}{|G|}
 \sum_{g \in G}|F(g)|$.
 
 \textsc{Definicija:} Naj bo $G$ grupa in $X$ množica. \textbf{Reprezentacija}
@@ -128,8 +129,8 @@ telesa. Telesa in njihovi duali:
 \begin{itemize}
   \item kocka $\leftrightarrow$ oktaeder
   \item tetraeder $\leftrightarrow$ tetraeder
-  \item ikozaeder (12 oglišč, ploskve trikotniki) $\leftrightarrow$ dodekaeder (20
-    oglišč, ploskve petkotniki)
+  \item ikozaeder (12 oglišč, 30 robov, 20 ploskev, ploskve trikotniki) $\leftrightarrow$ dodekaeder (20
+    oglišč, 30 robov, 12 ploskev, ploskve petkotniki)
 \end{itemize}
 
 \begin{tabular}{| c || c | c | c |}\hline
@@ -141,6 +142,7 @@ telesa. Telesa in njihovi duali:
   dodekaeder & 20 & 60 & $\frac{1}{60}(x_1^{20} + 20x_1^2x_3^6 + 15x_2^{10} + 24x_5^4)$ \\ \hline
 \end{tabular}
 
+%%%%% BARVANJA
 \section{Število neekvivalentnih barvanj}
 
 $G$ grupa, ki deluje na $X$, $|X|=n$, $K$ naj bo množica $r$-barv, $w: X
@@ -160,8 +162,12 @@ sta izomorfni.
 grupe $\widehat{G}$, oz. število neekvivalentnih barvanj $X$ glede na $G$ je
 število orbit $G$.
 
-\textsc{Izrek:} Naj bo $G$ grupa, ki deluje na $X$ in $r\geq 2$. Tedaj je
+\hfill
+
+\textsc{Izrek:} Naj bo $G$ grupa, ki deluje na $X$ in $r\geq 2$ število barv. Tedaj je
 število neekvivalentnih barvanj $X$ enako $Z(G;r,\ldots ,r)$.
+
+\hfill
 
 $K = \{ a,b,\ldots k\}$, $U(a,b,\ldots, k)$... rodovna funkcija za vsa
 neekvivalentna barvanja glede na delovanje grupe $G$ na $n$-množico $X$.
@@ -215,8 +221,177 @@ Ramseyevo število} $N(G_1,\ldots ,G_k)$ je najmanjši tak $N$, da če povezave
 polnega grafa $K_N$ pobarvamo poljubno z barvami $1, 2, \ldots ,k$, tedaj v tem
 $K_N$ najdemo vsaj en $G_i$, ki je barve $i$.
 
+To število obstaja!
+
 \textsc{Izrek:} Če je $T$ drevo z $n$ vozlišči, tedaj je $N(T,K_n) = (n-1)(n-1)+1$.
 
+\section{Osnove metrične teorije grafov in matrika sosednosti}
+
+\textsc{Definicije:}
+\begin{enumerate}
+\item \textbf{Interval $I_G(u,v)$} med vozliščema $u$ in $v$ v grafu $G$ je množica vozlišč, ki ležijo na najkrajši $u,v$-poti.
+\item \textbf{Ekscentričnost vozlišča} $u$ grafa $G$, ecc$_g(u) = \max{\{d(u,x);x \in V(G) \}}$.
+\item \textbf{Polmer} grafa $G$: rad$(G) = \min_u{\max_v{\{ d(u,x)\}}}$ = minimalna ekscentričnost grafa.
+\item \textbf{Center} grafa $G$, $C(G)$, je množica vozlišč, ki realizirajo polmer.
+\item \textbf{Premer} grafa, diam$(G) = \max_{u,v \in V(G)}d(u,v)$.
+\item Podgraf $H$ grafa $G$ je \textbf{izometrični podgraf}, če velja: $\forall u,v \in V(H): d_H(u,v) = d_G(u,v)$.
+\item Podgraf $H$ grafa $G$ je \textbf{konveksen}, če velja: $x,y \in V(H) \Longrightarrow I_G(x,y) \subseteq V(H)$.
+\item $G$ graf, \textbf{matrika sosednosti}: $(A(G))_{ij} = \begin{cases} 1;&v_iv_j \in E(G) \\ 0;& \text{sicer}\end{cases}$
+\end{enumerate}
+
+konveksen $\Longrightarrow$ izometričen $\Longrightarrow$ induciran
+
+\textsc{Izrek:} Če je $G$ graf z $V(G) = \{ v_1,\ldots ,v_n \}$, tedaj je
+$(A(G)^r)_{ij}$ število sprehodov med $v_i$ in $v_j$ dolžine $r$.
+
+\textsc{Posledica:} Če je $G$ povezan graf, potem so diagonalci v $A(G)^2$
+stopnje vozlišč grafa, sled matrike $A(G)^3$ je 6-krat število trikotnikov grafa
+$G$.
+
+$S_k(G) = \sum_{i=0}^kA(G)^i = I + A(G) + \cdots + A(G)^k$.
+
+\textsc{Posledica:} rad$(G) $ je najmanjši $k$, tak da $S_k(G)$ premore vrstico
+brez ničel in $C(G)$ ustreza vsem vozliščem s takimi vrsticami. diam$(G)$ je
+najmanjši $k$, tak da $S_k(G)$ ne vsebuje nobene ničle.
+
+\section{Vložitve metričnih prostorov v grafe}
+
+\textsc{Definicija:} Metrični prostor $(M,d)$ je \textbf{realiziran} z omrežjem
+$G = (V,E,w)$, $w:E\longrightarrow \R^+$, če je $M \subseteq V$ in je $d(x,y) =
+d_G(x,y)$ $\forall x,y \in M$. Realizacija $G=(V,E,w)$ metričnega prostora
+$(M,d)$ je \textbf{optimalna:}, če je $w(G) = \sum_{e \in E} w(e)$ najmanjši
+možen.
+
+\textsc{Izrek:} Vsak metrični prostor premore realizacijo z omrežjem. Vsak
+končen metričen prostor premore optimalno realizacijo z grafom.
+
+\textsc{Lema:} Naj bo $(M,d)$ metrični prostor z $|M|=n$ in naj bo $G=(V,E,w)$
+njegova realizacija, kjer je $|V| > 2^{\binom{n}{2}+1}+n$. Tedaj $(M,d)$ premore
+realizacijo s pravim podgrafom od $G$, ki ima kvečjemu  $2^{\binom{n}{2}+1}+n$
+vozlišč.
+
+\textsc{Definicija:} Metrični prostor $(M,d)$ zadošča \textbf{pogoju 4 točk}, če
+za vsako četverico $x,y,z,t \in M$ velja: $d(x,y)+d(z,t) \leq
+\max{\{d(x,z)+d(y,z), d(x,t)+d(y,t)\}}$.
+
+Ekvivalenten pogoj: $s_1 = d(x,y)+d(z,t), s_2 = d(x,z)+d(y,z), s_3=
+d(x,t)+d(y,t)$, potem velja, da sta največja $s$-a enaka.
+
+\textsc{Izrek:} Graf $G$ je drevo natanko tedaj, ko je povezan, brez trikotnikov
+in njegova metrika zadošča pogoju 4 točk.
+
+\textsc{Izrek:} Končen metričen prostor lahko karakteriziramo z drevesom natanko
+tedaj, ko njegove točke zadoščajo pogoju 4 točk. V tem primeru je realizacija
+enolična in jo lahko najdemo v polinomskem času.
+
+\section{Wienerjev indeks}
+
+\textsc{Definicija:} \textbf{Wienerjev indeks} grafa $G$ je $W(G) =
+\sum_{\{u,v\}}d_G(u,v) = \frac{1}{2}\sum_u \sum_v d_G(u,v)$.
+
+\textsc{Izrek:} Če je $T$ drevo, tedaj je $W(T) = \sum_e n_1(e) n_2(e)$, kjer
+sta $n_1(e), n_2(e)$ števbili vozlišč v povezanih komponentah grafa $T-e$.
+
+\textsc{Definicija:} $G,H$ grafa. Tedaj je \textbf{kartezični produkt} $G
+\square H$ grafov $G$ in $H$ graf z: $$ V(G \square H) = V(G) \times
+V(H)\text{  in } (g,h) \sim (g',h') \Longleftrightarrow g=g' \text{ in } hh' \in
+E(H) \text{ ali } gg' \in E(G) \text{ in } h=h'.  $$
+
+\textsc{Lema o razdalji:} Če sta $G$ in $H$ povezana grafa, tedaj je $d_{G
+\square H} = d_G + d_H$, natančneje $d_{G \square H}((g,h),(g',h')) =
+d_G(g,g') + d_H(h,h')$.
+
+\textsc{Trditev:} Če sta $G$ in $H$ povezana grafa, tedaj je $W(G\square H) =
+|V(G)|^2W(H) + |V(H)|^2W(G)$.
+
+\textsc{Posledica:} $W(Q_n) = n2^{2(n-1)}$; $n \geq 1$.
+
+%%%% VAJE
+\section{Vaje}
+
+\textsc{Trditev:} Naj bo $X = X_1  \amalg X_2 $, $|X_1|=n_1, |X_2|=n_2,|X|=n$.
+Naj $G_1$ deluje na $X_1$ in $G_2$ na $X_2$. Potem velja, da je
+$$ Z(G_1 \times G_2 ;x_1,x_2,\ldots x_n) = Z(G_1;x_1,\ldots ,x_{n_1}) Z(G_2 ;x_1,\ldots , x_{n_2}),$$
+kjer $G_1 \times G_2$ deluje na $X$ na naraven način.
+
+$N(2,k;2)=k$
+
+\textsc{Definicija:} Naj bo $G$ graf. Podmnožica $A \subseteq V(G)$ je
+\textbf{klika} v $G$, če sta vsaki dve vozlišči iz $A$ sosednji v $G$.
+Podmnožica $B \subseteq V(G)$ je \textbf{neodvisna množica} v $G$, če nobeni dve
+vozlišči iz $B$ nista sosednji v $G$.
+
+\textsc{Lema:} V grafu z $n$ vozlišči obstaja klika velikosti $\lfloor
+\frac{1}{2}\log_2{n}\rfloor$ ali neodvisna množica velikosti $\lfloor
+\frac{1}{2}\log_2{n}\rfloor$.
+
+\textsc{Trditev:} Naključni graf na $n$ vozliščih ima (z veliko verjetnostjo,
+tj. $P\to1$ ko $n\to\infty$) največjo kliko in največjo
+neodvisno množico velikosti $C\log{n}$.
+
+\textsc{Lema:} Naključni graf na $n$ vozliščih ima največjo kliko in neodvisno
+množico velikosti $\leq 2\log{n}$.
+
+\textsc{Trditev:} Naj bosta $N(a-1,b;2)$ in $N(a,b-1;2)$ obe sodi. Potem velja:
+$$ N(a,b;2) \leq N(a-1,b;2) + N(a,b-1;2) - 1.$$
+
+\textsc{Lema:} Za vsak $m \in \N$ obstaja tak $n \in \N$, da vsako zaporedje
+ $n$ realnih števil vsebuje monotono podzaporedje dolžine $m$. $n = N(m,m;2)$.
+
+\textsc{Lema:} Za $n \geq N(m,m;2)$ ima vsaka $\{ 0,1 \}$-matrika glavno
+podmatriko velikosti $m$, v kateri so vsi elementi nad diagonalo enaki. Za $n =
+N(N(m,m;2),N(m,m;2);2)$ ima matrika glavno podmatriko, v kateri so vsi elementi
+nad diagonalo enaki in vsi elementi pod diagonalo enaki.
+
+\textsc{Lema:} $N(\underbrace{3,3,\ldots ,3}_k;2) \leq \lfloor e k! \rfloor + 1$.
+
+Velja: $\lfloor ek! \rfloor = 1 + \lfloor e(k-1)! \rfloor k$.
+
+\textsc{Schurov izrek:} Za vsak $k \in \N$ obstaja $n \in \N$, da za vsako
+$k$-barvanje množice $[n]$ obstajajo števila $x,y,z \in [n]$ iste barve z
+lastnostjo $x+y=z$.
+
+\textsc{Lema:} $N(2K_3,K_3)=8$, $N(mK_3,mK_3)=5m$ za $m\geq 2$.
+
+$T$ drevo. Potem $C(T)$ vsebuje bodisi 1 bodisi 2 vozlišči.
+
+$\operatorname{rad}(G) \leq \operatorname{diam}(G) \leq 2\operatorname{rad}(G)$
+
+Pogoj 4 točk implicira trikotniško neenakost.
+
+Razdalja v drevesu zadošča pogoju 4 točk.
+
+$W(K_{1,n}) = n^2, n\geq 3$, $W(P_n) = \frac{1}{6}n(n^2-1), n\geq 2$, $W(K_{1,n}
+\square P_n) = \frac{1}{6}(n+1)^2n(n^2-1)$.
+
+%%% UPORABNO
+\section{Uporabno}
+
+$D_{2n} = $ grupa simetrij pravilnega $n$-kotnika. $|D_{2n}| = 2n$, $D_{2n} =
+\langle \text{rotacija za }\frac{2\pi}{n},\text{zrcaljenje}\rangle$. Naj bo
+$r=\text{ rotacija za }\frac{2\pi}{n}$ in $z$ zrcaljenje. Velja $r^iz =
+zr^{-i}$. Vsi elementi $D_{2n}$ so oblike: $r^i$, $i=0,1,\ldots ,n-1$ in $zr^i$,
+$i=0,1,\ldots ,n-1$.
+
+Koliko je različnih ogrlic iz kroglic različnih barv? Poišči grupo
+avtomorfizmov, oz. njene predstavnike in poglej, koliko že pobarvanih ogrlic
+fiksirajo. Npr. $id$ fiksira $\binom{n}{r}$ ogrlic, kjer je $n$ število biserov
+in $r$ število barv.
+
+Število različnih objektov z npr. $k$ belimi in $l$ črnimi deli: uporabi izrek
+Polya in iščeš koeficient pred $b^kc^l$.
+
+Ciklični indeksi $S_2$, $S_3$, $S_4$, $S_5$, ki delujejo na $\Z_2$, $\Z_3$, $\Z_4$, $\Z_5$:
+\begin{itemize}
+ \item $Z(S_2;x_1,x_2)=\frac{1}{2}(x_1^2+x_2)$
+ \item $Z(S_3;x_1,x_2,x_3)=\frac{1}{6}(x_1^3+3x_1x_2+2x_3)$
+ \item $Z(S_4;x_1,x_2,x_3,x_4)=\frac{1}{24}(x_1^4+6x_2x_1^2+3x_2^2+8x_3x_1+6x_4)$
+ \item $Z(S_5;x_1,x_2,x_3,x_4,x_5)=\frac{1}{120}(x_1^5+10x_2x_1^2+15x_2^2x_1+20x_3x_1^2+20x_3x_2+30x_4x_1+24x_5)$
+\end{itemize}
+
+$Q_n$: $V(Q_n) = \{0,1 \}^n = \{ b_1\ldots b_n; b_i \in \{0,1\} \}$,
+$u=b_1\ldots b_n, v = c_1\ldots c_n \in V(Q_n)$. $uv \in E(Q_n)
+\Longleftrightarrow \exists! i: b_i \neq c_i$.
 
 \hfill Avtor: Klemen Sajovec, manjši popravki: Jure Slak
 
