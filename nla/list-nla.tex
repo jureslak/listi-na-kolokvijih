@@ -57,7 +57,7 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 }
 {\end{enumerate}}
 
-\newcommand{\mytitle}{UNM list}
+\newcommand{\mytitle}{NLA list}
 \title{\mytitle}
 \author{Jure Slak}
 \date{\today}
@@ -73,6 +73,8 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 \newcommand{\T}{\mathsf{T}\!}
 \renewcommand{\H}{\mathsf{H}\!}
+
+\DeclareMathOperator{\im}{im}
 
 \begin{document}
 
@@ -132,6 +134,7 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 
 %%%%%%%%%%%%%%%%                   LINEARNI SISTEMI
+\section*{UNM}
 \subsection*{Linearni sistemi}
 
 \textsc{Norme:} $\|A\|_1 =
@@ -356,7 +359,7 @@ for k = 0 to m:
 \textsc{Schurova forma:} Za vsako matriko $A$ obstaja Schurova forma $S$, da je
 $A = USU^\H$,
 kjer je $U$ unitarna in $S$ zgornje trikotna. Na diagnoali so lastne vrednosti.
-V primeru kompleksnih lastnih vrednosti imamo 2x2 bloke.
+V primeru kompleksnih lastnih vrednosti imamo $2\times2$ bloke.
 
 \textsc{Otrogonalna iteracija:} Za izračun Schurove forme. $Z$ je lahko $n\times
 p$ matrika z ortonormiranimi stolpci, tako dobimo prvih $p$ stolpcev Schurove
@@ -446,6 +449,49 @@ Diagonalno dominantna matrika ($|a_{ij}| > \sum_{j=1, j\neq i}^n|a_{ij}|$) je ob
 % R_{h/2}(f)$ in ocenimo napako (če so odvodi baš enaki) in boljše izračunamo integral:
 % $R_{h/2}(f) \approx \frac{S_{h/2}(f) - S_h(f)}{15}, \quad I(f) \approx
 % \frac{16S_{h/2}(f) - S_h(f)}{15}$.
+
+\section*{NLA}
+\subsection*{Singularni razcep}
+$A \in \R^{m\times n}$, $m \geq n$. Singularni razcep je razcep matirke $A$ na
+$A = U \Sigma V^\T$, $U$ ortogonalna $m\times m$, $V$ ortogonalna $n\times n$,
+$\Sigma =
+\begin{bmatrix}
+  \sigma_1 && \\
+  & \ddots & \\
+  && \sigma_n \\
+  && \\
+\end{bmatrix} \in \R^{m\times n}$. Definiciji $U$ in $V$ po stolpcih: $A^\T A v_i = \sigma_i^2 v_i$, $Av_i =
+\sigma_iu_i$.
+Recimo da ima matrika prvih $r$ singularnih vrednosti neničelnih. Potem lahko
+$V$ razdelimo na dva dela, $V_1$ sestavljen iz lastnih vektorjev za neničelne
+lastne vrednosti $A^\T A$ in $V_2$ sestavljen iz lastnih vektorjev za ničelno
+lastno vrednost. Bločno definiramo
+\[ A =
+  \begin{bmatrix}
+    ^{m\times r} U_1 & ^{m\times m-r}U_2
+  \end{bmatrix}
+  \begin{bmatrix}
+    ^{r\times r} S & ^{r \times n-r}0 \\
+    ^{m-r \times r}0 & ^{m-r\times n-r} 0
+  \end{bmatrix}
+  \begin{bmatrix}
+    ^{r \times n} V_1 \\ ^{n-r \times n}V_2
+  \end{bmatrix}
+\]
+Definiramo lahko tudi ozek singularni razcep, pri katerem vzamemo samo $U_1, S$
+in $V_1$. Velja: \vspace{-2ex}
+\begin{itemize}
+  \item $V_1$ je ONB za $\im(A^\T)$
+  \item $V_2$ je ONB za $\ker(A)$
+  \item $U_1$ je ONB za $\im(A)$
+  \item $U_2$ je ONB za $\ker(A^\T)$
+\end{itemize}
+Psevdoinverz: $A^+ = V\Sigma^+ U^\T$, $\Sigma^+ = [1/\sigma_i]_i$.
+Rešitev po metodi najmanjših kvadratov: $x = \sum_{i=1}^n\frac{u_i^\T
+b}{\sigma_i}v_i = A^+b$.
+Aproksimacija matrike z matriko nižjega ranga:
+$A_k = \sum_{i=1}^k \sigma_i u_i v_i^\T$.
+
 
 \end{document}
 % vim: syntax=tex
