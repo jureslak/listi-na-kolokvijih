@@ -55,11 +55,8 @@ right  = 0.5cm]{geometry}
 \thispagestyle{empty}
 \setlength{\parindent}{0pt}
 
+\vspace{-2ex}
 \section{Permutacijske grupe}
-
-\textsc{Definicija:} Naj bo $G$ množica nekaterih permutacij nad množico $X$. Če
-$G$ tvori grupo za komponiranje, pravimo, da je $G$ \textbf{permutacijska
-grupa}, ki deluje na $X$.
 
 Naj grupa $G$ deluje na $X$. Definiramo relacijo: $x \sim y \Longleftrightarrow
 \exists g \in G: g(x)=y$.
@@ -70,10 +67,7 @@ Naj grupa $G$ deluje na $X$. Definiramo relacijo: $x \sim y \Longleftrightarrow
 ekvivalenčni razredi relacije $\sim$, velja torej: $Gx = \{ y \in X; g(y) = x
 \}$.
 
-$Gx$... orbita elementa $x$
-
-$G(x \rightarrow y) = \{ g \in G; g(x)=y \}$
-
+$G\cdot x$... orbita elementa $x$, $G(x \rightarrow y) = \{ g \in G; g(x)=y \}$,
 $G_x$... stabilizator elementa $x$: $G(x \rightarrow x)$
 
 \textsc{Izrek:} Če je $G$ končna permutacijska grupa, ki deluje na $X$, tedaj je
@@ -99,6 +93,7 @@ $\widehat{G} = \{ \widehat{g} ; g\in G \}$ je (permutacijska) grupa.
 
 
 %%%%%%%% SIMETRIJE IN ŠTETJE
+\vspace{-2ex}
 \section{Simetrije in štetje}
 
 Naj bo $\alpha_i$ število disjunktnih ciklov dolžine $i$ v $\pi$ zapisanem kot
@@ -143,6 +138,7 @@ telesa. Telesa in njihovi duali:
 \end{tabular}
 
 %%%%% BARVANJA
+\vspace{-2ex}
 \section{Število neekvivalentnih barvanj}
 
 $G$ grupa, ki deluje na $X$, $|X|=n$, $K$ naj bo množica $r$-barv, $w: X
@@ -177,6 +173,7 @@ neekvivalentna barvanja glede na delovanje grupe $G$ na $n$-množico $X$.
 ,\sigma_n),\text{ kjer je } \sigma_i = a^i + b^i + \cdots + k^i \quad (1\leq i
 \leq n) $$
 
+\vspace{-2ex}
 \section{Ramseyeva teorija}
 
 \textsc{Trditev:} Naj bodo povezave $K_n$ pobarvane z dvema barvama in naj bo
@@ -225,6 +222,7 @@ To število obstaja!
 
 \textsc{Izrek:} Če je $T$ drevo z $n$ vozlišči, tedaj je $N(T,K_n) = (n-1)(n-1)+1$.
 
+\vspace{-2ex}
 \section{Osnove metrične teorije grafov in matrika sosednosti}
 
 \textsc{Definicije:}
@@ -236,10 +234,7 @@ To število obstaja!
 \item \textbf{Premer} grafa, diam$(G) = \max_{u,v \in V(G)}d(u,v)$.
 \item Podgraf $H$ grafa $G$ je \textbf{izometrični podgraf}, če velja: $\forall u,v \in V(H): d_H(u,v) = d_G(u,v)$.
 \item Podgraf $H$ grafa $G$ je \textbf{konveksen}, če velja: $x,y \in V(H) \Longrightarrow I_G(x,y) \subseteq V(H)$.
-\item $G$ graf, \textbf{matrika sosednosti}: $(A(G))_{ij} = \begin{cases} 1;&v_iv_j \in E(G) \\ 0;& \text{sicer}\end{cases}$
 \end{enumerate}
-
-konveksen $\Longrightarrow$ izometričen $\Longrightarrow$ induciran
 
 \textsc{Izrek:} Če je $G$ graf z $V(G) = \{ v_1,\ldots ,v_n \}$, tedaj je
 $(A(G)^r)_{ij}$ število sprehodov med $v_i$ in $v_j$ dolžine $r$.
@@ -254,6 +249,7 @@ $S_k(G) = \sum_{i=0}^kA(G)^i = I + A(G) + \cdots + A(G)^k$.
 brez ničel in $C(G)$ ustreza vsem vozliščem s takimi vrsticami. diam$(G)$ je
 najmanjši $k$, tak da $S_k(G)$ ne vsebuje nobene ničle.
 
+\vspace{-2ex}
 \section{Vložitve metričnih prostorov v grafe}
 
 \textsc{Definicija:} Metrični prostor $(M,d)$ je \textbf{realiziran} z omrežjem
@@ -284,6 +280,7 @@ in njegova metrika zadošča pogoju 4 točk.
 tedaj, ko njegove točke zadoščajo pogoju 4 točk. V tem primeru je realizacija
 enolična in jo lahko najdemo v polinomskem času.
 
+\vspace{-2ex}
 \section{Wienerjev indeks}
 
 \textsc{Definicija:} \textbf{Wienerjev indeks} grafa $G$ je $W(G) =
@@ -307,6 +304,7 @@ d_G(g,g') + d_H(h,h')$.
 \textsc{Posledica:} $W(Q_n) = n2^{2(n-1)}$; $n \geq 1$.
 
 %%%% VAJE
+\vspace{-2ex}
 \section{Vaje}
 
 \textsc{Trditev:} Naj bo $X = X_1  \amalg X_2 $, $|X_1|=n_1, |X_2|=n_2,|X|=n$.
@@ -357,14 +355,15 @@ $T$ drevo. Potem $C(T)$ vsebuje bodisi 1 bodisi 2 vozlišči.
 
 $\operatorname{rad}(G) \leq \operatorname{diam}(G) \leq 2\operatorname{rad}(G)$
 
+$W(K_{1,n}) = n^2, n\geq 3$, $W(P_n) = \frac{1}{6}n(n^2-1), n\geq 2$, $W(K_{1,n}
+\square P_n) = \frac{1}{6}(n+1)^2n(n^2-1)$.
+
 Pogoj 4 točk implicira trikotniško neenakost.
 
 Razdalja v drevesu zadošča pogoju 4 točk.
 
-$W(K_{1,n}) = n^2, n\geq 3$, $W(P_n) = \frac{1}{6}n(n^2-1), n\geq 2$, $W(K_{1,n}
-\square P_n) = \frac{1}{6}(n+1)^2n(n^2-1)$.
-
 %%% UPORABNO
+\vspace{-2ex}
 \section{Uporabno}
 
 $D_{2n} = $ grupa simetrij pravilnega $n$-kotnika. $|D_{2n}| = 2n$, $D_{2n} =
