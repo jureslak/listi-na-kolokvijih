@@ -342,8 +342,9 @@ for k = 1 to m: // m je veliko število
 \end{verbatim}
 \normalsize
 Če imamo lastni vektor $v$, potem želimo imeti lastno vrednost $\lambda$.
-Najboljši približek je Raylegihov kvocient: $\rho(A, v) = \frac{z^\H\!\!Az}{z^\H
-z}$.
+Najboljši približek je \textbf{Raylegihov kvocient}: $\rho(A, v) = \frac{z^\H\!\!Az}{z^\H
+z}$. Velja: $\rho(\alpha x, A) = \rho(x, A)$, $\rho(x_i, A) = \lambda_i$, če
+$x_i$ lastni vektor. Minimum $\|Ax-\sigma x\|_2$ je dosežen pri $\rho(x, A)$.
 Kot kriterij v potenčni metodi uporabimo \verb'|A * z - p(A, z)| < eps'.
 
 Če imamo dober približek $\tilde{\lambda}$ za lastno vrednost vrednost
@@ -637,6 +638,64 @@ treba transponirati.
 \xrightarrow{P_3 \cdot}
 \]
 
+%%%%%%%%%%%%%%% SIMETRIČNI PROBLEM LASTNIH VREDNOSTI
+\subsection*{Simetrični problem lastnih vrednosti}
+Matriko $A$ = $A^\T$ lahko vedno diagonaliziramo in lastne vrednosti so realne.
+Lastni vektorji tvorijo ONB. Schurova forma je diagonalna.
+
+Izrek: (o prepletanju)
+Naj bo $A$ $n \times n$ simetrična matrika. Če je $A_k$ vodilna $k \times k$
+podmatirka, $k = 1, \dots, n-1$ velja: $\lambda_{k+1}(A_{k+1}) \leq
+\lambda_k(A_k) \leq \lambda_k(A_{k+1}) \leq \dots \leq \lambda_2(A_{k+1}) \leq
+\lambda_1(A_k) \leq \lambda_1(A_{k+1})$.
+
+Izrek o inerciji: Če je $A$ simetrična in $X$ nesingularna potem imata $X^\T A
+X$ enako število pozitivnih, negativnih in ničelnih lastnih vrednosti.
+
+Metode za izračun lastnih vrednosti:
+
+Inverzna iteracija (zgoraj), če imamo približek za lastno vrednost in želimo
+lastni vektor.
+
+Rayleighova iteracija, če imamo približek za lastni vektor $z_k$:
+\begin{verbatim}
+for k = 0, 1, ...
+    sigma_k = p(z_k, A)
+    reši (A - sigma_k I) y_(k+1) = z_k
+    z_(k+1) = y_(k+1) / ||y_(k+1)||
+\end{verbatim}
+
+\textbf{QR iteracija}: Na začetku reduciramo $A$ na tridiagonalno ( = zg. Hess). Izvajamo
+QR iteracijo z enojnimi premiki, ker so vse lv realne. Stane $30n + O(1)$
+operacij in $n + O(1)$ kv. korenov.
+
+\subsection*{Bisekcija}
+Lahko ugotovimo, koliko je lastnih vrednosti, ki so manjše ali enake $x$. To
+vodi v bisekcijo, s pomočjo katere izračunamo eno samo lastno vrednosti. Pri
+določanju števila lastnih vrednosti pomaga Sturmovo zaporedje.
+
+\textbf{Sturmovo zaporedje}
+Matrika $T$ je tridiagonalna
+($\diag(a_1,\dots,a_n)+\diag(b_1,\dots,b_{n-1},1)+\diag(b_1,\dots,b_{n-1},-1)$)\\
+$f_0(\lambda)=1$, $f_1(\lambda)=a_1-\lambda$,
+$f_{k+1}(\lambda)=(a_{k+1}-\lambda)f_k(\lambda)-b_k^2f_{k-1}(\lambda)$\\
+Zapišemo zaporedje $f(x)$, preštejemo kolikokrat se predznak zamenja
+(+ 0 $-$ in $-$ 0 + šteje za eno zamenjavo, če je 0 na koncu ne upoštevamo
+kot zamenjava). Kolikor je menjav predznaka, toliko je lastnih
+vrednosti na $(-\infty, x]$.
+
+\subsection*{Deli in vladaj}
+Tridiagonalno simetrično matriko $T$ napišemo kot $T = [T_1, 0; 0, T_2] + \rho
+vv^\T$, $\rho = b_m$ in $v = e_m + e_{m+1}$ (razdelimo na dva kosa in odštejemo
+$b_{mm}$). Rekurzivno poračunamo lastne vrednosti manjših dveh podmatrik.
+$T_1 = Q_1D_1Q_1^\T$, $T_2 = Q_2D_2Q_1^\T$, da poračunamo lastne vrednosti
+$T$ moramo rešiti sekularno enačbo $1 + \rho \sum_{i=1}^n \frac{u_i^2}{a_i -
+\lambda} = f(\lambda) = 0$. Aproksimiramo z racionalno funkcijo.
+
+\subsection*{Jacobijeva iteracija}
+Pomnožimo z rotacije z leve in z desne, da ubijemo največjega, ali pa vse po
+vrsti, ali pa tiste ki so nad nekim pragom.
+
 %%%%%%%%%%%%%%%   POSPLOŠENE LASTNE VREDNOSTI
 \subsection*{Posplošeni problem lastnih vrednosti}
 
@@ -668,17 +727,7 @@ $ K=
 k_1+k_2 & -k_2&\\-k_2 & k_2+k_3 & -k_3\\ &-k_3&k_3+k_4
 \end{bmatrix}$
 rešujemo sistem $\omega^2My+Ky=0$, kar lahko prevedemo na
-$M^{-1}Ky=\lambda y$, $\lambda=\omega^2$
-
-\subsection*{Sturmovo zaporedje}
-Matrika $T$ je tridiagonalna
-($\diag(a_1,\dots,a_n)+\diag(b_1,\dots,b_{n-1},1)+\diag(b_1,\dots,b_{n-1},-1)$)\\
-$f_0(\lambda)=1$, $f_1(\lambda)=a_1-\lambda$,
-$f_{k+1}(\lambda)=(a_{k+1}-\lambda)f_k(\lambda)-b_k^2f_{k-1}(\lambda)$\\
-Zapišemo zaporedje $f(x)$, preštejemo kolikokrat se predznak zamenja
-(+ 0 $-$ in $-$ 0 + šteje za eno zamenjavo, če je 0 na koncu ne upoštevamo
-kot zamenjava). Kolikor je menjav predznaka, toliko je lastnih
-vrednosti na $(x, \infty)$.
+$-M^{-1}Ky=\lambda y$, $\lambda=\omega^2$
 
 
 
