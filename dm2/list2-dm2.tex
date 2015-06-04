@@ -99,7 +99,7 @@ $\widehat{G} = \{ \widehat{g} ; g\in G \}$ je (permutacijska) grupa.
 Naj bo $\alpha_i$ število disjunktnih ciklov dolžine $i$ v $\pi$ zapisanem kot
 produkt disjunktnih ciklov. ($\alpha_1 = $ število negibnih točk $\pi$.)
 
-Če $|\pi| = n$, potem $\alpha_i + 2\alpha_2 + \ldots + n\alpha_n= n$.
+Če $|\pi| = n$, potem $\alpha_1 + 2\alpha_2 + \ldots + n\alpha_n= n$.
 
 $z(\pi ; x_1,\ldots ,x_n)=x_1^{\alpha_1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}$
 imenujemo \textbf{ciklični indeks permutacije $\pi$}
@@ -112,7 +112,7 @@ Vrtiljaku ustreza ciklična grupa, ogrlici pa diedrska. $D_{2n}$ je grupa
 simetrij pravilnega $n$-kotnika.
 
 \textsc{Izrek:} $Z(C_n; x_1,\ldots, x_n) = \frac{1}{n} \displaystyle \sum_{d
-\mid n} \phi (d)x_d^{\frac{n}{d}}$, \quad $\phi(p^k) = p^k(p-1)$.
+\mid n} \phi (d)x_d^{\frac{n}{d}}$, \quad $\phi(p^k) = p^{k-1}(p-1)$.
 
 \begin{tabular}[h!]{*{21}{|c}|} \hline
 $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 &
@@ -234,9 +234,9 @@ To število obstaja!
 
 \textsc{Definicije:}
 \begin{enumerate}
-\item \textbf{Interval $I_G(u,v)$} med vozliščema $u$ in $v$ v grafu $G$ je množica vozlišč, ki ležijo na najkrajši $u,v$-poti.
-\item \textbf{Ekscentričnost vozlišča} $u$ grafa $G$, ecc$_g(u) = \max{\{d(u,x);x \in V(G) \}}$.
-\item \textbf{Polmer} grafa $G$: rad$(G) = \min_u{\max_v{\{ d(u,x)\}}}$ = minimalna ekscentričnost grafa.
+\item \textbf{Interval $I_G(u,v)$} med vozliščema $u$ in $v$ v grafu $G$ je  množica vozlišč, ki ležijo na najkrajših $u,v$-poteh.
+\item \textbf{Ekscentričnost vozlišča} $u$ grafa $G$, ecc$_G(u) = \max{\{d(u,x);x \in V(G) \}}$.
+\item \textbf{Polmer} grafa $G$: rad$(G) = \min_u{\max_v{\{ d(u,v)\}}}$ = minimalna ekscentričnost grafa.
 \item \textbf{Center} grafa $G$, $C(G)$, je množica vozlišč, ki realizirajo polmer.
 \item \textbf{Premer} grafa, diam$(G) = \max_{u,v \in V(G)}d(u,v)$.
 \item Podgraf $H$ grafa $G$ je \textbf{izometrični podgraf}, če velja: $\forall u,v \in V(H): d_H(u,v) = d_G(u,v)$.
