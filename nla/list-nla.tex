@@ -24,6 +24,7 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 \usepackage{icomma}
 \usepackage{units}
+\usepackage{bbm} %% za \mathbb{1}
 
 \newtheorem{izrek}{Izrek}
 \newtheorem{posledica}{Posledica}
@@ -390,6 +391,11 @@ Potem vsaka lastna vrednost leži v vsaj enem Gerschgorinovem krogu. Če $m$
 krogov $C_i$ sestavlja povezano množico, ločeno od ostalih $n-m$ krogov, potem
 ta množica vsebuje natanko $m$ lastnih vrednosti.
 
+Če množimo $A$ z diagonalno matriko $D$ (ponavadi le en element na diagonali
+različen od 1), torej $D{-1}AD$, nam to ne spremeni lastnih vrednosti. Na novi
+matriki lahko ponovno uporabimo Greschgorinov izrek in dobimo drugačne ocene.
+
+
 Diagonalno dominantna matrika ($|a_{ij}| > \sum_{j=1, j\neq i}^n|a_{ij}|$) je obrnljiva.
 
 %%%%%%%%%%%%%%%%                    INTERPOLACIJA
@@ -491,6 +497,45 @@ Rešitev po metodi najmanjših kvadratov: $x = \sum_{i=1}^n\frac{u_i^\T
 b}{\sigma_i}v_i = A^+b$.
 Aproksimacija matrike z matriko nižjega ranga:
 $A_k = \sum_{i=1}^k \sigma_i u_i v_i^\T$.
+
+Regularizacija: Pozabimo na manjše sing vrednosti, ki povzročajo napake.
+$x = \sum_{i=1}^n \phi_i \frac{u_i^\T b}{\sigma_i}v_i$, za
+$\phi_i = (i \leq k)$ ali $\phi_i = \frac{\sigma_i^2}{\sigma_i^2 +
+\alpha^2}$.
+
+Totalni najmanjši kvadrati:
+rešitev predoločenega sistema $Ax = b$, kjer poiščemo najbližji par $[\tilde{A},
+\tilde{b}]$, da $x$ reši sistem $\tilde{A}x = \tilde{b}$.
+$x$, ki reši ta sistem dobimo kot:
+$x_{\text{TLS}} = \frac{-1}{v'_{n+1,n+1}}
+  \begin{bmatrix}
+    v_{1,n+1}' & \dots & v_{n,n+1}' \\
+  \end{bmatrix}^\T$.
+
+Nelinearne probleme najmanjših kvadratov: $F(x) = 0$, rešitev je $x$, ki
+minimizira $\|F(x)\|_2$. Rešujemo z Newtonovo metodi:
+$x_{r+1} = x_r - J_F^+(x_r)F(x_r)$.
+
+%%%%%%%%%%%%%%%   POSPLOŠENE LASTNE VREDNOSTI
+\subsection*{Posplošeni problem lastnih vrednosti}
+
+Množico vseh matrik oblike $A-\lambda B$ imenujemo matrični šop. Karakteristični
+polinom šopa $(A,B)$ je $p(\lambda)=\det (A-\lambda B)$. Če je $p$ identično
+enak $0$, je šop singularen, sicer je regularen.
+Če je šop regularen in velja $Ax = \lambda Bx$  za nek $x\not=0$, je $\lambda$
+lastna vrednost in $x$ desni lastni vektor. Če za regularen šop velja $Bx=0$ za
+nek $x\not=0$ je $\lambda=\infty$ lastna vrednost šopa in $x$ pripadajoči desni
+lastni vektor.
+Simetrično velja za leve lastne vektorje.
+
+Če je karakteristični polinom šopa $(A, B)$ stopnje $m\leq n$ ima šop $m$ lastnih
+vrednosti, ki so rešitve $p(\lambda)=0$ in neskončno lastno vrednost z
+večkratnostjo $n-m$.
+
+Če je B nesingularna, so vse lastne vrednosti končne in so enake lastnim
+vrednostim matrik $B^{-1}A$ in $AB^{-1}$. Neskončna lastna vrednost se pojavi,
+ko je $B$ singularna, in njena večkratnost je enaka $\dim(\ker(B))$.
+
 
 
 \end{document}
