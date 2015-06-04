@@ -179,27 +179,25 @@ for j = 1 to n:
             a_ik = a_ik - l_ij * a_jk
 \end{verbatim}
 \normalsize
-
-Postopek na roke:
-\begin{enumerate*}
-  \item * Če delamo pivotiranje zamenjamo primerne vrstice in stolpce v
-    $A, P, Q$, da je $a_{00}$ največji. \label{enum:lu:pivot}
-  \item Prvi stolpec delimo z $a_{00}$, razen $a_{00}$, ki ga pustimo na miru.
-  \item Za vsak element v podmatriki $A(2:n, 2:n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
-    a_{1j}$ (odštejemo produkt  $\leftarrow$ in $\uparrow$).
-  \item Ponovimo postopek na matriki $A(2:n, 2:n)$.
-\end{enumerate*}
-
-Delno pivotiranje uporablja samo matriko $P$, za LU razcep brez pivotiranja pa
-preskočimo~\ref{enum:lu:pivot}.
-
+%
+% Postopek na roke:
+% \begin{enumerate*}
+%   \item * Če delamo pivotiranje zamenjamo primerne vrstice in stolpce v
+%     $A, P, Q$, da je $a_{00}$ največji. \label{enum:lu:pivot}
+%   \item Prvi stolpec delimo z $a_{00}$, razen $a_{00}$, ki ga pustimo na miru.
+%   \item Za vsak element v podmatriki $A(2:n, 2:n)$: $a_{ij} = a_{ij} - a_{i1} \cdot
+%     a_{1j}$ (odštejemo produkt  $\leftarrow$ in $\uparrow$).
+%   \item Ponovimo postopek na matriki $A(2:n, 2:n)$.
+% \end{enumerate*}
+%
+%
 Skalarni produkt potrebuje $2n$ operacij. Reševanje s premimi substitucijami
 potrebuje $n^2$, z obratnimi $n^2+n$. Reševanje z LU razcepom (brez pivotiranja) potrebuje
 $\frac23n^3 + \frac32n^2 + \frac56n$ operacij.
-
+%
 Za izračunani LU razcep $\hat{L}\hat{U} = A + E$ velja $|E| \leq
 nu|\hat{L}||\hat{U}|$.
-
+%
 Pivotna rast: $g = \frac{\max u_{ij}}{\max a_{ij}}$. Pri delnem pivotiranju $g < 2^n$.
 
 \textsc{Razcep Choleskega:}
@@ -212,14 +210,14 @@ for k = 1 to n:
         v_ik = 1/v_kk * (a_ik - sum(v_ij * v_kj, j = 1 to k))
 \end{verbatim}
 \normalsize
-Postopek na roke po stolpcih:
-\begin{enumerate*}
-  \item Če sem diagonalen element: odštejem od sebe skalarni produkt vrstice na
-    levo same s sabo in se korenim.
-  \item Če nisem diagonalni: od sebe odštejem skalarni produkt vrstice levo od
-    sebe z vrstico levo od mojega diagonalnega. Nato se delim z
-    diagonalnim.
-\end{enumerate*}
+% Postopek na roke po stolpcih:
+% \begin{enumerate*}
+%   \item Če sem diagonalen element: odštejem od sebe skalarni produkt vrstice na
+%     levo same s sabo in se korenim.
+%   \item Če nisem diagonalni: od sebe odštejem skalarni produkt vrstice levo od
+%     sebe z vrstico levo od mojega diagonalnega. Nato se delim z
+%     diagonalnim.
+% \end{enumerate*}
 
 Razcep stane $\frac13n^3$ operacij. Je obratno stabilno. Je enoličen.
 
@@ -527,7 +525,7 @@ ortogonalnimi transformacijami $Q$, dokler ne skonvergira do shurove forme.
 Pomaga nam izrek o implicitnem $Q$.
 
 Izrek: Če je $Q  = [q_1, \dots, q_n]$ taka ortogonalna matrika, da je $H = Q^\T
-A Q$ zg. Hessenbergova, je $Q$ do predznaka natančno določena s $q_1$.
+A Q$ nerazcepna zg. Hessenbergova, je $Q$ do predznaka natančno določena s $q_1$.
 
 Ko imamo $A$ zg. Hessengergovo jo pomnožimo z leve z Givensovo rotacijo
 $\tilde{R}$, ki ima
@@ -718,6 +716,69 @@ ko je $B$ singularna, in njena večkratnost je enaka $\dim(\ker(B))$.
 Če je A singularna, si lastne vrednosti šopa enake recipročnim lastnim
 vrednostim $A^{-1}B$ in $BA^{-1}$ (lastna vrednost 0 pomeni, da ima šop lastno
 vrednost $\infty$)
+
+Za regularen šop obstajata matriki $Q$, $Z$, da je $Q^\H(A-\lambda B)Z =
+S-\lambda T$, kjer sta $S$ in $T$ trikotni matriki. Lastne vrednosti so
+$s_{ii}/t_{ii}$. To vodi v \textbf{QZ iteracijo}:
+$A$ in $B$ najprej reduciramo na zg. Hess. $B$ reduciramo s $QR$ razcepom na zg.
+trikotno. Potem popravljamo $A$ in hkrati nazaj $B$.
+\[
+A = \begin{bmatrix}
+  \star & \star & \star & \star \\
+  \star & \star & \star & \star \\
+  \framebox{$\star$} & \star & \star & \star \\
+  \framebox{$\star$} & \star & \star & \star \\
+\end{bmatrix}
+\xrightarrow{R_{34}^\T\cdot}
+\begin{bmatrix}
+  \star & \star & \star & \star \\
+  \star & \star & \star & \star \\
+  * & * & * & * \\
+            & * & * & * \\
+\end{bmatrix}
+\xrightarrow{\cdot R_{34}^\T}
+\begin{bmatrix}
+  \star & \star & * & * \\
+  \framebox{$\star$} & \star & * & * \\
+  \framebox{$\star$} & \star & * & * \\
+        & \star & * & * \\
+\end{bmatrix}
+\xrightarrow{R_{23}^\T\cdot}
+\]\[
+B = \begin{bmatrix}
+  \star & \star & \star & \star \\
+        & \star & \star & \star \\
+        &       & \star & \star \\
+        &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{R_{34}^\T\cdot}
+\begin{bmatrix}
+  \star & \star & \star & \star \\
+        & \star & \star & \star \\
+        &       & * & * \\
+        &       & \framebox{+}  & \framebox{*} \\
+\end{bmatrix}
+\xrightarrow{\cdot R_{34}^\T}
+\begin{bmatrix}
+  \star & \star & * & * \\
+        & \star & * & * \\
+        &       & * & * \\
+        &       &   & * \\
+\end{bmatrix}
+\xrightarrow{R_{23}^\T\cdot}
+\]
+Kasneje izvajamo dvojni premik, podobno kot pri QR množimo najprej s
+$\tilde{P}$, ki ima prvi stolpec enak $N_k$ zgrajena iz matrike $A_kB_k^{-1}$.
+Potem množimo z leve s $3 \times 3$ Hausholderjevimi zrcaljenji, in z desne
+popravimo grbo (rabimo več kot en korak).
+
+\subsection*{Nelinearni problemi lastnih vrednosti}
+$T(\lambda)$ je neka kvadratna matrika, elementi so gladke funkcije $\lambda$.
+Če je $y^\H T(\lambda) = 0$ za nek $\lambda$, je to lastni par. Problem je
+regularen če je $T \not\equiv 0$. Kvadratični problem $T(\lambda) = \lambda^2M +
+\lambda C + K$ lahko lineariziramo v $[0,N; -K,-C] - \lambda[N,0; 0,M]$.
+
+Tak sistem dobimo pri \textbf{nihanju}:
 
 Za primer lastnih frekvenc nihanja
 |--///$k_1$///--[$m_1$]--///$k_2$///--[$m_2$]--///$k_3$///--[$m_3$]--///$k_4$///--| zapišemo \\
