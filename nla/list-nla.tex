@@ -76,6 +76,7 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 \renewcommand{\H}{\mathsf{H}\!}
 
 \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\diag}{diag}
 
 \begin{document}
 
@@ -516,6 +517,8 @@ Nelinearne probleme najmanjših kvadratov: $F(x) = 0$, rešitev je $x$, ki
 minimizira $\|F(x)\|_2$. Rešujemo z Newtonovo metodi:
 $x_{r+1} = x_r - J_F^+(x_r)F(x_r)$.
 
+%%%%%%%%%%%%%%%   NESIMETR IČPROBLEM LASTNIH VREDNOSTI LASTNNIH
+
 %%%%%%%%%%%%%%%   POSPLOŠENE LASTNE VREDNOSTI
 \subsection*{Posplošeni problem lastnih vrednosti}
 
@@ -535,6 +538,29 @@ večkratnostjo $n-m$.
 Če je B nesingularna, so vse lastne vrednosti končne in so enake lastnim
 vrednostim matrik $B^{-1}A$ in $AB^{-1}$. Neskončna lastna vrednost se pojavi,
 ko je $B$ singularna, in njena večkratnost je enaka $\dim(\ker(B))$.
+Če je A singularna, si lastne vrednosti šopa enake recipročnim lastnim
+vrednostim $A^{-1}B$ in $BA^{-1}$ (lastna vrednost 0 pomeni, da ima šop lastno
+vrednost $\infty$)
+
+Za primer lastnih frekvenc nihanja
+|--///$k_1$///--[$m_1$]--///$k_2$///--[$m_2$]--///$k_3$///--[$m_3$]--///$k_4$///--| zapišemo \\
+$M=\diag(m_1,m_2,m_3)$,\\
+$ K=
+\begin{bmatrix}
+k_1+k_2 & -k_2&\\-k_2 & k_2+k_3 & -k_3\\ &-k_3&k_3+k_4
+\end{bmatrix}$
+rešujemo sistem $\omega^2My+Ky=0$, kar lahko prevedemo na
+$M^{-1}Ky=\lambda y$, $\lambda=\omega^2$
+
+\subsection*{Sturmovo zaporedje}
+Matrika $T$ je tridiagonalna
+($\diag(a_1,\dots,a_n)+\diag(b_1,\dots,b_{n-1},1)+\diag(b_1,\dots,b_{n-1},-1)$)\\
+$f_0(\lambda)=1$, $f_1(\lambda)=a_1-\lambda$,
+$f_{k+1}(\lambda)=(a_{k+1}-\lambda)f_k(\lambda)-b_k^2f_{k-1}(\lambda)$\\
+Zapišemo zaporedje $f(x)$, preštejemo kolikokrat se predznak zamenja
+(+ 0 $-$ in $-$ 0 + šteje za eno zamenjavo, če je 0 na koncu ne upoštevamo
+kot zamenjava). Kolikor je menjav predznaka, toliko je lastnih
+vrednosti na $(x, \infty)$.
 
 
 
