@@ -77,6 +77,7 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
 
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{sl}
 
 \begin{document}
 
@@ -517,7 +518,124 @@ Nelinearne probleme najmanjših kvadratov: $F(x) = 0$, rešitev je $x$, ki
 minimizira $\|F(x)\|_2$. Rešujemo z Newtonovo metodi:
 $x_{r+1} = x_r - J_F^+(x_r)F(x_r)$.
 
-%%%%%%%%%%%%%%%   NESIMETR IČPROBLEM LASTNIH VREDNOSTI LASTNNIH
+%%%%%%%%%%%%%%%   NESIMETRIČEN PROBLEM LASTNIH VREDNOSTI LASTNNIH
+\subsection*{Nesimetričen problem lastnih vrednosti}
+\subsubsection*{Implicitni QR}
+Najprej reduciramo $A$ na zg. Hessenbergovo. Nato $A$ z leve in desne množimo z
+ortogonalnimi transformacijami $Q$, dokler ne skonvergira do shurove forme.
+Pomaga nam izrek o implicitnem $Q$.
+
+Izrek: Če je $Q  = [q_1, \dots, q_n]$ taka ortogonalna matrika, da je $H = Q^\T
+A Q$ zg. Hessenbergova, je $Q$ do predznaka natančno določena s $q_1$.
+
+Ko imamo $A$ zg. Hessengergovo jo pomnožimo z leve z Givensovo rotacijo
+$\tilde{R}$, ki ima
+prvi stolpec enak normiranemu prvemu stolpcu $A_k - \sigma_kI$. S tem smo zagovotili, da ima naš $Q$ s
+katerim množimo pravilen prvi stolpec (kot bi delali Gram-Schidta ali QR
+razcep). Da ohranimo podobnost, pomnožimo še z desne. Pojavi se grba, ki jo z
+rotacijami izženemo iz matrike in s tem naredimo en korak. Ponavljamo dokler
+niso vsi pod diagonalo mrtvi.
+\[
+\begin{bmatrix}
+  \star & \star & \star & \star & \star \\
+  \star & \star & \star & \star & \star \\
+        & \star & \star & \star & \star \\
+        &       & \star & \star & \star \\
+        &       &       & \star & \star \\
+        &       &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{\tilde{R}^\T\cdot}
+\begin{bmatrix}
+  * & * & * & * & * \\
+  * & * & * & * & * \\
+        & \star & \star & \star & \star \\
+        &       & \star & \star & \star \\
+        &       &       & \star & \star \\
+        &       &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{\cdot \tilde{R}}
+\begin{bmatrix}
+  * & * & \star & \star & \star \\
+  * & * & \star & \star & \star \\
+     +  & *     & \star & \star & \star \\
+        &       & \star & \star & \star \\
+        &       &       & \star & \star \\
+        &       &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{R_{23}^\T\cdot}
+\begin{bmatrix}
+  \star & \star & \star & \star & \star \\
+  * & * & * & * & * \\
+    & * & * & * & * \\
+        &       & \star & \star & \star \\
+        &       &       & \star & \star \\
+        &       &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{\cdot R_{23}}
+\begin{bmatrix}
+  \star & * & *     & \star & \star \\
+  \star & * & *     & \star & \star \\
+        & * & *     & \star & \star \\
+        & + & *     & \star & \star \\
+        &   &       & \star & \star \\
+        &   &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{R_{34}^\T\cdot}
+\]
+
+Dvojni premiki: Prvo podobnostno transformacijo $\tilde{P}$ izberemo, da bo imela enak prvi
+stolpec kot pri navadni QR, to je enak kot matrika $N_k = A_k^2 - \tr(S_k)A_k +
+\det(S_k)I$, kjer je $S_k$ spodnja $2\times 2$ matrika matrike $A_k$. $N_k$ ima
+v prvem stolpcu samo 3 elemente neničlne, zato dobimo grbo velikosti 2 in delamo
+s Hausholderjevimi zrcaljenji $3\times 3$. To so simetrične matrike, zato ni
+treba transponirati.
+\[
+\begin{bmatrix}
+  \star & \star & \star & \star & \star \\
+  \star & \star & \star & \star & \star \\
+        & \star & \star & \star & \star \\
+        &       & \star & \star & \star \\
+        &       &       & \star & \star \\
+        &       &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{\tilde{P}\cdot}
+\begin{bmatrix}
+  * & * & *     & *     & * \\
+  * & * & *     & *     & * \\
+  + & * & *     & *     & * \\
+    &   & \star & \star & \star \\
+    &   &       & \star & \star \\
+    &   &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{\cdot \tilde{P}}
+\begin{bmatrix}
+  * & * & * & \star & \star \\
+  * & * & * & \star & \star \\
+  + & * & * & \star & \star \\
+  + & + & * & \star & \star \\
+    &   &   & \star & \star \\
+    &   &   &       & \star \\
+\end{bmatrix}
+\xrightarrow{P_2\cdot}
+\begin{bmatrix}
+  \star & \star & \star & \star & \star \\
+  *     & *     & *     & *     & * \\
+        & *     & *     & *     & * \\
+        & *     & *     & *     & * \\
+        &       &       & \star & \star \\
+        &       &       &       & \star \\
+\end{bmatrix}
+\xrightarrow{\cdot P_2}
+\begin{bmatrix}
+  \star & * & * & * & \star \\
+  \star & * & * & * & \star \\
+        & * & * & * & \star  \\
+        & * & * & * & \star  \\
+        & + & + & * & \star \\
+        &   &   &   & \star \\
+\end{bmatrix}
+\xrightarrow{P_3 \cdot}
+\]
 
 %%%%%%%%%%%%%%%   POSPLOŠENE LASTNE VREDNOSTI
 \subsection*{Posplošeni problem lastnih vrednosti}
