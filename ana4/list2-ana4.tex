@@ -1,0 +1,378 @@
+\documentclass[10pt,a4paper]{amsart}
+\usepackage[slovene]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\titleformat*{\section}{\sc\bfseries\centering}
+
+\usepackage[
+top    = 1.7cm,
+bottom = 1.7cm,
+left   = 1.5cm,
+right  = 1.5cm]{geometry}
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{enumerate}}
+
+
+\newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dy}{\ensuremath{\,\mathrm{d}y}}
+\newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
+\newcommand{\dd}[1]{\ensuremath{\,\mathrm{d}#1}}
+\let\oldint\int
+\renewcommand{\int}{\oldint \!}
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+\pagestyle{empty}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% \fontsize{9pt}{9pt}
+
+\textbf{Trik} za neskončne sisteme NDE za $x_n(t)$: rešimo ga s pomočjo rodovne
+funkcije $Q(y,t) = \sum_{n=1}^\infty x_n(t) y^n$. Velja: $yQ_y =
+\sum_{n=1}^\infty nx_n(t)y^n, Q_y - Q / y = \sum_{n=1}^\infty nx_{n+1}y^n$.
+Z upoštevanjem rekurzivne zveze dobimo PDE za $Q$, rešimo, razvijemo rešitev v
+vrsto po $y$.
+
+
+Zanimivi vzorci: $(x^2)^. = 2x\dot{x}$, $(xy)^. = \dot{x}y + x\dot{y}$,
+$(\ln{x})^. = \frac{\dot{x}}{x}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Če $u = u(x,y)$ določa ploskev v prostoru, je enačba tangentne ravnine na to
+ploskev v točki $(x,y,u(x,y))$ enaka: $u_x (X-x) + u_y (Y-y) - (U-u)=0$ (normala
+ravnine je $(A,B,C) = (u_x,u_y,-1)$). Razdalja od tangentne ravnine do točke
+$(a,b,c)$ je: $$ \text{d}(AX+BY+CU+D=0, (a,b,c)) =
+\frac{|Aa+Bb+Cc+D|}{\sqrt{A^2+B^2+C^2}}.  $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Eksistenčni izrek za nelinearne PDE 1. reda}
+
+\textsc{Izrek:} Naj bo $u=u(x, y)$ rešitev začetnega problema $$
+F(x,y,u,u_x,u_y)=0, \quad u(\alpha(s),\beta(s))=\gamma(s), \quad \text{za } s
+\in \mathcal{I}.  $$ Če sta $p(s)=u_x(\alpha(s),\beta(s))$ in $q(s) =
+u_y(\alpha(s),\beta(s))$ edini funkciji, za kateri velja: \begin{enumerate}
+  \item $ (T) = \det{\begin{bmatrix} \alpha' & \beta' \\ F_p & F_q
+  \end{bmatrix}}(s) \neq 0 \quad \forall s \in \mathcal{I},$ \item
+    $F(\alpha(s),\beta(s),\gamma(s),p(s),q(s))=0 \quad \forall s \in
+    \mathcal{I},$ \item $(p(s),q(s),-1) \cdot (\alpha'(s),\beta'(s),\gamma'(s))
+      = 0 \quad \forall s \in \mathcal{I}.$ \end{enumerate} Potem je rešitev $u$
+  enolična.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Separacija spremenljivk}
+
+$L^2([-\pi,\pi]) = \{f:[-\pi,\pi]\longrightarrow \R, \int_{-\pi}^\pi |f|^2
+\dx < \infty \}$ je vektorski prostor s skalarnim produktom $\langle f, g\rangle =
+\int_{-\pi}^\pi f(x)g(x)\dx$. Množica funkcij
+
+  $\{\frac{1}{2\pi},
+  \frac{1}{\pi}\sin{x},\frac{1}{\pi}\cos{x},\frac{1}{\pi}\sin{2x},\frac{1}{\pi}\cos{2x},\ldots
+\}$. je \underline{kompleten} (vsako funkcijo se da na enoličen način razviti v
+tem sistemu),  \underline{ortonormiran} sistem za ta produkt.
+
+\textbf{Fourierjev razvoj:} $f \in L^2([-\pi,\pi])$:
+
+$\tilde{f}(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}(a_n\cos{nx} + b_n\sin{nx})$,
+
+$a_n = \langle f,\frac{1}{\pi}\cos{nx} \rangle =
+\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos{nx}\dx, \quad n \in \N_0$,
+
+$b_n = \langle f,\frac{1}{\pi}\sin{nx} \rangle =
+\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin{nx}\dx, \quad n \in \N$.
+
+\textbf{Sinusna in kosinusna vrsta:} $f \in L^2([0,\pi])$. Za tako funkcijo
+obstaja liha in soda razširitev na $[-\pi,\pi]$. Za $\tilde{f}^S$ so $b_n = 0$,
+za $\tilde{f}^L$ pa $a_n = 0$.
+
+\textsc{Posledica:} Na $[0,\pi]$ za $f$ obstajata dva razvoja: \textbf{sinusna
+vrsta}: $\tilde{f}(x) =  \sum_{n=1}^{\infty} \tilde{b}_n\sin{nx}$ in
+\textbf{kosinusna vrsta}:  $\tilde{f}(x) =
+\frac{\tilde{a}_0}{2}\sum_{n=1}^{\infty}\tilde{a}_n\cos{nx}$, kjer sta:
+
+$\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N$,
+
+$\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in \N_0$.
+
+S substitucijo lahko razvoje prevedemo na poljuben interval $[-L,L]$ oz.
+$[0,L]$, $L > 0$. V tem primeru je $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
+x}{L}},\frac{1}{L}\cos{\frac{n\pi x}{L}},\ldots \}$ KONS.
+
+
+\textbf{Metoda separacije:} Kdaj jo uporabimo: \underline{Trivialen pogoj:}
+Imamo eno spremenljivko na omejenem območju in s homogenimi robnimi pogoji, npr.
+
+$x \in [0,L]$: $\alpha u(0,t) + \beta u_x(0,t) = 0, \quad \gamma u(_,t)+\delta
+u_x(L,t) = 0, \quad \alpha, \beta, \gamma, \delta \in \R.$
+
+\underline{Netrivialen pogoj:} Diferencialni operator, ki določa PDE, zadošča
+Sturm-Liouvillovi teoriji, tj. množica lastnih funkcij, ki jih dobimo iz robnega
+problema tvori K.O.N.S.
+
+
+\underline{\textbf{Štirje koraki metode:}}
+
+$\#1$: Separacija: nastavek $u(x,t)=X(x)T(t)$. (Nastavek vstavi v enačbo in loči
+spremenljivke, dobljeno enačbo pa enači z $\mu \in \R$.)
+
+$\#2$: Določanje lastnih funkcij $\{X_n\}_{n\in \N}$ iz robnega problema za NDE.
+(Reši NDE za X, homogeni robni pogoji ti dajo začetne pogoje za NDE. Obravnavati
+moraš možnosti $\mu >0, \mu = 0, \mu < 0$. Če je v kakšnem primeru $X \equiv 0$,
+lastnih funkcij v tem primeru ni. Pri izbire množice lastnih funkcij, lahko
+splošno konstanto za vsak člen BŠS postaviš na 1.)
+
+$\#3$: Iskanje pripadajočih $\{T_n \}_{n \in \N}$. (Z $\mu$, ki ga dobiš v $\#2$
+in določa družino lastnih funkcij, reši še NDE za $T$. Splošno konstanto lahko
+tu pustiš, lahko si misliš, za je v njej spravljena konstanta iz množice lastnih
+funkcij za $X$.)
+
+$\#4$: Splošna rešitev $u = \sum_{n=1}^\infty X_nT_n$. (Rešitev naj bi bila
+odvisna od števno mnogo konstant, ki jih določiš iz nehomogenega robnega pogoja.
+Dobro je opaziti morebitne sinusne/kosinusne vrste, ki jih dobiš z robnim
+pogojem, in upoštevati zvezo s koeficienti iz razvoja v sinusno/kosinusnov
+vrsto, torej $C_n = a_n \text{ ali } b_n$.)
+
+Če za nobeno od spremenljivk nimamo homogenega robnega pogoja, razbijemo problem
+na dva dela, npr: $\triangle u = 0$ razbijemo na $u = v+w$, $\triangle v = 0$ in
+$\triangle w = 0$, pri čemer $v$-ju in $w$-ju damo vsakemu en homogen robni
+pogoj in en pogoj, ki je od $u$-ja.
+
+\textbf{Reševanje nehomogene enačbe s separacijo:}
+
+Naredimo $\#$1 in $\#$2 za homogen problem (pri drugem koraku preveri, da lastne funkcije tvorijo K.O.S., tj. $\langle X_n,X_m \rangle = c_n \delta_{n,m} = \begin{cases} c_n; & n = m \\ 0; & n \neq m \end{cases}$, korak $\#$3 pa naredimo tako, da rešitev iz $\#2$ vstavimo v $u(x,t) = \sum_{n=0}^\infty X_n(x)T_n(t)$. Tu $T_n$ ne poznamo in računamo za splošnega. Vstavimo v nehomogeno enačbo in primerjamo koeficiente s tistimi iz razvoja nehomogenega dela po $\{X_n\}$. Partikularno rešitev dobimo z nastavkom. Ko razvijamo nehomogeni del $f(x)$ po $\{X_n\}$, si napišemo $\tilde{f}(x) = \sum_{n=0}^\infty \frac{\langle f,X_n \rangle}{\langle X_n,X_n \rangle}X_n$ in izračunamo koeficiente iz razvoja.
+
+\textbf{Laplace v polarnih koordinatah:} $\triangle u = u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2}u_{\varphi \varphi}$
+
+Pri polarnih koordinatah imamo namesto homogenega robnega pogoja lahko tudi naravni pogoj: $2\pi$-periodičnost: $u(r,0) = u(r,2\pi), u_\varphi (r,0) = u_\varphi (r,2\pi)$.
+
+Sistem $M\vec{x} = 0 $ ima netrivialne rešitve $\Longleftrightarrow \det{M} = 0$.
+
+%%%%%%%%%%%%%%%%%%eksistenca
+\textbf{Eksistenca:}
+
+$u_{tt}-c^2u_{xx}=0, c \in \R_+$ ima pri pogojih $u_x(0,t) = u_x(L,t)=0$ in $u(x,0) = u_t(x,0) = 0$ edino rešitev $u \equiv 0$. Za poljubne $a,b,f,g \in \mathcal{C}^\infty (\R)$ ima $u_{tt}-c^2u_{xx}=0, c \in \R_+$ enolično rešitev tudi pri pogojih $u_x(0,t) = a(t),u _x(L,t)=b(t), u(x,0) = f(x)$ in $u_t(x,0) = g(x)$
+
+\vspace{-.4cm}  %Iz nekega razloga tukaj naredi velik prazen prostor (pojavilo se je, ko je nastal spodnje okolje enumerate, razmaka ni, če je vspace < -0.4
+
+\section*{Sturm-Liouvilleova teorija}
+
+$A \in \R^{n \times n}$ je sebi adjungiran, če $A^T = A$, lastni vektorji tvorijo ortogonalno bazo. Velja $\langle Av,w \rangle = (Av)^Tw = v^TA^Tw = v^T(Aw) = \langle v,Aw \rangle$.
+
+\textbf{$SL$-operator}: $L:\mathcal{C}^2([a,b])\longrightarrow \mathcal{C}([a,b])$, $L(y) = \frac{1}{r(x)}[(p(x)y')'+q(x)y]$, $p,r > 0, x \in [a,b]$ + mešani ali periodični robni pogoj. Gledamo skrčitev operatorja na $V = \mathcal{C}^2(]a,b]) \cap \{\text{robni pogoji}\}$, $\langle f,g\rangle = \int_a^bf(x)g(x)r(x)dx$, kjer je $r$ utež.
+
+$L$ je sebi adjungiran za robne pogoje:
+
+\begin{enumerate}
+\item $y(a)=y(b)=0$,
+\item $y'(a)=y'(b)=0$,
+\item $y(a)=y(b), p(a)y'(a)=p(b)y'(b)$.
+\end{enumerate}
+
+\textbf{Izrek} (o kompletnosti lastnih funkcij)
+
+$p \in \mathcal{C}^1([a,b]); r,q \in \mathcal{C}([a,b]); p,r > 0$. Potem ima lastni problem $L(y) = \mu y$ pri robnih pogojih
+\vspace{-0.2cm}
+\begin{enumerate}[a)]
+\item $\alpha y(a) + \beta y'(a) = 0$ in $\gamma y(b) +  \delta y'(b) = 0$; $\alpha^2 + \beta^2 \neq 0, \gamma^2 + \delta^2 \neq 0$
+\item $y(a) = y(b)$ in $\alpha y'(a) = \beta y'(b)$; $\alpha^2+\beta^2 \neq 0$
+\end{enumerate}
+števno mnogo rešitev z lastnostmi:
+\begin{enumerate}[i)]
+\item $\mu_1 < \mu_2 < \ldots, $ $\lim_{n\rightarrow \infty}\mu_n = \infty$
+\item $\{g_n\}_{n\in \N}$ tvorijo \underline{kompleten} ortonormiran sistem v $L^2([a,b])\cap \{\text{robni pogoji}\}$ in za $ \langle f,g \rangle = \int_a^b f(x)g(x)r(x)dx$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Uporabni integrali:}
+$\int_a^b \sin(\frac{n\pi x}{b-a})^2 \dx = \int_a^b \cos(\frac{n\pi x}{b-a})^2 \dx =
+\frac{(b-a) \left(\sin \left(\frac{2 \pi  a n}{b-a}\right)-\sin \left(\frac{2
+\pi  b n}{b-a}\right)+2 \pi  n\right)}{4 \pi  n}, n \in \C$
+
+$(\int_a^bx^i \sin(kx)\dx)_{1,2} = (\frac{-\sin (a k)+a k \cos (a k)+\sin (b k)-b k \cos (b k)}{k^2},\frac{(a^2 k^2-2) \cos (a k)-2 a k \sin (a k)+(2-b^2 k^2) \cos (b k)+2 b k \sin (b k)}{k^3})$
+
+$(\int_a^bx^i \cos(kx)\dx)_{1,2} = (\frac{-a k \sin (a k)-\cos (a k)+b k \sin (b k)+\cos (b k)}{k^2},\frac{(2-a^2 k^2) \sin (a k)-2 a k \cos (a k)+(b^2 k^2-2) \sin (b k)+2 b k \cos (b k)}{k^3})$
+
+$\int_a^b (x-a)(b-x)\sin(kx)\dx = \frac{k (a-b) (\sin (a k)+\sin (b k))+2 \cos (a k)-2 \cos (b k)}{k^3}$
+
+$\int_a^b (x-a)(b-x)\cos(kx)\dx = \frac{k (a-b) (\cos (a k)+\cos (b k))-2 \sin (a k)+2 \sin (b k)}{k^3}$
+
+$\int_a^b \sin(mx)\cos(kx)\dx = \frac{-k \sin (a k) \sin (a m)-m \cos (a k) \cos (a m)+k \sin (b k) \sin (b m)+m \cos (b k) \cos (b m)}{k^2-m^2}$
+
+$\int_a^b \sin(mx)\sin(kx)\dx = \frac{-m \sin (a k) \cos (a m)+k \cos (a k) \sin (a m)+m \sin (b k) \cos (b m)-k \cos (b k) \sin (b m)}{k^2-m^2}$
+
+$\int_a^b \cos(mx)\cos(kx)\dx = \frac{-k \sin (a k) \cos (a m)+m \cos (a k) \sin (a m)+k \sin (b k) \cos (b m)-m \cos (b k) \sin (b m)}{k^2-m^2}$, povsod so $m, n, k \in \C$
+
+
+\textbf{Polarne koordinate:}
+$u_x = \cos (\varphi ) u_r-\frac{\sin (\varphi)}{r}u_\varphi,
+u_y = \sin (\varphi)u_r+\frac{\cos (\varphi )}{r}u_\varphi, \\
+u_{xx} =
+\cos^2(\varphi) u_{rr}
+- \frac{\sin(2\varphi)}{r}u_{r\varphi}
++ \frac{\sin^2(\varphi)}{r^2}u_{\varphi\varphi}
++ \frac{\sin^2(\varphi)}{r}u_r
++ \frac{\sin(2\varphi)}{r^2}u_\varphi, \\
+u_{xy} =
+\frac{1}{2} \sin (2 \varphi) u_{rr}
++ \frac{\cos (2 \varphi )}{r}u_{r\varphi}
+-\frac{\sin (2 \varphi)}{2 r^2} u_{\varphi\varphi}
+- \frac{\sin (2 \varphi)}{2 r}u_r
+- \frac{\cos (2 \varphi)}{r^2}u_\varphi, \\
+u_{yy} =
+\sin ^2(\varphi ) u_{rr}
++\frac{\sin (2\varphi )}{r} u_{r\varphi}
++ \frac{\cos ^2(\varphi )}{r^2} u_{\varphi\varphi}
++\frac{\cos ^2(\varphi )}{r} u_r
+-\frac{\sin(2\varphi)}{r^2} u_{\varphi},
+\Delta u = u_{rr} + \frac1r u_r + \frac{1}{r^2}u_{\varphi\varphi}
+$
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{NDE višjih redov}
+Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
+strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
+Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
+(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
+uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
+\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
+\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
+$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
+y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+%%
+%%\subsubsection*{Geometrija}
+%%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
+%%Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
+%%Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
+%%$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
+%
+%%\begin{tabular}{ll}
+%%Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
+%%Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
+%%\end{tabular}
+%
+%
+\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
+= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
+
+$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
+\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
++ C$ \\
+
+$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
+\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
+
+$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
+\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
+
+$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
+\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+
+$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
+\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+
+$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
+\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
+
+$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
+\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
+
+$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
+
+\end{tabular}
+
+\vspace{1ex}
+
+\parbox{0.4\textwidth}{
+\textbf{Faktorizacija:} \\
+$\sin{x} + \sin{y} = 2\sin\frac{x+y}{2}\cos\frac{x-y}{2}$\\
+$\sin{x} - \sin{y} = 2\cos\frac{x+y}{2}\sin\frac{x-y}{2}$\\
+$\cos{x} + \cos{y} = 2\cos\frac{x+y}{2}\cos\frac{x-y}{2}$\\
+$\cos{x} - \cos{y} =-2\sin\frac{x+y}{2}\sin\frac{x-y}{2}$
+}
+\parbox{0.4\textwidth}{
+\textbf{Antifaktorizacija:} \\
+$\sin\alpha\cos\beta = \frac{1}{2}\left[\sin(\alpha+\beta)+\sin(\alpha-\beta) \right]  $ \\
+$\cos\alpha\sin\beta = \frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta) \right]  $ \\
+$\cos\alpha\cos\beta = \frac{1}{2}\left[\cos(\alpha+\beta)+\cos(\alpha-\beta) \right]  $ \\
+$\sin\alpha\sin\beta = -\frac{1}{2}\left[\cos(\alpha+\beta)-\cos(\alpha-\beta)  \right]$ \\
+}
+%
+%
+%
+%$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
+%\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
+%\frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0 \end{cases} $\\ $\int
+%\frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx
+%+ c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj
+%kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+%
+%Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),
+%\dx = \dt/(1 + t^2)$\\ Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2),
+%\cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+%
+%
+%
+
+\vfill
+\hfill avtor: Klemen Sajovec, malo sprememb: Jure Slak
+
+\end{document}
+
