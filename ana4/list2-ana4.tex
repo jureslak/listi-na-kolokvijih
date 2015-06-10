@@ -9,10 +9,10 @@
 \titleformat*{\section}{\sc\bfseries\centering}
 
 \usepackage[
-top    = 1.7cm,
-bottom = 1.7cm,
-left   = 1.5cm,
-right  = 1.5cm]{geometry}
+top    = 0.9cm,
+bottom = 0.9cm,
+left   = 1cm,
+right  = 1cm]{geometry}
 
 % ukazi za matematicna okolja
 \theoremstyle{definition} % tekst napisan pokoncno
@@ -72,48 +72,6 @@ right  = 1.5cm]{geometry}
 
 % \fontsize{9pt}{9pt}
 
-\textbf{Trik} za neskončne sisteme NDE za $x_n(t)$: rešimo ga s pomočjo rodovne
-funkcije $Q(y,t) = \sum_{n=1}^\infty x_n(t) y^n$. Velja: $yQ_y =
-\sum_{n=1}^\infty nx_n(t)y^n, Q_y - Q / y = \sum_{n=1}^\infty nx_{n+1}y^n$.
-Z upoštevanjem rekurzivne zveze dobimo PDE za $Q$, rešimo, razvijemo rešitev v
-vrsto po $y$.
-
-
-Zanimivi vzorci: $(x^2)^. = 2x\dot{x}$, $(xy)^. = \dot{x}y + x\dot{y}$,
-$(\ln{x})^. = \frac{\dot{x}}{x}$.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Če $u = u(x,y)$ določa ploskev v prostoru, je enačba tangentne ravnine na to
-ploskev v točki $(x,y,u(x,y))$ enaka: $u_x (X-x) + u_y (Y-y) - (U-u)=0$ (normala
-ravnine je $(A,B,C) = (u_x,u_y,-1)$). Razdalja od tangentne ravnine do točke
-$(a,b,c)$ je: $$ \text{d}(AX+BY+CU+D=0, (a,b,c)) =
-\frac{|Aa+Bb+Cc+D|}{\sqrt{A^2+B^2+C^2}}.  $$
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Eksistenčni izrek za nelinearne PDE 1. reda}
-
-\textsc{Izrek:} Naj bo $u=u(x, y)$ rešitev začetnega problema $$
-F(x,y,u,u_x,u_y)=0, \quad u(\alpha(s),\beta(s))=\gamma(s), \quad \text{za } s
-\in \mathcal{I}.  $$ Če sta $p(s)=u_x(\alpha(s),\beta(s))$ in $q(s) =
-u_y(\alpha(s),\beta(s))$ edini funkciji, za kateri velja: \begin{enumerate}
-  \item $ (T) = \det{\begin{bmatrix} \alpha' & \beta' \\ F_p & F_q
-  \end{bmatrix}}(s) \neq 0 \quad \forall s \in \mathcal{I},$ \item
-    $F(\alpha(s),\beta(s),\gamma(s),p(s),q(s))=0 \quad \forall s \in
-    \mathcal{I},$ \item $(p(s),q(s),-1) \cdot (\alpha'(s),\beta'(s),\gamma'(s))
-      = 0 \quad \forall s \in \mathcal{I}.$ \end{enumerate} Potem je rešitev $u$
-  enolična.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -152,7 +110,7 @@ $\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N$,
 $\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in \N_0$.
 
 S substitucijo lahko razvoje prevedemo na poljuben interval $[-L,L]$ oz.
-$[0,L]$, $L > 0$. V tem primeru je \\ $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
+$[0,L]$, $L > 0$. V tem primeru je $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
 x}{L}},\frac{1}{L}\cos{\frac{n\pi x}{L}},\ldots \}$ KONS.
 
 
@@ -309,51 +267,39 @@ Nekaj izračunanih transformacij:
 
 \textbf{Uporaba Fourierovih transformacij v PDE}
 
-Želimo reševati PDE, v kateri je ena spremenljivka neomejena, npr. $x \in \R, t
-> 0$.  $U(x,t) =  \F(u)(x,t) = \int_{-\infty}^\infty u(s,t)e^{isx}ds$
-(transformacija po $x$)
+Želimo reševati PDE, v kateri je ena spremenljivka neomejena, npr. $x \in \R, t > 0$.
+$U(x,t) =  \F(u)(x,t) = \int_{-\infty}^\infty u(s,t)e^{isx}ds$ (transformacija po $x$)
 
-Veljajo pravila: \begin{enumerate}
+Veljajo pravila:
+\begin{enumerate}
 
-\item $\F(\alpha u + \beta v) = \alpha \F(u) + \beta \F (v)$, $\alpha , \beta
-  \in \C$
+\item $\F(\alpha u + \beta v) = \alpha \F(u) + \beta \F (v)$, $\alpha , \beta \in \C$
 
-\item $\F(\frac{\partial^n}{\partial t^n} u) = \frac{\partial^n}{\partial
-  t^n}\F(u) = \frac{\partial^n}{\partial t^n} U$
+\item $\F(\frac{\partial^n}{\partial t^n} u) = \frac{\partial^n}{\partial t^n}\F(u) = \frac{\partial^n}{\partial t^n} U$
 
 \item $\F(\frac{\partial^n}{\partial x^n}u) = (-ix)^n \F(u) = (-ix)^n U$
 
 \end{enumerate}
 
-Strategija: PDE z odvodi po $t$ in $x$ s Fourierovo transformacijo pretvorimo v
-NDE z odvodi po $t$ (tudi začetne pogoje), nato pa dobljeno rešitev NDE z
-inverzno Fourierovo transformacijo pretvorimo v rešitev PDE.
+Strategija: PDE z odvodi po $t$ in $x$ s Fourierovo transformacijo pretvorimo v NDE z odvodi po $t$ (tudi začetne pogoje), nato pa dobljeno rešitev NDE z inverzno Fourierovo transformacijo pretvorimo v rešitev PDE.
 
-Enačba $u_{xx} = u_t + u$ ima enolično rešitev pri pogojih $u(x,0)=g(x), \forall
-g \in \Cont^\infty (\R)$. Če je $g$ soda (oz. liha), je rešitev soda (oz. liha).
-(Včasih za uporabo te lastnosti lahko naše začetne podatke sodo (oz. liho)
-razširiti, odvisno katera razširitev nam da nov pogoj. Z razširjenim začetnim
-podatkom nalogo rešimo, na koncu pa vzamemo samo ustrezno polovico.)
+Enačba $u_{xx} = u_t + u$ ima enolično rešitev pri pogojih $u(x,0)=g(x), \forall g \in \Cont^\infty (\R)$. Če je $g$ soda (oz. liha), je rešitev soda (oz. liha). (Včasih za uporabo te lastnosti lahko naše začetne podatke sodo (oz. liho) razširiti, odvisno katera razširitev nam da nov pogoj. Z razširjenim začetnim podatkom nalogo rešimo, na koncu pa vzamemo samo ustrezno polovico.)
 
-\textbf{Konvolucija}: $(f \ast g) (x) = \int_{-\infty}^\infty f(\xi) g(x-\xi)
-\dxi$
+\textbf{Konvolucija}: $f \ast g (x) = \int_{-\infty}^\infty f(\xi) g(x-\xi) \dxi$
 
 Velja: $\F (f \ast g) = \F(f) \F (g)$
 
-Splošna rešitev enačbe $u_t - 2u_{xx} = 0$ pri pogoju $u(x,0) = f(x)$ je:
-$u(x,t) = \sqrt{ \frac{1}{8 \pi t}} \int_{-\infty}^\infty f(\xi) e^{- \frac{(x-
-\xi )^2}{8t}} \dxi$
+Splošna rešitev enačbe $u_t - 2u_{xx} = 0$ pri pogoju $u(x,0) = f(x)$ je: $u(x,t) = \sqrt{ \frac{1}{8 \pi t}} \int_{-\infty}^\infty f(\xi) e^{- \frac{(x- \xi )^2}{8t}} \dxi$
 
-Če iščemo splošno rešitev za poljuben začetni pogoj, se pri uporabi inverzne
-Fourierove transformacije splača uporabiti lastnost konvolucije in vriniti $\F
-\F^{-1}$.
+Če iščemo splošno rešitev za poljuben začetni pogoj, se pri uporabi inverzne Fourierove transformacije splača uporabiti lastnost konvolucije in vriniti $\F \F^{-1}$.
 
 
 \vspace{-0.4cm}
 %%%%%%%%%%%%%%%%%%% DIRAC
 \section*{Diracova $\delta$-funkcija}
 
-Diracova $\delta$-funkcija zadošča dvema lastnostma: \begin{enumerate}
+Diracova $\delta$-funkcija zadošča dvema lastnostma:
+\begin{enumerate}
 
 \item $\delta (x) = 0$ za $\R \backslash \{0\}$,
 
@@ -361,22 +307,18 @@ Diracova $\delta$-funkcija zadošča dvema lastnostma: \begin{enumerate}
 
 \end{enumerate}
 
-Diracovo $\delta$-funkcijo lahko realiziramo tudi kot limito funkcij $f_n (x) =
-\begin{cases} n;& |x| \leq \frac{1}{2n} \\ 0;& \text{sicer}\end{cases}$ ali kot
-limito funkcij $g_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2x^2}$. Definiramo jo lahko
-tudi kot $\delta (x) := \F^{-1}(1) = \frac{1}{2\pi} \F (1)$.
+Diracovo $\delta$-funkcijo lahko realiziramo tudi kot limito funkcij $f_n (x) = \begin{cases} n;& |x| \leq \frac{1}{2n} \\ 0;& \text{sicer}\end{cases}$ ali kot limito funkcij $g_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2x^2}$. Definiramo jo lahko tudi kot $\delta (x) := \F^{-1}(1) = \frac{1}{2\pi} \F (1)$.
 
 Za $f \in \Cont^\infty (\R)$ velja: $\int_\R \delta (x-a) f(x) \dx = f(a)$.
 
 \section*{Poissonovo jedro in Greenova funkcija}
 
-Rešujemo za: $u \in \Cont^2 ( \Omega) \cap \Cont (\bar{\Omega}), f \in \Cont (
-\Omega ), g \in \Cont ( \partial \Omega )$ in $\Omega$ odprta, povezana
-podmnožica v $\R^2$.
+Rešujemo za: $u \in \Cont^2 ( \Omega) \cap \Cont (\bar{\Omega}), f \in \Cont ( \Omega ), g \in \Cont ( \partial \Omega )$ in $\Omega$ odprta, povezana podmnožica v $\R^2$.
 
 $\triangle u = f$ je Poissonova enačba.
 
-Robni pogoji: \begin{enumerate}
+Robni pogoji:
+\begin{enumerate}
 
 \item $u|_{\partial \Omega} = g$ Dirichletov
 
@@ -386,209 +328,221 @@ Robni pogoji: \begin{enumerate}
 
 Poseben primer tega problema za $f=0$ so harmonične funkcije.
 
-\textbf{Izrek o povprečni vrednosti za harmonične funkcije}: $u(x_0,y_0) =
-\frac{1}{2\pi R} \int_{\partial K((x_0,y_0),R)}u \ds$.
+\textbf{Izrek o povprečni vrednosti za harmonične funkcije}: $u(x_0,y_0) = \frac{1}{2\pi R} \int_{\partial K((x_0,y_0),R)}u \ds$.
 
-\textbf{Šibki princip maksima}: Če je $\Omega$ omejeno: $\max_{\Omega} v =
-\max_{\partial \Omega} v$ oz.  $\min_{\Omega} v = \min_{\partial \Omega} v$
+\textbf{Šibki princip maksima}: Če je $\Omega$ omejeno: $\max_{\Omega} v = \max_{\partial \Omega} v$ oz.  $\min_{\Omega} v = \min_{\partial \Omega} v$
 
-\textbf{Krepki princip maksima}: Če je $\Omega$ neomejeno in če harmonična
-funkcija doseže lokalni ekstrem v notranjosti $\Omega$, je funkcija konstantna.
+\textbf{Krepki princip maksima}: Če je $\Omega$ neomejeno in če harmonična funkcija doseže lokalni ekstrem v notranjosti $\Omega$, je funkcija konstantna.
 
-Zveza med harmoničnimi in holomorfnimi funkcijami: \begin{enumerate}
+Zveza med harmoničnimi in holomorfnimi funkcijami:
+\begin{enumerate}
 
 \item Če $f = u + iv$ holomorfna, potem sta $u$ in $v$ harmonični.
 
-\item Če je $u$ harmonična, potem obstaja harmonična funkcija $v$, da je $f = u
-  + iv$ holomorfna (velja samo za enostavno povezana območja $\Omega$).
+\item Če je $u$ harmonična, potem obstaja harmonična funkcija $v$, da je $f = u + iv$ holomorfna (velja samo za enostavno povezana območja $\Omega$).
 
 \end{enumerate}
 
-Množica harmoničnih homogenih polinomov stopnje $n$ ($p(\lambda x,\lambda y) =
-\lambda^n p(x,y)$) tvori vektorski prostor dimenzije 2 za vsak $n \in \N$.
+Množica harmoničnih homogenih polinomov stopnje $n$ ($p(\lambda x,\lambda y) = \lambda^n p(x,y)$) tvori vektorski prostor dimenzije 2 za vsak $n \in \N$.
 
-Za omejeno območje $\Omega \subseteq \R^2$ velja $\int_\Omega u \triangle u
-\mathrm{d}S + \int_\Omega \nabla u \cdot \nabla u \mathrm{d}S = \int_{\partial
-\Omega} u(\nabla u \cdot \vec{n})\ds$, kjer je $\vec{n}$ zunanja enotska normala
-na $\Omega$.
+Za omejeno območje $\Omega \subseteq \R^2$ velja $\int_\Omega u \triangle u \mathrm{d}S + \int_\Omega \nabla u \cdot \nabla u \mathrm{d}S = \int_{\partial \Omega} u(\nabla u \cdot \vec{n})\ds$, kjer je $\vec{n}$ zunanja enotska normala na $\Omega$.
 
-Edina rešitev enačbe $\triangle u = \lambda u$, $\lambda \geq 0$, $u|_{\partial
-\Omega} = 0$ je funkcija $u \equiv 0$.
+Edina rešitev enačbe $\triangle u = \lambda u$, $\lambda \geq 0$, $u|_{\partial \Omega} = 0$ je funkcija $u \equiv 0$.
 
 Dirichletov problem je na omejenem območju enolično rešljiv.
 
-Krivuljni integral vektorskega polja: $\int_{\partial \Omega}\vec{V}
-\mathrm{d}\vec{s} = \int_\alpha^\beta \vec{V}(\gamma (t))\cdot \dot{\gamma} (t)
-\mathrm{d}t = \int_{\partial \Omega} \vec{V} \cdot \vec{T} \ds$, kjer je
-$\vec{T} = \frac{\dot{\gamma}(t)}{||\dot{\gamma}(t)||}$
+Krivuljni integral vektorskega polja: $\int_{\partial \Omega}\vec{V} \mathrm{d}\vec{s} = \int_\alpha^\beta \vec{V}(\gamma (t))\cdot \dot{\gamma} (t)  \mathrm{d}t = \int_{\partial \Omega} \vec{V} \cdot \vec{T} \ds$, kjer je $\vec{T} = \frac{\dot{\gamma}(t)}{||\dot{\gamma}(t)||}$
 
-$\gamma (t) = (x(t),y(t))$, normalni vektor: $(\dot{y}(t), -\dot{x}(t))$:
-$\int_\alpha^\beta (P,Q)\cdot (\dot{x},\dot{y}) \mathrm{d}t = \int_\alpha^\beta
-(Q,-P)\cdot (\dot{y},-\dot{x}) \mathrm{d}t $
+$\gamma (t) = (x(t),y(t))$, normalni vektor: $(\dot{y}(t), -\dot{x}(t))$: $\int_\alpha^\beta (P,Q)\cdot (\dot{x},\dot{y}) \mathrm{d}t = \int_\alpha^\beta (Q,-P)\cdot (\dot{y},-\dot{x}) \mathrm{d}t $
 
-Greenova formula za integral vektorskega polja po normali: $\int_\Omega (Q_x -
-P_y)  \mathrm{d} S = \int_{\partial \Omega} (P,Q)  \mathrm{d}\vec{s} =
-\int_{\partial \Omega} (Q,-P) \cdot \vec{n} \ds$, kjer $\vec{n}$ enotska
-normala.
+Greenova formula za integral vektorskega polja po normali: $\int_\Omega (Q_x - P_y)  \mathrm{d} S = \int_{\partial \Omega} (P,Q)  \mathrm{d}\vec{s} = \int_{\partial \Omega} (Q,-P) \cdot \vec{n} \ds$, kjer $\vec{n}$ enotska normala.
 
 \textbf{Reševanje Dirichletovega problema}
 
-Rešitev je vsota dveh problemov: $\triangle v = 0, v|_{\partial \Omega} = g$
-(Poissonov del) in $\triangle w = f, w|_{\partial \Omega} = 0$ (Greenov del).
+Rešitev je vsota dveh problemov: $\triangle v = 0, v|_{\partial \Omega} = g$ (Poissonov del) in $\triangle w = f, w|_{\partial \Omega} = 0$ (Greenov del).
 
-Poissonov del: $v(x,y) = \int_{\partial \Omega} P(x,y,s)g(s)\ds$, $P:\Omega
-\times \partial \Omega \rightarrow \R$, $(x,y,s) \mapsto P(x,y,s)$
-(\underline{Poissonovo jedro})
+Poissonov del: $v(x,y) = \int_{\partial \Omega} P(x,y,s)g(s)\ds$, $P:\Omega \times \partial \Omega \rightarrow \R$, $(x,y,s) \mapsto P(x,y,s)$ (\underline{Poissonovo jedro})
 
-Greenov del: $w(x,y) = \int_\Omega G(x,y;\xi,\eta ) f(\xi , \eta )
-\mathrm{d}S(\xi,\eta)$, $G: \Omega \times \Omega \backslash \{ (p,p); p\in
-\Omega \}  \rightarrow \R$, $(x,y;\xi,\eta) \mapsto G(x,y; \xi, \eta)$
-(\underline{Greenova funkcija}).
+Greenov del: $w(x,y) = \int_\Omega G(x,y;\xi,\eta ) f(\xi , \eta )  \mathrm{d}S(\xi,\eta)$, $G: \Omega \times \Omega \backslash \{ (p,p); p\in \Omega \}  \rightarrow \R$, $(x,y;\xi,\eta) \mapsto G(x,y; \xi, \eta)$ (\underline{Greenova funkcija}).
 
-Greenova identiteta: $\int_\Omega (u \triangle v - v \triangle u)  \mathrm{d}S =
-\int_{\partial \Omega} (u \partial_{\vec{n}}v - v \partial_{\vec{n}} u) \ds$,
-kjer $\partial_{\vec{n}} v = \langle \nabla v , \vec{n} \rangle$ in $\vec{n}$
-zunanja normala.
+Greenova identiteta: $\int_\Omega (u \triangle v - v \triangle u)  \mathrm{d}S = \int_{\partial \Omega} (u \partial_{\vec{n}}v - v \partial_{\vec{n}} u) \ds$, kjer $\partial_{\vec{n}} v = \langle \nabla v , \vec{n} \rangle$ in $\vec{n}$ zunanja normala.
+
+Poissonovo jedro se vedno da izračunati iz Greenove funkcije. Velja zveza: $ P(x,y,t) = \partial_{\vec{n}} G (x,y;\xi , \eta ) |_{(\xi ,\eta ) \in \partial \Omega}$.
+
+\textbf{Kompleksni logaritem}: $\log z = \ln |z| + i \arg z$
+
+\textbf{Fundamentalna rešitev}: $\Gamma (x,y;\xi,\eta) = \frac{1}{4\pi} \ln ((\xi - x)^2 + (\eta - y)^2)=\frac{1}{2\pi} \ln |z-q| = Re ( \frac{1}{2\pi} \log (z-q) )$
+
+Greenova funkcija za:
+
+\begin{itemize}
+
+\item polravnino $\mathbb{H} = \{ (x,y) \in \R^2, y>0 \} = \{ Im(z) > 0 \}$:
+  $G(z,w) = \Gamma (z,w) - \Gamma ( \bar{z},w) =  \frac{1}{4\pi} \log
+  \left(\frac{(\xi -x)^2+(\eta -y)^2}{(\xi -x)^2+(\eta +y)^2}\right)$
+
+\item enotski disk $\mathbb{D} = \{ x^2+y^2<1 \}$: $G_{\mathbb{D}} = \frac{1}{2\pi} \ln | \frac{w-z}{1-\bar{z}w} |$
+
+\item pas $\R \times (-1,1)$: $G_{\R \times (-1,1)}(z,w) = \Gamma (e^{\frac{\pi}{2}(z+i)} , e^{\frac{\pi}{2}(w+i)}) - \Gamma (e^{\frac{\pi}{2}(\bar{z}-i)} , e^{\frac{\pi}{2}(w+i)})$
+
+\item disk z radijem $R$ presekan s polravnino $\mathbb{H}$: $G(z, w) = \frac{1}{2 \pi}\log\left|\frac{(z-w)(R^2 - zw)}{(z-\bar{w})(R^2-z\bar{w})} \right|$
+
+\end{itemize}
+
+Poissonovo jedro za:
+
+\begin{itemize}
+
+\item  polravnino $\mathbb{H}$: $ P(x, y, \xi) = \frac{y}{\pi  \left((\xi -x)^2+y^2\right)}$
+
+\item enotski disk: $P(r, \varphi, \vartheta) = \frac{1-r^2}{1 - 2r \cos(\theta -\varphi) +r^2}$
+
+\end{itemize}
+
+Pas  $\R \times (-1,1)$ s preslikavo $z \mapsto (z+i)\frac{\pi}{2}$ preslikamo v pas  $\R \times (0,\pi)$, tega pa z $e^{x+iy} = e^x(\cos y + i \sin y)$ v polravnino $\mathbb{H} = \{ (x,y) \in \R^2, y>0 \}$ (ker je $y \in (0,\pi)$, je $\sin y > 0$)
+
+Če je $\Omega \subset \C \backslash \mathbb{D}(a,r)$, potem obstaja natanko ena omejena rešitev Dirichletovega problema.
+
+Vsaka rešitev enačbe $\triangle (\xi, \eta) G(x,y;\xi,\eta) = \delta (\xi - x, \eta - y)$, $G|_{(\xi, \eta) \in \partial \Omega} = 0$ je za $(x,y) \in \Omega$ Greenova funkcija.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{Uporabni integrali:}
-$\int_\R e^{-x^2} \dx = \sqrt{\pi}$
 
-$\int_a^b \sin(\frac{n\pi x}{b-a})^2 \dx = \int_a^b \cos(\frac{n\pi x}{b-a})^2 \dx =
-\frac{(b-a) \left(\sin \left(\frac{2 \pi  a n}{b-a}\right)-\sin \left(\frac{2
-\pi  b n}{b-a}\right)+2 \pi  n\right)}{4 \pi  n}, n \in \C$
+\vfill \hfill avtor: Klemen Sajovec, popravki: Jure Slak
 
-$(\int_a^bx^i \sin(kx)\dx)_{1,2} = (\frac{-\sin (a k)+a k \cos (a k)+\sin (b k)-b k \cos (b k)}{k^2},\frac{(a^2 k^2-2) \cos (a k)-2 a k \sin (a k)+(2-b^2 k^2) \cos (b k)+2 b k \sin (b k)}{k^3})$
-
-$(\int_a^bx^i \cos(kx)\dx)_{1,2} = (\frac{-a k \sin (a k)-\cos (a k)+b k \sin (b k)+\cos (b k)}{k^2},\frac{(2-a^2 k^2) \sin (a k)-2 a k \cos (a k)+(b^2 k^2-2) \sin (b k)+2 b k \cos (b k)}{k^3})$
-
-$\int_a^b (x-a)(b-x)\sin(kx)\dx = \frac{k (a-b) (\sin (a k)+\sin (b k))+2 \cos (a k)-2 \cos (b k)}{k^3}$
-
-$\int_a^b (x-a)(b-x)\cos(kx)\dx = \frac{k (a-b) (\cos (a k)+\cos (b k))-2 \sin (a k)+2 \sin (b k)}{k^3}$
-
-$\int_a^b \sin(mx)\cos(kx)\dx = \frac{-k \sin (a k) \sin (a m)-m \cos (a k) \cos (a m)+k \sin (b k) \sin (b m)+m \cos (b k) \cos (b m)}{k^2-m^2}$
-
-$\int_a^b \sin(mx)\sin(kx)\dx = \frac{-m \sin (a k) \cos (a m)+k \cos (a k) \sin (a m)+m \sin (b k) \cos (b m)-k \cos (b k) \sin (b m)}{k^2-m^2}$
-
-$\int_a^b \cos(mx)\cos(kx)\dx = \frac{-k \sin (a k) \cos (a m)+m \cos (a k) \sin (a m)+k \sin (b k) \cos (b m)-m \cos (b k) \sin (b m)}{k^2-m^2}$, povsod so $m, n, k \in \C$
-
-
-\textbf{Polarne koordinate:}
-$u_x = \cos (\varphi ) u_r-\frac{\sin (\varphi)}{r}u_\varphi,
-u_y = \sin (\varphi)u_r+\frac{\cos (\varphi )}{r}u_\varphi, \\
-u_{xx} =
-\cos^2(\varphi) u_{rr}
-- \frac{\sin(2\varphi)}{r}u_{r\varphi}
-+ \frac{\sin^2(\varphi)}{r^2}u_{\varphi\varphi}
-+ \frac{\sin^2(\varphi)}{r}u_r
-+ \frac{\sin(2\varphi)}{r^2}u_\varphi, \\
-u_{xy} =
-\frac{1}{2} \sin (2 \varphi) u_{rr}
-+ \frac{\cos (2 \varphi )}{r}u_{r\varphi}
--\frac{\sin (2 \varphi)}{2 r^2} u_{\varphi\varphi}
-- \frac{\sin (2 \varphi)}{2 r}u_r
-- \frac{\cos (2 \varphi)}{r^2}u_\varphi, \\
-u_{yy} =
-\sin ^2(\varphi ) u_{rr}
-+\frac{\sin (2\varphi )}{r} u_{r\varphi}
-+ \frac{\cos ^2(\varphi )}{r^2} u_{\varphi\varphi}
-+\frac{\cos ^2(\varphi )}{r} u_r
--\frac{\sin(2\varphi)}{r^2} u_{\varphi},
-\Delta u = u_{rr} + \frac1r u_r + \frac{1}{r^2}u_{\varphi\varphi}
-$
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section*{NDE višjih redov}
-Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
-strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
-Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
-(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
-uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
-\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
-\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
-$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
-y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+%
+%$\int_a^b \sin(\frac{n\pi x}{b-a})^2 \dx = \int_a^b \cos(\frac{n\pi x}{b-a})^2 \dx =
+%\frac{(b-a) \left(\sin \left(\frac{2 \pi  a n}{b-a}\right)-\sin \left(\frac{2
+%\pi  b n}{b-a}\right)+2 \pi  n\right)}{4 \pi  n}, n \in \C$
+%
+%$(\int_a^bx^i \sin(kx)\dx)_{1,2} = (\frac{-\sin (a k)+a k \cos (a k)+\sin (b k)-b k \cos (b k)}{k^2},\frac{(a^2 k^2-2) \cos (a k)-2 a k \sin (a k)+(2-b^2 k^2) \cos (b k)+2 b k \sin (b k)}{k^3})$
+%
+%$(\int_a^bx^i \cos(kx)\dx)_{1,2} = (\frac{-a k \sin (a k)-\cos (a k)+b k \sin (b k)+\cos (b k)}{k^2},\frac{(2-a^2 k^2) \sin (a k)-2 a k \cos (a k)+(b^2 k^2-2) \sin (b k)+2 b k \cos (b k)}{k^3})$
+%
+%$\int_a^b (x-a)(b-x)\sin(kx)\dx = \frac{k (a-b) (\sin (a k)+\sin (b k))+2 \cos (a k)-2 \cos (b k)}{k^3}$
+%
+%$\int_a^b (x-a)(b-x)\cos(kx)\dx = \frac{k (a-b) (\cos (a k)+\cos (b k))-2 \sin (a k)+2 \sin (b k)}{k^3}$
+%
+%$\int_a^b \sin(mx)\cos(kx)\dx = \frac{-k \sin (a k) \sin (a m)-m \cos (a k) \cos (a m)+k \sin (b k) \sin (b m)+m \cos (b k) \cos (b m)}{k^2-m^2}$
+%
+%$\int_a^b \sin(mx)\sin(kx)\dx = \frac{-m \sin (a k) \cos (a m)+k \cos (a k) \sin (a m)+m \sin (b k) \cos (b m)-k \cos (b k) \sin (b m)}{k^2-m^2}$
+%
+%$\int_a^b \cos(mx)\cos(kx)\dx = \frac{-k \sin (a k) \cos (a m)+m \cos (a k) \sin (a m)+k \sin (b k) \cos (b m)-m \cos (b k) \sin (b m)}{k^2-m^2}$, povsod so $m, n, k \in \C$
+%
+%
+%\textbf{Polarne koordinate:}
+%$u_x = \cos (\varphi ) u_r-\frac{\sin (\varphi)}{r}u_\varphi,
+%u_y = \sin (\varphi)u_r+\frac{\cos (\varphi )}{r}u_\varphi, \\
+%u_{xx} =
+%\cos^2(\varphi) u_{rr}
+%- \frac{\sin(2\varphi)}{r}u_{r\varphi}
+%+ \frac{\sin^2(\varphi)}{r^2}u_{\varphi\varphi}
+%+ \frac{\sin^2(\varphi)}{r}u_r
+%+ \frac{\sin(2\varphi)}{r^2}u_\varphi, \\
+%u_{xy} =
+%\frac{1}{2} \sin (2 \varphi) u_{rr}
+%+ \frac{\cos (2 \varphi )}{r}u_{r\varphi}
+%-\frac{\sin (2 \varphi)}{2 r^2} u_{\varphi\varphi}
+%- \frac{\sin (2 \varphi)}{2 r}u_r
+%- \frac{\cos (2 \varphi)}{r^2}u_\varphi, \\
+%u_{yy} =
+%\sin ^2(\varphi ) u_{rr}
+%+\frac{\sin (2\varphi )}{r} u_{r\varphi}
+%+ \frac{\cos ^2(\varphi )}{r^2} u_{\varphi\varphi}
+%+\frac{\cos ^2(\varphi )}{r} u_r
+%-\frac{\sin(2\varphi)}{r^2} u_{\varphi},
+%\Delta u = u_{rr} + \frac1r u_r + \frac{1}{r^2}u_{\varphi\varphi}
+%$
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%\section*{NDE višjih redov}
+%Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
+%strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
+%Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
+%(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
+%uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
+%\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
+%\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
+%$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
+%y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
+%%%
+%%%\subsubsection*{Geometrija}
+%%%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
+%%%Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
+%%%Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
+%%%$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
 %%
-%%\subsubsection*{Geometrija}
-%%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
-%%Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
-%%Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
-%%$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
+%%%\begin{tabular}{ll}
+%%%Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
+%%%Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
+%%%\end{tabular}
+%%
+%%
+%\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
+%= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
 %
-%%\begin{tabular}{ll}
-%%Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
-%%Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
-%%\end{tabular}
+%$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
+%\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
+%+ C$ \\
 %
+%$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
+%\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
 %
-\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
-= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
-
-$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
-\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
-+ C$ \\
-
-$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
-\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
-
-$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
-\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
-
-$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
-\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-
-$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
-\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-
-$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
-\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
-
-$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
-\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
-
-$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
-
-\end{tabular}
-
-\vspace{1ex}
-
-\parbox{0.4\textwidth}{
-\textbf{Faktorizacija:} \\
-$\sin{x} + \sin{y} = 2\sin\frac{x+y}{2}\cos\frac{x-y}{2}$\\
-$\sin{x} - \sin{y} = 2\cos\frac{x+y}{2}\sin\frac{x-y}{2}$\\
-$\cos{x} + \cos{y} = 2\cos\frac{x+y}{2}\cos\frac{x-y}{2}$\\
-$\cos{x} - \cos{y} =-2\sin\frac{x+y}{2}\sin\frac{x-y}{2}$
-}
-\parbox{0.4\textwidth}{
-\textbf{Antifaktorizacija:} \\
-$\sin\alpha\cos\beta = \frac{1}{2}\left[\sin(\alpha+\beta)+\sin(\alpha-\beta) \right]  $ \\
-$\cos\alpha\sin\beta = \frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta) \right]  $ \\
-$\cos\alpha\cos\beta = \frac{1}{2}\left[\cos(\alpha+\beta)+\cos(\alpha-\beta) \right]  $ \\
-$\sin\alpha\sin\beta = -\frac{1}{2}\left[\cos(\alpha+\beta)-\cos(\alpha-\beta)  \right]$ \\
-}
+%$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
+%\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
 %
+%$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
+%\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
 %
+%$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
+%\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
 %
-%$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
-%\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
-%\frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0 \end{cases} $\\ $\int
-%\frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx
-%+ c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj
-%kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+%$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
+%\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
 %
-%Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),
-%\dx = \dt/(1 + t^2)$\\ Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2),
-%\cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+%$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
+%\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
 %
+%$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
 %
+%\end{tabular}
 %
+%\vspace{1ex}
+%
+%\parbox{0.4\textwidth}{
+%\textbf{Faktorizacija:} \\
+%$\sin{x} + \sin{y} = 2\sin\frac{x+y}{2}\cos\frac{x-y}{2}$\\
+%$\sin{x} - \sin{y} = 2\cos\frac{x+y}{2}\sin\frac{x-y}{2}$\\
+%$\cos{x} + \cos{y} = 2\cos\frac{x+y}{2}\cos\frac{x-y}{2}$\\
+%$\cos{x} - \cos{y} =-2\sin\frac{x+y}{2}\sin\frac{x-y}{2}$
+%}
+%\parbox{0.4\textwidth}{
+%\textbf{Antifaktorizacija:} \\
+%$\sin\alpha\cos\beta = \frac{1}{2}\left[\sin(\alpha+\beta)+\sin(\alpha-\beta) \right]  $ \\
+%$\cos\alpha\sin\beta = \frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta) \right]  $ \\
+%$\cos\alpha\cos\beta = \frac{1}{2}\left[\cos(\alpha+\beta)+\cos(\alpha-\beta) \right]  $ \\
+%$\sin\alpha\sin\beta = -\frac{1}{2}\left[\cos(\alpha+\beta)-\cos(\alpha-\beta)  \right]$ \\
+%}
+%%
+%%
+%%
+%%$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
+%%\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
+%%\frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0 \end{cases} $\\ $\int
+%%\frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx
+%%+ c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj
+%%kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+%%
+%%Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),
+%%\dx = \dt/(1 + t^2)$\\ Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2),
+%%\cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
+%%
+%%
+%%
 
-\vfill
-\hfill avtor: Klemen Sajovec, malo sprememb: Jure Slak
 
 \end{document}
 
