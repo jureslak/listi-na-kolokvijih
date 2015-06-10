@@ -46,8 +46,9 @@ right  = 1.5cm]{geometry}
 }
 {\end{enumerate}}
 
-
+\newcommand{\ds}{\ensuremath{\,\mathrm{d}s}}
 \newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dxi}{\ensuremath{\,\mathrm{d}\xi}}
 \newcommand{\dy}{\ensuremath{\,\mathrm{d}y}}
 \newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
 \newcommand{\dd}[1]{\ensuremath{\,\mathrm{d}#1}}
@@ -60,6 +61,8 @@ right  = 1.5cm]{geometry}
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\C}{\mathbb C}
 \newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Cont}{\mathcal{C}}
 
 \pagestyle{empty}
 
@@ -117,7 +120,7 @@ u_y(\alpha(s),\beta(s))$ edini funkciji, za kateri velja: \begin{enumerate}
 \section*{Separacija spremenljivk}
 
 $L^2([-\pi,\pi]) = \{f:[-\pi,\pi]\longrightarrow \R, \int_{-\pi}^\pi |f|^2
-\dx < \infty \}$ je vektorski prostor s skalarnim produktom $\langle f, g\rangle =
+\\dx < \infty \}$ je vektorski prostor s skalarnim produktom $\langle f, g\rangle =
 \int_{-\pi}^\pi f(x)g(x)\dx$. Množica funkcij
 
   $\{\frac{1}{2\pi},
@@ -149,7 +152,7 @@ $\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N$,
 $\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in \N_0$.
 
 S substitucijo lahko razvoje prevedemo na poljuben interval $[-L,L]$ oz.
-$[0,L]$, $L > 0$. V tem primeru je $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
+$[0,L]$, $L > 0$. V tem primeru je \\ $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
 x}{L}},\frac{1}{L}\cos{\frac{n\pi x}{L}},\ldots \}$ KONS.
 
 
@@ -232,12 +235,225 @@ $p \in \mathcal{C}^1([a,b]); r,q \in \mathcal{C}([a,b]); p,r > 0$. Potem ima las
 \end{enumerate}
 števno mnogo rešitev z lastnostmi:
 \begin{enumerate}[i)]
-\item $\mu_1 < \mu_2 < \ldots, $ $\lim_{n\rightarrow \infty}\mu_n = \infty$
+\item $\mu_1 > \mu_2 > \ldots, $ $\lim_{n\rightarrow \infty}\mu_n = -\infty$
 \item $\{g_n\}_{n\in \N}$ tvorijo \underline{kompleten} ortonormiran sistem v $L^2([a,b])\cap \{\text{robni pogoji}\}$ in za $ \langle f,g \rangle = \int_a^b f(x)g(x)r(x)dx$.
 \end{enumerate}
 
+Enačbe oblike $u_t = au_{xx} + bu_x + cu$, kjer $a,b,c \in \R$, $a\neq 0$, $u(o,t) = u(L,t) = 0$ lahko rešujemo s separacijo spremenljivk za poljubne koeficiente $a,b,c$.
+
+$y(x) = \tilde{A}x^{ia} + \tilde{B}x^{-ia} = A\cos{(a\ln{x})} + B\sin{(a\ln{x})}$
+
+Dejstvo, ali določena družina funkcij tvori K.O.S., preverjamo z identifikacijo istoležnih funkcij v $L(y) = \frac{1}{r(x)}[(p(x)y')'+q(x)y] = \mu y =$ naša enačba (npr.  $L(y) = \frac{1}{r(x)}[(p(x)y')'+q(x)y] = x^2y'' + xy' = \mu y$ za reševanje enačbe $ x^2y'' + xy' = \mu y$.) Poiščemo utež $r$ in za prostor vzamemo prostor funkcij, za katere rešujemo enačbo, presekan z robni pogoji.
+
+\textbf{Legendrova enačba}
+
+$L(y) = ((1-x^2)y')'=\mu y$, $x \in [-1,1]$. To je singularen diferencialni operator, saj $p(\pm 1) = 0$, izrek pa deluje za $p > 0$. $L$ je omejena v $x = \pm 1$ natanko tedaj, ko je $\mu = -n(n+1), n \in \N$. Tedaj obstajata neodvisni polinomski rešitvi stopenj $2m$ in $2m+1$.
+
+\textbf{Kvocientni kriterij} za vrsto $\sum C_n x^n$: $\lim_{n\rightarrow \infty}\left| \frac{C_{n+1} x^{n+1}}{C_n x^{n}}\right| < 1$, potem vrsta konvergira.
+
+\textbf{Raabejev kriterij} za vrsto $\sum C_n x^n$: $\lim_{n\rightarrow \infty}n(1-\frac{C_nx^n}{C_{n+1}x^{n+1}} < 1$, potem ta vrsta divergira.
+
+Če gledamo operator $L(y) = ((1-x^2)y')'=\mu y$ na prostoru $\mathcal{C}^2(-1,1) \cap \{\text{omejene funkcije v }\pm1 \}$, dobimo lastne pare $(-n(n+1),P_n)$ in $\{P_n \}_{n \in \N_0}$ je K.O.S.
+
+\textbf{Laplace v sferičnih koordinatah:} $\triangle u = \frac{1}{r^2} \frac{\partial}{\partial r}(r^2u_r) + \frac{1}{r^2}\left[ \frac{1}{\cos \vartheta} \frac{\partial}{\partial \vartheta}(\cos \theta u_\vartheta) + \frac{1}{\cos \vartheta} u_{\varphi \varphi} \right]$, $r \in [0,\infty ),\varphi \in [0,2\pi], \vartheta \in [-\frac{\pi}{2}, \frac{\pi}{2}]$.
+
+\textbf{Besslova enačba}
+
+$x^2y''+xy'+(x^2-n^2)y = 0$, $x > 0$, $n \in \N_0$, singularna za $x = 0$. Z nastavkom $y = \sum_{m = 0}^\infty C_m x^{m+k}$, $k \in \N_0,$ $C_0 \neq 0$ dobimo rešitev, ki je omejena v $x = 0$: $J_n(x) = C_0 \sum_{l = 0}^\infty \frac{(-1)^l}{2^{2l}l!(n+l)(n+l-1)\cdots (n+1)}x^{2l}$.
+
+\textbf{Dodatek k Besslovi enačbi:}
+\begin{enumerate}
+\item Enačbo lahko obravnavamo tudi za $n \in \R_+\backslash \N_0$, vendar v eksplicitni obliki namesto $(n+l)!$ dobimo $\Gamma (n+l+1)$.
+\item Enačbo lahko obravnavamo tudi za $n \in \R_-$, vendar dobimo Besslove funkcije drugega reda $Y_n$, ki so singularne v $x=0$.
+\item Splošna rešitev Besslove enačbe: $y(x) = AJ_n(x) + BY_n(x)$.
+\item Besslova funkcija ima števno mnogo ničel.
+\end{enumerate}
+
+\section*{Fourierova transformacija in PDE}
+
+$f \in L^1(\R ) = \{ f: \R \longrightarrow \R ; \int_\R |f| dx < \infty \}$.
+
+$\F (f) (x) = \int_{-\infty}^\infty f(s) e^{isx} ds$
+
+$\F^{-1} (f) (x) = \frac{1}{2\pi} \int_{-\infty}^\infty f(s) e^{-isx} ds$
+
+Lastnosti:
+\begin{enumerate}
+
+\item $\F$ je linearna: $\F(\alpha f + \beta g) = \alpha \F(f) + \beta \F (g)$
+
+\item $\F (f')(x) = (-ix) \F(f)(x)$
+
+\item $\frac{d}{dx} \left[ \F (f)(x) \right] = \F(ixf) (x)$
+
+\item Če je $f$ soda funkcija, velja $\F^{-1}(f) = \frac{1}{2\pi}\F(f)$.
+
+\end{enumerate}
+
+Nekaj izračunanih transformacij:
+\begin{itemize}
+
+\item $f_1(x) = \begin{cases} 1;& |x| \leq 1 \\ 0; &\text{sicer} \end{cases}$, $\F(f_1) = \frac{2\sin x}{x}$
+
+\item $\F (e^{-a|x|})(x) = \frac{2a}{a^2+x^2}$, $a>0$
+
+\item $\F (e^{-ax^2})(x) = \sqrt{\frac{\pi}{a}}e^{-\frac{x^2}{4a}}$
+
+\item $\F^{-1} (e^{-ax^2})(x) = \frac{1}{2\pi}\sqrt{\frac{\pi}{a}}e^{-\frac{x^2}{4a}}$
+
+\item $f_2 = \begin{cases} 1-|x|;& |x|< 1 \\  0; & \text{sicer} \end{cases}$, $\F(f_2) = \frac{2}{x^2}(1-\cos x)$
+
+\item $\F (\cos (ax^2) ) = \sqrt{\frac{\pi}{a}} \cos (\frac{x^2}{4a}-\frac{ \pi}{4} )$, $a > 0$
+
+\end{itemize}
+
+\textbf{Uporaba Fourierovih transformacij v PDE}
+
+Želimo reševati PDE, v kateri je ena spremenljivka neomejena, npr. $x \in \R, t
+> 0$.  $U(x,t) =  \F(u)(x,t) = \int_{-\infty}^\infty u(s,t)e^{isx}ds$
+(transformacija po $x$)
+
+Veljajo pravila: \begin{enumerate}
+
+\item $\F(\alpha u + \beta v) = \alpha \F(u) + \beta \F (v)$, $\alpha , \beta
+  \in \C$
+
+\item $\F(\frac{\partial^n}{\partial t^n} u) = \frac{\partial^n}{\partial
+  t^n}\F(u) = \frac{\partial^n}{\partial t^n} U$
+
+\item $\F(\frac{\partial^n}{\partial x^n}u) = (-ix)^n \F(u) = (-ix)^n U$
+
+\end{enumerate}
+
+Strategija: PDE z odvodi po $t$ in $x$ s Fourierovo transformacijo pretvorimo v
+NDE z odvodi po $t$ (tudi začetne pogoje), nato pa dobljeno rešitev NDE z
+inverzno Fourierovo transformacijo pretvorimo v rešitev PDE.
+
+Enačba $u_{xx} = u_t + u$ ima enolično rešitev pri pogojih $u(x,0)=g(x), \forall
+g \in \Cont^\infty (\R)$. Če je $g$ soda (oz. liha), je rešitev soda (oz. liha).
+(Včasih za uporabo te lastnosti lahko naše začetne podatke sodo (oz. liho)
+razširiti, odvisno katera razširitev nam da nov pogoj. Z razširjenim začetnim
+podatkom nalogo rešimo, na koncu pa vzamemo samo ustrezno polovico.)
+
+\textbf{Konvolucija}: $(f \ast g) (x) = \int_{-\infty}^\infty f(\xi) g(x-\xi)
+\dxi$
+
+Velja: $\F (f \ast g) = \F(f) \F (g)$
+
+Splošna rešitev enačbe $u_t - 2u_{xx} = 0$ pri pogoju $u(x,0) = f(x)$ je:
+$u(x,t) = \sqrt{ \frac{1}{8 \pi t}} \int_{-\infty}^\infty f(\xi) e^{- \frac{(x-
+\xi )^2}{8t}} \dxi$
+
+Če iščemo splošno rešitev za poljuben začetni pogoj, se pri uporabi inverzne
+Fourierove transformacije splača uporabiti lastnost konvolucije in vriniti $\F
+\F^{-1}$.
+
+
+\vspace{-0.4cm}
+%%%%%%%%%%%%%%%%%%% DIRAC
+\section*{Diracova $\delta$-funkcija}
+
+Diracova $\delta$-funkcija zadošča dvema lastnostma: \begin{enumerate}
+
+\item $\delta (x) = 0$ za $\R \backslash \{0\}$,
+
+\item $\int_\R \delta \dx = 1$.
+
+\end{enumerate}
+
+Diracovo $\delta$-funkcijo lahko realiziramo tudi kot limito funkcij $f_n (x) =
+\begin{cases} n;& |x| \leq \frac{1}{2n} \\ 0;& \text{sicer}\end{cases}$ ali kot
+limito funkcij $g_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2x^2}$. Definiramo jo lahko
+tudi kot $\delta (x) := \F^{-1}(1) = \frac{1}{2\pi} \F (1)$.
+
+Za $f \in \Cont^\infty (\R)$ velja: $\int_\R \delta (x-a) f(x) \dx = f(a)$.
+
+\section*{Poissonovo jedro in Greenova funkcija}
+
+Rešujemo za: $u \in \Cont^2 ( \Omega) \cap \Cont (\bar{\Omega}), f \in \Cont (
+\Omega ), g \in \Cont ( \partial \Omega )$ in $\Omega$ odprta, povezana
+podmnožica v $\R^2$.
+
+$\triangle u = f$ je Poissonova enačba.
+
+Robni pogoji: \begin{enumerate}
+
+\item $u|_{\partial \Omega} = g$ Dirichletov
+
+\item $\partial_{\vec{n}} u |_{\partial \Omega} = g$ Neumannov.
+
+\end{enumerate}
+
+Poseben primer tega problema za $f=0$ so harmonične funkcije.
+
+\textbf{Izrek o povprečni vrednosti za harmonične funkcije}: $u(x_0,y_0) =
+\frac{1}{2\pi R} \int_{\partial K((x_0,y_0),R)}u \ds$.
+
+\textbf{Šibki princip maksima}: Če je $\Omega$ omejeno: $\max_{\Omega} v =
+\max_{\partial \Omega} v$ oz.  $\min_{\Omega} v = \min_{\partial \Omega} v$
+
+\textbf{Krepki princip maksima}: Če je $\Omega$ neomejeno in če harmonična
+funkcija doseže lokalni ekstrem v notranjosti $\Omega$, je funkcija konstantna.
+
+Zveza med harmoničnimi in holomorfnimi funkcijami: \begin{enumerate}
+
+\item Če $f = u + iv$ holomorfna, potem sta $u$ in $v$ harmonični.
+
+\item Če je $u$ harmonična, potem obstaja harmonična funkcija $v$, da je $f = u
+  + iv$ holomorfna (velja samo za enostavno povezana območja $\Omega$).
+
+\end{enumerate}
+
+Množica harmoničnih homogenih polinomov stopnje $n$ ($p(\lambda x,\lambda y) =
+\lambda^n p(x,y)$) tvori vektorski prostor dimenzije 2 za vsak $n \in \N$.
+
+Za omejeno območje $\Omega \subseteq \R^2$ velja $\int_\Omega u \triangle u
+\mathrm{d}S + \int_\Omega \nabla u \cdot \nabla u \mathrm{d}S = \int_{\partial
+\Omega} u(\nabla u \cdot \vec{n})\ds$, kjer je $\vec{n}$ zunanja enotska normala
+na $\Omega$.
+
+Edina rešitev enačbe $\triangle u = \lambda u$, $\lambda \geq 0$, $u|_{\partial
+\Omega} = 0$ je funkcija $u \equiv 0$.
+
+Dirichletov problem je na omejenem območju enolično rešljiv.
+
+Krivuljni integral vektorskega polja: $\int_{\partial \Omega}\vec{V}
+\mathrm{d}\vec{s} = \int_\alpha^\beta \vec{V}(\gamma (t))\cdot \dot{\gamma} (t)
+\mathrm{d}t = \int_{\partial \Omega} \vec{V} \cdot \vec{T} \ds$, kjer je
+$\vec{T} = \frac{\dot{\gamma}(t)}{||\dot{\gamma}(t)||}$
+
+$\gamma (t) = (x(t),y(t))$, normalni vektor: $(\dot{y}(t), -\dot{x}(t))$:
+$\int_\alpha^\beta (P,Q)\cdot (\dot{x},\dot{y}) \mathrm{d}t = \int_\alpha^\beta
+(Q,-P)\cdot (\dot{y},-\dot{x}) \mathrm{d}t $
+
+Greenova formula za integral vektorskega polja po normali: $\int_\Omega (Q_x -
+P_y)  \mathrm{d} S = \int_{\partial \Omega} (P,Q)  \mathrm{d}\vec{s} =
+\int_{\partial \Omega} (Q,-P) \cdot \vec{n} \ds$, kjer $\vec{n}$ enotska
+normala.
+
+\textbf{Reševanje Dirichletovega problema}
+
+Rešitev je vsota dveh problemov: $\triangle v = 0, v|_{\partial \Omega} = g$
+(Poissonov del) in $\triangle w = f, w|_{\partial \Omega} = 0$ (Greenov del).
+
+Poissonov del: $v(x,y) = \int_{\partial \Omega} P(x,y,s)g(s)\ds$, $P:\Omega
+\times \partial \Omega \rightarrow \R$, $(x,y,s) \mapsto P(x,y,s)$
+(\underline{Poissonovo jedro})
+
+Greenov del: $w(x,y) = \int_\Omega G(x,y;\xi,\eta ) f(\xi , \eta )
+\mathrm{d}S(\xi,\eta)$, $G: \Omega \times \Omega \backslash \{ (p,p); p\in
+\Omega \}  \rightarrow \R$, $(x,y;\xi,\eta) \mapsto G(x,y; \xi, \eta)$
+(\underline{Greenova funkcija}).
+
+Greenova identiteta: $\int_\Omega (u \triangle v - v \triangle u)  \mathrm{d}S =
+\int_{\partial \Omega} (u \partial_{\vec{n}}v - v \partial_{\vec{n}} u) \ds$,
+kjer $\partial_{\vec{n}} v = \langle \nabla v , \vec{n} \rangle$ in $\vec{n}$
+zunanja normala.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{Uporabni integrali:}
+$\int_\R e^{-x^2} \dx = \sqrt{\pi}$
+
 $\int_a^b \sin(\frac{n\pi x}{b-a})^2 \dx = \int_a^b \cos(\frac{n\pi x}{b-a})^2 \dx =
 \frac{(b-a) \left(\sin \left(\frac{2 \pi  a n}{b-a}\right)-\sin \left(\frac{2
 \pi  b n}{b-a}\right)+2 \pi  n\right)}{4 \pi  n}, n \in \C$
