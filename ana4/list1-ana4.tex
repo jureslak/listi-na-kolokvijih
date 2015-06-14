@@ -344,9 +344,9 @@ vrsta}: $\tilde{f}(x) =  \sum_{n=1}^{\infty} \tilde{b}_n\sin{nx}$ in
 \textbf{kosinusna vrsta}:  $\tilde{f}(x) =
 \frac{\tilde{a}_0}{2}\sum_{n=1}^{\infty}\tilde{a}_n\cos{nx}$, kjer sta:
 
-$\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N$,
+$\tilde{a}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\cos{nx}\dx, \quad n \in \N_0$,
 
-$\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in \N_0$.
+$\tilde{b}_n = \frac{2}{\pi}\int_0^{\pi}f(x)\sin{nx}\dx, \quad n \in \N$.
 
 S substitucijo lahko razvoje prevedemo na poljuben interval $[-L,L]$ oz.
 $[0,L]$, $L > 0$. V tem primeru je $\{\frac{1}{2L}, \frac{1}{L}\sin{\frac{n\pi
@@ -471,34 +471,30 @@ y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
 %%\end{tabular}
 %
 %
-\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
-= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
-
-$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
-\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
-+ C$ \\
-
-$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
-\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
-
-$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
-\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
-
-$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
-\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-
-$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
-\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-
-$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
-\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
-
-$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
-\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
-
-$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
-
+\section*{Integrali in formule}
+\begin{tabular}{llll}
+  $\int \ln{x} \dx = x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
+  $ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))+ C$ \\
+  $ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
+  $ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b \cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
+  $ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b \sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+  $ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x + \sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
+  $\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int \sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
+  $\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int \cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
+  $\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
 \end{tabular}
+
+
+$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
+\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
+\frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0 \end{cases} $\\ $\int
+\frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx
++ c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj
+kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
+
+Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),
+\dx = \dt/(1 + t^2)$\\ Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2),
+\cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
 
 \vspace{1ex}
 
@@ -516,8 +512,7 @@ $\cos\alpha\sin\beta = \frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta) \r
 $\cos\alpha\cos\beta = \frac{1}{2}\left[\cos(\alpha+\beta)+\cos(\alpha-\beta) \right]  $ \\
 $\sin\alpha\sin\beta = -\frac{1}{2}\left[\cos(\alpha+\beta)-\cos(\alpha-\beta)  \right]$ \\
 }
-%
-%
+
 %
 %$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
 %\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
