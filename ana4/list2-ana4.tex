@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{amsart}
+\documentclass[11pt,a4paper]{amsart}
 \usepackage[slovene]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -77,10 +77,8 @@ right  = 1cm]{geometry}
 
 \section*{Separacija spremenljivk}
 
-$L^2([-\pi,\pi]) = \{f:[-\pi,\pi]\longrightarrow \R, \int_{-\pi}^\pi |f|^2
-\\dx < \infty \}$ je vektorski prostor s skalarnim produktom $\langle f, g\rangle =
+$L^2([-\pi,\pi]) = \{f:[-\pi,\pi]\longrightarrow \R, \int_{-\pi}^\pi |f|^2 \dx < \infty \}$ je vektorski prostor s skalarnim produktom $\langle f, g\rangle =
 \int_{-\pi}^\pi f(x)g(x)\dx$. Množica funkcij
-
   $\{\frac{1}{2\pi},
   \frac{1}{\pi}\sin{x},\frac{1}{\pi}\cos{x},\frac{1}{\pi}\sin{2x},\frac{1}{\pi}\cos{2x},\ldots
 \}$. je \underline{kompleten} (vsako funkcijo se da na enoličen način razviti v
@@ -124,6 +122,7 @@ u_x(L,t) = 0, \quad \alpha, \beta, \gamma, \delta \in \R.$
 Sturm-Liouvillovi teoriji, tj. množica lastnih funkcij, ki jih dobimo iz robnega
 problema tvori K.O.N.S.
 
+Separacija v splošnem generira šibke rešitve, lahko so težave s konvergenco dobljene vrste!
 
 \underline{\textbf{Štirje koraki metode:}}
 
@@ -162,16 +161,20 @@ Pri polarnih koordinatah imamo namesto homogenega robnega pogoja lahko tudi nara
 
 Sistem $M\vec{x} = 0 $ ima netrivialne rešitve $\Longleftrightarrow \det{M} = 0$.
 
+Rešitve enačbe $\triangle u = 0$ na enotskem disku so: $u(r, \varphi) = C_0 + D_0 \log r + \sum_{n = 1}^\infty (C_n r^n + D_n r^{-n}) (A_n \cos(n \varphi) + B_n \sin(n \varphi))$.
+
 %%%%%%%%%%%%%%%%%%eksistenca
 \textbf{Eksistenca:}
 
 $u_{tt}-c^2u_{xx}=0, c \in \R_+$ ima pri pogojih $u_x(0,t) = u_x(L,t)=0$ in $u(x,0) = u_t(x,0) = 0$ edino rešitev $u \equiv 0$. Za poljubne $a,b,f,g \in \mathcal{C}^\infty (\R)$ ima $u_{tt}-c^2u_{xx}=0, c \in \R_+$ enolično rešitev tudi pri pogojih $u_x(0,t) = a(t),u _x(L,t)=b(t), u(x,0) = f(x)$ in $u_t(x,0) = g(x)$
 
+To lahko dokažemo tako, da preverimo, da je nek energijski funkciona $E$l konstantno 0 (trik: $E' = 0$ in potem izračunamo v neki točki).
+
 \vspace{-.4cm}  %Iz nekega razloga tukaj naredi velik prazen prostor (pojavilo se je, ko je nastal spodnje okolje enumerate, razmaka ni, če je vspace < -0.4
 
 \section*{Sturm-Liouvilleova teorija}
 
-$A \in \R^{n \times n}$ je sebi adjungiran, če $A^T = A$, lastni vektorji tvorijo ortogonalno bazo. Velja $\langle Av,w \rangle = (Av)^Tw = v^TA^Tw = v^T(Aw) = \langle v,Aw \rangle$.
+$A \in \R^{n \times n}$ je sebi adjungiran, če $A^T = A$, lastni vektorji tvorijo ortogonalno bazo, lastne vrednosti so realne. Velja $\langle Av,w \rangle = (Av)^Tw = v^TA^Tw = v^T(Aw) = \langle v,Aw \rangle$. V splošnem je pogoj $\langle Av,w \rangle = \langle v,Aw \rangle$.
 
 \textbf{$SL$-operator}: $L:\mathcal{C}^2([a,b])\longrightarrow \mathcal{C}([a,b])$, $L(y) = \frac{1}{r(x)}[(p(x)y')'+q(x)y]$, $p,r > 0, x \in [a,b]$ + mešani ali periodični robni pogoj. Gledamo skrčitev operatorja na $V = \mathcal{C}^2(]a,b]) \cap \{\text{robni pogoji}\}$, $\langle f,g\rangle = \int_a^bf(x)g(x)r(x)dx$, kjer je $r$ utež.
 
@@ -186,7 +189,7 @@ $L$ je sebi adjungiran za robne pogoje:
 \textbf{Izrek} (o kompletnosti lastnih funkcij)
 
 $p \in \mathcal{C}^1([a,b]); r,q \in \mathcal{C}([a,b]); p,r > 0$. Potem ima lastni problem $L(y) = \mu y$ pri robnih pogojih
-\vspace{-0.2cm}
+\vspace{-0.1cm}
 \begin{enumerate}[a)]
 \item $\alpha y(a) + \beta y'(a) = 0$ in $\gamma y(b) +  \delta y'(b) = 0$; $\alpha^2 + \beta^2 \neq 0, \gamma^2 + \delta^2 \neq 0$
 \item $y(a) = y(b)$ in $\alpha y'(a) = \beta y'(b)$; $\alpha^2+\beta^2 \neq 0$
@@ -194,10 +197,12 @@ $p \in \mathcal{C}^1([a,b]); r,q \in \mathcal{C}([a,b]); p,r > 0$. Potem ima las
 števno mnogo rešitev z lastnostmi:
 \begin{enumerate}[i)]
 \item $\mu_1 > \mu_2 > \ldots, $ $\lim_{n\rightarrow \infty}\mu_n = -\infty$
-\item $\{g_n\}_{n\in \N}$ tvorijo \underline{kompleten} ortonormiran sistem v $L^2([a,b])\cap \{\text{robni pogoji}\}$ in za $ \langle f,g \rangle = \int_a^b f(x)g(x)r(x)dx$.
+\item $\{y_n\}_{n\in \N}$ tvorijo \underline{kompleten} ortonormiran sistem v $L^2([a,b])\cap \{\text{robni pogoji}\}$ in za $ \langle f,g \rangle = \int_a^b f(x)g(x)r(x)dx$.
 \end{enumerate}
 
-Enačbe oblike $u_t = au_{xx} + bu_x + cu$, kjer $a,b,c \in \R$, $a\neq 0$, $u(o,t) = u(L,t) = 0$ lahko rešujemo s separacijo spremenljivk za poljubne koeficiente $a,b,c$.
+Enačbe oblike $u_t = au_{xx} + bu_x + cu$, kjer $a,b,c \in \R$, $a\neq 0$, $u(0,t) = u(L,t) = 0$ lahko rešujemo s separacijo spremenljivk za poljubne koeficiente $a,b,c$.
+
+Trik: če ne moremo doseči $p, r > 0$, lahko poskusimo prevesti na $\tilde{\mu} = -\mu, \tilde{L}(X) = -L(X)$ in rešujemo $\tilde{L}(X) = \tilde{\mu}X$, ki morda ustreza pogoju $p, r > 0$.
 
 $y(x) = \tilde{A}x^{ia} + \tilde{B}x^{-ia} = A\cos{(a\ln{x})} + B\sin{(a\ln{x})}$
 
@@ -205,26 +210,26 @@ Dejstvo, ali določena družina funkcij tvori K.O.S., preverjamo z identifikacij
 
 \textbf{Legendrova enačba}
 
-$L(y) = ((1-x^2)y')'=\mu y$, $x \in [-1,1]$. To je singularen diferencialni operator, saj $p(\pm 1) = 0$, izrek pa deluje za $p > 0$. $L$ je omejena v $x = \pm 1$ natanko tedaj, ko je $\mu = -n(n+1), n \in \N$. Tedaj obstajata neodvisni polinomski rešitvi stopenj $2m$ in $2m+1$.
+$L(y) = ((1-x^2)y')'=\mu y$, $x \in [-1,1]$. To je singularen diferencialni operator, saj $p(\pm 1) = 0$, izrek pa deluje za $p > 0$. Lastna funkcija $y$ je omejena v $x = \pm 1$ natanko tedaj, ko je $\mu = -n(n+1), n \in \N$. Tedaj obstajata neodvisni polinomski rešitvi stopenj $2m$ in $2m+1$.
 
-\textbf{Kvocientni kriterij} za vrsto $\sum C_n x^n$: $\lim_{n\rightarrow \infty}\left| \frac{C_{n+1} x^{n+1}}{C_n x^{n}}\right| < 1$, potem vrsta konvergira.
+\textbf{Kvocientni kriterij} za vrsto $\sum C_n x^n$: $\lim_{n\rightarrow \infty}\left| \frac{C_{n+1} x^{n+1}}{C_n x^{n}}\right| < 1$, potem vrsta konvergira za izbrani $x$.
 
-\textbf{Raabejev kriterij} za vrsto $\sum C_n x^n$: $\lim_{n\rightarrow \infty}n(1-\frac{C_nx^n}{C_{n+1}x^{n+1}} < 1$, potem ta vrsta divergira.
+\textbf{Raabejev kriterij} za vrsto $\sum C_n x^n$: $\lim_{n\rightarrow \infty}n(1-\frac{C_nx^n}{C_{n+1}x^{n+1}}) < 1$, potem ta vrsta divergira za izbrani $x$.
 
 Če gledamo operator $L(y) = ((1-x^2)y')'=\mu y$ na prostoru $\mathcal{C}^2(-1,1) \cap \{\text{omejene funkcije v }\pm1 \}$, dobimo lastne pare $(-n(n+1),P_n)$ in $\{P_n \}_{n \in \N_0}$ je K.O.S.
 
-\textbf{Laplace v sferičnih koordinatah:} $\triangle u = \frac{1}{r^2} \frac{\partial}{\partial r}(r^2u_r) + \frac{1}{r^2}\left[ \frac{1}{\cos \vartheta} \frac{\partial}{\partial \vartheta}(\cos \theta u_\vartheta) + \frac{1}{\cos \vartheta} u_{\varphi \varphi} \right]$, $r \in [0,\infty ),\varphi \in [0,2\pi], \vartheta \in [-\frac{\pi}{2}, \frac{\pi}{2}]$.
+\textbf{Laplace v sferičnih koordinatah:} $\triangle u = \frac{1}{r^2} \frac{\partial}{\partial r}(r^2u_r) + \frac{1}{r^2}\left[ \frac{1}{\cos \vartheta} \frac{\partial}{\partial \vartheta}(\cos \vartheta u_\vartheta) + \frac{1}{\cos \vartheta} u_{\varphi \varphi} \right]$, $r \in [0,\infty ),\varphi \in [0,2\pi], \vartheta \in [-\frac{\pi}{2}, \frac{\pi}{2}]$.
 
 \textbf{Besslova enačba}
 
-$x^2y''+xy'+(x^2-n^2)y = 0$, $x > 0$, $n \in \N_0$, singularna za $x = 0$. Z nastavkom $y = \sum_{m = 0}^\infty C_m x^{m+k}$, $k \in \N_0,$ $C_0 \neq 0$ dobimo rešitev, ki je omejena v $x = 0$: $J_n(x) = C_0 \sum_{l = 0}^\infty \frac{(-1)^l}{2^{2l}l!(n+l)(n+l-1)\cdots (n+1)}x^{2l}$.
+$x^2y''+xy'+(x^2-n^2)y = 0$, $x > 0$, $n \in \N_0$, singularna za $x = 0$. Z nastavkom $y = \sum_{m = 0}^\infty C_m x^{m+k}$, $k \in \N_0,$ $C_0 \neq 0$ dobimo rešitev, ki je omejena v $x = 0$: $J_n(x) = C_0 \sum_{l = 0}^\infty \frac{(-1)^l}{2^{2l}l!(n+l)(n+l-1)\cdots (n+1)}x^{2l + n}$.
 
 \textbf{Dodatek k Besslovi enačbi:}
 \begin{enumerate}
 \item Enačbo lahko obravnavamo tudi za $n \in \R_+\backslash \N_0$, vendar v eksplicitni obliki namesto $(n+l)!$ dobimo $\Gamma (n+l+1)$.
 \item Enačbo lahko obravnavamo tudi za $n \in \R_-$, vendar dobimo Besslove funkcije drugega reda $Y_n$, ki so singularne v $x=0$.
 \item Splošna rešitev Besslove enačbe: $y(x) = AJ_n(x) + BY_n(x)$.
-\item Besslova funkcija ima števno mnogo ničel.
+\item Besslova funkcija ima števno mnogo ničel. Vse razen $J_0$ se začnejo v $(0,0)$.
 \end{enumerate}
 
 \section*{Fourierova transformacija in PDE}
@@ -244,7 +249,7 @@ Lastnosti:
 
 \item $\frac{d}{dx} \left[ \F (f)(x) \right] = \F(ixf) (x)$
 
-\item Če je $f$ soda funkcija, velja $\F^{-1}(f) = \frac{1}{2\pi}\F(f)$.
+\item Če je $f$ soda funkcija, velja $\F^{-1}(f) = \frac{1}{2\pi}\F(f)$ in obe transformaciji sta realni funkciji.
 
 \end{enumerate}
 
@@ -262,6 +267,8 @@ Nekaj izračunanih transformacij:
 \item $f_2 = \begin{cases} 1-|x|;& |x|< 1 \\  0; & \text{sicer} \end{cases}$, $\F(f_2) = \frac{2}{x^2}(1-\cos x)$
 
 \item $\F (\cos (ax^2) ) = \sqrt{\frac{\pi}{a}} \cos (\frac{x^2}{4a}-\frac{ \pi}{4} )$, $a > 0$
+
+\item $\F (\cos (x) ) = \pi (\delta(x+1) + \delta(x-1))$
 
 \end{itemize}
 
@@ -281,9 +288,9 @@ Veljajo pravila:
 
 \end{enumerate}
 
-Strategija: PDE z odvodi po $t$ in $x$ s Fourierovo transformacijo pretvorimo v NDE z odvodi po $t$ (tudi začetne pogoje), nato pa dobljeno rešitev NDE z inverzno Fourierovo transformacijo pretvorimo v rešitev PDE.
+Strategija: PDE z odvodi po $t$ in $x$ s Fourierovo transformacijo pretvorimo v NDE z odvodi po $t$ (tudi začetne pogoje), nato pa dobljeno rešitev NDE (pazi, konstante so odvisne od $x$!) z inverzno Fourierovo transformacijo pretvorimo v rešitev PDE.
 
-Enačba $u_{xx} = u_t + u$ ima enolično rešitev pri pogojih $u(x,0)=g(x), \forall g \in \Cont^\infty (\R)$. Če je $g$ soda (oz. liha), je rešitev soda (oz. liha). (Včasih za uporabo te lastnosti lahko naše začetne podatke sodo (oz. liho) razširiti, odvisno katera razširitev nam da nov pogoj. Z razširjenim začetnim podatkom nalogo rešimo, na koncu pa vzamemo samo ustrezno polovico.)
+Enačba $u_{xx} = u_t + u$ ima enolično rešitev pri pogojih $u(x,0)=g(x), \forall g \in \Cont^\infty (\R)$. Če je $g$ soda (oz. liha), je rešitev soda (oz. liha). (Včasih za uporabo te lastnosti lahko naše začetne podatke sodo (oz. liho) razširiti, odvisno katera razširitev nam da nov pogoj. Z razširjenim začetnim podatkom nalogo rešimo, na koncu pa vzamemo samo ustrezno polovico. Če je pogoj $u_x(0, t)= 0$ naredimo sodo razširitev, če je $u(0, t)= 0$ pa liho. )
 
 \textbf{Konvolucija}: $f \ast g (x) = \int_{-\infty}^\infty f(\xi) g(x-\xi) \dxi$
 
@@ -328,24 +335,23 @@ Robni pogoji:
 
 Poseben primer tega problema za $f=0$ so harmonične funkcije.
 
+Vse harmonične funkcije na $\mathbb{H}$ oblike $u = f(\frac{x}{y})$ so $u = D \arctan (\frac{x}{y}) + E$.
+
 \textbf{Izrek o povprečni vrednosti za harmonične funkcije}: $u(x_0,y_0) = \frac{1}{2\pi R} \int_{\partial K((x_0,y_0),R)}u \ds$.
 
 \textbf{Šibki princip maksima}: Če je $\Omega$ omejeno: $\max_{\Omega} v = \max_{\partial \Omega} v$ oz.  $\min_{\Omega} v = \min_{\partial \Omega} v$
 
 \textbf{Krepki princip maksima}: Če je $\Omega$ neomejeno in če harmonična funkcija doseže lokalni ekstrem v notranjosti $\Omega$, je funkcija konstantna.
 
+\textbf{Liouvillov izrek}: Omejena cela funkcija je konstantna.
+
 Zveza med harmoničnimi in holomorfnimi funkcijami:
 \begin{enumerate}
-
 \item Če $f = u + iv$ holomorfna, potem sta $u$ in $v$ harmonični.
-
 \item Če je $u$ harmonična, potem obstaja harmonična funkcija $v$, da je $f = u + iv$ holomorfna (velja samo za enostavno povezana območja $\Omega$).
-
 \end{enumerate}
 
 Množica harmoničnih homogenih polinomov stopnje $n$ ($p(\lambda x,\lambda y) = \lambda^n p(x,y)$) tvori vektorski prostor dimenzije 2 za vsak $n \in \N$.
-
-Za omejeno območje $\Omega \subseteq \R^2$ velja $\int_\Omega u \triangle u \mathrm{d}S + \int_\Omega \nabla u \cdot \nabla u \mathrm{d}S = \int_{\partial \Omega} u(\nabla u \cdot \vec{n})\ds$, kjer je $\vec{n}$ zunanja enotska normala na $\Omega$.
 
 Edina rešitev enačbe $\triangle u = \lambda u$, $\lambda \geq 0$, $u|_{\partial \Omega} = 0$ je funkcija $u \equiv 0$.
 
@@ -355,8 +361,6 @@ Krivuljni integral vektorskega polja: $\int_{\partial \Omega}\vec{V} \mathrm{d}\
 
 $\gamma (t) = (x(t),y(t))$, normalni vektor: $(\dot{y}(t), -\dot{x}(t))$: $\int_\alpha^\beta (P,Q)\cdot (\dot{x},\dot{y}) \mathrm{d}t = \int_\alpha^\beta (Q,-P)\cdot (\dot{y},-\dot{x}) \mathrm{d}t $
 
-Greenova formula za integral vektorskega polja po normali: $\int_\Omega (Q_x - P_y)  \mathrm{d} S = \int_{\partial \Omega} (P,Q)  \mathrm{d}\vec{s} = \int_{\partial \Omega} (Q,-P) \cdot \vec{n} \ds$, kjer $\vec{n}$ enotska normala.
-
 \textbf{Reševanje Dirichletovega problema}
 
 Rešitev je vsota dveh problemov: $\triangle v = 0, v|_{\partial \Omega} = g$ (Poissonov del) in $\triangle w = f, w|_{\partial \Omega} = 0$ (Greenov del).
@@ -365,13 +369,21 @@ Poissonov del: $v(x,y) = \int_{\partial \Omega} P(x,y,s)g(s)\ds$, $P:\Omega \tim
 
 Greenov del: $w(x,y) = \int_\Omega G(x,y;\xi,\eta ) f(\xi , \eta )  \mathrm{d}S(\xi,\eta)$, $G: \Omega \times \Omega \backslash \{ (p,p); p\in \Omega \}  \rightarrow \R$, $(x,y;\xi,\eta) \mapsto G(x,y; \xi, \eta)$ (\underline{Greenova funkcija}).
 
-Greenova identiteta: $\int_\Omega (u \triangle v - v \triangle u)  \mathrm{d}S = \int_{\partial \Omega} (u \partial_{\vec{n}}v - v \partial_{\vec{n}} u) \ds$, kjer $\partial_{\vec{n}} v = \langle \nabla v , \vec{n} \rangle$ in $\vec{n}$ zunanja normala.
-
 Poissonovo jedro se vedno da izračunati iz Greenove funkcije. Velja zveza: $ P(x,y,t) = \partial_{\vec{n}} G (x,y;\xi , \eta ) |_{(\xi ,\eta ) \in \partial \Omega}$.
 
 \textbf{Kompleksni logaritem}: $\log z = \ln |z| + i \arg z$
 
-\textbf{Fundamentalna rešitev}: $\Gamma (x,y;\xi,\eta) = \frac{1}{4\pi} \ln ((\xi - x)^2 + (\eta - y)^2)=\frac{1}{2\pi} \ln |z-q| = Re ( \frac{1}{2\pi} \log (z-q) )$
+\textbf{Fundamentalna rešitev}: $\Gamma (x,y;\xi,\eta) = \frac{1}{4\pi} \ln ((\xi - x)^2 + (\eta - y)^2)=\frac{1}{2\pi} \ln |z-w| = Re ( \frac{1}{2\pi} \log (z-w) )$
+
+Greenove identitete:
+
+\begin{itemize}
+\item Za omejeno območje $\Omega \subseteq \R^2$ velja $\int_\Omega u \triangle u \mathrm{d}S + \int_\Omega \nabla u \cdot \nabla u \mathrm{d}S = \int_{\partial \Omega} u(\nabla u \cdot \vec{n})\ds$, kjer je $\vec{n}$ zunanja enotska normala na $\Omega$.
+\item Greenova formula za integral vektorskega polja po normali: $\int_\Omega (Q_x - P_y)  \mathrm{d} S = \int_{\partial \Omega} (P,Q)  \mathrm{d}\vec{s} = \int_{\partial \Omega} (Q,-P) \cdot \vec{n} \ds$, kjer $\vec{n}$ enotska normala.
+\item Greenova identiteta: $\int_\Omega (u \triangle v - v \triangle u)  \mathrm{d}S = \int_{\partial \Omega} (u \partial_{\vec{n}}v - v \partial_{\vec{n}} u) \ds$, kjer $\partial_{\vec{n}} v = \langle \nabla v , \vec{n} \rangle$ in $\vec{n}$ zunanja normala.
+\item  $\int_\Omega \triangle u  \mathrm{d}S = \int_{\partial \Omega}  \partial_{\vec{n}} u \ds$
+\item  $\int_\Omega ( \langle \nabla v, \nabla u \rangle + v \triangle u)  \mathrm{d}S = \int_{\partial \Omega} v \partial_{\vec{n}} u \ds$
+\end{itemize}
 
 Greenova funkcija za:
 
@@ -393,9 +405,9 @@ Poissonovo jedro za:
 
 \begin{itemize}
 
-\item  polravnino $\mathbb{H}$: $ P(x, y, \xi) = \frac{y}{\pi  \left((\xi -x)^2+y^2\right)}$
+\item  polravnino $\mathbb{H}$: $ P(x, y, \xi) =\frac{1}{\pi} \frac{y}{  \left((\xi -x)^2+y^2\right)}$
 
-\item enotski disk: $P(r, \varphi, \vartheta) = \frac{1-r^2}{1 - 2r \cos(\theta -\varphi) +r^2}$
+\item enotski disk: $P(r, \varphi, \vartheta) =\frac{1}{2 \pi}  \frac{1-r^2}{1 - 2r \cos(\theta -\varphi) +r^2}$
 
 \end{itemize}
 
@@ -405,144 +417,10 @@ Pas  $\R \times (-1,1)$ s preslikavo $z \mapsto (z+i)\frac{\pi}{2}$ preslikamo v
 
 Vsaka rešitev enačbe $\triangle (\xi, \eta) G(x,y;\xi,\eta) = \delta (\xi - x, \eta - y)$, $G|_{(\xi, \eta) \in \partial \Omega} = 0$ je za $(x,y) \in \Omega$ Greenova funkcija.
 
+Naj bo $\Phi \colon \Omega_1 \to \Omega_2$ biholomorfna in rob slika v rok. Če je $G_2$ Greenova funkcija za $\Omega_2$, potem je je $G_1 (z, w) = G_2(\Phi(z), \Phi(w))$ Greenova funkcija za $\Omega_1$. Velja še $\triangle G_1 = \triangle G_2 \det J_{\Phi}$.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vfill \hfill avtor: Klemen Sajovec, popravki: Jure Slak
-
-%
-%$\int_a^b \sin(\frac{n\pi x}{b-a})^2 \dx = \int_a^b \cos(\frac{n\pi x}{b-a})^2 \dx =
-%\frac{(b-a) \left(\sin \left(\frac{2 \pi  a n}{b-a}\right)-\sin \left(\frac{2
-%\pi  b n}{b-a}\right)+2 \pi  n\right)}{4 \pi  n}, n \in \C$
-%
-%$(\int_a^bx^i \sin(kx)\dx)_{1,2} = (\frac{-\sin (a k)+a k \cos (a k)+\sin (b k)-b k \cos (b k)}{k^2},\frac{(a^2 k^2-2) \cos (a k)-2 a k \sin (a k)+(2-b^2 k^2) \cos (b k)+2 b k \sin (b k)}{k^3})$
-%
-%$(\int_a^bx^i \cos(kx)\dx)_{1,2} = (\frac{-a k \sin (a k)-\cos (a k)+b k \sin (b k)+\cos (b k)}{k^2},\frac{(2-a^2 k^2) \sin (a k)-2 a k \cos (a k)+(b^2 k^2-2) \sin (b k)+2 b k \cos (b k)}{k^3})$
-%
-%$\int_a^b (x-a)(b-x)\sin(kx)\dx = \frac{k (a-b) (\sin (a k)+\sin (b k))+2 \cos (a k)-2 \cos (b k)}{k^3}$
-%
-%$\int_a^b (x-a)(b-x)\cos(kx)\dx = \frac{k (a-b) (\cos (a k)+\cos (b k))-2 \sin (a k)+2 \sin (b k)}{k^3}$
-%
-%$\int_a^b \sin(mx)\cos(kx)\dx = \frac{-k \sin (a k) \sin (a m)-m \cos (a k) \cos (a m)+k \sin (b k) \sin (b m)+m \cos (b k) \cos (b m)}{k^2-m^2}$
-%
-%$\int_a^b \sin(mx)\sin(kx)\dx = \frac{-m \sin (a k) \cos (a m)+k \cos (a k) \sin (a m)+m \sin (b k) \cos (b m)-k \cos (b k) \sin (b m)}{k^2-m^2}$
-%
-%$\int_a^b \cos(mx)\cos(kx)\dx = \frac{-k \sin (a k) \cos (a m)+m \cos (a k) \sin (a m)+k \sin (b k) \cos (b m)-m \cos (b k) \sin (b m)}{k^2-m^2}$, povsod so $m, n, k \in \C$
-%
-%
-%\textbf{Polarne koordinate:}
-%$u_x = \cos (\varphi ) u_r-\frac{\sin (\varphi)}{r}u_\varphi,
-%u_y = \sin (\varphi)u_r+\frac{\cos (\varphi )}{r}u_\varphi, \\
-%u_{xx} =
-%\cos^2(\varphi) u_{rr}
-%- \frac{\sin(2\varphi)}{r}u_{r\varphi}
-%+ \frac{\sin^2(\varphi)}{r^2}u_{\varphi\varphi}
-%+ \frac{\sin^2(\varphi)}{r}u_r
-%+ \frac{\sin(2\varphi)}{r^2}u_\varphi, \\
-%u_{xy} =
-%\frac{1}{2} \sin (2 \varphi) u_{rr}
-%+ \frac{\cos (2 \varphi )}{r}u_{r\varphi}
-%-\frac{\sin (2 \varphi)}{2 r^2} u_{\varphi\varphi}
-%- \frac{\sin (2 \varphi)}{2 r}u_r
-%- \frac{\cos (2 \varphi)}{r^2}u_\varphi, \\
-%u_{yy} =
-%\sin ^2(\varphi ) u_{rr}
-%+\frac{\sin (2\varphi )}{r} u_{r\varphi}
-%+ \frac{\cos ^2(\varphi )}{r^2} u_{\varphi\varphi}
-%+\frac{\cos ^2(\varphi )}{r} u_r
-%-\frac{\sin(2\varphi)}{r^2} u_{\varphi},
-%\Delta u = u_{rr} + \frac1r u_r + \frac{1}{r^2}u_{\varphi\varphi}
-%$
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%\section*{NDE višjih redov}
-%Ne nastopa $y$: uvedemo $z = y'$. \\ Obe
-%strani sta odvoda nečesa: integriramo in dodamo konstanto. \\ \hspace*{20pt}
-%Odvodi: $y'/y = (\log(y))', x y' + y = (xy)', \frac{y'' y - y'^2}{y^2} =
-%(\frac{y'}{y})', \frac{y' x - y}{x^2} = (\frac{y}{x})'$.\\ Ne nastopa $x$:
-%uvedemo $z(y) = y'$, $y$ neodvisna spr. $y'' = \dot{z}z$, $y''' = \ddot{z}z^2 +
-%\dot{z}^2z$. \\ Homogena: $F(x, ty, ty', \dots, ty^{(n)})$ = $t^k F(x, y, y',
-%\dots,  y^{(n)})$. Vpeljemo $z(x) = y'/y$. $y''/y = z' + z^2$.\\ Z utežjo:
-%$F(kx, k^my, k^{m-1}y', \dots, k^{m-n}y^{(n)}) = k^pF(x, y, y', \dots,
-%y^{(n)})$. Uvedemo: $x = e^t, y = u(t)e^{mt}$.
-%%%
-%%%\subsubsection*{Geometrija}
-%%%Tangenta v točki $(x,y)$: $Y-y=y'(X-x)$ \\
-%%%Normala v točki $(x,y)$: $Y-y=-\frac{1}{y'}(X-x)$\\
-%%%Ločna dolžina: $\int_a^b \sqrt{1 + y'(x)^2} \dx$ \\
-%%%$d(T_0,p)=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$ $ \quad T_0=(x_0,y_0), ax+by+c=0$
-%%
-%%%\begin{tabular}{ll}
-%%%Abscisa tangente: $X = x - y/y'$ & Ordinata tangente: $Y = y - xy'$ \\
-%%%Abscisa normale: $X = x+yy'$ & Ordinata normale: $Y = y + x/y'$
-%%%\end{tabular}
-%%
-%%
-%\section*{Integrali in formule} \begin{tabular}{llll} $\int \ln{x} \dx
-%= x \ln{x} - x + C$ & $\int \frac{1}{\sin(x)} \dx = \ln{\tan(x/2)} + C$ \\
-%
-%$ \int x^m\log(x) \dx = x^{m+1}\left(\frac{\log x}{m+1} -
-%\frac{1}{(m+1)^2}\right) + C$ & $ \int \frac{1}{\cos(x)} \dx = -\log(\cot(x/2))
-%+ C$ \\
-%
-%$ \int p(x) e^{k x} \dx = q(x) e^{k x} + C$, st($q$) = st($p$) & $ \int
-%\frac{1}{\tan(x)} \dx = \log(\sin(x)) + C$ \\
-%
-%$ \int e^{a x} \sin(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b
-%\cos(b x)) + C$ & $ \int \tan(x) \dx = - \log(\cos(x)) + C$ \\
-%
-%$ \int e^{a x} \cos(b x) \dx = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b
-%\sin(b x)) + C$ & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-%
-%$ \int \frac{1}{\sqrt{a^2 + x^2}} \dx =\text{arsh}\frac{x}{a} + C = \log|x +
-%\sqrt{x^2 + a^2}| + C$  & $ \int x/(1 + x) \dx = x - \log(x + 1) + C$ \\
-%
-%$\int \frac{1}{\sqrt{a^2 - x^2}} \dx =\arcsin\frac{x}{a} + C$ & $ \int
-%\sin^2(x) \dx = \frac{1}{2} (x - \sin x \cos x) + C$ \\
-%
-%$\int \frac{1}{a^2+x^2} \dx = \frac{1}{a}\arctan\frac{x}{a} + C$ & $ \int
-%\cos^2(x) \dx = \frac{1}{2} (x + \sin x \cos x) + C$  \\
-%
-%$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ \\
-%
-%\end{tabular}
-%
-%\vspace{1ex}
-%
-%\parbox{0.4\textwidth}{
-%\textbf{Faktorizacija:} \\
-%$\sin{x} + \sin{y} = 2\sin\frac{x+y}{2}\cos\frac{x-y}{2}$\\
-%$\sin{x} - \sin{y} = 2\cos\frac{x+y}{2}\sin\frac{x-y}{2}$\\
-%$\cos{x} + \cos{y} = 2\cos\frac{x+y}{2}\cos\frac{x-y}{2}$\\
-%$\cos{x} - \cos{y} =-2\sin\frac{x+y}{2}\sin\frac{x-y}{2}$
-%}
-%\parbox{0.4\textwidth}{
-%\textbf{Antifaktorizacija:} \\
-%$\sin\alpha\cos\beta = \frac{1}{2}\left[\sin(\alpha+\beta)+\sin(\alpha-\beta) \right]  $ \\
-%$\cos\alpha\sin\beta = \frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta) \right]  $ \\
-%$\cos\alpha\cos\beta = \frac{1}{2}\left[\cos(\alpha+\beta)+\cos(\alpha-\beta) \right]  $ \\
-%$\sin\alpha\sin\beta = -\frac{1}{2}\left[\cos(\alpha+\beta)-\cos(\alpha-\beta)  \right]$ \\
-%}
-%%
-%%
-%%
-%%$\displaystyle \int \frac{1}{a x^2 + bx + c} \dx = \begin{cases}
-%%\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx + c}|+C, & a >0\\
-%%\frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D})+C, & a<0 \end{cases} $\\ $\int
-%%\frac{p(x)}{(x-a)^n (x^2 + bx + c)^m} \, \dx = A \log|x - a| + B \log|x^2 + bx
-%%+ c| + C \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj
-%%kot spodaj}}{(x-a)^{n-1} (x^2 + bx + c)^{m-1}}$ \\
-%%
-%%Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),
-%%\dx = \dt/(1 + t^2)$\\ Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2),
-%%\cos x = (1-u^2)/(1 + u^2), \dx = 2 du/(1 + u^2)$\\
-%%
-%%
-%%
-
+\vfill \hfill avtor: Klemen Sajovec, popravki: Jure Slak, Vesna Iršič
 
 \end{document}
-
