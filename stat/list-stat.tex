@@ -1,0 +1,248 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[slovene]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\titleformat*{\section}{\sc\bfseries\centering}
+
+\usepackage[
+top    = 0.9cm,
+bottom = 0.9cm,
+left   = 1cm,
+right  = 1cm]{geometry}
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{zgled}[definicija]{Zgled}
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{1pt}
+}
+{\end{enumerate}}
+
+\newcommand{\ds}{\ensuremath{\,\mathrm{d}s}}
+\newcommand{\dx}{\ensuremath{\,\mathrm{d}x}}
+\newcommand{\dxi}{\ensuremath{\,\mathrm{d}\xi}}
+\newcommand{\dy}{\ensuremath{\,\mathrm{d}y}}
+\newcommand{\dt}{\ensuremath{\,\mathrm{d}t}}
+\newcommand{\dd}[1]{\ensuremath{\,\mathrm{d}#1}}
+\let\oldint\int
+\renewcommand{\int}{\oldint \!}
+
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Cont}{\mathcal{C}}
+
+\newcommand{\X}{\underline{X}}
+\newcommand{\Z}{\underline{Z}}
+\newcommand{\W}{\underline{W}}
+\newcommand{\uu}{\underline{u}}
+\newcommand{\uv}{\underline{v}}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\corr}{corr}
+
+\pagestyle{empty}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% \fontsize{9pt}{9pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$\X = \left( \begin{matrix}
+  X_1 \\ X_2 \\ \vdots \\ X_n
+\end{matrix} \right)
+ \longrightarrow E(\X) = \left( \begin{matrix} E(X_1) \\ E(X_2) \\ \vdots \\ E(X_n) \end{matrix} \right)
+ \longrightarrow \cov(\X) = \left(
+ \begin{matrix}
+ \var(X_1)  & \cov(X_1,X_2) & \cdots & \cov(X_1,X_n) \\
+ \cov(X_2,X_1) & \var(X_2) & \cdots & \cov(X_2, X_n) \\
+ \vdots  & \vdots & \ddots & \vdots \\
+ \cov(X_n, X_1) & \cov(X_n,X_2) & \cdots & \var(X_n)
+ \end{matrix}   \right)$
+
+ kovariančna matrika (simetrična, pozitivno semi-definitna)
+
+ $\uu \otimes \uv = \uu\uv^T$
+
+ $\X \X^T =  \left(
+ \begin{matrix}
+ X_1^2  &X_1X_2 & \cdots &X_1X_n \\
+ X_2X_1 & X_2^2 & \cdots & X_2 X_n \\
+ \vdots  & \vdots & \ddots & \vdots \\
+ X_n X_1 & X_nX_2 & \cdots & X_n^2
+ \end{matrix}   \right)$
+
+ $\cov(\X) = E[(\X-E(\X))(\X - E(\X))^T] = E(\X\X^T) - E(\X)E(\X)^T$
+
+korelacijski koeficient: $\corr(X_1,X_2) = \frac{\cov(X_1,X_2}{\sqrt{\var(X_1)
+\var(X_2)}}$
+
+ Če je $A$ deterministična matrika (konstantna), velja: $E(A\X) = A E(\X)$,
+ $\cov(A\X) = A\cov(\X)A^T$
+
+ $\cov(\langle \X, \uu \rangle , \langle \X, \uv \rangle) =
+ \rangle \cov(\X)\uu,\uv \rangle$, $\cov (\uu^T
+ \X, \uv^T \X) = \uv^T \cov(\X) \uu$
+
+Standardna $p$-razsežna normalna porazdelitev je porazdelitev slučajnega
+vektorja $ \left( Z_1 ,  Z_2 , \ldots , Z_n  \right)$,
+
+  kjer so $Z_1, \ldots , Z_p \sim N(0,1)$ in neodvisne.
+
+Če je $Q$ ortogonalna matrika in $\Z$ standarden normalen vektor,
+potem je $\W = Q\Z$ tudi standarden normalen.
+
+Splošna $n$-razsežna normalna porazdelitev je vsaka porazdelitev slučajnega
+vektorja $\W = A\Z+\uu$, kjer je $\Z$
+standarden $p$-razsežni normalni vektor, $A$ matrika $n \times p$ polnega ranga
+in $\uu \in \R^n$.
+
+$E(\Z) = 0$, $\cov(\Z) = I$, $E(\underline{W}) =
+\uu$, $\cov(\Z) = AA^T$
+
+Če $A \in \R^{n\times p}$ polnega ranga, je $AA^T$ polnega ranga (in obrnljiva).
+
+$\sigma > 0, X \sim N(\mu, \sigma^2 ) \Longrightarrow P(X \leq a ) = \Phi
+(\frac{a-\mu}{\sigma})$
+
+\textbf{Pogojna gostota}: $f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_y (y)}$
+
+$\left( \begin{matrix} X_1 \\ X_2 \end{matrix} \right)
+\sim
+N \left(
+\left[ \begin{matrix} \mu_1 \\ \mu_2 \end{matrix} \right],
+\left[ \begin{matrix} \Sigma_{11} & \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22} \end{matrix} \right] \right)
+\Longrightarrow
+X_2 | X_1 \sim N(\mu_2 +  \Sigma_{21}\Sigma_{11}^{-1} (X_1 - \mu_1), \Sigma_{22} - \Sigma_{21} \Sigma_{11}^{-1} \Sigma_{12} )$
+
+$||X||^2 = X^T X = sl(XX^T)$
+
+Če poznamo porazdelitev slučajne spremenljivke $Y$ in $f_{X|Y}$, potem velja
+$f_X(x) = E[f_{X|Y}(x)]$.
+
+\textbf{Pogojne pričakovane vrednosti}: $E(X) = E[E(X|Y)]$, $ \quad E[Xg(Y)|Y] =
+E(X|Y)g(X)$, v abstraktnem smislu definiramo kot funkcijo $\Psi(x)$, za katero
+za vsako omejeno zvezno funkcijo $g$ velja $E[Yg(x)]=E[\Psi(x)g(x)]$.
+
+$\cov(X,Y) = \cov(E(X|Z),E(Y|Z)) + E(\cov(X,Y|Z))$, med drugim $\var(X) =
+\var(E(X|Z)) + E(\var(X|Z))$
+
+Če so $X_1,\ldots , X_n$ neodvisne med seboj in tudi od $Y_1,\ldots , Y_n)$,
+potem so $X_1,\ldots, X_n$ neodvisne tudi pogojno na $Y$.
+
+\section*{Centralni limitni izrek}
+
+\textbf{Izrek}: Naj bodo $X_1,X_2, \ldots$ neodvisne, enako porazdeljene z
+$E(X_i^2) < \infty$ in $E(X_i) = \mu_1$ ter $\var(X_i) = \sigma_1^2$. $S_n = X_1
++ X_2 + \cdots X_n$. Tedaj:
+$$
+\frac{S_n - n\mu_1}{\sigma_1 \sqrt{n} } \xrightarrow[n\rightarrow \infty]{\text{šibko}} N(0,1),
+$$
+kjer $n\mu_1 = E(S_n)$ in $\sigma_1 \sqrt{n} = \sigma(S_n)$.
+
+Bolj ohlapno: $n$ velik $\Longrightarrow S_n \dot{\sim} N(n\mu_1, n\sigma^2)$
+
+$P(a \leq S_n \leq b) \approx \Phi(\frac{b-n\mu_1}{\sigma_1\sqrt{n}}) - \Phi
+(\frac{a-n\mu_1}{\sigma_1 \sqrt{n}})$
+
+Če slučajna spremenljivka živi v celih številih, lahko namesto $\leq$ vzamemo
+$<$ in mejo povečamo za 1, ali pa vzamemo sredino.
+
+Natančnost sredine je odvisna od asimetrije, ki jo meri $A(X) =
+\frac{E[(X-E(X))^3]}{(\var(X))^{ \frac{3}{2}}}$.
+
+Naj bodo $X_1,\ldots, X_n$ neodvisne in identično porazdeljene, $\sigma_1 =
+\sqrt{\var(X_i)}$, $\gamma_1 = E[|X_i - E(X_i) |^3]^{\frac{1}{3}}$, $S_n = X_1
++ \cdots + X_n$. Ko $n \longrightarrow \infty$, $P(a_n \leq S_n \leq b_n)$
+aproksimiramo z ustreznimi normalnimi. Zadosten pogoj, da gre:
+
+\begin{itemize}
+\item absolutna napaka $\rightarrow 0$: $n \gg \frac{\gamma_1^6}{\sigma_1^6}$
+\item relativna napaka $\rightarrow 0$: $n \gg \frac{\gamma_1^6}{\sigma_1^6}$ in $\min \{ |a_n - E(S_n)|, |b_n - E(S_n)| \} \ll \frac{n^{\frac{2}{3}}\sigma_1^2}{\gamma_1}$
+\end{itemize}
+
+$\mu_1 = E(X_i)$, $\sup_{x\in \R} |P(S_n \leq x) - \Phi(
+\frac{x-n\mu_1}{\sigma_1 \sqrt{n}} )| \leq \frac{0.4774}{\sqrt{n}}
+\frac{\gamma_1^3}{\sigma_1^3}$
+
+\textbf{Porazdelitev $\chi^2$}:
+
+Če so $Z_1,\ldots ,Z_n$ neodvisne standardno normalne, potem je $Z_1^2 + \cdots
++ Z_n^2 \sim \chi^2(n)$, $\chi^2 (n) \xrightarrow{n\rightarrow \infty} N(0,1)$.
+
+$\chi^2(n) = \Gamma(\frac{n}{2}, \frac{1}{2})$
+
+Če $U \sim \Gamma(a,\lambda)$ in $V \sim \Gamma(b, \lambda)$, potem $U+V \sim
+\Gamma (a+b, \lambda)$
+
+Če $U_1,\ldots , U_m \sim \Gamma(\frac{n}{2m},\frac{1}{2})$ neodvisne, potem
+$U_1 + \cdots + U_m \sim \chi^2 (n)$.
+
+\textbf{Razmerje Ljapunova}:
+
+$S= X_1+\cdots + X_n$, $\mu = E(S)$, $\sigma^2 = \var(S)$, $X_1,\ldots , X_n$
+neodvisne.  $P(a \leq S \leq b) \approx \Phi(\frac{b-\mu}{\sigma}) - \Phi
+(\frac{a-\mu}{\sigma})$
+
+$\sup_{x\in \R} |P(S\leq x) - \Phi (\frac{x-\mu}{\sigma})| \leq
+\frac{0.5591}{\sigma^3} \sum_{k=1}^n E[|X_k - E(X_k)|^3]$
+
+Če desna stran konvergira k 0, imamo konvergenco k $N(0,1)$.
+
+\section*{Dejanska statistika}
+
+$\hat{a}$ je \underline{nepristranska cenilka} za $a$, če je $E(\hat{a}) = a$,
+\underline{srednja kvadratična napaka}: $q(\hat{a}) = E[(\hat{a}-a)^2]$,
+\underline{standardna napaka}: $\sqrt{q(\hat{a})} = se(\hat{a})$.
+
+Slučajne spremenljivke $X_1,\ldots ,X_n$ so \underline{izmenljive}, če velja:
+$(X_{\pi(1)},X_{\pi(2)},\ldots, X_{\pi(n)}) \stackrel{d}{=} (X_1,X_2,\ldots,X_n)
+\quad \forall \pi \in S_n.$
+
+Za izmenljive sl. spr. $X_1,\ldots ,X_n$ s pričakovano vrednosti $E(X_i) = \mu$,
+varianco $\var(X_i) = \sigma^2$, korelacijo $\corr(X_i, X_j) = \rho$, za $i \neq
+j$ je vzorčno povprečje $\bar{X} = \frac{X_1 + \cdots + X_n}{n}$ nepristranska
+cenilka za $\mu$,  $\var(\bar{X}) = \frac{\sigma^2}{n}(1+\rho(n+1))$,
+nepristranska cenilka za $\sigma^2$ pa je $\hat{\sigma}^2 =
+\frac{1}{(n-1)(1-\rho)}\sum_{i=1}^n (X_i - \bar{X})^2 $
+
+\textbf{Enostavno slučajno vzorčenje}
+
+Populacija: $1,2,\ldots , N$, vzorec: $K_1, K_2, \ldots, K_n$. Vrednosti spremenljivk na populaciji $x_1, x_2, \ldots, x_N$ (ne poznamo vseh). Poznamo vrednosti na vzorcu: $X_i = x_{K_i}$ (izmenljive, ker je vsaka $n$-terica enako verjetna)
+
+\end{document}
+
