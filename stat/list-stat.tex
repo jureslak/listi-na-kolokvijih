@@ -88,40 +88,42 @@ right  = 1cm]{geometry}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section*{Verjetnost}
+
 $\X = \left( \begin{matrix}
   X_1 \\ X_2 \\ \vdots \\ X_n
 \end{matrix} \right)
- \longrightarrow E(\X) = \left( \begin{matrix} E(X_1) \\ E(X_2) \\ \vdots \\ E(X_n) \end{matrix} \right)
- \longrightarrow \cov(\X) = \left(
- \begin{matrix}
- \var(X_1)  & \cov(X_1,X_2) & \cdots & \cov(X_1,X_n) \\
- \cov(X_2,X_1) & \var(X_2) & \cdots & \cov(X_2, X_n) \\
- \vdots  & \vdots & \ddots & \vdots \\
- \cov(X_n, X_1) & \cov(X_n,X_2) & \cdots & \var(X_n)
- \end{matrix}   \right)$
+\longrightarrow E(\X) = \left( \begin{matrix} E(X_1) \\ E(X_2) \\ \vdots \\ E(X_n) \end{matrix} \right)
+\longrightarrow \cov(\X) = \var(X) = \left(
+\begin{matrix}
+  \var(X_1)  & \cov(X_1,X_2) & \cdots & \cov(X_1,X_n) \\
+  \cov(X_2,X_1) & \var(X_2) & \cdots & \cov(X_2, X_n) \\
+  \vdots  & \vdots & \ddots & \vdots \\
+  \cov(X_n, X_1) & \cov(X_n,X_2) & \cdots & \var(X_n)
+\end{matrix}   \right)$
 
- kovariančna matrika (simetrična, pozitivno semi-definitna)
+kovariančna matrika (simetrična, spd)
 
- $\uu \otimes \uv = \uu\uv^T$
+%  $\X \X^T =  \left(
+%  \begin{matrix}
+%  X_1^2  &X_1X_2 & \cdots &X_1X_n \\
+%  X_2X_1 & X_2^2 & \cdots & X_2 X_n \\
+%  \vdots  & \vdots & \ddots & \vdots \\
+%  X_n X_1 & X_nX_2 & \cdots & X_n^2
+%  \end{matrix}   \right)$
 
- $\X \X^T =  \left(
- \begin{matrix}
- X_1^2  &X_1X_2 & \cdots &X_1X_n \\
- X_2X_1 & X_2^2 & \cdots & X_2 X_n \\
- \vdots  & \vdots & \ddots & \vdots \\
- X_n X_1 & X_nX_2 & \cdots & X_n^2
- \end{matrix}   \right)$
+$E(X^2) = \var(X) + E(X)^2$
 
- $\cov(\X) = E[(\X-E(\X))(\X - E(\X))^T] = E(\X\X^T) - E(\X)E(\X)^T$
+$\cov(\X) = E[(\X-E(\X))(\X - E(\X))^T] = E(\X\X^T) - E(\X)E(\X)^T$
 
-korelacijski koeficient: $\corr(X_1,X_2) = \frac{\cov(X_1,X_2}{\sqrt{\var(X_1)
+korelacijski koeficient: $\corr(X_1,X_2) = \frac{\cov(X_1,X_2)}{\sqrt{\var(X_1)
 \var(X_2)}}$
 
  Če je $A$ deterministična matrika (konstantna), velja: $E(A\X) = A E(\X)$,
  $\cov(A\X) = A\cov(\X)A^T$
 
  $\cov(\langle \X, \uu \rangle , \langle \X, \uv \rangle) =
- \rangle \cov(\X)\uu,\uv \rangle$, $\cov (\uu^T
+ \langle \cov(\X)\uu,\uv \rangle$, $\cov (\uu^T
  \X, \uv^T \X) = \uv^T \cov(\X) \uu$
 
 Standardna $p$-razsežna normalna porazdelitev je porazdelitev slučajnega
@@ -263,7 +265,7 @@ predstavljajo delež populacije v stratumih, $\mu_1,\ldots, \mu_k$ povprečja
 stratificiranih spremenljivk, $\sigma_1,\ldots,\sigma_k$ standardne odklone.
 Povprečje na celotni populaciji je $\mu = w_1\mu_1 + \cdots + w_k\mu_k$.
 
-Varianca na celi populaciji: $\sigma^2 = \sigma_B^2 + \sigma_w^2$, kjer $\sigma_B^2 = \sum_{i=1}^k w_i(\mu_i - \mu)^2$ in $\sigma_w^2 = \sum_{i=1}^k w_i \sigma_i^2$.
+Varianca na celi populaciji: $\sigma^2 = \sigma_b^2 + \sigma_w^2$, kjer $\sigma_b^2 = \sum_{i=1}^k w_i(\mu_i - \mu)^2$ in $\sigma_w^2 = \sum_{i=1}^k w_i \sigma_i^2$.
 
 Enostavni slučajni vzorci po stratumih:
 
@@ -282,11 +284,11 @@ $\sigma_i^2 = \frac{1}{n_i - 1} \frac{N_i -1}{N_i} \sum_{j=1}^{n_i} (X_{ij} -
 \overline{X}_i)^2$ nepristranska cenilka za $\sigma_i^2$, $\widehat{\sigma}_w^2
 = \sum_{i=1}^k \frac{w_i}{n_i - 1} \frac{N_i-1}{N_i}\sum_{j=1}^{n_i} (X_{ij} -
 \overline{X}_i)^2$  nepristranska cenilka za $\sigma_w^2$ in
-$\widehat{\sigma}_B^2 = \sum_{i=1}^k w_i (\overline{X}_i - \overline{X})^2 -
+$\widehat{\sigma}_b^2 = \sum_{i=1}^k w_i (\overline{X}_i - \overline{X})^2 -
 \sum_{i=1}^k (w_i - w_i^2) \frac{N_i - n_i}{N_i - 1}\frac{1}{n_i}
-\widehat{\sigma}_i^2$ nepristranska cenilka za $\sigma_B^2$.
+\widehat{\sigma}_i^2$ nepristranska cenilka za $\sigma_b^2$.
 
-\section*{intervali zaupanja}
+\section*{Intervali zaupanja}
 
 $a$ bi radi ocenili: $a_{min} < a < a_{max}$, kjer je $(a_{min},a_{max})$
 interval zaupanja. $P(a_{min} < a < a_{max}) \geq 1-\alpha$, kjer je $1-\alpha$
@@ -303,6 +305,7 @@ potem $T(\X ,\mu) = \frac{\overline{X} - \mu}{S^2}\sqrt{n}$, kjer $S^2 =
 \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X})^2$. Za velike $n$ je $
 \frac{\overline{X} - \mu}{S}\sqrt{n} \,\dot{\sim}\, N(0,1)$, v splošnem pa je $
 \frac{\overline{X} - \mu}{S}\sqrt{n} \sim \text{Student}(n-1).$
+
 
 \section*{Ocenjevanje parametrov}
 \textbf{Metoda momentov:} \\
@@ -343,33 +346,63 @@ Aproksimativni interval zaupanja: $\vartheta \in \left( \hat{\vartheta} \pm z_{1
 \sqrt{\frac{1}{nI(\hat{\vartheta})}}\right)$.
 
 \section*{Testiranje hipotez}
+Naredimo si testno statistiko in hipotezo zavrnemo, če ima preveč ekstremno
+vrednost. $p$-vrednosti imenujemo verjetnost, da dobimo še bolj ekstremen
+rezultat. Če je $p$-vrednost manjša od stopnje tveganja $\alpha$, hipotezo
+zavrnemo.
+$\frac{\overline{X}-\mu_0}{\sigma} \sqrt{n} \sim N(0,1)$
 
-Razmerje verjetij: $\Lambda' = \frac{\sup _{\vartheta \in \Omega_1}L(\vartheta)}{\sup _{\vartheta \in \Omega_2}L(\vartheta)}$
+$\frac{1}{\sigma^2}\sum_{i=1}^n (X_i - \overline{X})^2 =
+\frac{n-1}{\sigma^2}\hat{\sigma}^2 \sim \chi^2 (n-1)$
 
-Testiramo $H_0: \mu = \mu_0$ proti $H_1: \mu \neq \mu_0$:
+Če $Z \sim N(0,1)$, $H \sim \chi^2(m) \Longrightarrow \frac{Z}{\sqrt{H}}\sqrt{m}
+\sim Student(m)$.
 
-$T = \frac{\overline{X} - \mu_0}{\widehat{\sigma}_+}\sqrt{n} \sim Student(n-1)$, kjer $\widehat{\sigma}_+ = \sqrt{\frac{(X_1 - \overline{X})^2 + \cdots + (X_n - \overline{X})^2}{n-1}}$.
+\textbf{T-test:}
+Recimo, da so podatki $X_1, \dots X_n$ vzorec iz $N(\mu, \sigma^2)$.
+Testiramo $H_0: \mu = \mu_0$ proti $H_1: \mu \neq \mu_0$.
 
+Testna statistika: $T = \frac{\overline{X} - \mu_0}{\widehat{\sigma}_+}\sqrt{n} \sim
+\text{Student}(n-1)$, kjer $\hat{\sigma}^2 = \frac{1}{n-1} \sum_{i=1}^n(X_i -
+\bar{X})^2$. \\
 $H_0$ zavrnemo proti:
 \begin{itemize}
-\item $H_1: \mu \neq \mu_0$, če $|T| \geq t_{1-\frac{\alpha}{2}}(n-1)$
-\item $H_1: \mu > \mu_0$, če $T \geq t_{1-\alpha}(n-1)$
-\item $H_1: \mu < \mu_0$, če $T \leq -t_{1-\alpha}(n-1)$.
+  \item $H_1: \mu \neq \mu_0$, če $|T| \geq t_{1-\frac{\alpha}{2}}(n-1)$
+  \item $H_1: \mu > \mu_0$, če $T \geq t_{1-\alpha}(n-1)$
+  \item $H_1: \mu < \mu_0$, če $T \leq -t_{1-\alpha}(n-1)$.
 \end{itemize}
 
-Naj bosta
-$\left\{ \begin{matrix} \frac{\overline{X}-\mu_0}{\sigma} \sqrt{n} \sim N(0,1) \\
-\frac{1}{\sigma^2}\sum_{i=1}^n (X_i - \overline{X})^2 = \frac{n-1}{\sigma^2}\widehat{\sigma_+^2} \sim \chi^2 (n-1)  \end{matrix} \right\}$  neodvisni.
+Podobno deluje $Z$-test, samo da uporabljamo normalno porazdelitev.
 
-Če $Z \sim N(0,1)$, $H \sim \chi^2(m) \Longrightarrow \frac{Z}{\sqrt{H}}\sqrt{m} \sim Student(m)$.
-
-$X_1, \ldots ,X_m \sim N(\mu_1, \sigma^2)$ neodvisne in $Y_1, \ldots ,Y_n \sim N(\mu_2 , \sigma^2)$ neodvisne. Testiramo $H_0: \mu_1 = \mu_2$ proti $H_1: \mu_1 \neq \mu_2 / \mu_1 > \mu_2 / \mu_2 > \mu_1$. Potem $H_0$ zavrnemo proti:
+Primerjava dveh povprečij:
+$X_1, \ldots ,X_m \sim N(\mu_1, \sigma^2)$ neodvisne in $Y_1, \ldots ,Y_n \sim
+N(\mu_2 , \sigma^2)$ neodvisne. \\
+Testiramo $H_0: \mu_1 = \mu_2$, ki ga zavrnemo proti:
 \begin{itemize}
-\item $H_1: \mu_1 \neq \mu_2$, če $|T| \geq t_{1-\frac{\alpha}{2}}(m+n-2)$
-\item $H_1: \mu_1 > \mu_2$, če $T > t_{1-\alpha}(m+n-2)$
-\item $H_1: \mu_2 < \mu_1$, če $T \geq t_{1-\alpha}(m+n-2)$.
+  \item $H_1: \mu_1 \neq \mu_2$, če $|T| \geq t_{1-\frac{\alpha}{2}}(m+n-2)$
+  \item $H_1: \mu_1 > \mu_2$, če $T > t_{1-\alpha}(m+n-2)$
+  \item $H_1: \mu_2 < \mu_1$, če $T \geq t_{1-\alpha}(m+n-2)$.
 \end{itemize}
 
+\textbf{$\mathbf{\boldsymbol\chi^2}$ test:}
+Denimo, da imamo podatek $n_1, \dots, n_r$, ki je realizacija slučajne multinomsko porazdeljene
+spremenljivke s parametri $n$ = št. poskusov in $p_1, \dots, p_r$ = kako
+verjeten je kateri izid.
+
+Testna statistika je definirana kot $\chi^2 = \sum_{k=1}^r\frac{(n_k - n
+p_k)^2}{n p_k}$ in je porazdeljena $\chi^2(r-1)$.
+
+Hipotezo zavrnemo, če je $\chi^2 > \chi_\alpha$, kjer je $\alpha$ stopnja
+tveganja in $\chi_\alpha$ kvantil.
+
+\textbf{$\boldsymbol \lambda$ statistika:} \\
+Uporabimo razmerje verjetij: $\Lambda = \frac{\sup _{\vartheta \in
+\Omega}L(\vartheta|x)}{\sup _{\vartheta \in \Omega_0}L(\vartheta|x)}$
+
+Wilksov izrek: $\lambda = 2 \log(\Lambda) = \sup_{\vartheta \in \Omega}
+\ell(\vartheta|x) - \sup_{\vartheta \in \Omega_0} \ell(\vartheta|x)$ ima
+porazdelitev $\chi^2(r)$, za $r = \dim\Omega - \dim\Omega_0$.
+Hipotezo zavrnemo, če je $\lambda > \chi_{1-\alpha}(r)$.
 
 \section*{Linearna regresija}
 Predpostavljamo, da so opaženi slučajni podatki $\Y = (Y_1, \dots, Y_n)^T$ nastali kot
@@ -413,7 +446,7 @@ $(\Sigma)^{-\frac12}$. Cenilka za $\ubeta$ postane $\hat{\ubeta} =
 Za testiranje hipoteze $\beta_i = 0$ proti $\beta_i \neq 0$ uporabimo testno
 statistiko $t = \frac{\hat{\ubeta}_i}{\hat{\sigma} \sqrt{C_{ii}}} \sim t_{n-m}$.
 
-\textbf{Inverzi matrik}
+\textbf{Inverzi matrik -- molimo k Raiču, da jih ne rabimo}
 \[
   \begin{bmatrix}
     a & b \\ c & d
