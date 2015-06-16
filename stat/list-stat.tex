@@ -63,13 +63,17 @@ right  = 1cm]{geometry}
 \newcommand{\Cont}{\mathcal{C}}
 
 \newcommand{\X}{\underline{X}}
+\newcommand{\Y}{\underline{Y}}
 \newcommand{\Z}{\underline{Z}}
 \newcommand{\W}{\underline{W}}
 \newcommand{\uu}{\underline{u}}
 \newcommand{\uv}{\underline{v}}
+\newcommand{\ubeta}{\ensuremath{\underline{\beta}}}
+\newcommand{\ueps}{\ensuremath{\underline{\varepsilon}}}
 \DeclareMathOperator{\cov}{cov}
 \DeclareMathOperator{\var}{var}
 \DeclareMathOperator{\corr}{corr}
+\DeclareMathOperator{\se}{se}
 
 \pagestyle{empty}
 
@@ -138,6 +142,8 @@ $E(\Z) = 0$, $\cov(\Z) = I$, $E(\underline{W}) =
 
 $\sigma > 0, X \sim N(\mu, \sigma^2 ) \Longrightarrow P(X \leq a ) = \Phi
 (\frac{a-\mu}{\sigma})$
+
+$X_1,\ldots, X_n \sim N(\mu, \sigma^2)$, potem $X_1  + \cdots +  X_n \sim N(n\mu, \frac{\sigma^2}{n})$, $\overline{X} \sim N(\mu, \sigma^2)$, $\overline{X} - \mu \sim N(0, \frac{\sigma^2}{n})$
 
 \textbf{Pogojna gostota}: $f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_y (y)}$
 
@@ -223,11 +229,11 @@ $\sup_{x\in \R} |P(S\leq x) - \Phi (\frac{x-\mu}{\sigma})| \leq
 
 Če desna stran konvergira k 0, imamo konvergenco k $N(0,1)$.
 
-\section*{Dejanska statistika}
+\section*{Dejanska statistika -- vzročenje}
 
-$\hat{a}$ je \underline{nepristranska cenilka} za $a$, če je $E(\hat{a}) = a$,
-\underline{srednja kvadratična napaka}: $q(\hat{a}) = E[(\hat{a}-a)^2]$,
-\underline{standardna napaka}: $\sqrt{q(\hat{a})} = se(\hat{a})$.
+$\widehat{a}$ je \underline{nepristranska cenilka} za $a$, če je $E(\widehat{a}) = a$,
+\underline{srednja kvadratična napaka}: $q(\widehat{a}) = E[(\widehat{a}-a)^2]$,
+\underline{standardna napaka}: $\sqrt{q(\widehat{a})} = se(\widehat{a})$.
 
 Slučajne spremenljivke $X_1,\ldots ,X_n$ so \underline{izmenljive}, če velja:
 $(X_{\pi(1)},X_{\pi(2)},\ldots, X_{\pi(n)}) \stackrel{d}{=} (X_1,X_2,\ldots,X_n)
@@ -235,14 +241,105 @@ $(X_{\pi(1)},X_{\pi(2)},\ldots, X_{\pi(n)}) \stackrel{d}{=} (X_1,X_2,\ldots,X_n)
 
 Za izmenljive sl. spr. $X_1,\ldots ,X_n$ s pričakovano vrednosti $E(X_i) = \mu$,
 varianco $\var(X_i) = \sigma^2$, korelacijo $\corr(X_i, X_j) = \rho$, za $i \neq
-j$ je vzorčno povprečje $\bar{X} = \frac{X_1 + \cdots + X_n}{n}$ nepristranska
-cenilka za $\mu$,  $\var(\bar{X}) = \frac{\sigma^2}{n}(1+\rho(n+1))$,
+j$ je vzorčno povprečje $\overline{X} = \frac{X_1 + \cdots + X_n}{n}$ nepristranska
+cenilka za $\mu$,  $\var(\overline{X}) = \frac{\sigma^2}{n}(1+\rho(n+1))$,
 nepristranska cenilka za $\sigma^2$ pa je $\hat{\sigma}^2 =
-\frac{1}{(n-1)(1-\rho)}\sum_{i=1}^n (X_i - \bar{X})^2 $
+\frac{1}{(n-1)(1-\rho)}\sum_{i=1}^n (X_i - \overline{X})^2 $
 
 \textbf{Enostavno slučajno vzorčenje}
 
-Populacija: $1,2,\ldots , N$, vzorec: $K_1, K_2, \ldots, K_n$. Vrednosti spremenljivk na populaciji $x_1, x_2, \ldots, x_N$ (ne poznamo vseh). Poznamo vrednosti na vzorcu: $X_i = x_{K_i}$ (izmenljive, ker je vsaka $n$-terica enako verjetna)
+Populacija: $1,2,\ldots , N$, vzorec: $K_1, K_2, \ldots, K_n$. Vrednosti
+spremenljivk na populaciji $x_1, x_2, \ldots, x_N$ (ne poznamo vseh). Poznamo
+vrednosti na vzorcu: $X_i = x_{K_i}$ (izmenljive, ker je vsaka $n$-terica enako
+verjetna)
+
+\textbf{Stratificirano vzorčenje}:
+
+Populacijo velikosti $N$ razdelimo na $k$ stratumov velikosti $N_1,\ldots,N_k$,
+kjer $w_1,w_2,\ldots ,w_k$ ($w_i = \frac{N_i}{N}$ in $w_1 + \cdots + w_k = 1$)
+predstavljajo delež populacije v stratumih, $\mu_1,\ldots, \mu_k$ povprečja
+stratificiranih spremenljivk, $\sigma_1,\ldots,\sigma_k$ standardne odklone.
+Povprečje na celotni populaciji je $\mu = w_1\mu_1 + \cdots + w_k\mu_k$.
+
+Varianca na celi populaciji: $\sigma^2 = \sigma_B^2 + \sigma_w^2$, kjer $\sigma_B^2 = \sum_{i=1}^k w_i(\mu_i - \mu)^2$ in $\sigma_w^2 = \sum_{i=1}^k w_i \sigma_i^2$.
+
+Enostavni slučajni vzorci po stratumih:
+
+$
+\begin{matrix}
+X_{11},\ldots ,X_{1n_1} & \overline{X}_1 \\
+X_{21}, \ldots ,X_{2n_2} & \overline{X}_2 \\
+\vdots & \vdots \\
+X_{k1},\ldots , X_{kn_k} & \overline{X}_k
+\end{matrix}
+$,
+kjer so $\overline{X}_i$ vzorčna povprečja po stratumih. $\overline{X} =
+\sum_{i=1}^k w_i \overline{X}_i$ je nepristranska cenilka za $\mu$,
+
+$\sigma_i^2 = \frac{1}{n_i - 1} \frac{N_i -1}{N_i} \sum_{j=1}^{n_i} (X_{ij} -
+\overline{X}_i)^2$ nepristranska cenilka za $\sigma_i^2$, $\widehat{\sigma}_w^2
+= \sum_{i=1}^k \frac{w_i}{n_i - 1} \frac{N_i-1}{N_i}\sum_{j=1}^{n_i} (X_{ij} -
+\overline{X}_i)^2$  nepristranska cenilka za $\sigma_w^2$ in
+$\widehat{\sigma}_B^2 = \sum_{i=1}^k w_i (\overline{X}_i - \overline{X})^2 -
+\sum_{i=1}^k (w_i - w_i^2) \frac{N_i - n_i}{N_i - 1}\frac{1}{n_i}
+\widehat{\sigma}_i^2$ nepristranska cenilka za $\sigma_B^2$.
+
+\section*{intervali zaupanja}
+
+$a$ bi radi ocenili: $a_{min} < a < a_{max}$, kjer je $(a_{min},a_{max})$
+interval zaupanja. $P(a_{min} < a < a_{max}) \geq 1-\alpha$, kjer je $1-\alpha$
+stopnja zaupanja $(95\%, 99\%)$ in $\alpha$ stopnja tveganja $(5\%, 1\%)$.
+
+Določanje IZ: pivotna funkcija $T(\X , a)$, kjer je $\X$ opažanje in $a$
+ocenjevani parameter.
+
+IZ za $\mu$, kjer je $\sigma$ znan: $P(|\overline{X} - \mu| < M_\alpha ) =
+1-\alpha$, $M_\alpha = \frac{\sigma}{\sqrt{n}} \Phi^{-1}(1-\frac{\alpha}{2})$
+
+Če tudi $\sigma$ ne poznamo in če so $X_1,\ldots, X_n \sim N(\mu, \sigma^2)$,
+potem $T(\X ,\mu) = \frac{\overline{X} - \mu}{S^2}\sqrt{n}$, kjer $S^2 =
+\frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X})^2$. Za velike $n$ je $
+\frac{\overline{X} - \mu}{S}\sqrt{n} \,\dot{\sim}\, N(0,1)$, v splošnem pa je $
+\frac{\overline{X} - \mu}{S}\sqrt{n} \sim \text{Student}(n-1).$
+
+\section*{Testiranje hipotez}
+
+\section*{Linearna regresija}
+Predpostavljamo, da so opaženi slučajni podatki $\Y = (Y_1, \dots, Y_n)^T$ nastali kot
+$\Y = X \ubeta + \ueps$, kjer je $X$ znana deterministična $n \times m$ matrika, $\ubeta$
+neznan determinističen $m$ vektor, $\ueps$ neznan slučajen vektor napak, za katerega
+predpostavimo standardni regresijski model, ki pravi: $E[\ueps] = 0$ in
+$\var(\ueps) = \sigma^2 I$.  Drugače povedano, napake $\varepsilon_i$ so
+nekorelirane, varianca vsake posamezne pa je $\sigma^2$.
+
+Za $\ubeta = (\alpha, \beta)^T$ in $X = (1, x_1; 1, x_2; \dots; 1, x_n)$
+preidemo na standardno ocenjevanje s premico.
+
+Nepristranska cenilka za $\ubeta$ je cenilka po metodi najmanjših kvadratov
+$\hat{\ubeta} = (X^TX)^{-1}X^TY$.
+
+Varianca cenilke: $\var(\ubeta) = \sigma^2(X^TX)^{-1} = \sigma^2C$.
+
+Nepristranska cenilka za $\sigma^2$ je $\hat{\sigma}^2 = \frac{1}{n-m}
+\sum_{i=1}^n \hat{\ueps}_i^2$, kjer je $\hat{\ueps} = \Y - X\ubeta$.
+
+Če gledamo samo posamezne komponente je cenilka za $\beta_i$ enaka
+$\hat{\beta}_i = (\hat{\ubeta})_i$ in $\var(\hat{\beta}_i) = \sigma^2C_{ii}$,
+$\se(\hat{\ubeta}) = \sigma \sqrt{C_{ii}}$.
+
+Izrek (Gauss-Markov): Cenilka po metodi najmanjših kvadratov je najboljša med
+vsemi linearnimi nepristranskimi cenilkami (ima najmanjšo varianco). Za vsako
+linearno cenilko $\tilde{\ubeta} = L\Y$ mora veljati $LX = I$ in posledično
+$\var(\tilde{\ubeta}) = \var(\tilde{\ubeta} - \hat{\ubeta}) +
+\var(\hat{\ubeta})$, saj je $\cov(\tilde{\ubeta} - \hat{\ubeta}, \hat{\ubeta}) =
+0$.
+
+Če za $\ueps$ predpostavljamo $\var(\ueps) = \sigma^2\Sigma$ za neko pd.\
+matriko $\Sigma$, potem to prevedemo na standardni model z množenjem z leve s
+$(\Sigma)^{-\frac12}$. Cenilka za $\ubeta$ postane $\hat{\ubeta} =
+(X^T\Sigma X)^{-1}X^T\Sigma^{-1} \Y$.
+
+Za testiranje hipoteze $\beta_i = 0$ proti $\beta_i \neq 0$ uporabimo testno
+statistiko $t = \frac{\hat{\ubeta}_i}{\hat{\sigma} \sqrt{C_{ii}}} \sim t_{n-m}$.
 
 \end{document}
-
