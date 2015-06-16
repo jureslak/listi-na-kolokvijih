@@ -67,6 +67,8 @@ right  = 1cm]{geometry}
 \newcommand{\Z}{\underline{Z}}
 \newcommand{\W}{\underline{W}}
 \newcommand{\uu}{\underline{u}}
+\newcommand{\ux}{\underline{x}}
+\newcommand{\utheta}{\underline{\vartheta}}
 \newcommand{\uv}{\underline{v}}
 \newcommand{\ubeta}{\ensuremath{\underline{\beta}}}
 \newcommand{\ueps}{\ensuremath{\underline{\varepsilon}}}
@@ -161,7 +163,7 @@ $||X||^2 = X^T X = sl(XX^T)$
 $f_X(x) = E[f_{X|Y}(x)]$.
 
 \textbf{Pogojne pričakovane vrednosti}: $E(X) = E[E(X|Y)]$, $ \quad E[Xg(Y)|Y] =
-E(X|Y)g(X)$, v abstraktnem smislu definiramo kot funkcijo $\Psi(x)$, za katero
+E(X|Y)g(X)$, v abstraktnem smislu definiramo $E[Y|X]$ kot funkcijo $\Psi(x)$, za katero
 za vsako omejeno zvezno funkcijo $g$ velja $E[Yg(x)]=E[\Psi(x)g(x)]$.
 
 $\cov(X,Y) = \cov(E(X|Z),E(Y|Z)) + E(\cov(X,Y|Z))$, med drugim $\var(X) =
@@ -302,6 +304,44 @@ potem $T(\X ,\mu) = \frac{\overline{X} - \mu}{S^2}\sqrt{n}$, kjer $S^2 =
 \frac{\overline{X} - \mu}{S}\sqrt{n} \,\dot{\sim}\, N(0,1)$, v splošnem pa je $
 \frac{\overline{X} - \mu}{S}\sqrt{n} \sim \text{Student}(n-1).$
 
+\section*{Ocenjevanje parametrov}
+\textbf{Metoda momentov:} \\
+Vzorec $\ = (X_1, \dots, X_n)^T$ je iz neke porazdelitve $f_X(x|\utheta)$.
+Nastavimo parametre $\utheta$, da bo povprečje enako vzorčnemu povprečju,
+varianca vzorčni varianci\dots. Rešimo sistem enačb: $E[X] = \bar{X}$, $\var(X)
+= \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2$.
+
+\textbf{Metoda največjega verjetja}: Postavimo se na stališče, da je vzorec
+$\ux = (x_1, \dots, x_n)^T$ neke porazdelitve
+$f_X(x|\utheta)$, ki smo ga dobili verjetno eden izmed bolj verjetnih,
+in nastavimo parametre $\utheta$ tako, da bo najbolj verjeten.
+Kako verjeten je vzorec je podano s funkcijo verjetja $L$.
+Če so vzorci neodvisni, je $L(\utheta|\ux) = \prod_{i=1}^n f_X(x_i|\utheta)$. V
+diskretnem primeru je to $L(\utheta|\ux) = \prod_{i=1}^n P_{\utheta}(X=x_i)$. \\
+Definiramo tudi logaritemsko funkcijo verjetja $\ell(\utheta|\ux) =
+\log(L(\utheta|\ux))$.
+
+Cenilka po metodi največjega verjetja (MLE) je vrednost $\hat{\utheta}$, kjer je
+dosežen maksimum $L$, ali ekvivalentno, $\ell$. Cenilka je nepristranska.
+Ponavadi jo dobimo tako da rešimo sistem $\frac{\partial \ell}{\partial
+\utheta}(\utheta|\ux) = 0$ za $\utheta$. \\
+Za MLE velja: $\sqrt{n}(\vartheta - \hat{\utheta}) \,\dot{\sim}\, N(0, I^{-1}(\utheta))$.
+
+\textbf{Fisherjeva matrika informacije:} \\
+Varianca MLE je dana s Fisherjevo matriko informacije. \\
+Matrike je dana z $I_{kl}(\utheta) = -E\left[\frac{\partial^2}{\partial
+\vartheta_k\partial\vartheta_l}(\log(f_X(x|\utheta)))\right]$, $I(\utheta) = -E[\text{hesse}(\log(f_X(x|\utheta)))]$.
+
+Velja: $\var(\hat{\utheta}_k) = \frac{(I^{-1})_{kk}}{n}$, $\se(\hat{\utheta}_k) =
+\sqrt{\frac{(I^{-1})_{kk}}{n}}$.
+
+Za primer, ko je $\vartheta$ skalar, se formule poenostavijo:
+$I(\vartheta) = E[\frac{\partial^2}{\partial\vartheta^2}
+\log(f_X(x|\vartheta))]$, \\
+$\se(\hat{\vartheta}) = \frac{1}{\sqrt{n I(\vartheta)}}$.
+Aproksimativni interval zaupanja: $\vartheta \in \left( \hat{\vartheta} \pm z_{1-\frac{\alpha}{2}}
+\sqrt{\frac{1}{nI(\hat{\vartheta})}}\right)$.
+
 \section*{Testiranje hipotez}
 
 \section*{Linearna regresija}
@@ -325,14 +365,18 @@ Nepristranska cenilka za $\sigma^2$ je $\hat{\sigma}^2 = \frac{1}{n-m}
 
 Če gledamo samo posamezne komponente je cenilka za $\beta_i$ enaka
 $\hat{\beta}_i = (\hat{\ubeta})_i$ in $\var(\hat{\beta}_i) = \sigma^2C_{ii}$,
-$\se(\hat{\ubeta}) = \sigma \sqrt{C_{ii}}$.
+$\se(\hat{\beta_i}) = \sigma \sqrt{C_{ii}}$.
+
+Za lin. kombinacijo komponent je cenilka enaka $a^T\hat{\ubeta}$ in njena
+varianca je $\var(a^T\hat{\ubeta}) = a^T C a$, za poljuben vektor $a$.
 
 Izrek (Gauss-Markov): Cenilka po metodi najmanjših kvadratov je najboljša med
 vsemi linearnimi nepristranskimi cenilkami (ima najmanjšo varianco). Za vsako
 linearno cenilko $\tilde{\ubeta} = L\Y$ mora veljati $LX = I$ in posledično
 $\var(\tilde{\ubeta}) = \var(\tilde{\ubeta} - \hat{\ubeta}) +
 \var(\hat{\ubeta})$, saj je $\cov(\tilde{\ubeta} - \hat{\ubeta}, \hat{\ubeta}) =
-0$.
+0$. Enako velja tudi za cenilko $a^T\hat{\ubeta}$ za vsak vektor $a$, v posebnem
+za $a = e_i$ tudi za cenilke po komponentah.
 
 Če za $\ueps$ predpostavljamo $\var(\ueps) = \sigma^2\Sigma$ za neko pd.\
 matriko $\Sigma$, potem to prevedemo na standardni model z množenjem z leve s
