@@ -344,6 +344,33 @@ Aproksimativni interval zaupanja: $\vartheta \in \left( \hat{\vartheta} \pm z_{1
 
 \section*{Testiranje hipotez}
 
+Razmerje verjetij: $\Lambda' = \frac{\sup _{\vartheta \in \Omega_1}L(\vartheta)}{\sup _{\vartheta \in \Omega_2}L(\vartheta)}$
+
+Testiramo $H_0: \mu = \mu_0$ proti $H_1: \mu \neq \mu_0$:
+
+$T = \frac{\overline{X} - \mu_0}{\widehat{\sigma}_+}\sqrt{n} \sim Student(n-1)$, kjer $\widehat{\sigma}_+ = \sqrt{\frac{(X_1 - \overline{X})^2 + \cdots + (X_n - \overline{X})^2}{n-1}}$.
+
+$H_0$ zavrnemo proti:
+\begin{itemize}
+\item $H_1: \mu \neq \mu_0$, če $|T| \geq t_{1-\frac{\alpha}{2}}(n-1)$
+\item $H_1: \mu > \mu_0$, če $T \geq t_{1-\alpha}(n-1)$
+\item $H_1: \mu < \mu_0$, če $T \leq -t_{1-\alpha}(n-1)$.
+\end{itemize}
+
+Naj bosta
+$\left\{ \begin{matrix} \frac{\overline{X}-\mu_0}{\sigma} \sqrt{n} \sim N(0,1) \\
+\frac{1}{\sigma^2}\sum_{i=1}^n (X_i - \overline{X})^2 = \frac{n-1}{\sigma^2}\widehat{\sigma_+^2} \sim \chi^2 (n-1)  \end{matrix} \right\}$  neodvisni.
+
+Če $Z \sim N(0,1)$, $H \sim \chi^2(m) \Longrightarrow \frac{Z}{\sqrt{H}}\sqrt{m} \sim Student(m)$.
+
+$X_1, \ldots ,X_m \sim N(\mu_1, \sigma^2)$ neodvisne in $Y_1, \ldots ,Y_n \sim N(\mu_2 , \sigma^2)$ neodvisne. Testiramo $H_0: \mu_1 = \mu_2$ proti $H_1: \mu_1 \neq \mu_2 / \mu_1 > \mu_2 / \mu_2 > \mu_1$. Potem $H_0$ zavrnemo proti:
+\begin{itemize}
+\item $H_1: \mu_1 \neq \mu_2$, če $|T| \geq t_{1-\frac{\alpha}{2}}(m+n-2)$
+\item $H_1: \mu_1 > \mu_2$, če $T > t_{1-\alpha}(m+n-2)$
+\item $H_1: \mu_2 < \mu_1$, če $T \geq t_{1-\alpha}(m+n-2)$.
+\end{itemize}
+
+
 \section*{Linearna regresija}
 Predpostavljamo, da so opaženi slučajni podatki $\Y = (Y_1, \dots, Y_n)^T$ nastali kot
 $\Y = X \ubeta + \ueps$, kjer je $X$ znana deterministična $n \times m$ matrika, $\ubeta$
