@@ -386,4 +386,28 @@ $(\Sigma)^{-\frac12}$. Cenilka za $\ubeta$ postane $\hat{\ubeta} =
 Za testiranje hipoteze $\beta_i = 0$ proti $\beta_i \neq 0$ uporabimo testno
 statistiko $t = \frac{\hat{\ubeta}_i}{\hat{\sigma} \sqrt{C_{ii}}} \sim t_{n-m}$.
 
+\textbf{Inverzi matrik}
+\[
+  \begin{bmatrix}
+    a & b \\ c & d
+  \end{bmatrix}^{-1}
+  =
+  \frac{1}{ad - bc}
+  \begin{bmatrix}
+    d & -b \\ -c & a
+  \end{bmatrix}
+  \qquad A =
+  \begin{bmatrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i \\
+  \end{bmatrix}^{-1}
+ =
+  \frac{1}{\det(A)}
+\begin{bmatrix}
+e i-f h & c h-b i & b f-c e \\
+f g-d i & a i-c g & c d-a f \\
+d h-e g & b g-a h & a e-b d \\
+\end{bmatrix}
+\]
 \end{document}
