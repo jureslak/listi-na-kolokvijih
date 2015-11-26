@@ -1,0 +1,345 @@
+\documentclass[a4paper,oneside,10pt]{article}
+
+\usepackage[slovene]{babel}    % slovenian language and hyphenation
+\usepackage[utf8]{inputenc}    % make čšž work on input
+\usepackage[T1]{fontenc}       % make čšž work on output
+\usepackage[reqno]{amsmath}    % basic ams math environments and symbols
+\usepackage{amssymb,amsthm}    % ams symbols and theorems
+\usepackage{mathtools}         % extends ams with arrows and stuff
+\usepackage{url}               % \url and \href for links
+\usepackage{icomma}            % make comma a thousands separator with correct spacing
+\usepackage{units}             % \unit[1]{m} and unitfrac
+\usepackage{enumerate}         % enumerate style
+\usepackage{array}             % mutirow
+\usepackage[usenames]{color}   % colors with names
+\usepackage{graphicx}          % images
+\usepackage{titlesec}          % control the sections
+
+\usepackage[bookmarks, colorlinks=true, linkcolor=black, anchorcolor=black,
+citecolor=black, filecolor=black, menucolor=black, runcolor=black,
+urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
+\usepackage[
+paper=a4paper,
+top=1cm,
+bottom=1cm,
+textwidth=19cm,
+% textheight=24cm,
+]{geometry}  % page geomerty
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+% basic sets
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Rbar}{\ensuremath{\bar{\mathbb{R}}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+\newcommand{\Title}{TM 1.~kolokvij}
+\newcommand{\Author}{Jure Slak}
+\title{\Title}
+\author{\Author}
+\date{\today}
+\hypersetup{pdftitle={\Title}, pdfauthor={\Author}, pdfcreator={\Author},
+            pdfproducer={\Author}, pdfsubject={}, pdfkeywords={}}  % setup pdf metadata
+
+\pagestyle{empty}              % vse strani prazne
+\setlength{\parindent}{0pt}    % zamik vsakega odstavka
+\setlength{\parskip}{4pt}      % prazen prostor po odstavku
+\setlength{\overfullrule}{30pt}  % oznaci predlogo vrstico z veliko črnine
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{-1pt}   % left, before, after
+\titlespacing*{\subsection}{0pt}{6pt}{-1pt}
+
+%% commands
+\newcommand{\A}{\ensuremath{\mathcal{A}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+\renewcommand{\S}{\ensuremath{\mathcal{S}}}
+\renewcommand{\P}{\ensuremath{\mathcal{P}}}
+
+\begin{document}
+
+\vspace{-2ex}
+\section*{Sigma algebre}
+\vspace{-2ex}
+\begin{minipage}{0.49\textwidth}
+  \textbf{Def:} Družina množic \A~je \textbf{$\sigma$-algebra (algebra)}, če
+  \begin{itemize*}
+    \item $\emptyset \in \A$
+    \item $A \in \A \implies A^c \in \A$
+    \item $A_i \in \A \implies \bigcup_{i=0}^\infty \in \A$ (le za končne unije)
+  \end{itemize*}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+  \textbf{Def:} Družina množic $\S \subset \P(X)$ je \textbf{polalgebra}, če
+  \begin{itemize*}
+    \item $\emptyset \in \S$
+    \item $A, B \in \S \implies A \cap B \in \S$
+    \item $\forall A \in \S$ je $A^c$ končna unija disjuntnih množic iz $\S$ (ni nujno $A^c \in \S$).
+  \end{itemize*}
+\end{minipage}
+
+\vspace{-4ex}
+\section*{Mera}
+\begin{minipage}{0.6\textwidth}
+  \textbf{Def:} $(X, \A)$ merljiv prostor. Preslikava $\mu \colon \A \to [0, \infty]$
+  je \\pozitivna \textbf{mera}, če velja:
+  \begin{itemize*}
+    \item $\mu(\emptyset) = 0$
+    \item $\{E_n\}_{n \in \N}$ paroma disjunktne
+      $\implies \mu(\bigcup_{n = 1}^\infty E_n) = \sum_{n = 1}^\infty \mu(E_n)$
+  \end{itemize*}
+\end{minipage}
+\begin{minipage}{0.39\textwidth}
+  Merljiv prostor je \textbf{poln}, če velja:\\$N \in \A, \mu(N) = 0, A
+  \subseteq N \Rightarrow A \in \A$.
+\end{minipage}
+
+\textbf{Izrek:} $(X, \A, \mu)$ prostor z mero. Potem je
+$\B = \{ B = A \cup S; A \in \A, S \subseteq N \in \A, \mu(N) = 0 \}$,
+$\tilde{\mu} (B) = \mu(A)$. Potem je $\B$ $\sigma$-algebra na $X$,
+$\A \subseteq \B$, $\tilde{\mu}$ je mera na $\B$, ki se na $\A$ ujema z $\mu$.
+Poleg tega je prostor $(X, \B, \tilde{\mu})$ poln.
+
+\textbf{Def:} $(X, \A, \mu)$ prostor z mero.
+\begin{itemize*}
+  \item $\mu$ je \textbf{končna}, če je $\mu(X) < \infty$
+  \item $\mu$ je \textbf{$\sigma$-končna} (predpogoj je $\mu(X) = \infty$),
+    če je $X = \bigcup_{n=1}^\infty E_n, \mu(E_n) < \infty$ (BŠS $E_n$ disj.\ ali naraščajoče)
+  \item $\mu$ je \textbf{semi-končna}, če za vsako $E\in \A$ z $\mu(E) = \infty$
+    obstaja $F \in \A, F \subseteq E$ in $0 < \mu(F) < \infty$
+\end{itemize*}
+
+Velja: $(X, \A, \mu)$.
+\begin{itemize*}
+  \item Če $\mu$ je $\sigma$-končna, potem je semi-končna. % to ni definicija, to smo na vajah izpeljali
+  \item Če $\mu$ je semi-končna, potem za vsak $c > 0$ obstaja $F \in \A$, da je
+    $c \leq \mu(F) < \infty$ (tj.\ končne množice imajo lahko poljubno veliko
+    mero).
+  \item $A = \bigcup_{j = 1}^\infty A_j, A_1 \subseteq A_2 \subseteq A_3 \subseteq
+    \ldots \Rightarrow  \mu(A) = \lim_{n \to \infty} \mu(A_n)$
+  \item $A = \bigcap_{j = 1}^\infty A_j, A_1 \supseteq A_2 \supseteq A_3 \supseteq
+    \ldots \text{ in } \mu(A_1) < \infty \Rightarrow  \mu(A) = \lim_{n \to \infty} \mu(A_n)$
+  \item $\mu(\bigcup_{n=1}^\infty A_n) \leq \sum_{n = 1}^\infty \mu(A_n)$ za
+    vsako zaporedje množic $A_n \in \A$
+\end{itemize*}
+
+\textbf{Def:} Preslikava $\zeta \colon \mathcal{P}(X) \to [0, \infty]$ je \textbf{zunanja mera}, če velja:
+\begin{itemize*}
+  \item $\zeta(\emptyset) = 0$
+  \item $\zeta(A) \leq \zeta(B)$ za $A \subseteq B$
+  \item $\zeta(\bigcup_{n = 1}^\infty A_n) \leq \sum_{n = 1}^\infty \zeta(A_n)$
+\end{itemize*}
+
+Velja: $X$, $\zeta$ zunanja mera:
+\begin{itemize*}
+  \item $\zeta (N) = 0 \Rightarrow N$ je $\zeta$-merljiva
+  \item $E \subseteq X, E \in \A_{\zeta}$, potem za vsako $A \subseteq X$ velja
+    $\zeta(A \cup E) + \zeta(A \cap E) = \zeta(A) + \zeta(E)$
+  \item $A \subseteq X, \forall \varepsilon > 0 \exists E \in \A_{\zeta}, E
+    \subseteq A: \zeta(A \backslash E) < \varepsilon$, potem je $A \in
+    \A_{\zeta}$
+\end{itemize*}
+
+\textbf{Def:} $E \subseteq X$ je \textbf{$\zeta$-merljiva}, če
+$\forall A \subseteq X: \zeta(A) = \zeta(A \cap E) + \zeta(A \cap E^c)$ ($\leq$
+vedno velja).
+
+\textbf{Karateodorijev izrek:}
+$\A_{\zeta} = $ družina vsej $\zeta$-merljivih množic, je $\sigma$-algebra.
+Prostor $(X, \A_{\zeta}, \zeta)$ je poln.
+
+\textbf{Def:} \A{} algebra nad $X$. Preslikava $\nu \colon \A \to [0, \infty]$
+je pozitivna \textbf{mera na algebri}, če velja:
+\begin{itemize*}
+  \item $\nu(\emptyset) = 0$
+  \item $\{E_n\}_{n \in \N}$ paroma disjunktne in $\bigcup_{n=0}^\infty E_n \in \A$
+    $\implies \nu(\bigcup_{n = 1}^\infty E_n) = \sum_{n = 1}^\infty \nu(E_n)$
+\end{itemize*}
+
+Velja: $\mu$ inducira zunanjo mero $\zeta$ na $X$ s predpisom \\ $\zeta(B) =
+\inf\{ \sum_{j=0}^\infty \mu(A_j); B \subseteq \bigcup_{j=0}^\infty A_j, A_j \in
+\A \}$.
+
+\textbf{Def:} \textbf{Polmera} na \S{} je preslikava $\lambda\colon\S\to[0,
+\infty]$ z lastnostmi:
+\begin{itemize*}
+  \item $\lambda(\emptyset) = 0$
+  \item $A = \bigcup_{i=0}^n A_i, A_i \in \S$ paroma disjunktne $\implies
+    \lambda(A) = \sum_{i=0}^n \lambda(A_i)$
+  \item $A = \bigcup_{i=0}^\infty A_i, A_i \in \S$ paroma disjunktne, $A \in \S$
+    $\implies \lambda(A) \leq \sum_{i=0}^\infty \lambda(A_i)$
+\end{itemize*}
+
+Velja: Če je $\S$ polalgebra, potem je družina vseh unij $A = A_1 \cup \cdots \cup A_n$
+$A_i \in \S$ paroma disjunktne; algebra in s predpisom
+$\nu(A) = \lambda(A_1) + \cdots + \lambda(A_n)$ je definirana mera na njej.
+
+\subsection*{Lebesgue-Stieltjesove mere}
+\textbf{Def:} Naj bo $f\colon\R\to\R$ naraščajoča in zvezna z leve.
+Definiramo družino $\S = \{[a, b), (-\infty, a), [b, \infty); a, b \in \R \}$.
+in polmero $\mu_f$ na njej: $\mu_f(\emptyset) = 0, \mu_f([a, b)) = f(b) - f(a),
+\mu_f((-\infty, a)) = f(a) - f(-\infty), \mu_f([b, \infty)) = f(\infty) - f(b)$ \\
+Polmero $\mu_f$ po vseh možnih izrekih razširimo do mere na $\sigma$-algebri.
+Velja
+$\mu_{f}(E) = \inf \{ \sum_{n = 1}^\infty \mu_{f}(I_n); E \subseteq
+\bigcup_{n=1}^\infty I_n \}.$
+
+Razširjeno mero za $f = \operatorname{id}$ imenujemo Lebesguova mera $m$ in
+je edina traslacijsko invariantna mera, kjer so kompakti končni. Velja
+$m(E) = \inf \{ \sum_{n = 1}^\infty (b_n - a_n); E \subseteq
+\bigcup_{n=1}^\infty [a_n, b_n)] \}.$ Mera števne množice je 0. Množica je
+Lebesgueovo merljiva, če je unija množice z ničelno mero in množice tipa
+$F_{\sigma}$ ($=$ števna unija zaprtih množic))
+
+V splošnem so mere intervalov enake:
+$\mu_f([a, b)) = f(b) - f(a)$,
+$\mu_f((a, b)) = f(b) - f(a+)$,
+$\mu_f([a, b]) = f(b+) - f(a)$,
+$\mu_f((a, b]) = f(b+) - f(a+)$ in
+$\mu_f(\{a\}) = f(a+) - f(a)$.
+Od tod sledi, da je $f$ zvezna, natanko tedaj, ko je mera vsakega singeltona
+enaka 0.
+
+Če $E \subseteq \R, m(E) > 0$, potem $0 \in (-a, a) \subseteq E - E$ za nek $a
+\in \R$.
+
+\section*{Merljive preslikave}
+\textbf{Def:} Naj bosta $(X, \A)$ in $(Y, \B)$ merljiva prostora.  Preslikava
+$f\colon X \to Y$ je \textbf{merljiva}, natanko tedaj ko $\forall A \in \A:
+f^{-1}(A) \in \B$.
+
+Če sta $X$ in $Y$ topološka prostora opremnljena z Borelovimi
+$\sigma$-algebrama, potem je vsaka zvezna preslikava merljiva. Če je le $Y$
+takšen, je merljivost dovolj preverjati na odprtih množicah (ni treba na vseh
+merljivih). Če slikamo v $\R$, potem je dovolj preveriti, da so $f^{-1}
+((-\infty, a)) \in \A$ za vsak $a \in \R$. BŠS lahko vzamemo tudi $(-\infty, a],
+(a, \infty)$ ali $[a, \infty).$
+
+Če je $f\colon\R\to\R$ odvedljiva, potem je odvod $f$ merljiva preslikava.
+
+Vsaka naraščajoča funkcija je zvezna povsod, razen v števno mnogo točkah, torej
+je Borelovo merljiva.
+
+Merljivost je dovolj preverjati na generatorjih $\sigma$-algebre.
+
+\textbf{Izrek:} Vsota, produkt, linearne kombunacije in kompozitumi merljivih so
+merljivi.  Limita (po točkah) merljivih preslikav je merljiva. Infimum in
+supremum merljivih preslikav sta merljiva. Velja: $\limsup f_n$ in $\liminf f_n$
+sta merljivi funkciji.
+
+\textbf{Def:} \textbf{Produktna $\sigma$-algebra}: $\A_1 \otimes \A_2 :=
+\sigma(\{ A_1 \times A_2; A_1 \in \A_1, A_2 \in \A_2 \})$
+
+\textbf{Izrek:} $(Y_i,, \B_i)$ merljiva, na $Y = Y_1 \times Y_2$ vzamemo
+produktno $\sigma$-algebro $\B = \B_1 \otimes \B_2$. Potem je:
+\begin{itemize*}
+  \item Koordinatni projekciji $q_i \colon Y \to Y_i$ sta merljivi preslikavi.
+  \item Če $(X, \A)$ merljiv, $f \colon X \to Y$ poljubna. $f$ je merljiva
+    $\iff$ $q_i \circ f$ sta obe merljivi.
+  \item Če imata $Y_i$ števni bazi topologije: $f$ Borelova (na $Y$ vzamemo
+    Borelovo $\sigma$-algebro, generirano s produktno topologijo) $\iff$ $q_i
+    \circ f$ Borelovi.
+\end{itemize*}
+
+\textbf{Def:} Naj bo $f_n\colon X\to\Rbar$ zaporedje merljivih preslikav z
+merljivo limitno funkcijo $f$.
+\begin{itemize*}
+  \item $f_n \to f$ \textbf{skoraj povsod}, če je $\mu(\{x; f_n(x) \not\to f(x) \}) = 0$,
+  \item $f_n \to f$ \textbf{skoraj enakomerno}, če za vsak $\varepsilon > 0$ obstaja množica
+    $A$, da $\mu(A^c) < \varepsilon$ in $f_n\to f$ enakomerno na A,
+  \item $f_n \to f$ \textbf{konvergira po meri}, če za vsak $\varepsilon > 0$ velja
+    $\lim_{n\to\infty} \mu(\{ x \in X; \left|f_n(x) - f(x)\right| \geq \varepsilon \}) = 0$.
+\end{itemize*}
+
+Velja: skoraj enakomerno $\implies$ skoraj povsod in po meri.
+
+% Izrek je Egorov, poglej wikipedijo!
+% Mi slovenimo v Jegorov!
+\textbf{Izrek (Jegorov):} $\mu$ končna (tj.\ $\mu(X) < \infty$), $f,f_n$ merljive.
+Potem $f_n \to f$ skoraj povsod $\implies$ $f_n \to f$ skoraj enakomerno.
+
+
+\textbf{Def:} Funckija $f$ je \textbf{stopničasta}, če je $f = \sum_{i=1}^n c_i
+\chi_{A_i}$, za $c_i \in \R$.
+
+\textbf{Izrek:} Za vsako merljivo funkcijo $f\colon X \to [0, \infty]$ obstaja
+naraščajoče zaporedje stop.~mer.~fn.~$s_n$, tako da $s_n \to f$ po točkah. Če je
+$f$ omejena in slika v $\C$, potem konvergira enakomerno, a ni naraščajoče.  Če
+je $f$ nenegativna in omejena, obstaja naraščajoče zaporedje, ki konvergira
+enakomerno.
+
+\section*{Random miscellany}
+
+\textbf{Def:} Za zaporedje $\{E_n\}_{n\in\mathbb N}$ podmnožic v $X$ je
+\begin{itemize*}
+  \item $\limsup E_n = \bigcap_{n = 1}^\infty \bigcup_{k = n}^\infty E_k$
+    točke, ki so vsebovane v neskončno mnogo množicah $E_i$
+  \item $\liminf E_n = \bigcup_{n = 1}^\infty \bigcap_{k = n}^\infty E_k$
+    točke, ki so vsebovane v vseh razen končno mnogo množicah $E_i$.
+  \item Velja $\mu(\liminf E_n) \leq \liminf \mu(E_n) = \lim_{m\to \infty}
+    (\inf_{n \geq m} \mu(E_n)).$
+  \item Če je $\sum_{n = 1}^\infty \mu(E_n) < \infty$, je skoraj vsak $x \in X$
+    vsebovan v končno mnogo množicah $E_n$, torej je $\mu(\limsup E_n)=0$
+    (Borel-Cantellijeva lema).
+\end{itemize*}
+
+\textbf{Primeri:}
+\begin{itemize*}
+  \item $X$ neštevna, $\A = \{E \subseteq X; E \text{ števna ali } E^c \text{
+    števna}\} = \sigma (\{\{x\}; x \in X\})$ je $\sigma$-algebra; takšna je tudi
+    Borelova $\sigma$-algebra na topologiji končnih komplementov; primer mere na
+    njej: $\mu(E) = \text{``0 če E števna in 1 sicer''}$
+  \item$\A = \{E \subseteq X; E \text{ končna ali } E^c \text{ končna}\}$ je
+    algebra, ni pa $\sigma$-algebra
+  \item $X = \N$, $\A_n = \sigma(\{\{1\}, \ldots, \{n\}\}) = \{E \subseteq \N; E
+      \subseteq [n] \text{ ali } E^c \subseteq [n]\}$, velja $\A_n \subsetneq
+      \A_m$ za $n<m$, $\bigcup_{n = 1}^\infty \A_n$ ni $\sigma$-algebra
+  \item $(X, \mathcal{P}(X), \mu)$, $\mu(E) = \text{``0 če je $E$ števna in neskončno sicer''}$
+    -- $\mu$ ni semi-končna
+  \item mera, ki šteje točke; Diracova mera
+  \item Zaporedje funkcij $\chi_{[n, \infty)}$ na realni osi konvergira proti $0$
+      povsod, vendar ne skoraj enakomerno.
+  \item Če na $[0,1]$ naredimo karakteristične funkcije $\chi_{[k/2^m, k+1/2^m]}$
+    za vsak $k$ in $m$, zaporedje konvergira po meri, vendar nikjer ne po točkah
+    (v vsaki točki ima neskončno funkcij vrednost 1 in neskončno funkcij vrednost 0).
+\end{itemize*}
+
+\textbf{Cantorjeva množica}:
+\begin{itemize*}
+  \item Klasična: presek števno zaprtih intervalov.  Je kompaktna, metrizabilna,
+    nima izoliranih točk, popolnoma nepovezana, ni diskretna, ni končna (je
+    neštevna). Njena Leb.\ mera je 0.
+  \item Posplošena: $C_0 = [0,1]$, $0<\alpha_n < 1$, $C_n$ = iz notranjosti
+    vsakega intervala v $C_{n-1}$ izvzamemo ``sredinski'' interval \emph{deleža}
+    $\alpha_n$ (delež je na vsakem koščku isti, njegova dolžina se pa spreminja).
+    Nato vse te presekamo.  Topološke lastnosti enake, a mera ni nujno 0. Velja:
+    $m(C) = \lim m(C_n) = \prod_{n = 1}^\infty (1 - \alpha_n)$, $m(C_n) = (1 -
+    \alpha_1) (1 - \alpha_2) \cdots (1 - \alpha_n)$ (limita delnih produktov je
+    padajoča in navzdol omejena, torej konvergira).  Velja: $m(C) > 0 \iff
+    \sum_{n = 1}^\infty \log(1 - \alpha_n) \text{ konvergira } \iff \sum_{n =
+    1}^\infty \alpha_n \text{ konvergira}$, ker $\log(1 - x) = - \sum x^n/n = -x
+    + \ldots$
+\end{itemize*}
+
+\textbf{Extra}: Zaprto množico lahko zapišemo kot števno unijo kompaktov (v $\R$).
+
+\hspace*{\fill} Avtorji: generacija 2015
+
+\end{document}
