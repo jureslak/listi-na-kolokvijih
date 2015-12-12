@@ -1,0 +1,457 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, %
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=1.8cm,
+    bottom=2cm,
+%    textheight=24cm,
+    textwidth=15cm,
+    ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+
+\newcommand{\mytitle}{Kombinatorika 1}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Jure Slak}}
+\hypersetup{pdfsubject={}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\newcommand{\per}{\mathfrak{S}}
+\DeclareMathOperator{\inv}{inv}
+\newcommand{\q}[1]{\underline{#1}}
+
+\begin{document}
+\pagestyle{empty}
+
+%Opomba: mislim, da so notri vse pomembne stvari iz mojih %zapiskov z vaj.
+%Nekaj stvari mogoče še lahko dodamo, so spodaj navedene samo %po imenu in z ?, ker nisem zihr a jih rabimo.
+
+%Odgovor: Zgleda zelo OK. Vmes je še nek TODO, ki ga bom %naredil, če bom imel čas, ampak sicer pa zgleda kul. Jure
+
+%Odgovor 2: No nekaj stvari sem še dodala, tudi tvojih TODO-jev. Bi bilo pa pomoje dobro, če še kdo pregleda list, da ne bomo imeli gor narobe formul. Že jaz sem našla veliko napak, tako da res ne zaupam, da je vse pravilno! Vesna
+
+
+\begin{center}
+  \bf \Large Preštevalna kombinatorika
+\end{center}
+
+\textbf{Dirichletov princip:} Če $n$ predmetov razporedimo v $k$ škatel,
+kjer $n >k$, potem vsaj ena od škatel vsebuje vsaj $2$ predmeta. \\
+Posplošitev: Če $n$ predmetov razporedimo v $k$ škatel, potem vsaj ena od
+škatel vsebuje vsaj $\lceil \frac{n}{k} \rceil$ predmetov.
+
+\textbf{Množice in multimnožice:} $S = [n] \implies |S^T| = |S|^{|T|}, |2^S| = 2^{|S|},
+|\per(S)| = n!, \big\lvert \binom{S}{k}\big\rvert = \binom{|S|}{k}$.
+Multimnožica $f\colon S \to \N, f(s) = \text{kolikokrat se $s$ pojavi}, \\
+\text{$f$ je podmultimnožica $g$, če } \forall s: f(s) \leq g(s)$,
+št.~podmultimnožic: $\prod_{s\in S} (1 + f(s))$ \\
+št.~premutacij multimnožice $M = \{1^{a_1}, 2^{a_2}, \ldots, n^{a_n}\},
+\sum a_i = N: \binom{N}{a_1, \ldots, a_n} = \frac{N!}{a_1!\cdots a_n!}$
+(razvrstimo $N$ elementov v $n$ kategorij, v vsako $a_i$ elementov).
+
+\textbf{Binomski koeficienti:}
+$\binom{n}{0} = 1, \binom{n}{n} = 1, \binom{n}{k} = 0,\text{ za }k < 0, k > n, \binom{n}{k} = \binom{n}{n-k}$ \\
+Rekurzivna zveza: $\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}$ \\
+Rodovna funk.: $\sum_k \binom{n}{k}x^k = (1+x)^n$, $\sum_{n, k} \binom{n}{k} x^k t^n = \frac{1}{1- (1+x)t}$,
+  $\sum_n \binom{n}{k}x^n = \frac{x^k}{(1-x)^{k+1}}$ \\
+Ostale enakosti: $\sum_k \binom{n}{k} = 2^n,
+\sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n},
+2^{n-l} (n)_l = \sum_k (k)_l \binom{n}{k},
+\sum_{k=0}^n (-1)^k \binom{n}{k} = 0 (n\geq 1),
+\binom{k}{k} + \binom{k+1}{k} + \ldots + \binom{n}{k} = \binom{n+1}{k+1},
+\binom{n+m}{k} = \sum_i \binom{n}{i} \binom{m}{k-i}$
+
+\textbf{Kompozicije:} Kompozicija št.~$n$ je zaporedje $(\lambda_1, \ldots, \lambda_\ell),
+\lambda_i \in [n]$, pri čemer je $\sum_{i=0}^\ell \lambda_i = n$. \\
+Št.~kompozicij $n$ je $2^{n-1}$. Št.~kompozicij s $k$ deli je $\binom{n-1}{k-1}$. \\
+Drugače povedano, enačba $x_1 + \cdots + x_k = n$, $x_i \in \{1, \ldots, n\}$ ima $\binom{n-1}{k-1}$ rešitev. \\
+Pri šibkih kompozicijah dopuščamo $\lambda_i = 0$. Število šibkih kompozicij s k deli
+označimo z $\multiset{k}{n} = \binom{n+k-1}{n-1}$. Šteje tudi izbire $n$ izmed $k$ elementov,
+pri čemer se elementi ponavljajo. \\
+Enačba $x_1 + \cdots + x_k = n$, $x_i \in \{0, \ldots, n\}$ ima $\multiset{k}{n}$ rešitev.\\
+Enačba $x_1 + \cdots + x_k \leq n$, kjer $x_i \in \{1, 2, 3, \ldots\}$, ima $\binom{n}{k}$ rešitev.
+
+\textbf{Permutacije:} Kanonični zapis: v vsakem ciklu na začetku največja številka,
+cikli urejeni naraščajoče po prvem elementu. Foatojeva transformacija: zbrišemo
+oklepaje v kanoničnem zapisu. Je bijekcija (inverz: poiščemo LD maksimume, z
+njimi se začnejo cikli).
+
+Koliko je premutacij s predpisanimi cikli: $a_1$ ciklov dolžine $1$, ..., $a_n$ ciklov dolžine $n$?
+Če je $\sum_i i a_i = n$, potem $\displaystyle \frac{n!}{1^{a_1} a_1! \cdots n^{a_n}a_n!}$, sicer 0.\\
+$i\in[n]$ je v nekem $k$-ciklu za $(n-1)!$ premutacij.\\
+$i, j \in [n], i \neq j$, sta v istem ciklu v $n!/2$ premutacijah.\\
+Permutacija dolžine $n$ ima v povprečju $H_n$ ciklov.\\
+Permutacija ima kvadratni koren $\iff$ ima sodo ciklov sode dolžine.\\
+Permutacijska matrika: $(A_{\pi})_{i, j} = 1$ ntk.~$\pi(i) = j$. Velja
+$|\det(A_{\pi})| = 1$, $A_{\pi} A_{\sigma} = A_{\pi \sigma}$ in $\pi \sigma$ ter
+$\sigma \pi$ imata enako fiksnih točk.
+
+\textbf{Stirlingova števila 1.~vrste:}
+Koliko je premutacij v $\per_n$ s $k$ cikli: $c(n, k)$. \\
+Predznačeno število: $s(n, k) = (-1)^{n-k} c(n, k)$. \\
+Vrenosti: $c(n, 1) = (n-1)!, c(n, n) = 1, c(n, n-1) = \binom{n}{2}, c(0, 0) = 1, c(n, k) = 0$, za k < 0, k > n. \\
+Rekurzivna zveza: $c(n, k) = c(n-1, k-1) + (n-1) c(n-1, k)$ \\
+Rodovna funkcija: $\sum_k c(n, k) x^k = x(x+1)\cdots(x+n-1), \sum_k s(n, k) x^k = (x)_n$.
+Števila $c(n, k)$ štejejo tudi permitacjie $n$ elementov s $k$ LD maksimumi (Foatojeva transf.)
+Števila $c(n, k)$ štejejo tudi št.~zaporedij $(a_i)_{i=1}^n, 0 \leq a_i \leq n-i$, ki vsebujejo natanko $k$ ničel.\\
+Za fiksen $k$ je $c(n, n-k)$ polinom v $n$ stopnje $2k$.
+
+\textbf{Inverzije:} $(i, j)$ je inverzija, če je $i < j$ in $\pi(i) > \pi(j)$.
+Z $\inv(\pi)$ označimo št.~inverzij v $\pi$. Velja $sign(\pi) = (-1)^{\inv(\pi)}$.\\
+Velja: $\ell(\pi) = \inv(\pi)$, kjer $\ell(n)$ dolžina premutacije, to je najmanjše število
+enostavnih transpozicij ($(i, i+1)$), iz katerih dobimo $\pi$.\\
+Velja: $\sum_{\pi \in \per_n} q^{\inv(\pi)} = 1(1+q)(1+q+q^2) \cdots (1+q+ \cdots + q^{n-1}) = \q{n}!$. \\
+Tabela inverzij: $i(\pi) = (a_1, \ldots, a_n)$, kjer $a_k =$ \# inverzij
+$(\pi_i, \pi_j)$, kjer $\pi_j = k$. Izkaže se $0 \leq a_k \leq a_{n-k}$. Te
+tabele so v bijektivni korespondenci z $\per_n$.
+
+\textbf{$\boldsymbol q$-izreki:}
+Oznaka: $q$-naravna števila: $\q{n} = 1 + q + \cdots + q^{n-1}$. Definiramo tudi
+$\q{n}! = \q{1}\cdots\q{n}$ in $\binom{\q{n}}{\q{k}} = \frac{\q{n}!}{\q{k}!\q{n-k}!}$.
+Lastnosti: $\binom{\q{n}}{\q{0}} = 1, \binom{\q{n}}{\q{n}} = 1, \binom{\q{n}}{\q{1}} = \q{n},
+\binom{\q{n}}{\q{k}} = \binom{\q{n}}{\q{n-k}}$,\\ $\binom{\q{n}}{\q{k}} =
+\binom{\q{n-1}}{\q{k-1}} + q^k\binom{\q{n-1}}{\q{k}} = \binom{\q{n-1}}{\q{k}} + q^{n-k} \binom{\q{n-1}}{\q{k-1}}$. \\
+Definiramo $q$-multinomski simbol: $\binom{\q{N}}{\q{a_1}\ldots\q{a_n}} =\
+  \binom{\q{N}}{\q{a_1}}\binom{\q{N-a_1}}{\q{a_2}}\binom{\q{N-a_1-a_2}}{\q{a_3}}\cdots$ \\
+$q$-binomski izrek: $\prod_{i=0}^{n-1}(1+q^i t) = \sum_{k=0}^n q^{\binom{k}{2}} \binom{\q{n}}{\q{k}} t^k$ \\
+Izrek: $M = \{ 1^{a_1}, \ldots, n^{a_n}\}$ multimnožica, $N = \sum_i a_i$.
+Potem je: $\sum_{\pi \in \per(M)} q^{\inv(\pi)} = \binom{\q{N}}{\q{a_1}\ldots \q{a_n}}$. \\
+Izrek: V $\mathbb{F}_q^n$ je $\binom{\q{n}}{\q{k}}$ vektorskih podprostorov dimenzije $k$.
+
+\textbf{Eulerjeva števila:} permutacija $\pi$ je alternirajoča, če velja
+$\pi(1) > \pi(2) < \pi(3) > \cdots$ ali obratno alternirajoča, če velja $\pi(1) < \pi(2) > \pi(3) < \cdots$.
+Število alternirajočih permutacij označimo z $E_n$ in imenujmo Eulerjevo število.  \\
+Rekurzivna zveza: $2E_{n+1} = \sum_k \binom{n}{k} E_kE_{n-k}$. \\
+Rodovna funkcija: $\sum_n E_n \frac{x^n}{n!} = \frac{1}{\cos(x)} + \tan(x)$ (lihi so $\tan(x)$ in sodi so $\frac{1}{\cos(x)}$).
+
+\textbf{Bernoullijevo število:} $1, \frac{1}{2}, \frac{1}{6}, 0, - \frac{1}{30}, 0, \frac{1}{42}, 0, - \frac{1}{30}, 0, \ldots$\\
+$$B_n = \begin{cases}
+    0 &\text{če } n = 0 \\
+    1/2 & \text{če } n = 1\\
+    0 & \text{če } n>1 \text{ lih}\\
+    \frac{(-1)^{\frac{n}{2} + 1} n E_{n-1}}{2^n (2^n - 1)} & \text{če } n > 1 \text{ sod}\end{cases}$$\\
+Rodovna funkcija: $\frac{x e^x}{e^x - 1} = \sum_n B_n \frac{x^n}{n!}$
+
+\textbf{Faulhaberjeva formula:}
+\begin{align*}
+  \sum_{j = 1}^n  j^k &= \frac{1}{k+1} \sum_{\ell=0}^k \binom{k+1}{\ell} B_\ell n^{k+1-\ell} =  \\
+  &= \frac{n^{k+1}}{k+1} + \frac{n^k}{2} + \frac{\binom{k}{1}}{4 \cdot 3} n^{k-1} -
+  \frac{\binom{k}{3} 2}{16 \cdot 15} n^{k-3} + \frac{\binom{k}{5} 16}{64 \cdot 63} n^{k-5} -
+  \frac{\binom{k}{7} 272}{256 \cdot 255} n^{k-7} + \cdots
+\end{align*}
+
+%TODO: Riemannova zeta funkcija ? Sure :)
+
+\textbf{Eulerska števila:} padec permutacije $\pi \in \per_n$ je tak $i$, da je $1 \leq i \leq n-1$, da je $\pi(i) > \pi(i+1)$.
+Eulersko število $A(n, k)$ je število permutacij s $k-1$ padci.\\
+Rekurzivna zveza: $A(n, k) = kA(n-1, k) + (n+1-k) A(n-1, k-1)$. \\
+Rodovna funckija: če označimo z $A_n(x) = \sum_{k=1}^n A(n, k) x^k$, potem velja:
+  $\sum_m m^n x^m = \frac{A_n(x)}{(1-x)^{n+1}}$. \\
+Rodovna funkcija: $\sum_n A_n \frac{t^n}{n!} = \frac{1-t}{1-xe^{(1-x)t}}, x^n = \sum_k A(n, k) \binom{x+k-1}{n}$.
+
+\pagebreak
+\textbf{Razdelitev} množice $[n]$ je
+množica blokov $\{A_1, \ldots A_k\}$, kjer je $A_i \neq \emptyset$, $A_i \cap A_j = \emptyset$,
+$\bigcup_{i=1}^k A_i = [n]$.
+
+\textbf{Stirlingova števila 2.~vrste:} $S(n, k)$ je število razdelitev množice $[n]$ na $k$ blokov.\\
+Eksplicitna zveza: $S(n,k) = \sum_{i= 0}^k (-1)^{k-i} \frac{i^n}{i! (k-i)!}$\\
+Število surjekcij $[n] \to [k]$ je $k!S(n, k) = \sum_{i=0}^k (-1)^{k-i}\binom{k}{i}i^n$. \\
+$S(n, 0) = \delta_{0n}, S(n, 1) = 1, S(n, n) = 1, S(n, n-1) = \binom{n}{2}, S(n, 2) = 2^{n-1}-1$,
+$S(n, k) = 0, \text{ za } k < 0, k > n$.\\
+Očitno velja: $\sum_{k=0}^nS(n, k) = B(n)$. \\
+Rekurzivna zveza: $S(n, k) = S(n-1, k-1) + kS(n-1, k)$,
+                  $S(n+1, m+1) = \sum_{k=1}^n\binom{n}{k}S(k, m)$ \\
+Rodovna funkcija: $x^n = \sum_k S(n, k)(x)_k$. \\
+Rodovna funkcija: $\sum_n S(n, k) x^n = \frac{x^k}{(1-x)(1-2x) \cdots (1-kx)}$,
+                  $\sum_n S(n, k) \frac{x^n}{n!} = \frac{1}{k!}(e^x - 1)^k$. \\
+Velja: $n! \leq S(2n, n) \leq (2n)!$\\
+$S(n, k) = $ \# zaporedji $a_1, \ldots, a_n; a_i \in [k], \forall j \in [k] \exists i: a_i = j$ in prva pojavitev $j$ je pred prvo pojavitvijo $j+1$
+
+\textbf{Bellova števila:} $B(n)$ je število razdelitev $[n]$.\\
+$B(0) = B(1) = 1$\\
+Rekurzivna zveza: $B(n+1) = \sum_{k=0}^n\binom{n}{k}B(k)$ \\
+Rodovna funkcija: $\sum_n B(n)\frac{x^n}{n!} = e^{e^x - 1}$.\\
+Velja: $B(n) \leq n!$
+$B(n) = $ \# premutacij $w \in S_n$, da ni res: $\exists i < j: w_i < w_{j+1} < w_j$\\
+$S(n, n-k) =  $ polinom v $n$ stopnje $2k$ (za fiksen $k$)
+
+
+%TODO Cik-cak/Entringerjeva števila (z vaj) ?
+
+\textbf{Lahova števila:} število razdelitev $[n]$ na $k$ linearno urejenih nepraznih blokov.\\
+ $L(0, 0)=1$ in $L(n, 0)= 0$ za $n\geq1$, $L(n, 1) = n!, L(n, n) = 1, L(n, n-1) = n(n-1)$\\
+Eksplicitna formula: $L(n, k) =  \binom{n-1}{k-1} \frac{n!}{k!}$\\
+Rekurzivna zveza: $L(n, k) = L(n-1, k-1) + (n+k-1) L(n-1, k)$\\
+Rodovna funkcija: $\sum_n L(n, k) \frac{x^n}{n!} = \frac{1}{k!} (\frac{x}{1-x})^k, \sum_k L(n, k) (x)_k = (x)^n$
+
+\textbf{Razčlenitve:} Razčlenitev/particija $n$ je $(\lambda_1, \ldots, \lambda_l)$,
+kjer $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_l > 0$ cela števila in
+$\lambda_1 + \cdots + \lambda_l = n$.\\
+Diagram: v vsako vrstico damo $\lambda_i$ pikic.\\
+Konjugirana razčlenitev $\lambda'$: transponiramo diagram $\lambda$. Velja: $\lambda_j' = \max\{j, \lambda_j > i\}$\\
+$p_k(n) = $ \# razčlenitev $n$ na $k$ delov.\\
+$\overline{p_k}(n) = $ \# razčlenitev $n$ na največ $k$ delov.\\
+$p(n) = $ \# razčlenitev $n$ na poljubno mnogo delov.\\
+$l(n) = $ \# razčlenitev $n$ s samimi lihimi deli.\\
+$r(n) = $ \# razčlenitev $n$ s samimi različnimi deli.\\
+Rekurzivna zveza: $p_k(n) = p_{k-1}(n-1) + p_k(n-k)$\\
+Rodovna funkcija: $\sum_n p(n) x^n = \prod_{i \geq 1} \frac{1}{1 - x^i}, \sum_n l(n) x^n = \prod_{i \geq 1} \frac{1}{1 - x^{2i-1}}, \sum_n r(n) x^n = \prod_{i \geq 1} (1 + x^i)$\\
+Veljajo naslednje enakosti:
+\begin{itemize*}
+  \item $\overline{p_k} (n) = $ \# razčlenitev $n$ z deli $\leq k$
+  \item $l(n) = r(n)$
+  \item \# razčlenitev $n$ z lihimi deli = \# razčlenitev $n$ z različnimi deli
+  \item \# razčlenitev $n$ z deli $\geq 2$ = $p(n) - p(n-1)$
+  \item \# razčlenitev $n$, kjer je razlika med prvima dvema deloma vsaj 3 = $p(n-3)$
+  \item \# razčlenitev $n$, kjer je razlika med prvima dvema deloma enaka 3 = $p(n-3) - p(n-4)$
+\end{itemize*}
+
+\textbf{Petkotniška števila:} $s(n)$ = \# razčlenitev $n$ na sodo mnogo
+različnih delov - \# razčlenitev $n$ na liho mnogo različnih delov\\
+Rodovna funkcija: $\prod_{i \geq 1} (1 - x^i) = \sum_n s(n) x^n$\\
+Lema: $s(n) = (-1)^r$, če $n = \frac{r (3r \pm 1)}{2}$ in $0$ sicer\\
+Eulerjev petkotniški izrek: $p(n) = p(n-1) + p(n-2) - p(n-5) - p(n-7) + p(n-12) + p(n-15) - \ldots$
+
+%\textbf{Catanalnova števila:}
+%TODO
+
+\textbf{Fibonaccijeva števila:} $F_1 = 1, F_2 = 1, F_n = F_{n-1} + F_{n-2}$
+\begin{itemize*}
+  \item \# podmnožic $S \subseteq [n]$, ki ne vsebujejo 2 zaporednih števil $ = F_{n+2}$
+  \item \# kompozicij števila $n$ z deli 1 in 2 $ = F_{n+1} = \sum_{k = 0}^n \binom{n-k}{k}$
+  \item \# kompozicij $n$, kjer so vsei deli $> 1$ $= F_{n-1}$
+  \item \# kompozicij $n$ s samimi lihimi deli $= F_n$
+  \item \# $n$-teric $(a_1, \ldots, a_n)$, kjer $a_i \in \{0, 1\}$ in $a_1 \leq a_2 \geq a_3 \leq a_4 \geq \ldots$ $= F_{n+2}$
+  \item \# $n$-teric $(T_1, \ldots, T_n), T_i \subseteq [k], T_1 \subseteq T_2 \supseteq T_3 \subseteq T_4 \supseteq \ldots$ $= (F_{n+2})^k$
+  \item \# urejenih parov $(S, w)$, kjer $S \subseteq[n]$ in $w \in S_n$, da $w(i) \notin S \forall i \in S$ $= n! F_{n+1}$
+\end{itemize*}
+
+
+\textbf{Načelo vključitev in izključitev:}
+$A_1, \ldots, A_n \subseteq A$:  \\
+Moč unije: $|A_1 \cup \ldots \cup A_n| = \sum_{j = 1}^n (-1)^{j-1} \sum_{1\leq i_1 < \ldots < i_j \leq n }
+  |A_{i_1} \cap \ldots \cap A_{i_j}|$ \\
+Moč preseka kompl: $|A_1^c \cap \ldots \cap A_n^c| = \sum_{j = 0}^n (-1)^j \sum_{1\leq i_1 < \ldots < i_j \leq n }
+  |A_{i_1} \cap \ldots \cap A_{i_j}| = \sum_{S \subseteq [n]} (-1)^{|S|} |A_S|$ \\
+Primeri uporabe: Število surjekcij, Eulerjeva funkcija $\phi$
+
+%Splošnejša oblika (s predavanj) ??
+
+\textbf{Zanimivi objekti z vaj:}
+\begin{itemize*}
+  \item podmnožice v $[n]$ \ldots $2^n = \sum_k \binom{n}{k}$
+  \item $k$-terice v $[n]$ \ldots $(n)_k$
+  \item $k$-terice $(a_1, \ldots, a_k)$, kjer $a \leq a_1 < a_2 < \ldots < a_k \leq n$ in $a_{i+1} - a_i \geq j$: ekvivalentno $1 \leq a_1 < a_2 - (j-1) < a_3 - 2(j-1) < \ldots < a_k - (k-1) (j-1) \leq n - (k-1)(j-1)$ in jih je $\binom{n-(k-1)(j-1)}{k}$
+  \item $(A_1, \ldots, A_k), A_1 \subseteq A_2 \subseteq \ldots \subseteq A_k \subseteq [n]$ je $(k+1)^n$
+  \item $(A_1, \ldots, A_k)$, kjer so $A_i$ paroma disjunktne, je $(k+1)^n$
+  \item $(A_1, \ldots, A_k)$, kjer je $A_1 \cap \ldots \cap A_k = \emptyset$, je $(2^k - 1)^n$
+\end{itemize*}
+
+\textbf{Uporabno:} $\frac{1}{(1-x)^{d+1}} = \sum_n \binom{n+d}{d} x^n$\\
+Če dokazuješ $C = A - B$ lahko narediš bijekcijo med $C+B$ in $A$, ali pa najdeš
+injekcijo $f \colon B \to A$, kjer $|Im f| = B, |(Im f)^c| = C$ ter nato $A = |Im f| + |(Im f)^c| = B + C$.
+
+%\begin{center}
+%  \bf \Large Rodovne funkcije
+%\end{center}
+
+%TODO
+
+
+
+
+%##########  staro ############
+
+\textbf{Izbori $k$ elementov iz $n$-množice:} \\[6pt]
+\begin{tabular}[h]{|c|c|c|c|c|}
+  \hline
+  urejeni/ponavljanje & DA/DA & DA/NE & NE/DA & NE/NE \\ \hline
+  število & $n^k$ & $(n)_k$ & $\binom{n+k-1}{k}$ & $\binom{n}{k}$ \\ \hline
+\end{tabular}
+
+%\textbf{Binomska in multinomska števila:} $\binom{n}{k} = \frac{n!}{(n-k)!k!} \qquad \binom{n}{n_1, \ldots, n_k} =
+%\frac{n!}{n_1!\cdots n_k!}$ \\
+%Velja: $(a+b)^n = \sum_{k=0}^n\binom{n}{k}a^{n-k}b^k \qquad \sum_{k=0}^n\binom{n}{k} =
+%2^n \qquad \sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}$ \\
+%Rekurzivna zveza: $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$.
+
+%\textbf{Pravilo vključitev in izključitev:} $|A_1 \cup \cdots \cup A_n| = \alpha_1 - \alpha_2 + %\dots +
+%(-1)^{n+1}\alpha_n$ \\
+%$\alpha_i = \text{vsota moči vseh možnih presekov po $i$ množic}$. \\
+%V posebnem, če so vsi preseki po $i$ množic enako močni:
+%$\lvert\bigcup_{i=1}^nA_i\rvert = \sum_{i=1}^n (-1)^{i+1}\binom{n}{i}\lvert\bigcap_{j=1}^iA_j\rvert$
+
+%\textbf{Stirlingova števila 2. vrste:} \\
+%$S(n, k)$ je število možih razbitij $n$-množice na $k$ nepraznih kosov. \\
+%Definiramo $S(0, 0)=1$ in $S(n, 0)= 0$ za $n\geq1$. \\
+%Rekurzivna zveza: $S(n, k) = S(n-1, k-1) + k\cdot S(n-1, k)$ \\
+%Velja: $x^n = \sum_{k=1}^nS(n, k)x^{\underline{k}} \qquad S(n+1, m+1) =
+%\sum_{k=1}^n\binom{n}{k}S(k, m)$  \\
+%Število surjekcij: $k!S(n, k) = \sum_{i=1}^n(-1)^i\binom{k}{i}(k-i)^n$
+
+%\textbf{Lahova števila:} \\
+%$L(n, k)$ je število možnih razbitij $n$-množice na $k$ linearno urejenih nepraznih kosov. \\
+%Definiramo $L(0, 0)=1$ in $L(n, 0)= 0$ za $n\geq1$. \\
+%Rekurzivna zveza: $L(n, k) = L(n-1, k-1) + (n+k-1)\cdot L(n-1, k)$ \\
+%Eksplicitna formula: $L(n, k) = \frac{n!}{k!}\binom{n-1}{k-1} = %\frac{(n-1)!}{(k-1)!}\binom{n}{k}$. \\
+%Velja: $x^{\bar{n}} = \sum_{k=1}^nL(n, k)x^{\underline{k}}$
+
+%\textbf{Particije števila:}\\
+%Particija števila $n$ je zapis $n = \lambda_1 + \dots + \lambda_k$, kjer velja $0 <
+%\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_k$. $\lambda_i$ so kosi.\\
+%Rekurzivna zveza: $p(n; k) = p(n-1; k-1) + p(n-k; k)$, št. particij $n$ na $k$ kosov. \\
+%$p(n; k) = p(n-k; \leq k) = \sum_{i=1}^{n-k}p(n-k; i)$
+
+\textbf{Dvanajstera pot:}\\
+Razporejamo $n$ predmetov v $r$ predalov. Ali ločimo elemente,
+dopuščamo prazne predale, dopuščamo več kot en predmet v predalu?  Glejmo
+$f\colon[n] \to [r]$.
+
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  predmeti/predali \textbackslash\ $f$ & poljubna & injektivna & surjektivna \\ \hline
+  DA/DA & $r^n$ & $(r)_n$ & $r!S(n, r)$ \\ \hline
+  NE/DA & $\multiset{r}{n} = \binom{r+n-1}{n}$ & $\binom{r}{n}$ & $\binom{n-1}{r-1}$ \\ \hline
+  DA/NE & $\sum_{k=1}^rS(n, k)$ & $n \leq r$ & $S(n, r)$ \\ \hline
+  NE/NE & $\overline{p_k}(n)$ & $n \leq r$ & $p_r(n)$ \\ \hline
+\end{tabular}
+
+% {\footnotesize
+
+% \textbf{Binomska števila:} $\binom{n}{k}$ \\
+% \begin{tabular}{|*{16}{c|}}
+%   \hline
+%   $n \backslash k$ & 0&1&2&3&4&5&6&7&8&9&10&11&12&13&14\\ \hline
+%   0 & 1 &  &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   1 & 1 & 1 &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   2 & 1 & 2 & 1 &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   3 & 1 & 3 & 3 & 1 &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   4 & 1 & 4 & 6 & 4 & 1 &  &  &  &  &  &  &  &  &  & \\ \hline
+%   5 & 1 & 5 & 10 & 10 & 5 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+%   6 & 1 & 6 & 15 & 20 & 15 & 6 & 1 &  &  &  &  &  &  &  & \\ \hline
+%   7 & 1 & 7 & 21 & 35 & 35 & 21 & 7 & 1 &  &  &  &  &  &  & \\ \hline
+%   8 & 1 & 8 & 28 & 56 & 70 & 56 & 28 & 8 & 1 &  &  &  &  &  & \\ \hline
+%   9 & 1 & 9 & 36 & 84 & 126 & 126 & 84 & 36 & 9 & 1 &  &  &  &  & \\ \hline
+%   10 & 1 & 10 & 45 & 120 & 210 & 252 & 210 & 120 & 45 & 10 & 1 &  &  &  & \\ \hline
+%   11 & 1 & 11 & 55 & 165 & 330 & 462 & 462 & 330 & 165 & 55 & 11 & 1 &  &  & \\ \hline
+%   12 & 1 & 12 & 66 & 220 & 495 & 792 & 924 & 792 & 495 & 220 & 66 & 12 & 1 &  & \\ \hline
+%   13 & 1 & 13 & 78 & 286 & 715 & 1287 & 1716 & 1716 & 1287 & 715 & 286 & 78 & 13 & 1 & \\ \hline
+%   14 & 1 & 14 & 91 & 364 & 1001 & 2002 & 3003 & 3432 & 3003 & 2002 & 1001 & 364 & 91 & 14 & 1\\ \hline
+% \end{tabular}
+
+% \textbf{Stirlingova števila 2. vrste:} $S(n, k)$ in \textbf{Bellova števila} $B(n)$\\
+% \begin{tabular}{|*{12}{c|}}
+%   \hline
+%   $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10&$B(n)$ \\ \hline
+%   1 & 1 &  &  &  &  &  &  &  &  & & 1 \\ \hline
+%   2 & 1 & 1 &  &  &  &  &  &  &  & & 2 \\ \hline
+%   3 & 1 & 3 & 1 &  &  &  &  &  &  & & 5 \\ \hline
+%   4 & 1 & 7 & 6 & 1 &  &  &  &  &  & & 15 \\ \hline
+%   5 & 1 & 15 & 25 & 10 & 1 &  &  &  &  & & 52 \\ \hline
+%   6 & 1 & 31 & 90 & 65 & 15 & 1 &  &  &  & & 203\\ \hline
+%   7 & 1 & 63 & 301 & 350 & 140 & 21 & 1 &  &  & & 877 \\ \hline
+%   8 & 1 & 127 & 966 & 1701 & 1050 & 266 & 28 & 1 &  & & 4140 \\ \hline
+%   9 & 1 & 255 & 3025 & 7770 & 6951 & 2646 & 462 & 36 & 1 & & 21147 \\ \hline
+%   10 & 1 & 511 & 9330 & 34105 & 42525 & 22827 & 5880 & 750 & 45 & 1 & 115975 \\ \hline
+% \end{tabular}
+
+% \textbf{Stirlingova števila 1. vrste:} $s(n, k)$ \\
+% \begin{tabular}{|*{11}{c|}}
+%   \hline
+%   $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10 \\ \hline
+%   1 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+%   2 & 1 & 1 &  &  &  &  &  &  &  & \\ \hline
+%   3 & 2 & 3 & 1 &  &  &  &  &  &  & \\ \hline
+%   4 & 6 & 11 & 6 & 1 &  &  &  &  &  & \\ \hline
+%   5 & 24 & 50 & 35 & 10 & 1 &  &  &  &  & \\ \hline
+%   6 & 120 & 274 & 225 & 85 & 15 & 1 &  &  &  & \\ \hline
+%   7 & 720 & 1764 & 1624 & 735 & 175 & 21 & 1 &  &  & \\ \hline
+%   8 & 5040 & 13068 & 13132 & 6769 & 1960 & 322 & 28 & 1 &  & \\ \hline
+%   9 & 40320 & 109584 & 118124 & 67284 & 22449 & 4536 & 546 & 36 & 1 & \\ \hline
+%   10 & 362880 & 1026576 & 1172700 & 723680 & 269325 & 63273 & 9450 & 870 & 45 & 1\\ \hline
+% \end{tabular}
+
+% \textbf{Lahova števila:} $L(n, k)$ \\
+% \begin{tabular}{|*{11}{c|}}
+%   \hline
+%   $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10 \\ \hline
+%   1 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+%   2 & 1 & 1 &  &  &  &  &  &  &  & \\ \hline
+%   3 & 1 & 5 & 1 &  &  &  &  &  &  & \\ \hline
+%   4 & 1 & 26 & 11 & 1 &  &  &  &  &  & \\ \hline
+%   5 & 1 & 157 & 103 & 19 & 1 &  &  &  &  & \\ \hline
+%   6 & 1 & 1100 & 981 & 274 & 29 & 1 &  &  &  & \\ \hline
+%   7 & 1 & 8801 & 9929 & 3721 & 593 & 41 & 1 &  &  & \\ \hline
+%   8 & 1 & 79210 & 108091 & 50860 & 10837 & 1126 & 55 & 1 &  & \\ \hline
+%   9 & 1 & 792101 & 1268211 & 718411 & 191741 & 26601 & 1951 & 71 & 1 & \\ \hline
+%   10 & 1 & 8713112 & 16010633 & 10607554 & 3402785 & 590756 & 57817 & 3158 & 89 & 1\\ \hline
+% \end{tabular}
+
+% \textbf{Particije števila:} $p(n; k)$ \\
+% \begin{tabular}{|*{16}{c|}}
+%   \hline
+%   $n \backslash k$ & 1&2&3&4&5&6&7&8&9&10&11&12&13&14&15 \\ \hline
+%   1 & 1 &  &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   2 & 1 & 1 &  &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   3 & 1 & 1 & 1 &  &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   4 & 1 & 2 & 1 & 1 &  &  &  &  &  &  &  &  &  &  & \\ \hline
+%   5 & 1 & 2 & 2 & 1 & 1 &  &  &  &  &  &  &  &  &  & \\ \hline
+%   6 & 1 & 3 & 3 & 2 & 1 & 1 &  &  &  &  &  &  &  &  & \\ \hline
+%   7 & 1 & 3 & 4 & 3 & 2 & 1 & 1 &  &  &  &  &  &  &  & \\ \hline
+%   8 & 1 & 4 & 5 & 5 & 3 & 2 & 1 & 1 &  &  &  &  &  &  & \\ \hline
+%   9 & 1 & 4 & 7 & 6 & 5 & 3 & 2 & 1 & 1 &  &  &  &  &  & \\ \hline
+%   10 & 1 & 5 & 8 & 9 & 7 & 5 & 3 & 2 & 1 & 1 &  &  &  &  & \\ \hline
+%   11 & 1 & 5 & 10 & 11 & 10 & 7 & 5 & 3 & 2 & 1 & 1 &  &  &  & \\ \hline
+%   12 & 1 & 6 & 12 & 15 & 13 & 11 & 7 & 5 & 3 & 2 & 1 & 1 &  &  & \\ \hline
+%   13 & 1 & 6 & 14 & 18 & 18 & 14 & 11 & 7 & 5 & 3 & 2 & 1 & 1 &  & \\ \hline
+%   14 & 1 & 7 & 16 & 23 & 23 & 20 & 15 & 11 & 7 & 5 & 3 & 2 & 1 & 1 & \\ \hline
+%   15 & 1 & 7 & 19 & 27 & 30 & 26 & 21 & 15 & 11 & 7 & 5 & 3 & 2 & 1 & 1\\ \hline
+% \end{tabular}
+
+% }
+
+\end{document}
+% vim: spell spelllang=sl
+% vim: foldlevel=99
+
