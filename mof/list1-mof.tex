@@ -1,0 +1,349 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, %
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=1cm,
+    bottom=1cm,
+%    textheight=24cm,
+    textwidth=19cm,
+    ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+
+\newcommand{\mytitle}{Moderna fizika 1}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Vesna Irsic}}
+\hypersetup{pdfsubject={}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{-1pt}   % left, before, after
+\titlespacing*{\subsection}{0pt}{6pt}{-1pt}
+
+\newcommand{\vv}{\vec}
+\newcommand{\va}{\ensuremath{\vec{a}}}
+\newcommand{\vb}{\ensuremath{\vec{b}}}
+\newcommand{\vc}{\ensuremath{\vec{c}}}
+\newcommand{\vf}{\ensuremath{\vec{f}}}
+\newcommand{\vg}{\ensuremath{\vec{g}}}
+\newcommand{\vE}{\ensuremath{\vec{E}}}
+\newcommand{\vB}{\ensuremath{\vec{B}}}
+\newcommand{\vA}{\ensuremath{\vec{A}}}
+\newcommand{\vD}{\ensuremath{\vec{D}}}
+\newcommand{\vH}{\ensuremath{\vec{H}}}
+
+\newcommand{\vnabla}{\ensuremath{\vec{\nabla}}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+\renewcommand{\kappa}{\varkappa}
+
+\newcommand{\x}{\times}
+
+\newcommand{\dd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dt}[1][]{\dd{#1}{t}}
+\newcommand{\dx}[1][]{\dd{#1}{x}}
+\newcommand{\dy}[1][]{\dd{#1}{y}}
+\newcommand{\dz}[1][]{\dd{#1}{z}}
+
+
+\begin{document}
+\pagestyle{empty}
+
+\section{Vektorska analiza}
+$(\va \x \vb)_i = \eps_{ijk} a_j b_k$, kjer $\eps_{ijk} = 1$, če je permutacija
+indeksov soda, $-1$, če je liha in $0$ če sta vsaj dva indeksa enaka\\
+\parbox{0.5\textwidth}{
+$\eps_{ijk} \eps_{klm} = \delta_{il} \delta_{jm} - \delta_{im} \delta_{jl}$\\
+$\va \x (\vb \x \vc) = (\va \vc) \vb - (\va \vb) \vc$\\
+$\va (\vb \x \vc) = - \vb (\va \x \vc) = \vc (\va \x \vb)$}
+\parbox{0.5\textwidth}{
+$(\va \x \vb) \x (\vc \x \vv{d}) = ((\va \x \vb) \vv{d})\vc - ((\va \x \vb) \vc)\vv{d}$\\
+$\vnabla f = \operatorname{grad} f, \vnabla \cdot \vf = \operatorname{div} \vf, \vnabla \x \vf = \operatorname{rot} \vf$ \\
+$\vnabla(fg) = g \vnabla f + f \vnabla g$ }
+$\vnabla(f \vg) = f (\vnabla \vg) + (\vnabla f) \vg$ (uporabno za $\vnabla \vE$, določanje porazdelitve naboja $\rho$)\\
+Pomembno: $\vnabla(\frac{\vv{r}}{r^3}) = 4 \pi \delta(r)$ in $\vnabla(r^n) = n r^{n-2} \vv{r}$\\
+Pozor: $\vnabla (\frac{\vv{r}}{r^3}) = 4 \pi \delta(r)$\\
+\parbox{0.5\textwidth}{
+$\vnabla \x (f \vg) = \vnabla f \x \vg + f (\vnabla \x \vg)$\\
+$\vnabla \cdot (\vf \x \vg) = \vg \cdot (\vnabla \x \vf) - \vf \cdot (\vnabla \x \vg)$}
+\parbox{0.5\textwidth}{
+$\vnabla \x (\vnabla \x \vf) = \vnabla(\vnabla \cdot \vf) - \Delta \vf$\\
+$\vnabla \x (\vf \x \vg) = \vf (\vnabla \vg) - \vg (\vnabla \vf) + (\vg \vnabla) \vf - (\vf \vnabla) \vg$\\ }
+Stokes: $\oint_{\partial S} \vf\, d\vv{l} = \int_S (\vnabla \x \vf)\, d\vv{S}$\\
+Gauss: $\oint_{\partial V} \vf \cdot\, d\vv{S} = \int_V \vnabla \cdot \vf\, dV$\\
+Green: $\oint_{\partial V} (f \vnabla g - g \vnabla f)\, d\vv{S} =  \int_V (f \Delta g - g \Delta f)\, dV$
+
+\section{Elektromagnetizem}
+\textbf{Sila med dvema nabojema:} $\vec{F} = \displaystyle \frac{e_1 e_2}{4 \pi \eps_0 r^2}
+\frac{\vv{r}}{r}$\\
+\textbf{Maxwellove enačbe:}\\[10pt]
+\framebox{$\oint_{\partial V} \vE \cdot d\vv{S} = \frac{1}{\eps_0} \int \rho_e\, dV = \frac{e}{\eps_0}$} oz.\
+\framebox{$\vnabla \cdot \vE = \frac{\rho}{\eps_0}$,} kjer je $e$ celotni zaobjeti
+naboj in $\rho_e$ gostota naboja v volumnu. Električni pretok: $\Phi_e = \int \vE \cdot d\vv{S}$\\
+\framebox{$\oint \vB \cdot d\vv{S} = 0$} oz.\ \framebox{$\vnabla \cdot \vB = 0$}\\
+\framebox{$\oint_{\partial S} \vE \cdot d\vv{l} = - \frac{d}{dt} \int_S \vB\, d\vv{S} = -\dt
+\Phi_m$} oz.\ \framebox{$\vnabla \x \vE = - \frac{d\vB}{dt}$,} kjer je $\Phi_m$ magnetni pretok\\
+\framebox{$\oint_{\partial S}  \vB\, \cdot\, d\vv{l} = \mu_0 \int_S (\vv{J} + \eps_0 \frac{d\vE}{dt})\, d\vv{S}$} oz.\ \framebox{$\vnabla \x \vB = \mu_0 (J + \eps_0 \frac{d\vE}{dt})$,}
+kjer je $\vv{J} = \frac{d\vv{I}}{dS}$ gostota električnega toka
+
+\textbf{Maxwellove enačbe v snovi:} $\vE$ je el.\ poljska jakost, $\vv{D}$ el.\ poljaka gostota, $\vv{H}$ je mag.\ poljska jakost, $\vB$ mag. poljska gostota.\\
+V snovi velja $\vv{D} = \eps \vE, \vB = \mu \vv{H}$\\
+$\oint_{\partial V} \vD \cdot d\vv{S} = \int_V \rho\, dV$ oz.\
+$\vnabla \cdot \vD = \rho$\\
+$\oint \vB \cdot d\vv{S} = 0$ oz.\ $\vnabla \cdot \vB = 0$\\
+$\oint_{\partial S} \vE \cdot d\vv{l} = -  \int_S \frac{d\vB}{dt} \, d\vv{S}$ oz.\ $\vnabla \x \vE = - \frac{d\vB}{dt}$\\
+$\oint_{\partial S}  \vH\, \cdot\, d\vv{l} = \int_S (\vv{J} + \frac{d\vD}{dt})\, d\vv{S}$
+oz.\ $\vnabla \x \vH =  (\vv{J}+ \frac{d\vD}{dt})$\\
+Kontinuitetna enačba: $\frac{\partial \rho}{\partial t} + \vnabla \vv{J} = 0$
+
+\textbf{Vektorski potencial:} $(\varphi, \vA), \vB = \vnabla \x \vA, \vE = -\vnabla \varphi - \dt{\vA}$\\
+Umeritvena invarianca: skalarno polje $\psi$, $\vA \to \vA + \vnabla \psi,
+\varphi \to \varphi - \dt \psi$  ($\vE$ in $\vB$ se pri tem ne spremenita) \\
+Maxwellovi enačbi (samo 2): \\
+$\Delta \varphi + \dt \vnabla \vA = - \frac{\rho}{\eps_0}$\\
+$\square\, \vA + \vnabla (\vnabla \vA + \frac{1}{c^2} \dt{\phi}) =
+\mu_0 \vv{j}$, kjer $\square = \frac{1}{c^2} \frac{d^2}{dt^2} - \nabla^2$ in $\mu_0 \eps_0 = \frac{1}{c^2}$\\
+Pogoste umeritve:
+Weyl: $\varphi = 0$;
+Coulomb: $\vnabla \vA = 0$;
+Lorenz: $\vnabla \vA + \frac{1}{c^2} \dt{\phi} = 0$ (v tem primeru sta  Max.\ enačbi
+$\square\, \vA = \mu_0 \vv{j}$ in $\square\, \varphi = \frac{\rho}{\eps_0}$)
+
+\textbf{EMV v vakuumu:} $\vnabla^2 \vE = \mu_0 \eps_0 \frac{\partial^2 \vE}{\partial t^2},
+\vnabla^2 \vB = \mu_0 \eps_0 \frac{\partial^2 \vB}{\partial t^2}$,
+$c = \frac{1}{\sqrt{\eps_0 \mu_0}} = \nu \lambda = \frac{\omega}{k}$ je hitrost valovanja.\\
+Ravni val: $\vE(t) = \vv{E_0} e^{i(\vv{k} \vv{x} - \omega t)}$, kjer je $\vv{k}$ smer širjenja valovanja.\\
+Velja: $\vB, \vE, \vv{k}$ so paroma pravokotni!
+
+\textbf{EMV v snovi:} Dobimo robne pogoje pri prehodu med snovjo 1 in 2.
+Normalno oz.\ tangentno smer gledamo glede na prehod med snovema.
+Velja $D_i = \eps_i E_i, B_i = \mu_i H_i$, $\sigma$ in $j$ sta del
+meritve -- izmerimo ju na meji med snovema.\\
+V normalni smeri: $D_{1 n} - D_{2 n} = (\eps_1 E_1)_n - (\eps_2 E_2)n=
+(\vD_1 - \vD_2) \vv{n} = \sigma$ in $B_{1 n} - B_{2 n} = 0$\\
+V tangentni smeri: $E_{1 t} - E_{2 t} = 0$ in $H_{1 t} - H_{2 t} = j$\\
+Uporabno: če se valovanje širi le v $z$ smeri (torej v eksponentu le $z$
+namesto vektorja $\vv{x}$), lahko $\vnabla = \vnabla_T + \vnabla_z$.\\
+Za vodnik (plašč 4-kotnega valja) dobimo (tu $\vv{z}$ enotski):\\
+\parbox{0.5\textwidth}{
+$\vnabla_T E_z \x \vv{z} + i k \vv{z} \x \vE_T = i \omega \mu \vH_T$\\
+$\vnabla_T \x \vE_T = i \omega \mu \vH_z$\\
+$\vnabla_T H_z \x \vv{z} + i k \vv{z} \x \vH_T = - i \omega \eps \vE_T$}
+\parbox{0.5\textwidth}{
+$\vnabla_T \x \vH_T = - i \omega \eps \vE_z$\\
+$\vnabla_T \cdot \vE_T + ik E_z = 0$\\
+$\vnabla_T \cdot \vH_T + i k H_z = 0$ }
+
+\begin{tabular}{c|c}
+telo & električno polje\\ \hline \hline
+točkasti naboj $e$ & $ E(r) = \frac{e}{4 \pi \eps_0 r^2} \frac{\vv{r}}{r}$ \\ \hline
+enakomerno nabita sfera polmera $R$, $\sigma = e/S$ & $E(r) =
+                                \begin{cases}
+                                0 &\text{če } r \leq R\\
+                                \frac{e}{4 \pi \eps_0 r^2} \frac{\vv{r}}{r} & \text{če } r \geq R \end{cases}$ \\ \hline
+enakomerno nabita krogla, $e$ & $E(r) =
+                                \begin{cases}
+                                \frac{r e}{4 \pi \eps_0 R^3} \frac{\vv{r}}{r} &\text{če } r \leq R\\
+                                \frac{e}{4 \pi \eps_0 r^2} \frac{\vv{r}}{r} & \text{če } r \geq R \end{cases}$ \\ \hline
+neskončno dolga žica, $\sigma_e = de/dz$ & $E(r) = \frac{\sigma_e}{2 \pi \eps_0 r} \frac{\vv{r}}{r}$ \\ \hline
+enakomerno nabit valj z luknjo, polmera $R_1 < R_2$,\\volumska gostota naboja na višino $L$ $\rho_e = \frac{e}{L \pi (R_2^2 - R_1^2)}$;\\če rabim poln valj, vstavim $R_1 = 0$ & $E(r) =
+                                \begin{cases}
+                                0 &\text{če } r \leq R_1\\
+                                \frac{\rho_e}{2 \eps_0 r} (r^2 - R_1^2) &\text{če } R_1 \leq r \leq R_2\\
+                                \frac{\rho_e}{2 \eps_0 r} (R_2^2 - R_1^2) &\text{če } R_1 \leq r \leq R_2 \end{cases} $\\ \hline
+neskončna plošča, $\sigma_S = de/dS$ & $E(z) = \frac{\sigma_S}{2 \eps_0} \frac{\vv{z}}{z}$ \\ \hline
+kondenzator (plošči $\sigma$ in $-\sigma$) & $E(r) =
+                                \begin{cases}
+                                \frac{\sigma}{\eps_0} & \text{med ploščama}\\
+                                0 & \text{sicer} \end{cases}$ \\ \hline
+\end{tabular}
+
+\begin{tabular}{c|c}
+telo & magnetno polje\\ \hline \hline
+neskončna žica, tok $I$ & $B_r = B_z = 0, B_{\phi} = \frac{\mu_0 I}{2 \pi r} \vv{e_{\varphi}}$ \\ \hline
+neskončna valjasta lupina polmera $R$ & $B(r) =
+                                \begin{cases}
+                                0 &\text{če } r \leq R\\
+                                \frac{\mu_0 I}{2 \pi r} & \text{če } r \geq R \end{cases}$\\ \hline
+neskončni poln valj polmera $R$ & $B(r) =
+                                \begin{cases}
+                                \frac{\mu_0 I r}{2 \pi R^2} &\text{če } r \leq R\\
+                                \frac{\mu_0 I}{2 \pi r} & \text{če } r \geq R \end{cases}$ \\ \hline
+
+\end{tabular}\\
+
+\section{Relativnost}
+Postulata:
+\begin{itemize*}
+  \item Hitrost svetlobe je v vseh inercialnih KS enaka.
+  \item Fizikalni zakoni so enaki v vseh inercialnih KS.
+\end{itemize*}
+
+Oznaki: $\beta = \frac{v}{c}, \gamma = \frac{1}{\sqrt{1 - \beta^2}}$ \\
+Transformacija med sistemi (sistem $S'$ se giblje glede na $S$ s hitrostjo $v$ v smeri $x$):
+\begin{align*}
+  ct' &= \gamma(ct - \beta x) \\
+  x' &= \gamma(x - \beta ct) \\
+  y' &= y \\
+  z' &= z
+\end{align*}
+\begin{align*}
+ \Lambda(\beta) = \Lambda_{\nu}^{\mu}&=
+ \begin{bmatrix}
+  \gamma & -\gamma \beta & & \\
+  -\gamma \beta & \gamma & & \\
+   & & 1 & \\
+   & & & 1
+ \end{bmatrix} \\
+  x'^\mu &= \Lambda^\mu_\nu x^\nu \\
+  \Lambda(\beta) \Lambda(- \beta) & = 1 \\
+  \Lambda(\beta_1) \Lambda(\beta_2) & = \Lambda(\frac{\beta_1 + \beta_2}{1 + \beta_1 \beta_2})
+\end{align*}\\
+ Sistem $S'$ se glede na $S$ giblje s hitrostjo $v_0$:  \\
+\textbf{Podalšanje časa:} $t' = \gamma t$ \\
+\textbf{Skrčenje dolžin:} $L' = \frac{L}{\gamma}$, $\tan  \alpha ' = \gamma \tan \alpha$ \\
+Četverci:
+\begin{itemize*}
+  \item Pozicija: $x^\mu = (ct, x, y, z), x_\mu = (ct, -x, -y, -z)$,
+    invarianta: $x^{\mu} x_{\mu} = (ct)^2 - x^2 - y^2 - z^2$
+  \item Hitrost: $u^\mu = \dd{x}{\tau} = \dd{x}{t}\dd{t}{\tau} = \gamma_v(c, \vv{v})$,
+                 $\|u\|^2 = u^{\mu} u_{\mu} = c^2 = $konst. \\
+                 Seštevanje hitrosti: Če se $S'$ giblje glede na $S$ z $v_0$ in $S''$ glede na $S$ z $v_1$, potem se
+                 $S''$ giblje glede na $S'$ s hitrostjo $v_1'$, ki jo dobimo kot:
+                 $v_1' = \frac{v_1 -v_0}{1 - \frac{v_1v_0}{c^2}}$ ali
+                 $\beta_{v_1'} = \frac{\beta_{v_1} - \beta_{v_0}}{1 - \beta_{v_1}\beta_{v_0}}$.
+% \item Pospešek: $a_\mu = \dd{u}{\tau}$
+  \item Odvod: $\partial_\mu = (\frac{1}{c}\dt, \dx, \dy, \dz) = (\frac{1}{c}\dt, \vnabla)$;
+        $\partial^\mu\partial_\mu = \frac{1}{c^2}\dd{^2}{t^2}-\nabla^2 = \square$.
+  \item Gibalna količina: $p_\mu = m_0u_\mu = (\frac{E}{c}, p)$, $\|p\|^2 = \frac{E^2}{c^2} - p\cdot p$,
+        zakon: $E^2 = c^2 p \cdot p + (m_0c^2)^2$, $E = c\sqrt{p^2+c^2m^2}$ in $\frac{p c}{E} = \beta$. \\
+        Mirovna energija: $E_m = mc^2$, polna: $E = mc^2 + T= \gamma m c^2$, kinetična: $W_k = W - W_m$\\
+        Splača se pogledati, če $E >> mc^2$, posledično $m^2 c^2 \approx 0$ in $E/c \approx p$\\
+        Brezmasni delci: $= = (E/c)^2 - p_x^2 - p_y^2 - p_z^2$, če le v smeri $x$: $E = p_x c$
+  \item Tok: $J^\mu = (\rho c, j)$, $\rho$ je gostota naboja, $j$ je gostota toka.
+  \item EM potencial: $A^\mu = (\frac{\phi}{c}, A)$, kjer je $\phi$ električni potencial in $A$ magnetni potencial.
+\end{itemize*}
+
+\section{Kvantna mehanika}
+Operatorji:
+\begin{itemize*}
+    \item Gibalna količina: $\hat{p} = -i\hbar \dx$
+    \item Hamiltonian: $\hat{H} = \hat{T} + \hat{V} = \frac{\hat{p}^2}{2m} + \hat{V}$
+    \item Povprečje operatorja $\hat O$: $\langle \hat{O} \rangle = \int \psi^*\hat{O}\psi \,dx$ (v splošnem velja $\langle\hat{p}^2\rangle = 2 m \langle E\rangle$). Le operatorji $x, p, H$ so neodvisno od časa.
+\end{itemize*}
+$E = h \nu$, $\omega = 2 \pi \nu$, $E = \hbar \omega$\\
+Interferenca valovanj: maksimum: $d \sin \theta = N \lambda$, minimum:
+$d \sin \theta = (N + \frac{1}{2}) \lambda$\\
+Velja: $\lambda = \frac{h}{p}$, $p$ gibalna količina.
+
+\textbf{Schrodingrjeva enačba:} $i\hbar \frac{\partial\psi}{\partial t} = \hat{H}\psi$
+
+\textbf{Lastne funckije in lastne energije za delec v neskončni potencialni jami širine $a$:} \\
+$\psi_n(x) = \sqrt{\frac{2}{a}} \sin(\frac{n \pi x}{a})$, $E_n = \frac{n^2 \pi^2 \hbar^2}{2 m a^2}$\\
+$\langle x\rangle = a/2, \langle x^2\rangle = \frac{a^2}{6} (2 - \frac{3}{n^2 \pi^2})$, $\langle p\rangle = 0, \langle p^2\rangle = 2 m E_n$\\
+$\delta p\, \delta x = \frac{\hbar}{2} \sqrt{\frac{n^2 \pi^2}{3} - 2}$\\
+Če je jama simetrična, torej na $(-a/2, a/2)$: (pišem le tisto, kar je drugače)\\
+$\psi_n^S = \psi_n (n - a/2) = \sqrt{\frac{2}{a}} \left(\sin(\frac{n \pi x}{a}) \cos(\frac{n \pi}{2}) -  \cos(\frac{n \pi x}{a}) \sin(\frac{n \pi}{2})\right)$\\
+$\langle x\rangle  = 0, \langle x^2\rangle = \frac{a^2}{12} (1 - \frac{6}{n^2 \pi^2})$
+
+
+\textbf{Lastne funkcije in lastne energije za delec v potencialni jami širine $a$ z globino $h$:} TODO
+
+\textbf{Razvoj lastnih stanj po času:} $\psi_n (t) = \psi_n (0) \exp(\frac{E_n}{i \hbar} t)$\\
+Povprečja operatorjev so neodvisna od časa!
+
+\textbf{Transmisivnost:} $T$, odbojnost je $R = 1 - T$\\
+$k = \sqrt{\frac{2 m E}{\hbar^2}}$, $k' = \sqrt{\frac{2 m (E \mp V_0)}{\hbar^2}}$ ($-$,
+   če stopnica, $+$ če jama)\\
+Stopnica višine $V_0$ (v desno neskončna):
+$T = \frac{k'}{k} \frac{|C|^2}{|A|^2} = \frac{4 k k'}{(k + k')^2}$,
+$R = \frac{|B|^2}{|A|^2} = \frac{(k - k')^2}{(k + k')^2}$\\
+Če $E < V_0$ je vedno $R = 1$.\\
+Končna stopnica višine $V_0$, z različno visokim začetkom in koncem:
+  $T = \frac{k''}{k} \frac{|E|^2}{|A|^2}$\\
+Končna stopnica širine $a$, višine $V_0$, ki se začne in konča na isti višini:\\
+Če  $E > V_0$: $T = \frac{|E|^2}{|A|^2} = \frac{1}{%\displaystyle
+                    1+ \left(\frac{k^2 - k'^2}{2 k k'}\right)^2 \sin^2 (k'a)}$.
+Če $E < V_0$: pišemo $k' = i \kappa$, $T = \frac{1}{%\displaystyle
+                    1+  \left(\frac{k^2 + \kappa^2}
+                                                     {2 k \kappa}\right)^2 \sinh^2 (\kappa a)}$
+
+\textbf{Heisenbergovo načelo nedoločenosti:} $\delta x\, \delta p \ge \frac{\hbar}{2}$,
+$\delta x = \langle x^2 \rangle - \langle x \rangle^2$,
+$\delta E\, \delta t \geq \frac{\hbar}{2}$, $\delta m = \frac{1}{c^2} \delta E$
+
+\textbf{Bohrov model atoma:}\\
+$r_N = \frac{N^2 h^2 \eps_0}{Z e_0^2 m \pi}$ radij, ko se ujame $N$ valovnih dolžin\\
+$W_N = - \frac{Z^2}{N^2} \frac{\alpha^2}{2} m c^2$ energija pri $N$-ti črti\\
+$\alpha = \frac{e_0^2}{4 \pi \eps_0 \hbar c} = \frac{1}{137}$ konstanta fine strukture
+
+\section{Uporabno}
+Aproksimacije: $\sqrt{1 + x} = 1 + x/2, \frac{1}{\sqrt{1+x}} = 1 - x/2, (1+x)^n = 1 + nx$\\
+Za integrale: sfera $dS = r^2 \sin\theta\, d\varphi\, d\theta$\\
+valj $dS = r\, d\varphi\, dz$\\
+kocka $dS = dy\, dz$\\
+% valj r dr d\varphi\\
+$\int_{0}^{k\frac{\pi}{2}} \sin^2(x)dx = \frac{1}{2}\cdot \frac{k\pi}{2}$\\
+Konstante:
+\begin{itemize*}
+  \item $\varepsilon_0 = \unit[8,9 \times 10^{-12}]{\frac{As}{Vm}}$
+  \item $\mu_0 = \unit[4\pi \times 10^{-7}]{\frac{Vs}{Am}}$
+  \item $\hbar = \frac{h}{2\pi}$
+  \item $\hbar = \unit[6.582119514 \times 10^{-16}]{eVs}$
+  \item $\hbar c = \unit[0.19732697]{eV\mu m} \approx \unit[200]{eVnm}$
+  \item $1 eV = \unit[1.6 \cdot 10^{-19}]{J}$
+  \item masa elektrona: $m_e = \unit[511 \cdot 10^{3}]{eV/c^2}$
+\end{itemize*}
+Enote:
+\begin{itemize*}
+\item $\unit[ ]{N} = \unit[]{kg\frac{m}{s^2}}$
+\item $\unit[ ]{V} = \unit[]{\frac{kg m^2}{A s^3}}$
+\item $\unit[ ]{J} = \unit[]{\frac{kg m^2}{s^2}}$
+\end{itemize*}
+
+
+\end{document}
