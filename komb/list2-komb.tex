@@ -1,0 +1,203 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, %
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=1.8cm,
+    bottom=2cm,
+%    textheight=24cm,
+    textwidth=15cm,
+    ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+
+\newcommand{\mytitle}{Kombinatorika 1}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Jure Slak}}
+\hypersetup{pdfsubject={}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\newcommand{\per}{\mathfrak{S}}
+\newcommand{\rf}{\longleftrightarrow}
+\DeclareMathOperator{\inv}{inv}
+\newcommand{\q}[1]{\underline{#1}}
+
+\begin{document}
+\pagestyle{empty}
+
+\textbf{Formalne potenčne vrste:}\\
+Konvolucija: $F(x) G(x) = \sum_n c_n x^n$, kjer je $c_n = \sum_{k=0}^n a_k b_{n-k}$\\
+Enota za $\cdot$: $1 \rf (\delta_{n0})_n$\\
+$F$ ima obrat za množenje $\iff F(0) \neq 0$\\
+Valuacija: $v(F) = \min\{n \; ; \; a_n \neq 0\}$ oz.\ $\infty$, če $a_n = 0 \forall n$\\
+$v(F + G) \geq \min\{v(f), v(G)\}$, $v(FG) = v(F) + v(G)$\\
+$F \circ G$ lahko definiramo, če $G(0) = =$ ali $F$ polinom.\\
+$F$ ima inverz ta $\circ \iff F(0)=0, F'(O) \neq 0 \iff v(F) = 1$
+
+\textbf{Običajne rodovne funkcije: } \\
+$\frac{1}{(1 - x)^{d+1}} = \sum_n \binom{n+d}{d} x^n$ za $d \in \N$\\
+Če moraš izračunat neko vrsto: v njej zagledaš rodovno funkcijo pri npr.\ $x=1$ in uporabiš spodnje formule.\\
+$(a_{n+d})_n \rf \frac{F(x) - a_0 - a_1 x - \cdots - a_{d-1} x^{d-1}}{x^d}$\\
+$(p(n) a_n)_n \rf p(x D) F(x)$\\
+$F(x)G(x) \rf (\sum_{k=0}^n a_k b_{n-k})_n$
+
+\textbf{Eksponentne rodovne funkcije: }\\
+$(p(n) a_n)_n \rf p(x D) F$\\
+$(a_{n+d})_n \rf F^{(d)}(x)$\\
+$F(x) \cdot G(x) \rf (\sum_{k=0}^{n}\binom{n}{k}a_kb_{n-k})_n$\\
+$\text{struktura množice} = (1)_n \rf e^x$, $(n)_n \rf x e^x$\\
+$\text{struktura urejenih podmnožic/urejene particije} \rf \frac{1}{1-x}$\\
+$\text{grafovski cikel} \rf 1/2 (\log(\frac{1}{1-x}) - x - x^2/2)$\\
+$\text{struktura cikla} \rf \log(\frac{1}{1-x}) = \sum_{n\geq1} \frac{x^n}{n}$\\
+$(\# \text{grafov na n vozliščih})_n \rf \sum_n 2^{\binom{n}{2} \frac{x^n}{n!}}$\\
+$(B(n))_n \rf e^{e^x - 1}$\\
+$(\# \text{involucij})_n \rf e^{x + \frac{x^2}{2}}$\\
+$(\# \text{premestitev})_n \rf \frac{e^{-x}}{1-x}$\\
+$(\# \text{2-regularnih grafov})_n \rf \frac{\exp(-x/2 - x^2/4)}{\sqrt{1-x}}$\\
+Število premutacij, katerih dolžine ciklov so v $A$: $e^{\sum_{k \in A} \frac{x^k}{k}}$\\
+\textit{Eksponentna formula:} $e^{F(x)}$ je erf za: $[n]$ razdelimo na neprazne podmnožice in damo vsaki strukturo $S$, ki jo opisuje erf $F(x)$ (veljati mora $F(0) = 0$)\\
+\textit{Izrek o kompoziciji:} $[n]$ razdelimo na bloke. Na množico blokov damo strukturo z erf $G(x)$, znotraj blokov pa strukturo z erf $F(x)$. Erf celotne strukture je $G(F(x))$.\\
+\textit{Trditev:} Če je $H(x) = e^{F(x)}$ in $F \rf (a_n)_n, H \rf (b_n)_n$,
+potem je $nb_n = \sum_k \binom{n}{k} a_k b_{n-k}$.\\
+\textit{Izrek o kompoziciji 2:} $n$ objektov damo v $k$ blokov; $\sum_n \sum_k c_{n,k} \frac{x^n}{n!} y^k = G(y \cdot F(x))$, $G$ na vseh blokih, $F$ znotraj bloka.\\
+\textit{Trditev:} $H(x)$ erf za strukturo ``razdelimo na neprazne množice, vsaki damo strukturo S'', potem je mešana rodovna funkcija za to strukturo, kjer štejemo število teh podmnožic, oblike $H(x)^y$.\\
+\textit{Trditev:} Množico razdelimo na $k$ blokov, vsakemu damo strukturo, ki jo šteje $F(x)$ (pri pogoju $F(0) \neq 0$), dobimo erf $\frac{1}{k!}F^k(x).$
+
+\textbf{Povprečje in varianca:} \\
+Pozor, tu je $F$ običajna rf za dano zaporedje!\\
+$\mu = \frac{F'(1)}{F(1)} = (\log F(x))' |_{x = 1}$\\
+$\sigma^2 = \frac{F'(1)}{F(1)} + \frac{F''(1)}{F(1)} - \frac{F'(1)^2}{F(1)^2} = \mu + (\log F(x))'' |_{x = 1}$
+
+\textbf{Lagrangeeva inverzija:} najdemo inverz za kompuzitum od neke rodovne funkcije\\
+Če $v(F)=1$: $n[x^n](F^{(-1)}(x))^k = k [x^{-k}](F(x))^{-n}$\\
+$F, G$ formalni pot.\ vrsti, $v(F) = 1, v(G) = 0, F(x) = x G(F(x))$, potem je\\
+$x [x^n] F^j(x) = j [x^{n-j}]G^n(x)$
+
+\textbf{Rekurzivne enačbe: }\\
+- z običajnimi rf\\
+- z eksponentnimi rf\\
+- z nastavkom: za homogeno enačbo $a_n = \lambda^n$, za partikularno rešitev (desna stran je oblike $q(n) \lambda^n$) je nastavek oblike $r(n) n^k \lambda^n$, kjer je $\deg q = \deg r$ in $k$ kratnost $\lambda$ v karakterističnem polinomu. Splošna rešitev je vsota homogenege in partikularne rešitve.
+- če so rešitve karakteristične enačbe kompleksne, jih zapišeš kot sinuse in kosinuse, da se vidi, da pride v resnici realno (skupaj s konstantami).
+
+\textbf{Catalanova števila:} So fajn. Definitivno.\\
+$C_{n+1} = \sum_{k=0}^n C_k C_{n-k}, \quad C_n = \frac{1}{n+1} \binom{2n}{n} \approx \frac{2^{2n}}{\sqrt{\pi} n^{3/2}}$\\
+$C_n$ liho $\iff n = 2^k - 1, k \in \N_0$
+\begin{itemize*}
+    \item število Dyckovih poti
+    \item število binarnih dreves na $n$ točkah
+    \item Število pravilno gnezdenih oklepajev na $x_1\cdots x_{n+1}$
+    \item Število triangulacij $(n+2)$-kotnika
+\end{itemize*}
+\vspace{-0.4cm}
+$d(n)$ = \# dreves na $n$ točkah = \# besed dolžine $n-2$ z $n$ znaki, tj.\ $d(n) = n^{n-2}$, bijekcija je Pruferjeva koda drevesa\\
+Stirlingova formula: $n! \approx \sqrt{2 \pi n} (\frac{n}{e})^n$\\
+k-Catalanova števila, $C_n^k = \frac{1}{k(n+1)}\binom{k(n+1)}{n} = \frac{1}{(k-1)n +1}\binom{kn}{n}$\\
+$C_n^k$ štejejo polna k-narna drevesa (0 ali k potpmcev) s $(k-1)n+1$ listi oz.\ $k(n+1)$ vozlišči\\
+$C_n^k$ = \# prirejenih Dyckovih poti dolžine $kn$ (poti od $(0,0)$ do $(kn,0)$ s koraki $(1, k-1)$ in $(1, -1)$, ki nikoli ne gredo pod x-os), orf za te poti je $C_k (x) = \sum_n C_n^k(x) x^n = 1 + x C_k^k(x)$.
+
+\textbf{Asimptotika:}
+% pri algebraični singularnosti je formula s predavanj, ker je bolj splošna (na vajah je bil z_0 = 1)
+\begin{itemize*}
+    \item $F$ v $z_0$ pol reda $r$, $c_{-r} = \lim_{z \to z_0} F(z)(z-z_0)^r$,
+    $a_n \approx (-1)^r \frac{c_{-r} n^{r-1}}{(r-1)! z_0^{n+r}}$
+    \item $F(z) = (z_0 - z)^{\beta} g(z)$, kjer $\beta \notin \Z, z_0 >0$, $g(z)$ analizična v okolici $z_0$, $F$ ima v $z_0$ edino singularnost, najbližjo izhodišču, $g(z_0) \neq 0$.\\
+    $a_n \approx \frac{g(z_0) z_0^{\beta}}{z_0^n n^{\beta + 1} \Gamma(-\beta)}$ (kjer je $\Gamma(z+1) = z \Gamma(z), \Gamma(1/2)= \sqrt{\pi}, \Gamma(-1/2) = -2 \sqrt{\pi}$)
+    \item $F$ cela dopustna funkcija, $\alpha(r) = \frac{r F'(r)}{F(r)}$. Poišči pozitivno rešitev (enolična je) $\alpha(r_n) = n, r_n >0$,
+    $a_n \approx \frac{F(r_n)}{r_n^n \sqrt{2 \pi r_n \alpha'(r_n)}}$
+\end{itemize*}
+
+\textbf{Motzkinova števila:} \# poti od $(0,0)$ do $(n,0)$ s koraki $(1,1), (1,0)$ in $(1, -1)$, ki nikoli ne gredo pod x-os\\
+$M(x) = 1 + x M(x) + x^2 M^2(x)$, $M(x) = \frac{1 - x - \sqrt{1 - 2x - 3x^2}}{2x^2}$
+
+\textbf{Mobiusova inverzija:} \\
+$P$ lokalno končna, če je $[x, y]$ končen za vsak $x, y$ iz dum. \\
+$I(P, K) = \{ f\colon \{\text{intervali v P} \} \to K\}$ incidenčna algebra.
+(To pomeni, da je $f(x, y)$ definiran le za $x \leq y$.)
+Operaciji $f+g$, $\lambda f$ standardno, produkt:
+$(fg)(x, y) = \sum_{x\leq z \leq y}f(x, z)g(z, y)$. Enota je $\delta_{xy}$.
+
+Inverz za množenje obstaja $\iff f(x, x) \neq 0$. \\
+Def: $\zeta(x, y) = 1, \mu = \zeta^{-1}$. $\zeta^2(x, y) = |[x, y]|, \zeta^k(x, y) =
+\# \text{multiverig dolžine $k$ med $x$ in $y$}$. $(\zeta-1)(x, y) = |(x, y)|$, $(\zeta-1)^k(x, y)
+= \# \text{verig dolžine $k$ med $x$ in $y$}$.
+
+$\mu(x,x) = 1$ za vsak $x$\\
+$\mu(x,y) = - \sum_{x < z \leq y} \mu(z,y)$\\
+$\mu(x,y) = - \sum_{x \leq z < y} \mu(x,z)$
+
+$g(x) = \sum_{y \leq x} f(y) \iff f(x) = \sum_{y \leq x} \mu(y,x) g(y)$\\
+$g(x) = \sum_{y \geq x} f(y) \iff f(x) = \sum_{y \geq x} \mu(x,y) g(y)$\\
+Veriga, $\underline{n}$: $\mu(i,j) = \texttt{1}(i = j) - \texttt{1}(j-i = 1)$\\
+Bool, $B_n$: $\mu(S, T) = (-1)^{|T \backslash S|}$\\
+Delitelji, $D_n$: $\mu(a, b) = 0 \cdot \texttt{1}(p^2 | \frac{b}{a}, p\in \mathbb{P}) +
+(-1)^k \cdot \texttt{1}(\frac{b}{a} \text{ je produkt k različnih praštevil})$\\
+$\mu(n) = 0 \cdot \texttt{1}(p^2 | n, p\in \mathbb{P}) + (-1)^k
+\cdot \texttt{1}(n \text{ je produkt k različnih praštevil})$\\
+$g(n) = \sum_{d|n} f(d) \iff f(n) = \sum_{d|n} \mu(n/d) g(d) = \sum_{d|n} \mu(d) g(n/d)$\\
+$\sigma(n)$ = \# deliteljev $n$, $\sum_{d|n} \sigma(d) \mu(n/d) = 1$\\
+Eulerjeva funkcija: $\Phi(n)$ = \# števil, ki so tuja $n$; $\Phi(n) = n \Pi_{p\in \mathbb{P}, p|n} (1 - 1/p)$\\
+$\Phi(n)=\sum_{d|n} \mu(d) \frac{n}{d}$ in $n = \sum_{d|n} \Phi(d)$
+\vspace{-2mm}
+\begin{izrek}
+$P, Q$ lokalno končni dum. Potem $\mu_{P \times Q}((x,y),(x',y')) = \mu_P(x,x')\mu_Q(y,y')$
+\end{izrek}
+\vspace{-5mm}
+\textbf{Mreže}
+Mreža: vsaka dva elementa imata skupno zgornjo in spodnjo mejo.\\
+$x \vee y =$ najmanjša skupnja zgornja meja (spoj, kupa)\\
+$x \wedge y =$ največja skupna spodnja meja (stik, kapa)\\
+$\hat{0}, \hat{1} =$ najmanši element dum, največji element dum
+\vspace{-2mm}
+\begin{izrek}
+$P$ končna mreža, $a \in P\setminus \{ \hat{1} \}$. Potem
+$\mu(\hat{0},\hat{1}) = \sum_{x \in P, x \neq \hat{0}, x \wedge a =\hat{0}}\mu(x,\hat{1})$.
+\end{izrek}
+\vspace{-2mm}
+\textbf{Končni avtomati}
+Narediš graf, ki povezuje možne prehode med stanji, npr. veljavna nadaljevanja zaporedja.
+Napišeš matriko sosednosti $A$. Potem je rodovna funkcija za število sprehodov med $i$ in $j$
+enaka: $\sum A_{ij}(n)x^n = \frac{(-1)^{i+j} \det((I-xA)^{ji})}{\det(I-xA)}$.
+
+\end{document}
+% vim: spell spelllang=sl
+% vim: foldlevel=99
+
