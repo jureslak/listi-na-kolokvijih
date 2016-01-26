@@ -1,0 +1,258 @@
+\documentclass[a4paper,oneside,10pt]{article}
+
+\usepackage[slovene]{babel}    % slovenian language and hyphenation
+\usepackage[utf8]{inputenc}    % make čšž work on input
+\usepackage[T1]{fontenc}       % make čšž work on output
+\usepackage[reqno]{amsmath}    % basic ams math environments and symbols
+\usepackage{amssymb,amsthm}    % ams symbols and theorems
+\usepackage{mathtools}         % extends ams with arrows and stuff
+\usepackage{url}               % \url and \href for links
+\usepackage{icomma}            % make comma a thousands separator with correct spacing
+\usepackage{units}             % \unit[1]{m} and unitfrac
+\usepackage{enumerate}         % enumerate style
+\usepackage{array}             % mutirow
+\usepackage[usenames]{color}   % colors with names
+\usepackage{graphicx}          % images
+\usepackage{titlesec}          % control the sections
+
+\usepackage[bookmarks, colorlinks=true, linkcolor=black, anchorcolor=black,
+citecolor=black, filecolor=black, menucolor=black, runcolor=black,
+urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
+\usepackage[
+paper=a4paper,
+top=1cm,
+bottom=1cm,
+textwidth=19cm,
+% textheight=24cm,
+]{geometry}  % page geomerty
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+% basic sets
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Rbar}{\ensuremath{\bar{\mathbb{R}}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+\newcommand{\Title}{TM 1.~kolokvij}
+\newcommand{\Author}{Jure Slak}
+\title{\Title}
+\author{\Author}
+\date{\today}
+\hypersetup{pdftitle={\Title}, pdfauthor={\Author}, pdfcreator={\Author},
+            pdfproducer={\Author}, pdfsubject={}, pdfkeywords={}}  % setup pdf metadata
+
+\pagestyle{empty}              % vse strani prazne
+\setlength{\parindent}{0pt}    % zamik vsakega odstavka
+\setlength{\parskip}{4pt}      % prazen prostor po odstavku
+\setlength{\overfullrule}{30pt}  % oznaci predlogo vrstico z veliko črnine
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{-1pt}   % left, before, after
+\titlespacing*{\subsection}{0pt}{6pt}{-1pt}
+
+%% commands
+\newcommand{\A}{\ensuremath{\mathcal{A}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+\renewcommand{\S}{\ensuremath{\mathcal{S}}}
+\renewcommand{\P}{\ensuremath{\mathcal{P}}}
+\renewcommand{\N}{\ensuremath{\mathbb{N}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
+
+\begin{document}
+
+Župnik vstane in reče: ``Mer\'{i}mo''.
+
+\textbf{\large Integrali:}\\
+\textit{Def.~integrala stopničaste funkcije.} Za $f = \sum_{i=1}^n c_i \chi_{A_i}$ je
+$\int f d\mu = \sum_{i=1}^n c_i \mu(A_i)$.\\
+\textit{Def.\ integrala nenegativne funkcije: }$f \geq 0$ merljiva: $\int_X f d\mu =
+\sup\{\int_X s d\mu\; ; \; 0 \leq s \leq f, s \text{ merljiva, stopničasta}\}$\\
+\textit{Integral in vsoto} nenegativnih merljivih funkcij lahko vedno zamenjamo.
+Enako tudi za $L^1$ funkcije.\\
+Velja: $g\geq 0$: $\int g d \mu = 0 \iff g = 0$ s.p.\\
+Za $f \in L^1$ velja: $|\int f d \mu| \leq \int |f| d \mu$\\
+Dirac: $\int_X f d\delta_{x_0} = f(x_0)$\\
+Triki: nova spremenljivka, per partes, Taylorjev razvoj, nek izraz zapišeš kot določen integral neke funkcije, \ldots\\
+$(\N, \P(\N), \mu$ šteje točke): $\int_{\N} f d \mu = \sum_{n=1}^\infty f(n)$\\
+\textbf{LMK: } $(X, \A, \mu)$, $\{f_n\}_n$ merljive nenegativne, naraščajoče zaporedje
+(lahko le s.p., a potem mora biti $f$ merljiva) k $f$ (limita po točkah). Potem
+$\int_X f d \mu = \lim \int_X f_n d \mu$.\\
+\textbf{LMK za padajoče: } isti pogoji kot prej, le da $f_n$ padajoče in
+zahtevamo $\int_X f_m d \mu < \infty$ za nek $m$. Ni potrebno, da so $f_n$ nenegativne!
+Dokaz preko $g_n = f_1 - f_n.$\\
+Seveda je ok, tudi če je zaporedje padajoče/naraščajoče od nekega fiksnega $n$-ja
+(neodvisnega od $x$) naprej. Lahko preverjaš z odvodom po $t$ oz $n$.\\
+$\lim_{n \to \infty} a_n^{b_n} = \exp(\lim (a_n - 1) b_n)$\\
+$L^1(X, \A, \mu) = \{f:X \to \C \; ; \; \int_X |f| d\mu < \infty\}$\\
+To je poln prostor (lahko uporabljamo Cauchyjev pogoj).\\
+\textbf{LDK: } $\{f_n\}_n, f_n \to f$ po točkah; obstaja $g\in L^1(\mu): |f_n| \leq g \forall n$.
+Potem: $\int_X f d \mu = \lim \int_X f_n d \mu$ in $||f_n - f||_1 \to 0$.\\
+Zaporedje nenegativnih merljivih funkcij $f_n \to 0$ po točkah.
+Obstaja $M>0: \int_X \max \{f_1, \ldots, f_n\} d \mu \leq M \forall n$.
+Potem je $\lim \int_X f_n d \mu = 0$.\\
+Zaporedje nenegativnih merljivih funkcij $f_n \to 0$ po točkah.
+$\lim \int_X f_n f \mu = 0$. Potem je $f = 0$ s.p.\\
+Pozor: zavedaj se, da menjaš Lebegove in Riemannove integrale!!\\
+\textbf{Fatoujeva lema: } $f_n$ nenegativne, merljive. $\int_X \liminf f_n d \mu
+\leq \liminf \int_X f_n d \mu$.\\
+Če obstaja $g \geq 0$, $g \in L^1$, $|f_n| \leq g$: $\limsup \int_X f_n d \mu
+\leq \int_X \limsup f_n d \mu$.\\
+Če $f_n \to f$ v $L^1$, potem obstaja podzaporedje, ki konvergira proti $f$ s.p.\\
+\textbf{Produktna mera: }$(X, \A, \mu), (Y, \B, \nu)$ oba $\sigma$-končna merljiva
+prostora. $(X \times Y, \A \otimes \B, \mu \times \nu)$, $\sigma$-algebra
+je generirana z merljivimi pravokotniki, mero pa dobimo iz polmere
+$(\mu \times \nu) (A \times B) = \mu(A) \nu(B)$.\\
+Velja: $E_x \in \B, E^y \in \A, f_x \B$-merljiva, $f^y \A$-merljiva.\\
+\textbf{Tonellijev izrek: } $f \geq 0$ merljiva. Potem lahko menjamo integrale.\\
+\textbf{Fubinijev izrek: } $f \in L^1$ (kar ponavadi preverimo s pomočjo Tonellija
+na $|f|$). Potem lahko menjamo integrale.\\
+
+\textbf{\large Kompleksne mere:} \\
+\textbf{Def:} Kompleksna mera $\mu$ je preslikava $\nu: \mathcal{A} \to \C$, za katero velja:
+$\nu(\bigcup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \nu(A_i)$, za disjunktne $A_i \in \mathcal{A}$.\\
+Opomba: totalno variacijo lahko računamo tudi le po končnih razbitjih.
+
+\textbf{Totalna variacija mere:} $|\nu|(A) = \sup\{ \sum_{i=1}^\infty |\nu(A_i)|;
+\bigcup A_i = A, A_i \in \mathcal A \text{ disjunktne}\}$.
+Velja: $|\nu|(A) \geq |\nu(A)|$, ki je nenegativna in končna mera. Za končno pozitivno mero $\mu$ je $|\mu| = \mu$. Trikotniška neenakost:
+$||\nu_1| - |\nu_2|| \leq |\nu_1 + \nu_2| \leq |\nu_1| + |\nu_2|$. \\
+\textbf{Absolutna zveznost:} Kompleksna mera $\nu$ je absolutno zvezna glede na pozitivno mero $\mu$,
+če velja za vsak $N \in \mathcal{A}$: $\mu(N) = 0 \implies \nu(N) = 0$.
+Velja: $\nu \ll \mu \iff |\nu| \ll \mu$.
+
+\textbf{Vzajemna singularnost:} Meri $\mu$ in $\nu$ sta vzajemno singularni ($\mu \perp \nu$), če sta
+skoncentrirani na disjunktnih množicah. Velja: $\mu \perp \nu \iff |\mu| \perp \nu$.
+
+\textbf{Pozitvnost množic:} Množica $P$ je pozitivna/negativna/ničelna množica za realno mero $\mu$,
+če je $\mu(A) \geq 0$ / $\mu(A) \leq 0$ / $\mu(A) = 0$ za vsako merljivo $A \subseteq P$. Lastnosti so zaprte za podmnožice in števne unije.
+
+Velja:\\
+- $\nu$ realna mera. Za vsako $A \in \A$ obstaja $\nu$-pozitivna podmnožica $P \subset A, P \in \A$: $\nu(P) \geq \nu(A)$.\\
+- $\forall \varepsilon > 0, \forall A \in \A \exists P_{\varepsilon} \subset A$: $\nu(P_{\varepsilon}) \geq \nu(A)$ in $\nu(B) \geq - \varepsilon$ za vse $B \subseteq P_{\varepsilon}, B \in \A$.\\
+- $\nu$ kompleksna (končna!) in $\mu$ pozitivna mera. Velja: $\nu \ll \mu \iff (\forall \varepsilon > 0 \exists \delta > 0: \; A \in \A, \mu(A) < \delta \implies |\nu(A)|< \varepsilon)$.
+
+\textbf{Hahnov razcep mere:} Naj bo $\nu$ realna mera. Potem obstajata taki $P$, $N \in \mathcal{A}$, da
+je $P \cap N = \emptyset$, $P \cup N = X$, $P$ je $\nu$-pozitivna, $N$ je $\nu$-negativna.
+Razcep je enoličen v smislu, če sta $E$ in $F$ še eni taki množici, potem je sta simetrični razliki
+$E \Delta P$ in $F \Delta N$ $\nu$-ničelni.
+
+\textbf{Jordanov razcep realne mere:} Vsako realno mero $\nu$ lahko enolično razcepimo na
+$\nu = \nu^+ - \nu^-$, kjer sta ti meri pozitivni in skoncentrirani na disjunktnih podmnožicah
+($\nu^+ \perp \nu^-$). Pri tem je $\nu^+(E) = \nu(P \cap E) , \nu^-(E) = - \nu(N \cap E)$, kjer $P, N$ Hahnov razcep mere $\nu$.
+
+\textbf{LRN izrek}: Če je $\mu$ $\sigma$-končna pozitivna mera, $\nu$ kompleksna mera, potem se da
+$\nu$ enolično izraziti kot $\nu = \nu_a + \nu_s$, pri čemer je $\nu_a \ll \mu$, $\nu_s \perp \mu$ in
+obstaja natanko ena funkcija $f \in L^1(\mu)$, da je $\nu_a(A) = \int_A f d\mu$. Funkcija $f$ se imenuje
+Radon-Nikodymov odvod $f = \frac{d\nu_a}{d\mu}$.
+
+\textbf{Norma mere:} $\|\mu\| = |\mu|(X)$.
+
+$\lambda = \lambda^{+} - \lambda^{-}$ (Jordanov razcep mere), potem
+je $|\lambda| = \lambda^{+} + \lambda^{-}$.
+
+Če je $\lambda$ realna/kompleksna mera in $\lambda(X) = |\lambda|(X) \Longrightarrow \lambda$ pozitivna.
+
+Triki: uporabljaj def.\ supremuma (oceni le en člen, glej $-\varepsilon$, \ldots), hkrati ocenjuj meri $E$ in $E^c$.
+
+$(X, \A, \mu)$ merljiv prostor s pozitivno mero. $f \geq 0$ merljiva. Potem je $\nu(E) = \int_E f d \mu$ pozitivna mera. Za vsako $g$ nenegativno merljivo ali $L^1$ velja: $\int g d \nu = \int fg d \mu$. Velja tudi obrat: če $\mu, \nu$ pozitivni, je $f \geq 0$.
+
+\textbf{Izrek o povprečjih:} $(X, \A, \mu)$ s končno pozitivno mero, $f \in L^1(\mu), S\subset \C$ zaprta podmnožica. Sledi: za poljubno $E \in \A$, za katero je $\mu(E) > 0$, $\frac{1}{\mu(E)} \int_E f d \mu \in S \implies f(x) \in S$ za skoraj vsek $x \in X$.\\
+V posebnem to pomeni: $\int_E f d \mu \geq 0 \forall E \implies f \geq 0$.\\
+Uporabno za: dokaži, da $f$ s.p. slika v neko zaprto množico.
+
+$(X, \A)$, $\mu$ kompleksna mera. Tedaj obstaja $h \in L^1(\mu)$, da je $\mu(E) = \int_E h d |\mu|$ in $|h| = 1$ povsod. ($\mu$ in $|\mu|$ se razlikujeta za $e^{i \varphi}$).
+
+Posledica: $f \in L^1, \mu$ pozitivna mera, $\lambda(E) = \int_E f d \mu$ kompleksna mera. Potem je $|\lambda|(E) = \int_E |f| d \mu$.
+
+\textbf{\large $\boldsymbol L^ {\boldsymbol p}$ prostori} \\
+\textbf{Def:} $L^p(\mu) = \{ f\colon X \to \C; \int |f|^p d\mu < \infty, f \text{ merljiva}\}$,
+$L^\infty(\mu) = \{ f\colon X \to \C \text{ merljiiva}, \|f\|_\infty < \infty\}$ \\
+$\|f\|_p = \left(\int |f|^p d\mu\right)^{1/p}$,
+$\|f\|_\infty = \inf\{c \in \R^+; \mu(\{x \in X; |f(x)| > c\}) = 0\}$
+
+\textbf{Konjugirani eksponenti:} $p$ in $q \in [1, \infty]$ konjugirana,
+če velja: $1/p + 1/q = 1$.
+
+\textbf{Youngova neenakost:} $a, b \in [0, \infty$, $p \in (0, \infty)$.
+Potem je $ab \leq \frac{a^p}{p} + \frac{b^q}{q}$. \\
+\textbf{H\"{o}lderjeva neenakost:} $\int |fg|d\mu \leq \|f\|_p\|g\|_q$. \\
+\textbf{Neenakost Minowskega:} $\|f+g\| \leq \|f\|_p + \|g\|_p$.
+\\
+\textbf{Neenakost Chebysheva:} $A_{n, \varepsilon} = \{x \in X: |f_n(x) - f(x)| \geq \varepsilon\}$ potem je $\mu(A_{n, \varepsilon}) \leq \frac{\|f_n - f \|_p^p}{{\varepsilon}^p}$.\\
+\textbf{Jensenova neenakost:} $\mu$ verjetnostna mera, $f \in L^1(\mu)$, $\varphi$ konveksna na $(a,b)
+\supset \mathcal{Z}_f$: $\varphi(\int_X) f d \mu \leq \int_X (\varphi \circ f) d \mu$
+
+$L^p$ prostori so normirani in polni. $L^2$ ima skalarni produkt. Stopničaste funkcije so goste.
+
+Če je $\mu$ $\sigma$-končna, sta $L^p$ in $L^q$ dualna prostora.\\
+$X = \N, \A = \P(X), \mu$ šteje točke: dobimo prostore $l^p$
+
+$(X, \A, \mu)$ merljiv s končno mero, $1 \leq p < q < \infty$. Potem je $L^q \subseteq L^p$ in
+$||f||_p \leq \mu(X)^{\frac{q-p}{pq}} ||f||_q$\\
+$1 \leq p < q < \infty$ velja $l^p \subseteq l^q$ in $||x||_q \leq ||x||p$\\
+Če $1 \leq p < \infty$ in $f_n \to f$ v $L^p$ prostoru, potem $f_n \to f$ po meri.
+
+Triki: najprej dokaži za $||x|| = 1$, če imaš produkt načaraj ustrezne
+funkcije za Holderja, če imaš vsote pa za Minkowskega.
+
+\textbf{Random: } Gamma: $\Gamma(t) = \int_0^\infty x^{t-1} e^{-x} dx, \Gamma(1/2) = \sqrt{\pi}$\\
+Včasih so koristne množice oblike: $E_t = \{x \in X \; ; \; f(x) \geq t\}.$\\
+\textbf{Taylor:} $\log(1-x) = - \sum_{n=1}^\infty \frac{x^n}{n},
+\log(1 + x) = \sum_{n=1}^\infty (-1)^{n+1} \frac{x^n}{n},
+\frac{1}{(1-x)^{d+1}} = \sum \binom{n+d}{d} x^n,
+\arctan x = \sum \frac{(-1)^n}{2n+1} x^{2n+1},
+(1+x)^\alpha = \sum_{n=0}^\infty \binom{\alpha}{n} x^n$.
+
+\textbf{\large Integrali in formule} \\
+\begin{tabular}{llll}
+$\int \ln{x}  = x \ln{x} - x $ & $\int \frac{1}{\sin(x)}  = \ln{\tan(x/2)} $ &  $1+\tan^2{x} = \frac{1}{\cos^2{x}}$ \\
+
+$ \int x^m\log(x)  = x^{m+1}\left(\frac{\log x}{m+1} - \frac{1}{(m+1)^2}\right) $ & $ \int \frac{1}{\cos(x)}  = -\log(\cot(x/2)) $  & $1+\cot^2{x} = \frac{1}{\sin^2{x}}$\\
+
+$ \int p(x) e^{k x}  = q(x) e^{k x} $, st($q$) = st($p$) & $ \int \frac{1}{\tan(x)}  = \log(\sin(x)) $ & $\sin{x} = \frac{e^{ix}-e^{-ix}}{\textbf{2i}}$\\
+
+$ \int e^{a x} \sin(b x)  = \frac{e^{a x} }{ a^2 + b^2} (a \sin(b x) - b \cos(b x)) $ & $ \int \tan(x)  = - \log(\cos(x)) $ & $\cos{x} = \frac{e^{ix}+e^{-ix}}{2}$\\
+
+$ \int e^{a x} \cos(b x)  = \frac{e^{a x} }{ a^2 + b^2} (a \cos(b x) + b \sin(b x)) $ & $ \int x/(1 + x)  = x - \log(x + 1) $ & $\sinh{x} = \frac{e^{x}-e^{-x}}{2}$\\
+
+$ \int \frac{1}{\sqrt{a^2 + x^2}}  =\text{arsh}\frac{x}{a}  = \log|x + \sqrt{x^2 + a^2}| $  & $ \int x/(1 + x)  = x - \log(x + 1) $ & $\cosh{x} = \frac{e^{x}+e^{-x}}{2}$\\
+
+$\int \frac{1}{\sqrt{a^2 - x^2}}  =\arcsin\frac{x}{a} $ & $ \int \sin^2(x)  = \frac{1}{2} (x - \sin x \cos x) $ & $\cosh^2{x}-\sinh^2{x}=1$ &\\
+
+$\int \frac{1}{a^2+x^2}  = \frac{1}{a}\arctan\frac{x}{a} $ & $ \int \cos^2(x)  = \frac{1}{2} (x + \sin x \cos x) $  & $\tan^2{x} = \tan'{x}-1$ \\
+
+$\sin^2(x/2) = (1 - \cos(x))/2$ & $\cos^2(x/2) = (1 + \cos(x))/2$ & $\int \frac{1}{b+a x} = \frac{\log(a x+b)}{a}$\\
+
+\end{tabular}
+
+$\displaystyle \int \frac{1}{a x^2 + bx }  =
+\begin{cases}
+\frac{1}{\sqrt{a}}\log|2ax + b + 2 \sqrt{a} \sqrt{ax^2 + bx }|, & a >0\\
+ \frac{-1}{\sqrt{-a}} \arcsin((2ax + b)/\sqrt{D}), & a<0
+\end{cases} $\\
+$\int \frac{p(x)}{(x-a)^n (x^2 + bx )^m} \,  = A \log|x - a| + B \log|x^2 + bx |  \arctan(\frac{2x + b}{\sqrt{-D}}) + \frac{\text{polinom st. ena manj kot spodaj}}{(x-a)^{n-1} (x^2 + bx )^{m-1}}$ \\
+$\displaystyle \frac{d}{dx} \int_{a(x)}^{b(x)} f(t) dt = f(b(x)) b'(x) - f(a(x)) a'(x))$\\
+$\frac{1}{x} = \int_0^{\infty} e^{-xy} dy$
+
+Substitucija: $t = \tan x, \sin^2 x = t^2 /(1 + t^2), \cos^2 x = 1/(1 + t^2),  = 1/(1 + t^2)$\\
+Substitucija: $u = \tan (x/2), \sin x = 2 u /(1 + u^2), \cos x = (1-u^2)/(1 + u^2),  = 2 du/(1 + u^2)$\\
+
+\hfill Avtorji: Vesna Iršič, Jure Slak, generacija 2015/16
+\end{document}
