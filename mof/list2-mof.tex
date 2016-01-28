@@ -1,0 +1,260 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, %
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=1cm,
+    bottom=1cm,
+%    textheight=24cm,
+    textwidth=19cm,
+    ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+
+\newcommand{\mytitle}{Moderna fizika 1}
+\title{\mytitle}
+\author{Jure Slak}
+\date{\today}
+\hypersetup{pdftitle={\mytitle}}
+\hypersetup{pdfauthor={Vesna Irsic}}
+\hypersetup{pdfsubject={}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{-1pt}   % left, before, after
+\titlespacing*{\subsection}{0pt}{6pt}{-1pt}
+
+\newcommand{\vv}{\vec}
+\newcommand{\va}{\ensuremath{\vec{a}}}
+\newcommand{\vb}{\ensuremath{\vec{b}}}
+\newcommand{\vc}{\ensuremath{\vec{c}}}
+\newcommand{\vf}{\ensuremath{\vec{f}}}
+\newcommand{\vg}{\ensuremath{\vec{g}}}
+\newcommand{\vE}{\ensuremath{\vec{E}}}
+\newcommand{\vB}{\ensuremath{\vec{B}}}
+\newcommand{\vA}{\ensuremath{\vec{A}}}
+\newcommand{\vD}{\ensuremath{\vec{D}}}
+\newcommand{\vH}{\ensuremath{\vec{H}}}
+
+\newcommand{\vnabla}{\ensuremath{\vec{\nabla}}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+\renewcommand{\kappa}{\varkappa}
+
+\newcommand{\x}{\times}
+
+\newcommand{\dd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dt}[1][]{\dd{#1}{t}}
+\newcommand{\dx}[1][]{\dd{#1}{x}}
+\newcommand{\dy}[1][]{\dd{#1}{y}}
+\newcommand{\dz}[1][]{\dd{#1}{z}}
+\newcommand{\dth}[1][]{\dd{#1}{\theta}}
+\newcommand{\dphi}[1][]{\dd{#1}{\phi}}
+\renewcommand{\H}{\ensuremath{\hat{H}}}
+
+\renewcommand{\b}{\boldsymbol}
+
+\begin{document}
+\pagestyle{empty}
+
+Ko iščeš ta list, bo s 50\% verjetnostjo izginil iz obstoja ali
+pa razpadel na dva visokoenergijska nevtrina.
+
+\textbf{Harmonski oscilator:} \\
+Harmosnki oscilator opiše hamiltonian $\H = \frac{\hat{p}}{2m} + \frac{1}{2}k\hat{x}^2 = \frac{\hat{p}}{2m} + \frac{m \omega^2}{2}\hat{x}^2$. \\
+Lastna stanja imajo energijo $E_n = \hbar\omega(n+1/2), \omega^2 = k/m$ \\
+Lastne funkcije (so ONS):
+$\displaystyle \psi_n = \frac{1}{\sqrt{2^nn!\sqrt{\pi}x_0}}
+e^{-\frac{1}{2}\left(\frac{x}{x_0}\right)^2}\textstyle H_n\left(\frac{x}{x_0}\right)$,
+$H_n$ so Hermitovi polinomi, $x_0 = \sqrt{\frac{\hbar}{m \omega}}$. \\
+Velja še: $x\psi_n = \sqrt{\frac{n+1}{2}}x_0\psi_{n+1} + \sqrt{\frac{n}{2}}x_0\psi_{n-1}$ \quad Verjetnostni tok:
+$j = \frac{\hbar}{2mi}\left(\Psi^* \frac{\partial \Psi }{\partial x}-
+\Psi \frac{\partial \Psi^* }{\partial x} \right)$\\
+Če $\psi = \sum_n a_n \psi_n$, je $a_n = \left\langle \psi_n, \psi\right\rangle$, veljati mora $\sum_n |a_n|^2 = 1$, povprečna energija je $E = \sum_n |a_n|^2 E_n$ (in je neodvisna od časa). Verjetnost, da pri meritvi izmerimo energijo $E_k$ je enaka $|a_k|^2$.\\
+$\left\langle k|\hat{x}|n\right\rangle = \sqrt{\frac{\hbar}{2m\omega}} (\sqrt{n} \delta_{k, n-1} + \sqrt{n+1} \delta_{k, n+1})$, $\left\langle n|\hat{x^2}|n\right\rangle = \frac{\hbar}{m \omega} (n + \frac{1}{2})$
+
+\textbf{Hermitovi polinomi:} $H_{2n}$ so sodi, $H_{2n+1}$ so lihi.\\
+Velja:
+$H_n''(u) - 2uH_n'(u) + 2nH_n(u) = 0, H_n'(u) = 2nH_{n-1}(u)$,
+$\int_{-\infty}^\infty e^{-u^2} H_n(u)H_m(u) du = \sqrt{\pi}2^nn!\delta_{n,m}$. \\
+Rekurzivna zveza: $H_{n+1}(u)= 2uH_n(u)-H_n'(u)$, eksplicitni izraz:
+$H_n(u)=(-1)^n e^{u^2}\frac{d^n}{du^n}e^{-u^2}=\left (2u-\frac{d}{du} \right )^n 1$
+$H_0 = 1, H_1 = 2u, H_2 = 4u^2-2, H_3 = 8u^3 - 12u, H_4 = 16u^4 - 48u^2 + 12,
+H_5 = 32u^5 - 160u^3 + 120u$.\\
+$\int_{-\infty}^\infty H_n(y) \exp(-y^2 + y y_0 - \frac{y_0^2}{2}) dy = \sqrt{\pi} y_0^n \exp(\frac{-y_0^2}{4})$
+
+\textbf{3D (vrtilna količina):} \\
+$\hat{\b{p}}\psi = -i\hbar\nabla\psi$, $\hat{\b{r}}\psi = (x\psi, y\psi, z\psi)$,
+$\hat{T} = -\frac{\hbar}{2m}\nabla^2$, $\hat{H} = \hat{T} + \hat{V}$. Predpostavimo $V = V(r)$.
+$\hat{\b{L}}=\hat{\b{r}}\times\hat{\b{p}} = -i\hbar\left(y\dz{} - z\dy{},
+z\dx{}-x\dz{}, x\dy{} - y\dx \right)$. \\
+Velja: $[L_x, L_y] = i\hbar L_z$ in cliklično. $[L^2, L_i] = 0$.  \\
+V sferičnih koordinatah:
+$x = r\cos\phi\sin\theta, y = \sin\phi\sin\theta, z = r\cos\theta, dV = r^2\sin\theta$ \\
+$L_x = -i\hbar\left(-\sin\varphi \dth{} - \cot\theta \cos\phi \dphi{}\right)$,
+$L_y = -i\hbar\left(-\cos\varphi \dth{} - \cot\theta \sin\phi \dphi{}\right)$,
+$L_z = -i\hbar\dphi{}$, \\
+$L^2 = -\hbar^2\left(\dd{^2}{\theta^2} + \cot\theta \dth{} +
+\frac{1}{\sin^2\theta} \dd{^2}{\phi^2}\right)$ \\
+Lastne funkcije: $Y_{\ell m}$, lastne vrednosti za $L^2$ so $\hbar^2\ell(\ell+1)$, za $L_z$ pa $\hbar m$,
+za $\ell = 0, 1, 2, \ldots$, $m = -\ell, -\ell+1, \dots, \ell$.
+Te funkcije so ortonormirane glede na integral po površini sfere. %Spodaj notacija $Y_l^m$, ker Wikipedija.
+%V splošnem so enake $Y_{lm} = A_{lm}P_l^m(\cos(\theta))e^{im\theta}$, kjer je $P_l^m$ polinom.
+%\scriptsize
+%\begin{align*}
+%    Y_{0}^{0}(\theta,\varphi)&={1\over 2}\sqrt{1\over \pi} \\
+%    Y_{1}^{-\pm 1}(\theta,\varphi) & = \mp {1\over 2}\sqrt{3\over 2\pi}\cdot e^{pm i\varphi}\cdot\sin\theta\quad = {1\over 2}\sqrt{3\over 2\pi}\cdot{(x\pm iy)\over r} \\ Y_{1}^{0}(\theta,\varphi) & = {1\over 2}\sqrt{3\over \pi}\cdot\cos\theta\quad \quad = {1\over 2}\sqrt{3\over \pi}\cdot{z\over r} \\
+%    Y_{2}^{\pm 2}(\theta,\varphi) &={1\over 4}\sqrt{15\over 2\pi}\cdot e^{\pm 2i\varphi}\cdot\sin^{2}\theta\quad ={1\over 4}\sqrt{15\over 2\pi}\cdot{(x \pm iy)^2 \over r^{2}}\\
+%    Y_{2}^{\pm 1}(\theta,\varphi) &=\mp{1\over 2}\sqrt{15\over 2\pi}\cdot e^{\pm i\varphi}\cdot\sin\theta\cdot\cos\theta\quad ={1\over 2}\sqrt{15\over 2\pi}\cdot{(x \pm iy)z \over r^{2}}\\
+%    Y_{2}^{0}(\theta,\varphi) &={1\over 4}\sqrt{5\over \pi}\cdot(3\cos^{2}\theta-1)\quad ={1\over 4}\sqrt{5\over \pi}\cdot{(2z^{2}-x^{2}-y^{2})\over r^{2}}
+%\end{align*}
+%\normalsize
+%
+%Povprečja:
+%$\left\langle  L^2 \right\rangle = \hbar^2(\ell +1)\ell$,
+%$\left\langle  L_x \right\rangle = ?$,
+%$\left\langle  L_y \right\rangle = ?$,
+%$\left\langle  L_z \right\rangle = \hbar m$
+
+\textbf{Atom vodika:} \\
+Potencial $V(r) = -\frac{e^2}{4\pi\eps_0r} = - \frac{\alpha \hbar c}{r}$. Rzstavimo tudi kinetično energijo:
+$\hat{T} = \frac{\hat{p}^2}{2m} = \frac{1}{2m}(\hat{p}_r + \frac{\hat{L}^2}{\hat{r}^2})$ \\
+Lastne funkcije (so ONS) $\Psi_{nlm}(r,\vartheta, \varphi) = R_{n\ell}(r) Y_{\ell m}(\vartheta, \varphi)$, $n = 1, 2, \ldots$, $\ell = 0, \ldots, n-1$, $m_l = -l, \ldots, l$. \\
+Lastne  vrednosti: $E_n = - E_{ry} \frac{1}{n^2}$, kjer $E_{ry} = \frac{m_e c^2 \alpha^2}{2} = \frac{ m_e e^4}{2 ( 4 \pi \eps_0)^2 \hbar^2 } \approx 13.6 eV$.\\
+Velja: $\int R_{n' l'}^*(r) R_{nl}(r) r^2 dr = \delta_{n n'} \delta_{l l'}$ in $\int Y_{l' m'}^*(\vartheta, \varphi) Y_{lm}(\vartheta, \varphi) d\Omega = \delta_{l l'} \delta_{m m'}$, kjer $d\Omega = d(cos\vartheta) d\varphi$.
+%$R_{nl} = A_{n\ell}r^\ell L_{n\ell}(\frac{r}{nr_B}) e^{r/nr_B}$, kjer so $L_{n\ell}$ polinomi.
+%So normirane glede na utež $r^2$.
+
+\textbf{Radialni del:} $R_{n l}(r) = \sqrt{(\frac{2}{n r_B})^3 \frac{(n-l-1)!}{2n(n+l)!}} e^{-\frac{\rho}{2}} \rho^l L_{n-l-1}^{2l+1}(\rho)$, kjer je $\rho = \frac{2r}{n r_B}$.\\
+Bohrov radij $r_B = \frac{4 \pi \varepsilon_0 \hbar^2}{m_{\mathrm{e}} e^2} =
+\frac{\hbar c}{m_{\mathrm{e}}\,c^2\,\alpha}$\\
+Povprečje potencialne enegrije: $\left\langle V\right\rangle = - \alpha \hbar c \left\langle \frac{1}{r}\right\rangle$, po Bohrovo pa isto, le da velja $r_n = n^2 r_B$ in $\left\langle \frac{1}{r}\right\rangle = \frac{1}{n^2 r_B}$, $n$ je stanje v katerem smo. Izkaže se: $\left\langle V\right\rangle_{nlm} = -\frac{\alpha \hbar c}{n^2 r_B}$ za vse $n,l,m$.\\
+Velja tudi:
+$\left\langle \frac{1}{r}\right\rangle = \frac{1}{r_Bn^2}$,
+$\left\langle \frac{1}{r^2}\right\rangle = \frac{2}{r_B^2n^3(2\ell+1)}$,
+$\left\langle \frac{1}{r^3}\right\rangle = \frac{2}{r_B^3n^3\ell(\ell+1)(2\ell+1)}$,
+v osnovnem stanju: $\left\langle r^p\right\rangle = \frac{r_B^p}{2^{p+1}} (p+2)!$\\
+Virialni teorem (klasična mehanika): Za potencial oblike $V = \# r^p$ velja $2 \left\langle T\right\rangle = p \left\langle V\right\rangle$. Velja tudi za osnovno stanje vodikovega atoma.\\
+Če računamo $\left\langle r\right\rangle$, so koristni ``matrični elementi'' $\left\langle i|r|j\right\rangle = \int R_i^* r R_j r^2 dr$. Velja: $\left\langle 1|r|1\right\rangle = \frac{3}{2}r_B, \left\langle 1|r|2\right\rangle = \left\langle 2|r|1\right\rangle = - \frac{2^5 \sqrt{2}}{3^4} r_B \approx - 0.5 r_B, \left\langle 2|r|2\right\rangle = 6 r_B$.\\
+Ehrenfestov teorem: Za operator $\mathcal{O}$ velja $\frac{d \left\langle \mathcal{O}\right\rangle}{dt} = \frac{1}{i\hbar} \left\langle [\mathcal{O}, H]\right\rangle + \left\langle \frac{\partial \mathcal{O}}{\partial t}\right\rangle$. V posebnem to pomeni $\frac{d\left\langle r\right\rangle}{dt} = \frac{\left\langle p\right\rangle}{m}, \frac{d \left\langle p\right\rangle}{dt} = -\left\langle \frac{\partial V}{\partial x}\right\rangle$.
+
+\textbf{Sferični harmoniki:} $Y_{lm}(\vartheta, \varphi) = (-1)^m \sqrt{\frac{2l+1}{4 \pi} \frac{(l-m)!}{(l+m)!}} P_{lm}(\cos \vartheta) e^{im\varphi}$.\\
+$\langle l' m' |\mathcal{O}| lm\rangle = \int Y_{l'm'}^* \mathcal{O} Y_{lm} d\Omega $.\\
+$\langle l' m' |\hat{L_x}| lm\rangle = \frac{\hbar}{2} \sqrt{(l \mp m) (l \pm m + 1)} \delta_{l' l} \delta_{m', m\pm1}$\\
+$\langle l' m' |\hat{L_y}| lm\rangle = \mp \frac{\hbar}{2} \sqrt{(l \mp m) (l \pm m + 1)} \delta_{l' l} \delta_{m', m\pm1}$\\
+$\langle l' m' |\hat{L_z}| lm\rangle = \hbar m_l \delta_{l'l} \delta_{m' m}$\\
+$\langle l' m' |\hat{L^2}| lm\rangle = \hbar^2 l (l+1) \delta_{l'l} \delta_{m' m}$
+
+\textbf{Spin:} \\
+Ko postavimo vodikov atom v magnetno polje, ugotovimo da potrebujemo še spin.
+Definiramo ga analogno vrtilni količini in označimo s $s$. Sedaj imamo lastne funkcije:
+$\psi_{n\ell m_\ell s m_s}$. $s$ je za elektron enak $1/2$, $m_s$ pa teče od $-s$ do $s$ po koraku 1.\\
+Če delec postavimo v magnetno polje, nanj deluje magnetni moment
+$\hat{\mu} = \frac{e\hbar}{2 m \hbar} (g_l \hat{l} + g_s \hat{s}) = \mu_B (g_l \frac{\hat{l}}{\hbar} + g_s \frac{\hat{s}}{\hbar})$, kjer je $m$ masa delca. Za elektron je $g_l = -1$. \\
+Če vzamemo, da magnetno polje deluje le v z-smeri (in je v tej smeri konstantno), sledi $F_z = \left\langle \mu_z\right\rangle \frac{\partial B}{\partial z}$, kjer $\mu_z = \frac{e \hbar}{2 m}(-1 \hat{l_z} + g_s \hat{s_z})$.\\
+$s$ igra isto vlogo kot $l$, tudi enačbe so enake. Pri danem $s$ je $2s+1$ možnih stanj; $m_s = -s, -s+1,\ldots, s$. \\
+$\left\langle \hat{s^2}\right\rangle = \hbar^2 s (s+1)$, $\left\langle \hat{s_z}\right\rangle = \hbar m_s$\\
+Za elektron: $s = \frac{1}{2}$, $g_s = 2$ (slednje je dober približek za vse fermione).\\
+% je tole spodaj vse prav? Js teh stvari nimam tako napisanih v zapiskih (vaj)...
+? Hamiltonian popravimo z operatorjem $H_B = -\hat{\mu}B$ in lahko vzamemo da je polje v $z$ smeri, torej
+$H_{B_z} = -\hat{\mu}_zB_z = \frac{\mu_B B_z}{\hbar}L_z$.
+Lastne vrednosti $\hat{\mu}^2$ so $\ell(\ell+1)\mu_B$, $\hat{\mu}_z$ pa $m_{\ell} \mu_B$.
+Ob tem dodatku postane skupna energija
+$E_{nm_\ell} = -\frac{E_0}{n^2} + m_\ell \mu_B B$.\\
+%? Za operatorja $\hat{s}$ in $\hat{s}_z$ sta lastni vrednosti $\hbar s(s+1)$ in $\hbar m_s$.
+%Lastni magnetni moment je tako enak $\hbar{\mu} = -g\frac{e}{2m} \hat{s}$, kjer je za elektron $g=2$.
+%Skupni magnetni moment je vsota orbitalnega in lastnega.
+
+\textbf{LS sklopitev:} ($B = 0$)
+Zaradi interakcije med obema vrtilnima količinama popravimo hamiltonian:
+$\Delta H_{ls} = \frac{\alpha \hbar c}{2m_{\mathsf{e}}^2c^2} \hat{(\frac{1}{r^3})} \hat{ls}$.\\
+Za izračun lastnih stanj operatorja $\hat{ls}$ je boljša druga baza. (tukaj je $\hat{l} = \hat{L}$)
+Definiramo skupno vrtilno količino $\hat{j} = \hat{l} + \hat{s}$.
+velja: $\langle \hat{j}^2\rangle = \hbar j(j+1), \langle  \hat{j}_z \rangle = \hbar m_j$, kjer $j$ teče od
+$|\ell-s|$ do $\ell+s$ po 1. Število $m_j$ kot vedno teče od $-j$ do $j$.
+S kvadriranjem $j$ dobimo $\hat{ls} = \frac12(\hat{j}^2 - \hat{l}^2 - \hat{s}^2)$.
+Če je $\ell = 0$, potem ni sklopitve. Lastne vrednosti so $\left\langle \hat{ls}\right\rangle = \frac{1}{2} \hbar^2 (j(j+1) - \ell(\ell+1) - s(s+1))$. S to formulo poračunaš $\left\langle ls\right\rangle$ za vse možne kombinacije $n, l, j (s = 1/2)$ in nato vsakega posebej vstaviš v $\Delta E_{ls}$.\\
+Pretvorba: $\psi_{n\ell m_\ell sm_s} = \sum c_{\ell m_\ell s m_s}^{\ell sjm_j} \psi_{n\ell sjm_j}$.
+Koeficiente preberemo iz tabele (pozor, v tabeli so vsi skvadrirani!!). Verjetnost, da neko stanje izmerimo, je ustrezni koeficient na kvadrat.
+
+\textbf{Močno magnetno polje:} (ne rabimo iti v novo bazo) Razcep $\Delta E = \mu_B(m_\ell + 2m_s)B_z$. $B > 1/6 T$, da smo c tem približku. V osnovnem stanju: $\Delta E = \pm \mu_B B$.
+
+\textbf{Šibko magnetno polje:} (rabimo novo bazo) Razcep $\Delta E = \left\langle H_B\right\rangle = \frac{\mu_B}{\hbar} B_z (\left\langle l_z\right\rangle + 2\left\langle s_z\right\rangle)$.\\
+$\left\langle s_z\right\rangle = \frac{\left\langle j_z\right\rangle \left\langle sj\right\rangle}{\left\langle j^2\right\rangle}$, $\left\langle sj\right\rangle = \frac{1}{2} (j^2 + s^2 - l^2)$, $\left\langle l_z\right\rangle = \frac{\left\langle j_z\right\rangle \left\langle lj\right\rangle}{\left\langle j^2\right\rangle} = \frac{\left\langle j_z\right\rangle \left\langle j^2 - sj\right\rangle}{\left\langle j^2\right\rangle}$\\
+$\Delta E = \mu_B B_z m_j g_j$, kjer $g_j = 1 + \frac{\left\langle j^2 + s^2 - l^2\right\rangle}{2 \left\langle j^2\right\rangle} = 1 + \frac{j(j+1) + s(s+1) - l(l+1)}{2 j(j+1)}$. To poračunaš za vse možne $n,l,j$.
+
+\textbf{Perturbacije:} $\hat{H} = \hat{H_0} + \varepsilon \hat{H_1}$\\
+$\left\lvert n\right\rangle$ n-to stanje $H$, $\left\lvert n_0\right\rangle$ n-to stanje od $H_0$, $\left\lvert n_i\right\rangle$ n-to stanje v i-tem redu preturbacije; $H \left\lvert n\right\rangle = E_n \left\lvert n\right\rangle$\\
+$\left\lvert n\right\rangle = \left\lvert n_0\right\rangle + \varepsilon \left\lvert n_1\right\rangle + \varepsilon^2 \left\lvert n_2\right\rangle + \ldots, E_n = E_{n0} + \varepsilon E_{n1} + \varepsilon^2 E_{n2} + \ldots$\\
+POPRAVEK 1. REDA: $E_{n1} = \left\langle n_0\right\lvert \hat{H_1}\left\lvert n_0\right\rangle$, $\left\lvert n_1\right\rangle = \sum_{m \neq n} \frac{\left\langle m_0 \right\lvert  \hat{H_1}\left\lvert n_0\right\rangle}{E_{n0} - E_{m0}} \left\lvert m_0\right\rangle$\\
+POPRAVEK 2. REDA: $E_{n2} = \sum_{m \neq n} \frac{|\left\langle m_0 \right\rvert  \hat{H_1}\left\lvert n_0\right\rangle|^2}{E_{n0} - E_{m0}}$ (vedno pride < 0)
+
+\textbf{Neharmonski operator:} V vsakem primeru uvedemo $a = \frac{1}{\sqrt{2}} (\frac{x}{x_0} + \frac{i}{\hbar} x_0 p), a^+ = \frac{1}{\sqrt{2}} (\frac{x}{x_0} - \frac{i}{\hbar} x_0 p), n = a^+a, n+1 = a a^+$. Velja $[x,p] = i\hbar, [a, a^+] = 1, \frac{x}{x_0} = \frac{a + a^+}{\sqrt{2}}$.\\
+$a \left\lvert n\right\rangle = \sqrt{n} \left\lvert n-1\right\rangle, a^+ \left\lvert n\right\rangle = \sqrt{n+1} \left\lvert n+1\right\rangle, \hat{n} \left\lvert n\right\rangle = n \left\lvert n\right\rangle$\\
+$H_0 = \hbar \omega (\hat{n} + 1/2)$\\
+Če je $H_1 = \varepsilon_4 \hbar \omega (\frac{x}{x_0})^4 = \varepsilon_4 \hbar \omega \frac{1}{\sqrt{2}^4} (\hat{a} + \hat{a^+})^4$, dobimo $E_{n1} = \frac{3 \varepsilon_4 \hbar \omega}{2} (n^2 + n + \frac{1}{2})$ (ostanejo le členi, kjer je enako število $a$ in $a^+$), to je dober približek, dokler $E_{n0} > E_{n1}$.\\
+Če $H_1 = \varepsilon_3 \hbar \omega (\frac{x}{x_0})^3= \varepsilon_3 \hbar \omega \frac{1}{\sqrt{2}^3} (\hat{a} + \hat{a^+})^3$, je $E_{n1} = 0$ in $E_{n2} = - \frac{\hbar \omega \varepsilon_3^2}{8} (30 (n+1)n + 11)$ (smiselni $m$-ji so le $n-3, n-1, n+1, n+3$, ker $a$ in $a^+$ ravno dvigata/spuščata stanja).
+
+%To je še na starem listu.
+% NE vse.
+% No, alpha je na 1. listu, tik nad "Uporabno"
+%E1 je pa na tem listu, pri atomu vodika (tam kjer to rabiš)
+% glede na to, da kaže da bo formul za približno 2 strani je smiselno, da je za 2 strani in ne 2 in še malo...
+%Konstante:
+% Res je :)
+%\begin{itemize*}
+%  \item $\varepsilon_0 = \unit[8,9 \times 10^{-12}]{\frac{As}{Vm}}$
+%  \item $\mu_0 = \unit[4\pi \times 10^{-7}]{\frac{Vs}{Am}}$
+%  \item $\hbar = \frac{h}{2\pi}$
+%  \item $\hbar = \unit[6.582119514 \times 10^{-16}]{eVs}$
+%  \item $\hbar c = \unit[0.19732697]{eV\mu m} \approx \unit[200]{eVnm}$
+%  \item $1 eV = \unit[1.6 \cdot 10^{-19}]{J}$
+%  \item masa elektrona: $m_e = \unit[511 \cdot 10^{3}]{eV/c^2}$
+  %\item osnovno stanje vodika: $E_1 = -\unit[13.6]{eV}$
+  %\item konstanta fine strukture: $\alpha = \frac{1}{137}$
+%\end{itemize*}
+
+\hfill Avtorji: Jure Slak, Vesna Iršič, generacija 2015/16
+
+\end{document}
+
