@@ -1,0 +1,381 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
+]{hyperref}
+\usepackage[
+  paper=a4paper,
+  top=1.5cm,
+  bottom=1.5cm,
+%    textheight=24cm,
+  textwidth=18cm,
+  ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\P{\mathbb{P}}
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{enumerate}}
+
+\title{NAI}
+\author{vesna.irsic }
+\date{February 2016}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newcommand{\mybox}[1]{\frame{\rule{0pt}{10pt}\ #1\ }}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ls}{\left\langle}
+\newcommand{\rs}{\right\rangle}
+
+\begin{document}
+
+% Wooooow, si pa pridna :)
+% Go Vesna! ^^
+% Ah zdel se mi je, da se morm učit, pa me je preveč glava bolela, da bi dejansko kej pametnega razmislila. Tko sm bla pa uporabna :P
+
+%%%%%%%%%%%%%%%%                    APROKSIMACIJA
+% mislim, da so tu vse stvari z vaj. Edino kar manjka je Remezov postopek, ker se mi ga včerej ni dalo napisat.
+\subsection*{Aproksimacija}
+\textbf{Bernsteinovi polinomi:} \\
+Bernsteinov polinom: $B_i^n(x) = \binom{n}{i} x^i (1-x)^{n-i}$, $B_i^n$ so baza prostora $\P_n$, $B_i^n \geq 0,
+B_i^n(x) = B_{n-i}^n(1-x),
+\sum_{i=0}^n B_i^n(x) = 1$,
+$\sum_{i=0}^n \frac{i}{n} B_i^n(x) = x$,
+$B_i^n(x) = \sum_{j=i}^n (-1)^{j-i} \binom{n}{j} \binom{j}{i} x^j$,
+$B_i^n(x) = (1-x) B_i^{n-1}(x) + x B_{i-1}^{n-1}(x)$,
+$(B_i^n)'(x) = n (B_{i-1}^{n-1}(x) - B_i^{n-1}(x))$,
+$\int B_i^n(x) dx = \frac{1}{n+1} \sum_{j = i+1}^n B_j^{n+1}(x) + C$\\
+Bernsteinov operator: $(B_nf)(x) = \sum_{i=0}^n f(\frac{i}{n}) B_i^n(x)$\\
+$(B_nf)'(x) = n \sum_{i=0}^{n-1} \Delta f(\frac{i}{n}) B_i^{n-1}(x)$, kjer
+$\Delta f(\frac{i}{n}) = f(\frac{i+1}{n}) - f(\frac{i}{n})$\\
+$(B_nf)^{(k)}(x) = \frac{n!}{(n-k)!} \sum_{i=0}^{n-k} \Delta^kf(\frac{i}{n}) B_i^{n-k}(x)$,
+kjer $\Delta^k f(\frac{i}{n}) = \Delta^{k-1} f(\frac{i+1}{n}) - \Delta^{k-1} f(\frac{i}{n})$\\
+Za $f \colon [0,1] \to \R$ zvezno odvedljivo: $\lim_{n\to \infty} \|(B_nf)' - f'\|_{\infty} = 0$.\\
+Weierstrassov izrek: Za $f \in C([a,b])$ velja $\text{dist}_{\infty} (f, \P_n) \to 0$.\\
+Izrek: $\|f - B_n f\|_{\infty} \leq \omega(f, \frac{1}{\sqrt[4]{n}}) + \frac{\|f\|_{\infty}}{2 \sqrt{n}}$\\
+% Kantorovičev polinom??\\ NE!
+Ocena napake: $e_n = \|B_nf - f\|_{\infty} = C n^{-\alpha}$, $\frac{e_n}{e_m} =
+(\frac{m}{n})^{\alpha}$, $\alpha =
+\frac{\log(\frac{e_n}{e_m})}{\log(\frac{m}{n})}$.\\
+Če je $f$ Lipschitzova s konstanto $c$, je $|f(x) - (B_nf)(x)| \leq  \frac{c}{2 \sqrt{n}}$\\
+% Vesna, kaj je to? Rezultat ene naloge z vaj, ki sem ga pozabla v celoti prepisat :P
+$(B_nf)(x) = \sum_{i=0}^{n+1} (f(\frac{i-1}{n}) \frac{i}{n+1} + f(\frac{i}{n}) \frac{n+1-i}{n+1}) B_i^{n+1}(x)$\\
+Če je $f$ konveksna, je $B_nf \geq B_{n+1}f$.\\
+Triki:\\
+- 1 zapišeš kot vsoto Bern.\ polinomov\\
+- C.-S.\ neenakost: $|\ls x,y\rs| \leq \|x\| \cdot \|y\|$
+
+\textbf{Hiške:} $S$ so odsekoma linearne funkcije. Hiške so baza $S$. $\dim(S) = n+1$\\
+$H_i(x) = \begin{cases}
+\frac{x-x_{i-1}}{x_i - x_{i-1}}; & x \in [x_{i-1}, x_i]\\
+\frac{x-x_{i+1}}{x_i - x_{i+1}}; & x \in [x_{i}, x_{i+1}]\\
+0; & \text{ sicer}
+\end{cases}$\\
+Operator: $(I_1 f)(x) = \sum_{i = 0}^n f(x_i) H_i(x)$\\
+Izrek: Če je $I_1$ linearen in pozitiven in če je $\lim_{\Delta x \to 0} \|I_1
+f - f\|_{\infty} = 0$ za $f \in \P_i$ za $i = 0,1,2$, potem to velja za vsak $f
+\in C([a,b])$. (Naš $I_1$ temu zadošča.)
+
+\textbf{Element najboljše aproksimacije:} $X$ normiran prostor, $S \subset X$
+podprostor, $f \in X$; iščemo $f^* \in S$: $\|f - f^*\| = \text{dist}(S,f) =
+\inf_{s \in S} \{\|f-s\|\}$.\\
+Izrek: Če imamo enakomerno konveksen Banachov prostor in zaprt podprostor, potem obstaja e.n.a.\\
+Izrek: V končno razsežnih podprostorih e.n.a.\ vedno obstaja.\\
+$X$ normiran vektorski prostor. $X$ je \textbf{enakomerno konveksen}, če
+$\forall \eps > 0 \exists \delta >0: \forall x,y \in X: \|x\| = \|y\| = 1,
+\text{ velja: } \|\frac{1}{2} (x+y)\| > 1-\delta \implies \|x-y\| < \eps$.\\
+$X$ je \textbf{strogo normiran}, če za $x,y \in X$ za katera je $\|x+y\| =
+\|x\| + \|y\|$, velja $x = \lambda y, \lambda \in \C$.\\
+Množica $A$ je \textbf{strogo konveksna}, če za vse $a,b \in A, a \neq b$ in
+vse $\alpha \in (0,1)$ velja $\alpha a + (1-\alpha) b \in \text{int} A$.\\
+Krogla je \textbf{strogo konveksna} $\iff \forall x,y \in K(0,1), x \neq y,
+\alpha \in (0,1)$, velja $\|\alpha x + (1-\alpha) y\| < 1$.\\
+Izrek: $X$ z normo, v kateri so zaprte krogle strogo konveksne. Potem je $X$
+strogo normiran.\\
+Izrek: $X$ strogo normiran $\iff$ zaprta enotska krogla je strogo normirana.\\
+Izrek: Množica e.n.a. je konveksna. \\
+Izrek: $X$ Strogo normiran prostor. Potem za vsak $x\in X$ obstaja največ 1
+e.n.a. (Unitarni prostori so strogo normirani).
+\textbf{Remezov postopek:}
+Za p.n.e.a.\ stopnje $n$ vzamemo množico $E$ z $n+2$ točkami, $E = \{x_0, \ldots, x_{n+1}\}$.
+Potem rešimo sistem enačb, ki pravi da mora residual $r = f - p^\ast$ alternirati: $r(x_i) = (-1)^i m$.
+Če zapišemo $p^* = \sum a_i x^i$, potem se sistem glasi:\\
+$\begin{bmatrix}
+  1 & 1 & x_0 & x_0^2 & \cdots & x_0^n \\
+  -1 & 1 & x_1 & x_1^2 & \cdots & x_1^n \\
+  \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+  \pm 1 & 1 & x_{n+2} & x_{n+2}^2 & \cdots & x_{n+2}^n
+\end{bmatrix}
+\begin{bmatrix}
+  m \\ a_0 \\  \vdots \\ a_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+  f(x_0) \\ f(x_1) \\ \vdots \\ f(x_{n+2})
+\end{bmatrix}
+$ \\
+Rešimo in zračunamo residual $r$, ki mora alternirajoče dosegati $m$. Pazi, da so koeficienti polinoma
+po vrsti od $x^0$ do $x^n$!
+(Ne nujno kot svojo normo, takrat je postopka konec, oz.~ko je $\|r\|_\infty - m < \eps$.)
+Sedaj se ločita prvi in drugi Remezov postopek.
+\textbf{Prvi:}
+Izračunamo, kje je dosežen maksimum $|r|$ (ponavadi z odvajanjem),
+označimo točko z $\xi$, $r(\xi) = \|r\|_\infty$. Sedaj točko $\xi$ vstavimo v $E$, tako da vržemo ven
+eno izmed sosednjih, in sicer tisto, da $r$ še vedno alternira na $E$.
+\textbf{Drugi:}
+Ker $r$ alternira na $n+2$ točkah ima $n+1$ ničel $z_i$. Če dodamo še $z_{-1} = a, z_{n+1} = b$, potem
+je na intervalih $[z_i, z_{i+1}]$ enako predznačen -- na vsakem intervalu najdemo ekstrem $y_i$. Teh je $n+2$ in
+množico $\{y_i\}$ okličemo za nov $E$, starega pa pozabimo.
+
+Včasih lahko dobimo p.n.e.a.\ brez Remezovega postopka:\\
+- ga uganemo + Izrek (\emph{de La Vallée Poussin}): $f \in C([a,b]), p \in \P_n$, tako da $r = f-p$
+alternirajoče doseže svojo normo v vsaj $n+2$ točkah. Tedaj je $p$ p.n.e.a.\ za $f$ na $[a,b]$.\\
+- to na primer velja za polinome Čebiševa na $[-1, 1]$.
+
+Remeza lahko delamo, če funkcije zadoščajo Harovemu pogoju.
+
+\textbf{Polinomi Čebiševa} na $[-1,1]$: $T_n(x) = \cos(n \arccos (x)), x \in [-1,1]$,
+$T_n(x) = 2x T_{n-1}(x) - T_{n-2}(x)$, \\
+$T_0(x) = 1, T_1(x) = x, T_2(x) = 2x^2 - 1,
+T_3(x) = 4 x^3 - 3x, T_4(x) = 8x^4 - 8x^2 + 1$.\\
+$T_n(x)$ alternirajoče doseže $\pm 1$ v $n+1$ točkah in $\|T_n\|_{\infty} = 1$.\\
+Med vsemi polinomi stopnje $\leq n$ in vodilnim koeficientom $1$, ima $2^{-n+1}
+T_n$ najmanjšo $\infty$-normo na $[-1,1]$, hkrati pa izven $[-1,1]$ najhitreje
+narašča.\\
+Med vsemi polinomi $p \in \P_n$, za katere je $\|p\|_{\infty, [-1,1]} \leq 1$,
+polinom $T_n$ največji vodilni koeficient.\\
+Če je $p(x) = \sum_{i=0}^n a_i T_i(x)$, je $q(x) = p(x) - a_n T_n(x) =
+\sum_{i=0}^{n-1} a_i T_i(x)$ p.n.e.a.\ za $p$ na $[-1,1]$ stopnje $n-1$.
+$\|p-q\|_{\infty} = |a_n|$.
+
+\textbf{Harov pogoj:} $\{f_i\}_{i=0}^n$ zvezne, zadoščajo Harovemu pogoju na
+$[a,b]$, če je za vsake točke $a \leq x_0 < x_1 < \cdots < x_n \leq b: V(f;x) =
+\det (f_j(x_i))_{i,j = 0}^{n} = \begin{vmatrix}
+  f_0(x_0) & f_0(x_1) & \cdots & f_0(x_n) \\
+  f_1(x_0) & f_1(x_1) & \cdots & f_1(x_n) \\
+  \vdots & \vdots & \ddots & \vdots \\
+  f_n(x_0) & f_n(x_1) & \cdots & f_n(x_n)
+ \end{vmatrix} \neq 0.$ Če je $f_i(x) = x^i$, dobimo Vandermondovo determinanto.\\
+ Zelo uporaben izrek: Harov pogoj je izpolnjen $\iff$ vsak ``polinom''
+ $\sum_{i=0}^n \alpha_i f_i$ ima kvečjemu $n$ različnih ničel na $[a,b]$.
+ Za take sisteme lahko uporabljamo Remezov postopek.
+
+ \textbf{Metoda najmanjših kvadratov:} \\
+ Izrek: $X$ evklidski prostor, $f \in X$, $f^* \in S \subset X$. $f^*$ je e.n.a.m.n.k.\ za $f$ v $S$
+$\iff$ $f - f^* \bot S$.\\
+ $(s_j)$ baza $S \subset X$, $f \in X$, $f^* \in S$, $f^* = \sum \alpha_j s_j$. Dobimo sistem $G
+\alpha = b$, $G$ je Grammova matrika (simetrična in pozitivno definitna).\\
+$ \begin{bmatrix}
+  \ls s_1,s_1\rs  & \ls s_2, s_1\rs  & \cdots & \ls s_n, s_1\rs  \\
+  \ls s_1,s_2\rs  & \ls s_2, s_2\rs  & \cdots & \ls s_n, s_2\rs  \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \ls s_1,s_n\rs  & \ls s_2, s_n\rs  & \cdots & \ls s_n, s_n\rs
+ \end{bmatrix}
+ \begin{bmatrix}
+  \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_n
+ \end{bmatrix}  = \begin{bmatrix}
+ \ls f, s_1\rs  \\ \ls f, s_2\rs  \\ \vdots \\ \ls f, s_n\rs
+ \end{bmatrix}$\\
+ $G$ je nesingularna $\iff$ $s_1, \ldots, s_n$ so linearno neodvisne.\\
+ Včasih gledamo vse zoženo le na nekaj točk $x = (x_i)_{i=1}^n$, tedaj je $G$ nesingularna $\iff$
+imamo več kot $n+1$ različnih točk na $\P_n|_x$.\\
+ \textbf{Ortonormirani sistemi polinomov:}
+ Dan je nek skalarni produkt, želimo ortonormirano bazo polinomov stopnje $n$,
+ $(Q_0, Q_1, \ldots, Q_n), \|Q_i\| = 1, \ls Q_i, Q_j\rs  = \delta_{ij}$.  \\
+ Izberemo $Q_{-1} = 0, \tilde{Q}_0 = 1$. Računamo od $i=0$ dalje: \\
+ $\beta_i = \|\tilde{Q}_i\| = \sqrt{\ls \tilde{Q}_i, \tilde{Q}_i \rs}$\\
+ $Q_i = \tilde{Q}_i/\beta_i$ \\
+ $\alpha_i = \ls xQ_i, Q_i\rs$, \\
+ $\tilde{Q}_{i+1}(x) = (x - \alpha_i) Q_i(x) - \beta_i Q_{i-1}(x)$ in ponavljaš. \\
+ Alternativno velja:
+ $\beta_i = \ls x Q_i, Q_{i-1}\rs  = \|\tilde{Q}_i\|$ \\
+Dobljeni $Q$-ji so ortonormirani, $\tilde{Q}_i$ pa ortogonalni.
+Ker je Gramova matrika kar identiteta, zapišemo p.n.a.m.n.k. kar:
+$p^* = \sum_{i=0}^n \ls f, Q_i \rs Q_i$.
+% :)
+
+%%%%%%%%%%%%%%%%                    INTERPOLACIJA
+\subsection*{Interpolacija}
+\textbf{Lagrangeeva} interpolacija: interpoliramo le vrednosti funkcije $f$ v različnih točkah.\\
+\textbf{Hermitova} intrepolacija: interpoliramo vrednosti in vrednosti 1.\ odvodov funkcije $f$.
+
+\textbf{Lagrangeev interpolacijski polinom:} $a \leq x_0 < x_1 < \cdots x_n \leq b$ delilne točke\\
+$\displaystyle \ell_{n,j}(x)=\frac{\prod_{i=0,i\neq j}^n(x-x_i)}{\prod_{i=0,i\neq
+j}^n(x_j-x_i)}$, $\ell_{n,j}(x_i) = \delta_{ij}$, Polinom, ki se z $f$ ujema v
+$(x_i)_i$: $p(x) = \sum_{i=0}^nf(x_i)\ell_{n,i}(x)$.\\
+$\{\ell_{n,j}\}_j$ so baza $\P_n$, $\sum_{j=0}^n \ell_{n,j} = 1$\\
+Definiramo $\omega(x) = (x-x_0)\cdots(x-x_n)$. Velja $\ell_{n,i}(x) = \frac{\omega(x)}{(x-x_i)\omega'(x)}$.
+
+Ocena napake: $f(x) = p(x) + \frac{f^{(n+1)}(\xi)}{(n+1)!}\omega(x)$, kjer je
+$\xi$ nekje na intervalu, ki ga določajo $x_i$ in $x$. To se prevede na:
+$|f(x) - p(x)|  = |\omega(x) [x_0, \ldots, x_n, x]f| =
+|\omega(x) \frac{f^{(n+1)}(\xi)}{(n+1)!}| \leq \|\omega\|_\infty
+\frac{\|f^{(n+1)}\|_\infty}{(n+1)!}$\\
+V več dimenzijah: kolokacijska matrika $[\lambda_j(s_i)]_{i,j = 0}^n$,
+$\lambda_j$ evaluacije v točkah $x_j$, $s_i$ bazne funkcije prostora.
+
+Izračun vrednosti polinoma, ki je dan z $d_i = [x_0, \ldots, x_i]f$:\vspace{-\baselineskip}
+\small
+\begin{verbatim}
+v = d_n
+for i = n-1:-1:0
+    v = d_i + (x - x_i) v
+\end{verbatim}
+\normalsize
+
+\textbf{Deljene diference in Newtonova oblika interpolacijskega polinoma:}\\
+$[x_0, \ldots, x_k]f$ je koeficient pred $x^k$ v polinomu stopnje $\leq k$,
+ki se z $f$ ujema v teh $k+1$ točkah.\\
+% no ja, ni ravno vodilni koeficient, je koeficient pri x^k, kar je lahko tudi 0, ker je polinom lahko manjši...
+% ampak ja.
+%nene, maš prav, zato je šlo men tole razmišljanje tolk počas, k mam napačno def. v glavi
+Če so točke paroma različne: $[x_i]f = f(x_i)$, ostalo izračunamo po
+rekurzivni formuli: \\$[x_0, \ldots, x_k]f = \frac{[x_0, \ldots, x_{k-1}]f -[x_1, \ldots, x_k]f }{x_0-x_k}$. Če
+so točke $x_0$ do $x_k$ enake, je $[x_0, \ldots, x_k]f = \frac{f^{(k)}(x_0)}{k!}$.\\
+Zapis interpolacijskega polinoma: \\
+$p(x) = f[x_0] + f[x_0, x_1] (x-x_0) +  f[x_0, \dots, x_n](x-x_0)\cdots (x-x_{n-1}) =
+\sum_{j=0}^n \prod_{i=0}^{j-1}(x-x_i) [x_0, \ldots, x_j]f$\\
+Izrek (ocena napake): $f \in C^{n+1}([a,b])$, $f(x) - p(x) = \omega(x) [x_0, x_1, \ldots x_n, x]f$,
+pri čemer obstaja $\xi \in (\min x_i, \max x_i)$, da je
+$[x_0, x_1, \ldots x_n, x]f = \frac{f^{(n+1)} (\xi)}{(n+1)!}$, torej kot pri Lagrangu (duh, sej je isti).\\
+Izrek: $x_0, \ldots, x_n$ ne nujno urejene po velikosti, $f \in
+C^{n+1}([a,b])$, $h = \max_i |x_{i+1} - x_i|$, $I = [\min_i x_i, \max_i x_i]$.
+Velja: $\|f-p\|_{\infty, I} \leq \|f^{(n+1)}\|_{\infty, I} \frac{1}{4 (n+1)}
+h^{n+1}$.\\
+\textbf{Posplošeni Hornerjev algoritem:} \vspace{-\baselineskip}
+\small
+\begin{verbatim}
+a_n = [x_0, ..., x_n]f
+b_n = a_n
+for i = (n-1):0
+    b_i = a_i + b_(i+1) (x-x_i)
+return b_0
+\end{verbatim}
+\normalsize
+Velja: $b_0 = p(x) = [x]p$ in $b_i = [x_0, \ldots, x_{i-1}, x]p$, $b_n$ so
+koeficienti razvoja polinoma $p$ po bazi na točkah $x_0, \ldots, x_{n-1}, x$.\\
+S tem lahko dobimo Taylorjev razvoj okoli točke $a$ -- postopek ponavljamo na
+dobljenih koeficientih, dokler v bazo ne vrinemo samo $x-a$\\
+Če so $x_0, \ldots, x_n$ paroma različne: $[x_0, \ldots, x_n]f = \sum_{i=0}^n
+\frac{f(x_i)}{\omega'(x_i)}$ in $\sum_{i=0}^n \frac{x_i f(x_i}{\omega'(x_i)} =
+\frac{x_n [x_1, \ldots, x_n]f - x_0 [x_0 \ldots, x_{n-1}]f}{x_n - x_0}$\\
+Leibnitzova formula: $[x_0, \ldots, x_n](g \cdot h) = \sum_{i=0}^n [x_0,
+\ldots, x_i]g \cdot [x_i, \ldots, x_n]h$.\\
+\textbf{1.\ Newtonova oblika: }$x_i = x_0 + ih$, $f_i = f(x_i)$, $\Delta^0 f_i
+= f_i$, $\Delta^r f_i = \Delta^{r-1} f_{i+1} - \Delta^{r-1} f_i$, polinom $p(x)
+= p(x_0 + th) = \sum_{i=0}^n \binom{t}{i} \Delta^i f_0$, $t = (x-x_0)/h$.\\
+Velja: $[x_0, \ldots, x_n]f = \Delta^n f_0 \frac{1}{n! \cdot h^n}$\\
+\textbf{Lebesgueova neenakost:} $X$ normiran vektorski prostor, $\|\cdot\|$
+norma, $S \subset X$ podprostor. Naj bo $P \colon X \to S$ linearni projektor.
+Tedaj velja  $\forall f \in X\colon \|Pf\| - \|f\| \leq \|f - Pf\| \leq (1 +
+\|P\|) \text{ dist} (f, S)$.\\
+
+%%%%%%%%%%%%%%%%                    ZLEPKI
+\subsection*{Zlepki}
+Standardna metoda pri dokazih: zlepek obravnavaš na vsakem intervalu posebej!\\
+\textbf{Odsekoma linearni: } $S_{1, x}$\\
+\textbf{$I_1$: }za $x \in [x_i, x_{i+1}]$ je $(I_1f)(x) = [x_i]f + (x-x_i)
+[x_i, x_{i+1}]f = f(x_i) + (x-x_i) \frac{f(x_i) - f(x_{i+1})}{x_i - x_{i+1}}$\\
+Izrek: $\|f - I_1f\|_{\infty, [a,b]} \leq \frac{1}{8} \Delta x^2
+\|f^{(2)}\|_{\infty, [a,b]}$, kjer $\Delta x = \max_i \Delta x_i$\\
+Izrek:  $\|f - I_1f\|_{\infty, [a,b]} \leq 2 \text{dist}(f, S_{1,x})$\\
+Izrek:  $\|f - I_1f\|_{\infty, [a,b]} \leq \omega(f, \Delta x)$, kjer je
+$\omega(f, h) = \max  \{|f(x) - f(y)|\; ; \; x,y \in [a,b], |x-y| < h\} $\\
+\textbf{$L_1$: }(interpolira po metodi najmanjših kvadratov) $L_1 f =
+\sum_{i=0}^n \alpha_i H_i$, rešimo normalni sistem ($G \alpha = b, G = [\ls
+H_i, H_j\rs]_{i,j= 0}^n, b = [\ls f, H_j \rs]_{j=0}^n$, $G$ je tridiagonalna,
+strogo diagonalno dominantna)
+
+\textbf{Odsekoma parabolični:}\\
+Na vsakem intervalu interpoliramo v točkah $x_i, \frac{x_i + x_{i+1}}{2},
+x_{i+1}$ z vrednostmi $f(x_i), v_i, f(x_{i+1})$. $v_i$ izračunamo iz sistema
+enačb ($z_i'(x_i) = z_{i-1}'(x_i)$) $\frac{4 v_{i+1}}{\Delta x_{i+1}} + \frac{4
+v_i}{\Delta x_i} = \frac{f(x_i)}{\Delta x_i} + \frac{f(x_{i+2)}}{\Delta
+x_{i+1}} + 3 f(x_{i+1})(\frac{1}{\Delta x_i} + \frac{1}{\Delta x_{i+1}})$ za
+$i=0,1,\ldots,n-2$, določimo $v_{n-1}$ ter vstavimo v $z_i(x) = f(x_i) +
+(x-x_i)\frac{f(x_{i+1} - f(x_i)}{\Delta x_i} + (x-x_i)(x-x_{i+1})
+\frac{2(f(x_i) + f(x_{i+1} -2v_i)}{(\Delta x_i)^2}$
+
+\textbf{Odsekoma kubični:}\\
+\textbf{Hermitov kubični zlepek:} Če poznamo funkcijo in prvi odvod v
+$(x_i)_{i=0}^n$: interpoliramo na vsakem odseku posebej v
+točkah $(x_i, x_i, x_{i+1}, x_{i+1})$.\\
+$z_i(x) = f(x_i) + (x-x_i) f'(x_i) + (x-x_i)^2 \frac{[x_i, x_{i+1}]f -
+f'(x_i)}{x_{i+1} - x_i} + (x-x_i)^2 (x-x_{i+1}) \frac{f'(x_{i+1}) - 2 [x_i,
+x_{i+1}]f - f'(x_i)}{(x_{i+1} - x_i)^2}$\\
+Napako ocenimo enako kot pri deljenih diferencah.\\
+\textbf{Poln kubični zlepek:} Če poznamo le vrednosti funkcije, zahtevamo 2x
+zvezno odvedljivost zlepka. Uvedemo parametre $s_i = z'(x_i)$. \\
+Rešimo sistem enačb $\frac{s_{i-1}}{\Delta x_{i-1}} + 2 s_i
+\left(\frac{1}{\Delta x_{i-1}} + \frac{1}{\Delta x_i}\right) +
+\frac{s_{i+1}}{\Delta x_i} = 3\left(\frac{[x_i, x_{i+1}]f}{\Delta x_i} +
+\frac{[x_{i-1}, x_i]f}{\Delta x_{i-1}}\right)$ za $i=1,2,\ldots,n-1$, izberemo
+$s_0$ in $s_n$ in vstavimo v $z_i(x) = f(x_i) + (x-x_i)s_i +
+(x-x_i)^2\frac{[x_i, x_{i+1}]f - s_i}{\Delta x_i} +
+(x-x_i)^2(x-x_{i+1})\frac{s_{i+1} + s_i - 2[x_i, x_{i+1}]f}{\Delta x_i^2}$. Za
+poln zlepek vzamemo $s_0 = f'(x_0), s_n = f'(x_n)$.
+
+\textbf{B-zlepki:} Baza prostora zlepkov. So nenegativni, z lokalnim nosilcem
+in tvorijo particijo enote.\\
+$z = \sum_i \alpha_i B_{i,k}$, $\text{supp} B_{i,k} \subseteq [t_i, t_{i+k+1}]$\\
+Vozli: $t_i \leq t_{i+1} \leq \ldots \leq t_{i+k+1}; \; t_i < t_{i+k+1}$\\
+Če se vozel ponovi $j$-krat, v tej točki zahtevao zveznost odvoda reda $k-j$.\\
+$B_{i,k} (x) = (t_{i+k+1} - t_i) [t_i, \ldots, t_{i+k+1}](\cdot - x)_+^k$, kjer
+je $(\cdot - x)_+^k = \max\{0, (\cdot - x)^k\}$\\ Rekurzija: $B_{i,k}(x) =
+\frac{x-t_i}{t_{i+k}-t_i} B_{i, k-1} (x) + \frac{t_{i+k+1} - x}{t_{i+k+1} -
+t_{i+1}} B_{i+1, k-1} (x)$\\ $B_{i,0} (x) = 1 \cdot \mathbb{1}(x \in [t_i,
+t_{i+1})$\\ \textbf{De Bohrov algoritem za računanje vrednosti:}
+$\alpha_i^{[r]} (x) =
+\begin{cases}
+\alpha_i ;& r = 0\\
+\frac{(x-t_i) \alpha_i^{[r-1]} (x) + (t_{i+k+1-r} - x) \alpha_{i-1}^{[r-1]}}{t_{i+k+1} - t_i};& r > 0
+\end{cases}$\\
+Napišeš si tabelo, odgovor je potem $\alpha_j^{[k]}(x)$, kjer $t_j \leq x <
+t_{j+1}$. Tabelo delaš le po tistih $i$, kjer je $B_{i,k} \neq 0$. %???
+
+\end{document}
