@@ -1,0 +1,227 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{UDM}
+\author{vesna.irsic }
+\date{June 2016}
+
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, %
+menucolor=black, runcolor=black, urlcolor=black%
+]{hyperref}
+\usepackage[
+    paper=a4paper,
+    top=2cm,
+    bottom=2cm,
+%    textheight=24cm,
+    textwidth=19cm,
+    ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-10pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-10pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-12pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{-1pt}   % left, before, after
+\titlespacing*{\subsection}{0pt}{6pt}{-1pt}
+
+\newcommand{\dd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dt}[1][]{\dd{#1}{t}}
+\newcommand{\dx}[1][]{\dd{#1}{x}}
+\newcommand{\dy}[1][]{\dd{#1}{y}}
+\newcommand{\dz}[1][]{\dd{#1}{z}}
+\newcommand{\dth}[1][]{\dd{#1}{\theta}}
+\newcommand{\dphi}[1][]{\dd{#1}{\phi}}
+\renewcommand{\H}{\ensuremath{\hat{H}}}
+
+\renewcommand{\b}{\boldsymbol}
+
+\usepackage{bbold}
+\newcommand{\ind}{\ensuremath{\mathbb{1}}}
+\newcommand{\indset}[1]{\ind_{\{\text{#1}\}}}
+
+\begin{document}
+
+\subsection*{Splošne naloge}
+\textbf{Cauchy-Schwarzeva neenakost:} $a_1, \ldots, a_n \in \R \implies \frac{1}{n} (\sum a_i)^2 \leq \sum a_i^2$, enačaj ntk.\ $a_1 = \cdots = a_n$\\
+\textbf{Osnovni triki:} indukcija ali minimalen protiprimer ali ``kr eno shematsko risanje''\\
+\textbf{Turanov izrek:} $G$ ne vsebuje $K_p$, $p\geq2$ $\implies |E(G)| \leq \frac{1}{2} \frac{p-2}{p-1} n^2$, enačaj ko $p-1 | n$\\
+\textbf{Trik:} Če moraš dokazati $t = 0$, lahko raje dokažeš $(-1)^n t > 0$.\\
+Vsak povezan, dvodelen, $r$-regularen graf je 2-povezan.\\
+Velja: $t(G) + t(\overline{G}) > \geq \frac{1}{24}n (n-1) (n-5)$\\
+Velja: $diam(G) \geq 3 \implies diam(\overline{G}) \leq 3$
+
+\subsection*{Turnirji}
+V turnirju vedno obstaja vozlišče, iz katerega lahko vsako drugo vozlišče dosežemo v največ 2 usmerjenih korakih.\\
+Če turnir vsebuje usmerjen cikel, potem vsebuje usmerjen 3-cikel.\\
+V turnirju obstaja usmerjen 3-cikel $\iff$ vsa vozlišča imajo enako izhodno stopnjo.
+
+\subsection*{Kromatični polinom}
+$P(G,k) = $število $k$-barvanj grafa $G$, pot $P(P_n,k) = k(k-1)^{n-1}$, drevo isto kot za pot, poln graf $P(K_n,k) = k(k-1)\cdots (k-n+1)$.\\
+$\chi(G) = $ najmanjši $k$, da je $P(G,k) > 0$.\\
+\textbf{Trditev:} $G$ graf, $e$ povezava, $P(G,k)= P(G-e,k) - P(G/e,k)$.\\
+Lastnosti $P(G,k)$: koef. pri $k^n$ je 1, koef. pri $k^{n-1}$ je -m, koef. pri $k^{n-2}$ je $\binom{m}{2} - t$ (t=št. trikotnikov), prosti člen je 0, stopnja najnižjega neničelnega člena je št. komponent grafa, predznak koeficientov alternira. \\
+$P(G,-1) = (-1)^n a(G)\cdot$ (a(G) število acikličnih oriantacij $G$).
+
+$p_G(k) = \sum_{i=0}^n a_i k^{n-i}$ je polinom, koeficienti alternirajo, $a_0 = 1, a_a = -m, a_2 = \binom{m}{2} - t, a_n = 0$\\
+Rekurzija: $p_G(k) = p_{G-e}(k) - p_{G/e}(k)$\\
+$\chi(G)$ je najmanjši $k$, za katerega je $p_G(k) > 0$\\
+$p_G(-1) = (-1)^n a(G)$, $a(G)$ število acikličnih orientacij $G$\\
+$G$ $r$-vsota grafov $G_1, G_2$ (tj.\ presek je $K_r$): $p_G(k) = \frac{p_{G_1}(k) p_{G_2}(k)}{p_{K_r}(k)}$\\
+$G_1, G_2$ disjunktna: $p_{G_1 \cup G_2}(k) = p_{G_1}(k) p_{G_2}(k)$\\
+Razširitveni izrek: $\forall G: P_G(k) = \sum_{S \subset E(G)} (-1)^{|S|} k^{c(G[S])}$\\
+$p_G(k) = \sum_{i=0}^n a_i(G) k^{\underline{i}}$, $a_i$ število barvnih $i$-razbitji\\
+Primeri: $p_T(k) = k (k-1)^{n-1}$, $p_{C_n}(k) = (k-1)^n + (-1)^n (k-1)$, $p_{W_n}(k) = k p_{C_n} (k-1)$, $p_{L_n}(k) = k (k-1) (k^2 - 3 k + 3)^{n-1}$\\
+Če graf vsebuje trikotnik, potem $(k-2)|p_G(k)$\\
+Večkratnost ničle 1 v krom.\ polinomu $=$ število prereznih točk + 1 $=$ število blokov.\\
+Max.\ realna ničla $< |V(G)| - 1$
+
+
+\subsection*{Pretoki}
+$\Gamma$ Abelova grupa, utež $f \colon E(G) \to \Gamma$, usmeritev $D(v,u)$.
+$\Gamma - pretok$ je urejen par (D,f), za katerega velja pogoj: $\forall v \in
+V(G): \sum_{u \in N(v)} D(v,u)f(vu) = 0$. Nosilec je množica povezav: $supp(f) =
+\{f(e) \neq 0, e \in E(G)\}$. Če $supp(f) = E(G)$ imamo nikjer-ničelni pretok. k-pretok je celoštevilski pretok, pri katerem je $\forall e \in E(G): |f(e)| < k$. \textbf{Izrek(Tutte)}: Graf dopušča n-n k-pretok $\iff$ dopušča n-n $\mathbb{Z}_{k}$ pretok. \textbf{Pretočni polinom} je število različnih n-n $\Gamma$-pretokov za G, D, $\Gamma$, $k=|\Gamma|$. $F(G,k)=$ : (1) 0, G je povezava; (2) k-1, G je zanka; (3) (k-1)*F(G-e,k), e je zanka; (4) F(G-e,k)-F(G/e,k), e ni zanka.
+
+\subsection*{Linearna algebra}
+Če je $p$ polinom, $\lambda$ lastna vrednost od $A$, potem je $p(\lambda)$ lastna vrednost matrike $p(\lambda)$.\\
+$rang(A) = k \implies A$ ima največ $k$ lastnih vrednosti različnih od $0$.\\
+Naj bo $A$ $m \times n$ matrika, $B$ pa $n \times m$: $\det(AB - \lambda I) = \lambda^{m-n} \det(\lambda I - BA)$\\
+Lastni vektorji različnih lastnih vrednosti simetrične matrike so ortogonalni.\\
+Naj bo $A$ $n\times n$ matrika, $p_A(x) = x^n + a_1 x^{n-1} + \cdots + a_n$, če je $A[J]$ matrika, ko iz $A$ odstranimo stolpce in vrstice iz $J$, velja $a_i = (-1)^{n-k} \sum_{|J| = n-k} \det(A[J])$.
+
+\newpage
+\subsection*{Spekter grafa}
+Matrika sosednosti: $A_G$, Laplaceova matrika $L = D - A$.
+$p_G(x)$ karakteristični polinoma od $A_G$, $\lambda_1 \geq \ldots \geq \lambda_n$.\\
+Graf diametra $d$ ima vsaj $d+1$ različnih lastnih vrednosti.\\
+Če ima graf $r$ vozlišč z istimi sosedi, je $rang(A) = n-r+1$, zato je $0$ $r-1$-kratna lastna vrednost.\\
+Velja: $\lambda_1 \leq \sqrt{\frac{2 m (n-1)}{n}}$\\
+$G$ graf, $v$ vozlišče stopnje 1, $u \sim v$: $p_G(x) = x p_{G-v}(x) - p_{G-u-v}(x)$\\
+\textbf{Momenti: } $\sum \lambda_i = 0, \sum \lambda_i^2 = 2 m, \sum \lambda_i^3 = 6 t$\\
+\textbf{Poti: }$2 \cos(\frac{2 \pi i}{n} j)$ za $j = 0, 1, \ldots, n-1$\\
+$T$ gozd, $p_T(x) = x^n - a_1 x^{n-1} + \cdots + (-1)^{\lfloor n/2 \rfloor} a_{\lfloor n/2 \rfloor} x^{n - 2 \lfloor n/2 \rfloor}$, $a_i =$ število $k$ prirejanj od $T$\\
+$W_n$ matrika s prvo vrstico $[0,1,0,\ldots, 0]$, potem ciklično zamaknjena. Lastne vrednosti so $\omega_j = \exp(\frac{2 \pi i j}{n})$ za $j = 0, 1, \ldots, n-1$. Če je $A$ cirkulantna matrika s prvo vrstico $[0, a_1, \ldots, a_{n-1}]$, je $A = \sum_{i = 1}^{n-1} a_i W_n^i$, njene lastna vrednosti pa so $ \sum_{i = 1}^{n-1} a_i \omega_j^i$\\
+$\sum_{i=0}^{n-1} \omega_j^i = 0$ razen, če $j=0$, potem $\sum_{i=0}^{n-1} \omega_j^i = n$. \\
+\textbf{Cikli: }$2 \cos(\frac{2 \pi j}{n})$\\
+\textbf{$H_n$ }:$2n-2^{(1)}$ (vektor iz samih 1), $-2^{n-1}$ (vektorji $[1,1,0,0,\ldots, -1,-1, 0,0,\ldots]$), $0^{n}$\\
+Najmanjša lastna vrednost $L(G)$ je $-2$.\\
+$P$ incidenčna matrika, na dol so povezave, vodoravno pa vozlišča. Potem je $A_{L(G)} = P P^T - 2 I$.\\
+$\Delta(L(G)) \leq 2 \Delta(G)$\\
+$G$ povezan, $r$-regularen, potem je $\vec{1}$ lastni vektor za $r$, kratnosti 1.\\
+$G$ $r$-regularen, $\lambda_1, \ldots, \lambda_n$ lastne vrednosti, $m$ povezav: lastne vrednosti $L(G)$ so $\lambda_i + r - 2$ in še $-2$ kratnosti $m-n$. Uporabimo $A_G = P^T P - r I$.
+
+$S_k(G)$ množica vseh $k$-podgrafov od $G$, katerih povezane komponente sestavljajo $K_2$ in cikli ($k$ vozlišč ima)\\
+Za $H \in S_k(G)$ je c(H) število ciklov v $H$ in $r(H) = k - c_H$, kjer je $c_H$ število povezanih komponent $H$\\
+$p_G(x) = x^n + a_1 x^{n-1} + \cdots + a_n$\\
+Velja: $(-1)^i a_i = \sum_{H \in S_i(G)} (-1)^{r(H)} 2^{c(H)}$\\
+Spotoma opazimo še $\det(A_G) = \sum_{H \in S_n(G)} (-1)^{r_S(H)} 2^{c(H)} = \sum_{H \in S_n(G)} (-1)^{r(H)} 2^{c(H)}$ ($r_S$ je število sodih komponent v $H$)\\
+Posledica: če je $k$ dolžina najkrajšega lihega cikla v $G$, potem je število $k$ ciklov $= \frac{- a_k}{2}$
+
+Spekter $K_n$ je $n-1^{(1)}, -1^{(n-1)}$, preko $A = J - I$.\\
+Laplaceov spekter $K_n$ je $0^{(1)}, n^{(n-1)}$, preko $L = n I - J$.\\
+Spekter $K_{m,n}$ je $\sqrt{mn}^{(1)}, - \sqrt{mn}^{(1)}, 0^{(n+m-2)}$.\\
+za $k$-regularen graf je $\lambda_i + \mu_i = k$, $k$ je enkratna lastna vrednost in vse lastne vrednosti $|\lambda| \leq k$\\
+Dvodelen graf ima lastne vrednosti plus-minus po parih, ostale so 0.\\
+$diam(G) < $ število različnih lastnih vrednosti\\
+$f(x) = x^T A x$ doseže ekstrem v lastni vrednosti matrike $A$, vrednost pa je $\lambda_1$ oz.\ $\lambda_n$.\\
+Velja: $\delta \leq \lambda_1 \leq \Delta$
+
+\subsection*{Simetrije grafov}
+$Aut(G) \leq Sym(V(G))$ z operacijo $\alpha \cdot \beta = \beta \circ \alpha$, namesto $\alpha(v)$ pišemo $v^{\alpha}$, potem je $v^{\alpha \beta} = (v^{\alpha})^{\beta}$.\\
+Velja: $Aut(G) = Aut(G^C)$\\
+PP: $Aut(K_n) = S_n, Aut(K_{m,n}) = S_m \times S_n, Aut(K_{n,n}) = (S_m \times S_m) \rtimes S_2, Aut(C_n) = D_{2n}, Aut(P_n) = \Z_2, Aut(Petersen) = S_5$\\
+Izrek (Frucht): Za vsako končno grupo $X$ obstaja končen graf $G$, da je $Aut(G) = X$. Obstaja 3-regularen povezan graf $G$.\\
+Vozliščno simetričen: če za poljubni vozlišči $u, v$ obstaja $\alpha \in Aut(G): u^{\alpha} = v$. \\
+Primeri: $K_n, K_n^C, K_{n,n}, C_n, Q_n$, platnoska telesa, Petersenov graf.\\
+Lema o orbiti in stabilizatorju: grupa $G$ deluje na mn.\ $\Omega$. $G_{\omega} = \{g \in G \; ; \; \omega^g = \omega\}$ stabilizator, $\omega^G = \{\omega^g \; ; \; g \in G\}$ orbita. Tedaj je $|G| = |G_{\omega}| |\omega^G|$.\\
+Cayleyjev graf: $Cay(G; S)$, vozlišča so elementi grupe $G$, $h \sim g \iff h g^{-1} \in S \iff h \in Sg$.\\
+Velja: soseščina $N(h) = S h$, graf je $|S|$-regularen, $S$ generira grupo $G \iff Cay(G; S)$ je povezan.\\
+Regularno delovanje: $G$ deluje na $\Omega$ regularno, če je $G$ tranzitivna in je $G_{\omega} = 1$ za nek (in potme za vsak) $\omega \in \Omega$.\\
+Lema: $G$ deluje regularno $\iff$ $G$ deluje tranzitivno in $|G| = |\Omega|$.\\
+cayleyjev graf: graf, ki je izomorfen nekemu Cayleyjevemu grafu.\\
+$\rho \colon G \to Sym(G)$, $g$ identificiramo z $\rho_g$ (desno množenje z $g$), $\rho(G) \leq Aut(Cay(G; S))$ in dejuje tranzitivno na njej.\\
+Izrek (Sabidussi): $X$ je Cayleyjev graf $\iff$ $Aut(X)$ premore podgrupo, ki deluje na $V(X)$ regularno.\\
+Posledica: Vsak Cayleyjev graf je vozliščno simetričen.\\
+Pozor: obstajajo vozliščno simetrični povezni grafi, ki niso Cayleyjevi. Npr.\ Petersenov graf.\\
+Cayleyjev izrek: $n | |G| \implies $ obstaja $x \in G$ reda $n$.\\
+\vspace{-1ex}
+\hfill Avtorji: Vesna Iršič, et.\ al.
+
+
+
+
+
+%\subsection*{Seminarji}
+%\textbf{Homomorzozmi:} $f \colon V(G) \to V(H)$ je \emph{homomorfizem}, če $uv \in E(G) \implies f(u)f(v) \in E(H)$.
+%Če $\chi(G) > \chi(H)$, potem ne obstaja noben homomorfizem iz $G$ v $H$.
+%Graf $G$ je \emph{jedro}, če je vsak homomorfizem $G \to G$ bijekcija.
+%Vsak $G$ ima jedro, ki je induciran podgraf $G$ in je enoličen do izomorfizma natančno. % najbrž bo tole čisto preveč in bom raje pustila le osnovno definicijo
+%\\
+%\textbf{Snarki:}Graf je snark, če je kubičen, ciklično po povezavah vsaj 4 povezan (razpade na dve komponenti, vsaka vsebuje cikel), ima ožino vsaj 5 in kromatičen indeks 4. Primer:Petersenov graf\\
+%\textbf{Hipoham} $G$ ni ham.,$G-v$ je ham. $\forall v$.3-pov,$\delta(G)\geq3$,$\Delta(G)\leq\frac{1}{2}\left \lfloor{n-1}\right\rfloor$,$|V(G)\geq10$,primer:Petersen
+%\\
+%\textbf{Iskanje skupnosti:} Skupnosti (vozlišča, ki imajo neko skupno lastnosti) nam omogočajo enostavnejšo predstavitev velikih omrežij. Algoritmi za iskanje skupnosti: \emph{metoda spektralne bisekcije} (gledamo drugi lastni vektor, pozitivne komponente predstavljajo eno skupnost, negativne drugo), \emph{Kernighan-Lin} (najdemo delitev v dve skupnosti, ki najbolj optimizira modularnost (oceno delitve)), \emph{hierarhično grupiranje} (skupnosti povezujemo glede na razdaljo med njimi), \emph{Newman-Girvan} (na vsakem koraku odstranimo povezavo z največjo vmesnostjo (povezava, čez katero gre največ najkrajših poti med vsemi pari vozlišč)) in \emph{metoda štetja ciklov} (podobno kot prejšnji algoritem, le da odstranjujemo povezave, ki pripadajo najmanjšemu številu ciklov)
+%\\
+%\textbf{Podobnostno povezovanje (assortativity):} Karakteristika povezovanja glede na stopnjo vozlišč (enake stopnje -> podobno). Mera je koeficient podobnostnega povezovanja (Newman). Omrežja so lahko nevtralna, podobno ali različno povezana. Scale-free omrežja imajo strukturno zgornjo mejo (ne morejo biti preveč podobno povezana).
+%\\
+%\textbf{Cuts and Flows (digraph):}
+%\emph{Oriented cut} is a cut where we declare one of its partitions positive (\(V^+\)) and another negative (\(V^-\)). \emph{Cut space} is column space of transposed incidence matrix (\(D^T\)). \emph{Signed characteristic vector of oriented cut} is a vector \(z\) where \(z_e = 1\) if head  of \(e \in V^+\), \(-1\) if head of \(e \in V^-\) and \(0\) otherwise. \emph{Theorem.} Let X be connected graph and T spanning tree. Then signed characteristic vectors of  \(n \text{-} 1\) cuts of T in X form basis of cut space of X. \emph{Flow space} is orthogonal complement of cut space.
+%\\
+%\textbf{Mere centralnosti:} Kako pomembno je vozlišče? \emph{Preproste mere:} stopnja, število najkrajših poti na katerih vozlišče leži (med pari ostalih), povprečna razdalja do vozlišč. \emph{Spektralne mere:} Spektralna centralnost: vozlišče je pomembno, če je povezano z drugimi pomembnimi vozlišči. Začnemo z vektorjem približkov $x(0)$, nato metoda iteracije moči $x(t)=A^tx(0).$ (vozlišča si izmenjujejo centralnost s sosedi do konvergence). $x(t)$ - naše centralnosti so dejansko vodilni lastni vektor za enačbo $Ax = \lambda x,$. Katzova centralnost: $x = \beta	(I - \alpha A)^{-1}\cdot1$ (izboljšava spektralne centralnosti, da nekaj centralnosti zastonj v izogib razširjanju ničle). PageRank: stohastična matrika namesto matrike sosednosti (verjetnostni pomen).
+%\\
+%\textbf{Limite grafov:} Grafon je Lebesgueovo merljiva preslikava $W : [0, 1]^2 \to [0, 1]$. Vsak graf si lahko predstavljamo kot grafon tako, da narišemo njegovo matriko sosednosti in jo pomanjšamo na velikost kvadrata $[0, 1]^2$, kjer so enice ima $W$ vrednost 1, drugod 0.
+%Gostota homomorfizmov: $t(H,G) = \frac{\mathrm{|Hom(H,G)|}}{|V(G)|^{|V(H)|}}$. Zaporedje grafov $(G_n)_n$ je konvergentno, če je $\forall H: (t(H,G_n))_n$ konv. zap. števil. Grafoni so limite. Na podlagi grafona $W$ konstruiramo konvergentno zaporedje naključnih grafov tako, da vzamemo zap. naključnih množic $(S_n)_n, S_n \subset [0,1], |S_n| = n$ in def. $G_n$ z vozlišči $S_n$ in verj. povezav $\mathrm{P}(u \sim v) = W(u,v)$.
+%\\
+%\textbf{Razpršitev skozi omrežja:}
+%Želimo modelirati širjenje bolezni skozi omrežje. Imamo osnovni Bassov model, ki ima dva parametra, hitrost inovacije $p$ in hitrost imitacije $q$, dobimo rekurenčno enačbo katere rešitev je krivulja oblike črke S, katere oblika je odvisna od tistih dveh parametrov. Želimo tudi modelirati širjenje skozi omrežje, če so nekateri osebki imuni in poznamo strukturo grafa. Zanima nas koliko osebkov mora biti imunih v grafu da se bolezen ne bo razširila na vse. Ugotovimo da je problem v Scale-Free networkih, kjer morajo biti imuni skoraj vsi, ti networki so pomembni za veliko omrežji v realnem svetu. Iskanje po omrežju:   Ugotovimo da lahko social network predstavimo z modelom drevesa kjer so osebki istega tipa pogrupirani v vozlišče katerega označimo z vektorjem ničel in enic. Dva sta povezana če se razlikujeta samo v zadnji števki. Tako dobimo rezultat, da vsak pozna nekoga prek cca. 6ih drugih ljudi, kar je bilo tudi eksperimentalno pokazano.
+%\\
+%\textbf{Faktorji:}
+%$k$-regularen vpet podgraf grafa $G$ se imenuje $k$-faktor. Za primer $k=1$ je to popolno prirejanje, $k=2$ so to disjunktni cikli, ki zajamejo vsa vozlišča grafa $G$. Najbolj zanimivo za $k=1$. Če ima graf liho število povezav, ne vsebuje 1-faktorja. Sicer poznamo Tutte-ov izrek: Graf $G$ vsebuje 1-faktor natanko tedaj, ko $\forall S \subseteq V(G)$ velja $o(G\setminus S)\leq |S|$. Oznaka $o(H)$ pomeni število lihih komponent v grafu $H$. Množica $S\subseteq V(G)$ imenujemo 1-pregrada, če ni izpolnjen Tutte-ov pogoj, torej če  $o(G\setminus S)> |S|$. Dvodelni grafi so opredeljeni s Hallovim izrekom: $G$ naj bo dvodelen z biparticijo $(X,Y)$. Graf $G$ premore prirejanje, ki pokrije $X$ natanko tedaj, ko $\forall S\subseteq X$ velja $|N(S)|\geq |S|$. Ta pogoj je vedno izpolnjen za dvodelne $r$-regularne grafe. Naj bo $f(G)$ število 1-faktorjev v grafu $G$. Če $G$ premore 1-faktor, potem je $f(G)\geq\delta!$.
+%\\
+%\textbf{Krepko regularni grafi:} $X$ krepko regularen s parametri $(n, k, a, c)$ če velja, da je $k$-regularen, vsak par sosednih vozlišč ima $a$ skupnih sosedov in vsak par nesosednih vozlišč ima $c$ skupnih sosedov. Sosednostna matrika $A$ ima 3 lastne vrednosti. Prva je $k$, drugi dve pa izračunamo z enačbama $\theta = \frac{(a - c) + \sqrt{\Delta}}{2}$ in $\tau = \frac{(a - c) - \sqrt{\Delta}}{2}$. Primer je 5-cikel $C_5$, ki je krepko regularen graf s parametri $(5, 2, 0, 1)$
+
+
+
+
+
+
+
+
+% predavanja sem prestavila na vrh
+\end{document}
