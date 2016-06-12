@@ -1,0 +1,273 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
+]{hyperref}
+\usepackage[
+  paper=a4paper,
+  top=1.5cm,
+  bottom=1.5cm,
+%    textheight=24cm,
+  textwidth=18cm,
+  ]{geometry}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\P{\mathbb{P}}
+
+\newenvironment{itemize*}%
+{
+\vspace{-6pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{itemize}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-6pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{enumerate}}
+
+\title{NRPDE}
+\author{Jure Slak}
+\date{February 2016}
+
+% greek letters
+\let\oldphi\phi
+\let\oldtheta\theta
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+
+% vektorska analiza
+% vector operators
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\rot}{\operatorname{rot}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\lap}{\triangle}
+
+% transpose
+\newcommand{\T}{\ensuremath{\mathsf{T}}}
+\renewcommand{\sl}{\ensuremath{\operatorname{sl}}}
+
+% partial derivatives
+\newcommand{\dpar}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dpr}[1]{\dpar{#1}{r}}
+\newcommand{\dpt}[1]{\dpar{#1}{t}}
+\newcommand{\dpx}[1]{\dpar{#1}{x}}
+\newcommand{\dpy}[1]{\dpar{#1}{y}}
+\newcommand{\dpz}[1]{\dpar{#1}{z}}
+\newcommand{\dpth}[1]{\dpar{#1}{\theta}}
+\newcommand{\dpfi}[1]{\dpar{#1}{\varphi}}
+
+% total derivatives
+\newcommand{\dd}[2]{\ensuremath{\frac{d #1}{d #2}}}
+\newcommand{\ddr}[1]{\dd{#1}{r}}
+\newcommand{\ddt}[1]{\dd{#1}{t}}
+\newcommand{\ddx}[1]{\dd{#1}{x}}
+\newcommand{\ddy}[1]{\dd{#1}{y}}
+\newcommand{\ddz}[1]{\dd{#1}{z}}
+\newcommand{\ddth}[1]{\dd{#1}{\theta}}
+
+
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newcommand{\mybox}[1]{\frame{\rule{0pt}{10pt}\ #1\ }}
+
+\newcommand{\ls}{\left\langle}
+\newcommand{\rs}{\right\rangle}
+
+\renewcommand{\L}{\mathcal{L}}
+
+\newcommand{\dx}{\delta x}
+\newcommand{\dy}{\delta y}
+\newcommand{\dt}{\delta t}
+\newcommand{\diag}{\operatorname{diag}}
+
+\hypersetup{pdftitle={List NRPDE}, pdfauthor={Jure Slak}, pdfcreator={pdflatex},
+            pdfproducer={pdflatex}, pdfsubject={list}, pdfkeywords={}}  % setup pdf metadata
+
+\begin{document}
+
+\textbf{Tipi PDE 2. reda:} $\L u = au_{xx} + bu_{xy} + cu_{yy} + \text{I. red} = 0$,
+$D = b^2 - 4ac$.
+Če $D < 0$ eliptična (npr.\ Laplacova), če $D = 0$ parabolična (npr.\ toplotna) in če $D > 0$ hiperbolična (npr.\ valovna).
+
+\textbf{Diferenčne aproksimacije:}
+Dobimo jih z deljenimi diferencami, ali pa z metodo nedoločenih koeficientov (spodaj). Pri aproksimacijah z $\gamma \in (0, 1]$ predpostavljamo, da je desna vrednost $\gamma \dx$ stran od točke aproksimacije.
+Za vsako točko v mrežo napišemo enačbo. Lahko uporabimo simetrijo, na robu pa robne pogoje.
+\begin{align*}
+  f'(x_j) &= \frac{f(x_{j+1}) - f(x_{j-1})}{2\dx} + O(\dx^2) \quad
+  f'(x_j) = \frac{f(x_{j+1}) - f(x_{j})}{\dx} + O(\dx) \\
+  f'(x_j) &= \frac{f(x_{j}) - f(x_{j-1})}{\dx} + O(\dx)  \qquad
+  f''(x_j) = \frac{f(x_{j+1}) -2f(x_j) + f(x_{j-1})}{\dx^2} + O(\dx^2) \\
+  f''''(x_j) &= \frac{f(x_{j-2}) -4f(x_{j-1}) + 6f(x_j) -4f(x_{j+1}) + f(x_{j+2})}{\dx^4} + O(\dx^2) \\
+  f'(x_j) &= \frac{1}{\dx\gamma(1+\gamma)} (-\gamma^2 f(x_{j-1}) + f(x_{j+\gamma}) - (1-\gamma^2)f(x_j))+O(\dx^2)\\
+  f''(x_j) &= \frac{2}{\dx^2\gamma(1+\gamma)} (\gamma f(x_{j-1}) + f(x_{j+\gamma}) - (1+\gamma)f(x_j))+O(\dx)\\
+  \lap u(x_j, y_k) &= \frac{u(x_{j-1}, y_k) - 2u(x_j,y_k) + u(x_{j+1},y_k)}{\dx^2} + \frac{u(x_j,y_{k-1}) - 2u(x_j,y_k) + u(x_j,y_{k+1})}{\dy^2} + O(\dx^2+\dy^2) \\
+  \dpar{^2u}{xy}(x_j,y_k) &= \frac{u(x_{j-1}, y_{k-1}) - u(x_{j+1}, y_{k-1}) - u(x_{j-1}, y_{k+1}) + u(x_{j+1}, y_{k+1})}{\dx\dy} + O(\dx^2+\dy^2) \\
+  -\dpx{}\left(p \dpx{u}\right) &= -\frac{1}{\dx} \left( p(x_{j+\frac12}, y_k) \frac{u(x_{j+1}, y_k) - u(x_j, y_k)}{\dx} - p(x_{j-\frac12}, y_k) \frac{u(x_{j}, y_k) - u(x_{j-1}, y_k)}{\dx} \right) + O(\dx^2) \\
+  \dpar{^4u}{x^2y^2}(x_j,y_k) &= \frac{1}{\dx^2\dy^2}\left(\sum_{i=-1}^1\sum_{\ell=-1}^1
+  c_{i\ell} u(x_{j+i},y_{k+\ell})\right) + O(\dx^2+\dy^2), c = [1, -2, 1; -2, 4, -2; 1, -2, 1], c_{00} = 4 \\
+  \lap^2u(x_j, y_k) &\ \text{za $\dy = \dx := h$ matrika: [0,0,1,0,0; 0,2,-8,2,0; 1,-8,20,-8,1; 0,2,-8,2,0; 0,0,1,0,0]} + O(h^2)
+\end{align*}
+Lokalna napaka $\tau(x,y) = \L u (x,y) - \L_\delta u(x, y)$.\\
+Kako ocenimo napako? Ali iz interpolacij s deljenimi diferencami, torej $h^n\frac{f^{(n)}(\xi)}{n!}$ ali z uporabo Taylorjevega razvoja $u(x+\dx, y+\dy) = \exp\left(
+\dx\dpx{}+\dy\dpy{}\right)u(x,y)$ v lokalni napaki in iskanjem prvega neničelnega reda.
+
+\textbf{Metoda nedoločenih koef:}
+Zapišemo aproksimacijo v obliki $\L f = af(x_0) + bf(x_1) + \cdots + ef(x_4) + Rf$. Predpostavimo, da bo metoda točna za polinome $1, (x-x_1), (x-x_1)(x-x_2)$ dokler se da in
+zapišemo sistem za $a, b, c, d, e$. Napako iščemo v naslednjem redu z nastavkom $Rf = k f^{(5)}(\xi)$.
+
+\textbf{Ekstrapolacija:}
+Recimo, da rešimo dvakrat, enkrat z 2x bolj gosto mrežo. Potem lahko rečemo $u \approx u_1 + ch^2 + O(h^3)$ in $u \approx u_2 + c \frac{h^2}{4} + O(h^3)$.
+Vidimo, da se napaka reda 2 odšteje, če uporabimo $u \approx \frac{4u_2 - u_1}{3}$.
+
+\textbf{Laplaceova enačba:}
+Definicija: $\delta^2 = \frac{\dx^2\dy^2}{2(\dx^2+\dy^2)}$, $\theta_x = \frac{\delta^2}{\dx^2}$, $\theta_y = \frac{\delta^2}{dy^2}$. Velja $2(\theta_x + \theta_y) = 1$.
+Pri reševanju Laplaceove enačbe na pravokotniku, je matrika sistema bločno tridiagonalna, z diagonalnimi bloki
+$I - \diag(\theta_x, 1) - \diag(\theta_x, -1)$ in
+obdiagonalnimi bloki $-\theta_y I$.
+Če enačba ni točno taka, potem jo zapišemo v matriko in jo poskušamo
+izraziti z matriko Laplaceove enačbe. Za slednjo poznamo lastne vrednosti
+in upamo, da jih bomo tako tudi za našo.
+
+\textbf{Iteracijske metode}
+Rešujemo sistem $Ax =b$. Razcepimo matriko $A = M-N$ in rešujemo iterativno
+$Mx^{(n+1)} = Nx^{(n)} + b$. Iteracijska matrika je $T = M^{-1}N$.
+Če je spektralni radij $T$ manjši od 1, potem metoda konvergira za vsak začetni približek. Hitrost konvergence je sorazmerna z $h = -\log(\rho(T))$. Za $n$ točnih decimalk potrebujemo približno $n / h$ korakov.
+
+\textbf{Youngov izrek:} Za konsistentno urejeno matriko $A = L + D + U$ velja,
+da je $\det(cD - \alpha L - \alpha^{-1}U)$, neodvisna od $\alpha$, torej v
+posebnem za $\alpha = 1$ enaka $\det(cD - L - U)$. Matrika $A$ velikosti $n\times n$
+je konsistentno urejena, če obstaja vektor indeksov $\ell = (\ell_i)_{i=1}^n$,
+$\ell_i \in \{1, 2, \ldots, n\}$, da, če $i < j, a_{ij} \neq 0$ potem $\ell_i - \ell_j = -1$ in če $i > j, a_{ij} \neq 0$ potem $\ell_i - \ell_j = 1$
+
+\textbf{Jacobi:}
+Razcepimo $A = D - L - U$, $M = D$, $N = -L-U$. $T_J = D^{-1}(L+U)$.
+Lastne vrednosti $T$ so
+$\lambda_{pq}(T_J) = 4\theta_x \sin^2\left(\frac{\pi}{2} \frac{p}{J+1}\right) +
+4\theta_y \sin^2\left(\frac{\pi}{2} \frac{q}{K+1}\right)$, za $p = 1, \ldots, J$, $q = 1, \ldots, K$. Najmanjša je $\lambda_{11}$, največja pa je manjša od 2.
+Če je $\dx = \dy := h$, potem se izraz za lastne vrednosti poenostavi v
+$\lambda_{pq} = 1 - \frac{2(1-\cos(\pi / (n+1))) + h^2}{2+h^2} =
+1 - \frac12 (1+\pi^2)h^2 + O(h^4)$.
+
+\textbf{Gauss-Seidel:}
+Razcepimo $A = D - L - U$, $M = D - L$, $N = -U$. $T_{GS} = -(D+L)^{-1}U$. Lastne vrednosti $T$ so $\lambda_{pq}(T_{GS}) = \lambda_{pq}(T_J)^2$.
+
+\textbf{SOR:}
+Uporabimo afino kombinacijo GS in Jac metode.
+$u^{(k+1)}_{SOR} = (1-\omega)u^{(k)}_{J} + \omega u^{(k+1)}_{GS}$.
+Iteracijska metoda je torej:
+$(D+\omega L)u^{(k+1)} = D(1-\omega) u^{(k)}- \omega Uu^{(k)} + \omega b$.
+Iteracijska matrika je $T_{\omega} = (D+\omega L)^{-1}((1-\omega)D - \omega U)$,
+njene lastne vrednosti pa so $\lambda_{pq}(T_\omega) = \frac{1}{4}
+\left(\lambda(T_J) \omega \pm \sqrt{\lambda(T_J)^2 \omega^2 - 4(\omega-1)}
+\right)$. Optimalni parameter $\omega^\ast = \frac{2}{1+\sqrt{1-\rho(T_J)^2}}$,
+$\rho(T_{\omega^\ast}) = \omega^\ast - 1 = 1 - 2\sqrt{1+\pi^2}h + O(h^2)$ in vse
+lastne vrednosti so enake. Za red boljša kot GS in Jac.
+
+\textbf{ADI:}
+Naredimo en korak gor dol in en korak levo desno. Metodo zapišemo v dveh korakih.\\
+$((\omega + 2\theta_x)I - H)u^{(k+\frac12)} = ((\omega - 2\theta_y)I - V)u^{(k)} + b$,
+$((\omega + 2\theta_y)I - V)u^{(k+1)} = ((\omega - 2\theta_x)I - H)u^{(k+\frac12)} + b$,
+kjer je $H$ matrika obdiagonalnih elementov ($\theta_x$) in $V$ matrika elementov na bločni obdiagonali. Optimalni parameter $\omega$ je enak
+$\omega = \sqrt{\alpha\beta}$, kjer je $\alpha=\min(\xi_1, \mu_1)$,
+$\beta = \max(\xi_n, \mu_n)$,
+$\xi_i = 4\theta_x\sin^2\left(\frac12 \frac{i}{n+1}\right)$,
+$\mu_j = 4\theta_y\sin^2\left(\frac12 \frac{j}{m+1}\right)$.
+
+\textbf{FEM:}
+SL problem $\L u = -\dpx{}\left(p\dpx{u}\right) - \dpy{}\left(q\dpy{u}\right) + ru = f$,
+$u|_{\partial \Omega} = g$ prevedemo v šibko obliko. Iščemo $u$, za katero velja
+$\ls \L u - f, v\rs = 0$, za vsak $v$ iz $H_0^1$ ($C^2$ z homogenimi robnimi pogoji).
+Zapišemo lahko $\L u = -\div\left(\left(
+\begin{smallmatrix} p & 0 \\ 0 & q \end{smallmatrix} \right) \grad u\right) + ru$.
+Upoštevamo, da je $\div(\psi \vec{a}) = \psi \div\vec{a} + \vec{a}\cdot \grad{\psi}$, in s tem prevedemo
+$\ls \L u, v\rs = \int_\Omega (\left(\begin{smallmatrix} p & 0 \\ 0 & q \end{smallmatrix} \right)\grad u \grad v + ruv) d\Omega = \ls f, v\rs$.
+Rešitev $u$ iščemo kot afino kombinacijo baznih funkcij $u = \sum \alpha_i \phi_i + \phi_0$. Bazne funkcije so običajno hiške ali piramide, $\phi_0$ pa je vsota robnih hišk ali piramid, pomnoženih z robnimi pogoji.
+Sistem enačb ki ga dobimo je oblike $A \alpha = b$, kjer je
+$a_{ij} = \int_\Omega (p\dpx{\phi_i}\dpx{\phi_j} + q\dpy{\phi_i}\dpy{\phi_j} + r\phi_i\phi_j)d\Omega$, $b_i = \int_\Omega (f\phi_i - p\dpx{\phi_0}\dpx{\phi_i} - q\dpy{\phi_0}\dpy{\phi_i}-r\phi_0\phi_i)d\Omega$.
+Za 1D problem lahko vstavimo $q= 0$. V tem primeru je matrika tridiagonalna, ker so ostali integrali enaki 0.
+Pomagamo si s togostno matriko in vektorjem
+$K^i_{11} = \int_{x_{i-1}}^{x_i} p H_{i-1}'^2+rH_{i-1}^2dx$,
+$K^i_{12} = \int_{x_{i-1}}^{x_i} p H_{i-1}'H_{i}'+rH_{i-1}H_idx$,
+$K^i_{22} = \int_{x_{i-1}}^{x_i} p H_{i}'^2+rH_{i}^2dx$,
+$a_{ii} = K_{22}^i + K_{11}^{i+1}$,
+$f_1^i = \int_{x_{i-1}}^{x_i}fH_{i-1}dx$,
+$f_2^i = \int_{x_{i-1}}^{x_i}fH_{i}dx$,
+$b_1 = f_2^1 + f_1^2 - C_0K_{12}^1$,
+$b_i = f^i_2 + f_1^{i+1}$,
+$b_{n-1} = f_2^{n-1} + f_1^n - C_1K_{12}^n$.
+Če so $H$ hiške velja $K_{11}^i = K_{22}^i = \frac{1}{\Delta x_{i-1}} + \frac13\Delta x_{i-1}$, $K^i_{12} = K^i_{21} = -\frac{1}{\Delta x_{i-1}} + \frac16\Delta x_{i-1}$.
+
+Funkcija, ki je na trikotniku z oglišči $(x_i, y_i)$ v tretjem oglišču 1 in v prvih dveh 0 je dana s predpisom
+$\phi(x, y) = \frac{x_2 \left(y-y_1\right)+x \left(y_1-y_2\right)+x_1 \left(y_2-y\right)}{x_3 \left(y_1-y_2\right)+x_1 \left(y_2-y_3\right)+x_2 \left(y_3-y_1\right)}$. Iz teh lahko sestavimo bazne funkcije za 2D FEM.
+
+\textbf{Parabolične PDE (toplotna):}
+Toplotna enačba $u_t = \varkappa u_{xx}$. Courantovo število $\lambda = \frac{\varkappa \dt}{\dx^2}$.
+Theta metoda:
+$-\theta\lambda u_{j-1}^{n+1} +
+(1+2\theta\lambda)u_j^{n+1} -
+\theta\lambda u_{j+1}^{n+1} =
+(1-\theta)\lambda u_{j-1}^n +
+(1- 2(1-\theta)\lambda) u_j^n +
+(1-\theta)\lambda u_{j+1}^n$.
+Za $\theta = 1$ je implicitna, za $\theta = 0$ je eksplicitna in za $\theta = \frac12$ je Crank Nicholsovona.
+Stabilna je za $\frac12 \leq \theta \leq 1$ za vsak $\lambda$ in za
+$0 \leq \theta < \frac12$, če je $\lambda \leq \frac{1}{2(1-2\theta)}$.
+Lokalna napaka je $\tau_j^{n+1} = \dt(\theta-\frac12)u_tt + O(\dt^2+\dx^2)$.
+Globalno napako dobimo kot $\L_\delta e = \tau$.
+
+\textbf{Analiza stabilnosti -- Matrična metoda:}
+Diferenčno shemo zapišemo v obliki $u^{n+1} = Au^n + b$.
+Če je $A$ normalna in obstaja konstanta $C \geq 0$, da velja
+$\rho(A) \leq e^{C\dt}$, ko gre $\dx \to 0$, potem je diferenčna shema stabilna.
+Za matriko oblike $A = \diag(a) + \diag(c, -1) + \diag(b, 1), bc \leq 0$ velja
+$\lambda_k(A) = a + 2\sqrt{bc}\cos\left(\frac{k\pi}{n+1}\right)$.
+
+\textbf{Analiza stabilnosti -- Fourierova metoda:}
+Denimo, da lahko diferenčno metodo zapišemo v obliki:
+$\sum_{k}\beta_k(\lambda)u_{j+k}^{n+1} = \sum_{k}\gamma_k(\lambda)u_{j+k}^n$,
+$\lambda = \frac{\dt}{\dx^2}$. Shemi pridružimo racionalno funkcijo
+$\sigma(z, \mu) = \frac{\gamma(x, \mu)}{\beta(z, \mu)}$, kjer sta $\beta(z, \mu) = \sum_k \beta_k(\mu)z^k$ in $\gamma(z, \mu) = \sum_k \gamma_k(\mu) z^k$.
+Diferenčna metoda je za dani $\lambda$ stabilna natanko tedaj, ko je
+$\left|\sigma(e^{i\phi}, \lambda)\right| \leq 1$ za vsak $\phi \in [0, 2\pi]$.
+
+\hfill Avtor: Jure Slak
+
+\end{document}
+
