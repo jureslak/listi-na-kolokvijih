@@ -121,7 +121,6 @@ menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
             pdfproducer={pdflatex}, pdfsubject={list}, pdfkeywords={}}  % setup pdf metadata
 
 \begin{document}
-
 \textbf{Tipi PDE 2. reda:} $\L u = au_{xx} + bu_{xy} + cu_{yy} + \text{I. red} = 0$,
 $D = b^2 - 4ac$.
 Če $D < 0$ eliptična (npr.\ Laplacova), če $D = 0$ parabolična (npr.\ toplotna) in če $D > 0$ hiperbolična (npr.\ valovna).
@@ -153,8 +152,7 @@ Zapišemo aproksimacijo v obliki $\L f = af(x_0) + bf(x_1) + \cdots + ef(x_4) + 
 zapišemo sistem za $a, b, c, d, e$. Napako iščemo v naslednjem redu z nastavkom $Rf = k f^{(5)}(\xi)$.
 
 \textbf{Ekstrapolacija:}
-Recimo, da rešimo dvakrat, enkrat z 2x bolj gosto mrežo. Potem lahko rečemo $u \approx u_1 + ch^2 + O(h^3)$ in $u \approx u_2 + c \frac{h^2}{4} + O(h^3)$.
-Vidimo, da se napaka reda 2 odšteje, če uporabimo $u \approx \frac{4u_2 - u_1}{3}$.
+Recimo, da rešimo dvakrat, enkrat z 2x bolj gosto mrežo. Potem lahko rečemo $u \approx u_1 + ch^2 + O(h^3)$ in $u \approx u_2 + c \frac{h^2}{4} + O(h^3)$. Vidimo, da se napaka reda 2 odšteje, če uporabimo $u \approx \frac{4u_2 - u_1}{3}$.
 
 \textbf{Laplaceova enačba:}
 Definicija: $\delta^2 = \frac{\dx^2\dy^2}{2(\dx^2+\dy^2)}$, $\theta_x = \frac{\delta^2}{\dx^2}$, $\theta_y = \frac{\delta^2}{dy^2}$. Velja $2(\theta_x + \theta_y) = 1$.
@@ -227,15 +225,15 @@ $K^i_{11} = \int_{x_{i-1}}^{x_i} p H_{i-1}'^2+rH_{i-1}^2dx$,
 $K^i_{12} = \int_{x_{i-1}}^{x_i} p H_{i-1}'H_{i}'+rH_{i-1}H_idx$,
 $K^i_{22} = \int_{x_{i-1}}^{x_i} p H_{i}'^2+rH_{i}^2dx$,
 $a_{ii} = K_{22}^i + K_{11}^{i+1}$,
+$a_{i,i-1} = a_{i-1,i} = K_{12}^i$,
 $f_1^i = \int_{x_{i-1}}^{x_i}fH_{i-1}dx$,
 $f_2^i = \int_{x_{i-1}}^{x_i}fH_{i}dx$,
 $b_1 = f_2^1 + f_1^2 - C_0K_{12}^1$,
 $b_i = f^i_2 + f_1^{i+1}$,
 $b_{n-1} = f_2^{n-1} + f_1^n - C_1K_{12}^n$.
-Če so $H$ hiške velja $K_{11}^i = K_{22}^i = \frac{1}{\Delta x_{i-1}} + \frac13\Delta x_{i-1}$, $K^i_{12} = K^i_{21} = -\frac{1}{\Delta x_{i-1}} + \frac16\Delta x_{i-1}$.
+Če so $H$ hiške in $p = q = 1$ velja $K_{11}^i = K_{22}^i = \frac{1}{\Delta x_{i-1}} + \frac13\Delta x_{i-1}$, $K^i_{12} = K^i_{21} = -\frac{1}{\Delta x_{i-1}} + \frac16\Delta x_{i-1}$.
 
-Funkcija, ki je na trikotniku z oglišči $(x_i, y_i)$ v tretjem oglišču 1 in v prvih dveh 0 je dana s predpisom
-$\phi(x, y) = \frac{x_2 \left(y-y_1\right)+x \left(y_1-y_2\right)+x_1 \left(y_2-y\right)}{x_3 \left(y_1-y_2\right)+x_1 \left(y_2-y_3\right)+x_2 \left(y_3-y_1\right)}$. Iz teh lahko sestavimo bazne funkcije za 2D FEM.
+Funkcija, ki je na trikotniku z oglišči $(x_i, y_i)$ v tretjem oglišču 1 in v prvih dveh 0 je dana s predpisom $\phi(x, y) = \frac{x_2 \left(y-y_1\right)+x \left(y_1-y_2\right)+x_1 \left(y_2-y\right)}{x_3 \left(y_1-y_2\right)+x_1 \left(y_2-y_3\right)+x_2 \left(y_3-y_1\right)}$. Iz teh lahko sestavimo bazne funkcije za 2D FEM.
 
 \textbf{Parabolične PDE (toplotna):}
 Toplotna enačba $u_t = \varkappa u_{xx}$. Courantovo število $\lambda = \frac{\varkappa \dt}{\dx^2}$.
