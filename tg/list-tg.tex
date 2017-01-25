@@ -1,0 +1,338 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage[bookmarks, colorlinks=true, %
+linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black,%
+menucolor=black, runcolor=black, urlcolor=black, pdfencoding=unicode%
+]{hyperref}
+\usepackage[
+  paper=a4paper,
+  top=1cm,
+  bottom=1cm,
+%  textheight=27cm,
+  textwidth=19cm,
+]{geometry}
+\setlength{\footskip}{9pt}
+
+\usepackage{icomma}
+\usepackage{units}
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\P{\mathbb{P}}
+
+\newenvironment{itemize*}%
+{
+\vspace{-10pt}
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{itemize}
+\vspace{-10pt}}
+
+\newenvironment{enumerate*}%
+{
+\vspace{-10pt}
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{2pt}
+}
+{\end{enumerate}
+\vspace{-10pt}}
+
+\title{TG}
+\author{vesna.irsic}
+\date{January 2017}
+
+%\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ls}{\left\langle}
+\newcommand{\rs}{\right\rangle}
+\DeclareMathOperator{\diam}{diam}
+
+\usepackage{titlesec}
+\titlespacing*{\subsection}{0px}{0px}{-2px}
+\titleformat*{\subsection}{\large\bf\itshape\underline}
+
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{\boldmath #1}}
+
+\newcommand{\rlsep}{\rule{0.5 \textwidth}{.1pt}}
+
+\begin{document}
+
+%%%%% PRIREJANJA IN FAKTORJI
+% najprej definicije in izreki s predavanj
+
+\subsection*{Prirejanja in faktorji}
+\textbf{Prirejanje} $M$ je mn.\ povezav, ki paroma nimajo skupnih krajišč. Vozlišče je \textbf{$M$-zasičeno}, če je krajišče kake povezave iz $M$. Sicer je \textbf{$M$-nezasičeno}.\\
+Prirejanje $M$ je \textbf{maksimalno}, če ni vsebovano v nobenem večjem prirejanju; \textbf{največje}, če je moč $|M|$ največja med vsemi prirejanji v grafu; \textbf{popolno}, če so vsa vozlišča $M$-zasičena.\\
+Velja: popolno $\implies$ največje $\implies$ maksimalno.\\
+\textbf{Faktor} grafa je njegov vpet podgraf (tj.\ ima ista vozlišča kot cel graf). \textbf{$k$-faktor} je $k$-regularen faktor. 1-faktor = popolno prirejanje. (Vsak 3-regularen graf, ki premore 1-faktor premore dekompozicijo v 1-faktor in 2-faktor)\\
+Prirejanje $M$ je maksimalno $\iff$ med $M$-nezasičenimi vozlišči ni povezav.\\
+Pot v grafu je \textbf{$M$-alternirajoča}, če si na njej izmenoma sledijo povezave iz $M$ in iz $E(G) - M$.\\
+\textbf{Simetrična razlika:} $G, H$ grafa z $V(G) = V(H)$, $G \triangle H$ je graf z $V = V(G)$ in $e \in E$, če je $e$ v natanko enem od grafov $G$ in $H$.\\
+\textbf{Lema:} Vsaka komponenta v simetrični razliki dveh prirejanj je bodisi pot bodisi sod cikel.\\
+\textbf{Izrek:} Prirejanje $M$ grafa $G$ je največje natanko tedaj, ko $G$ ne premore nobene $M$-nezasičene poti.\\
+\textbf{Izrek (Tutte):} Graf $G$ premore popolno prirejanje natanko tedaj, ko za vsako $S \subseteq V(G)$: $|S| \geq o(G - S)$, kjer je $o(X)$ število lihih komponent grafa $X$.\\
+\textbf{Posledica:} Če je $G$ kubičen graf brez mostov, tedaj $G$ premore popolno prirejanje.\\
+\textbf{Izrek:} Če je $G$ dvodelen graf z biparticijo $X, Y$, potem v $G$ obstaja prirejanje, ki zasiči $X$ $\iff$ za vsak $S \subseteq X$: $|N(S)| \geq |S|$.\\
+\textbf{Posledica:} Vsak $k$-regularen dvodelen graf premore popolno prirejanje.
+
+Množica $Q \subseteq V(G)$ je \textbf{(vozliščno) pokritje} grafa $G$, če je vsaka povezava iz $G$ incidenčna z nekim vozliščem iz $Q$.\\
+\textbf{Izrek:} Če je $G$ dvodelni graf, potem je velikost največjega prirejanja enaka velikosti najmanjšega pokritja. Krajše: $G$ dvodelen $\implies \alpha'(G) = \beta(G)$.
+
+Mn.\ vozlišč $X$ grafa $G$ je \textbf{neodvisna}, če nobeni vozlišči iz $X$ nista sosednji.\\
+\textbf{Povezavno pokritje} grafa $G$ je taka množica povezav $F$, da je vsako vozlišče grafa $G$ krajišče neke povezave iz $F$.\\
+\textbf{$\alpha(G)$} = velikost največje neodvisne množice oz.\ neodvisnostno število grafa\\
+\textbf{$\alpha'(G)$} = velikost največjega prirejanja (tj.\ največje neodvisne množice povezav)\\
+\textbf{$\beta(G)$} = velikost najmanjšega pokritja grafa\\
+\textbf{$\beta'(G)$} = velikost najmanjšega povezavnega pokritja grafa (def.\ le za grafe brez izoliranih vozlišč)\\
+Določiti $\alpha$ je težko (že na dvodelnih grafih), določiti $\alpha'$ je pa polinomsko.\\
+\textbf{Trditev:} $G$ graf: $S$ je neodvisna množica v $G$ natanko tedaj, ko je $V(G) - S$ pokritje.\\
+FORMULE:\\
+$\forall G\colon \alpha'(G) \leq \beta(G)$\\
+$\forall G\colon \alpha(G) + \beta(G) = n(G)$\\
+$\forall G$ brez izoliranih vozlišč: $\alpha'(G) + \beta'(G) = n(G)$\\
+$\forall G$ dvodelen: $\alpha'(G) = \beta(G)$\\
+$\forall G$ dvodelen, brez izoliranih vozlišč: $\alpha(G) = \beta'(G)$\\
+\rlsep\\
+% NAUKI Z VAJ
+\textbf{Trditev:} Drevo ima največ eno popolno prirejanje.\\
+Za vsak graf $G$ brez izoliranih vozlišč velja $\alpha'(G) \geq \frac{|V(G)|}{\Delta(G) + 1}$.\\
+$G$ dvodelen graf z biparticijo $X, Y$. Naj bo $M_1$ prirejanje, ki zasiči $X' \subseteq X$ in $M_2$ prirejanje, ki zasiči $Y' \subseteq Y$. Potem obstaja prirejanje, ki zasiči $X' \cup Y'$.\\
+\rlsep\\
+% NAUKI IZ NALOG
+Za vsak graf $G$ velja $\alpha(G) \geq \frac{|V(G)|}{\Delta(G) + 1}$.
+
+
+%%%%%%%%%%%%% POVEZANOST
+\subsection*{Povezanost}
+% DEF. in IZREKI s PREDAVANJ
+\textbf{Def:} Množica vozlišč $S \subseteq V(G)$ je \textbf{prerezna množica}, če ima $G - S$ več kot eno komponento. \textbf{Povezanost grafa $G$, $\kappa(G)$}, je moč najmanjše množice $S$, da ima $G-S$ več kot eno komponento ali pa je $G - S = K_1$. Graf $G$ je \textbf{$k$-povezan}, če je $k \leq \kappa(G)$.\\
+\textbf{Velja:} $G$ ni polni graf. Če $G$ ni $k$-povezan, potem obstaja prerezna množica moči $k-1$.\\
+Primeri: $\kappa(K_n) = n-1, \kappa(K_{m,n}) = \min\{m, n\}, \kappa(P) = 3, \kappa(Q_n) = n$.\\
+\textbf{Def:} Množica povezav $F \subseteq E(G)$ je \textbf{prerezna množica povezav}, če ima $G - F$ več kot eno komponento. \textbf{Povezanost po povezavah grafa $G$, $\kappa'(G)$}, je moč najmanjše prerezne množice povezav. Graf $G$ je \textbf{$k$-povezan po povezavah}, če je ima vsaka prerezna množica povezav vsaj $k$ elementov.\\
+Primeri: $\kappa'(\text{drevo}) = 1, \kappa'(K_n) = n-1, \kappa'(P) = 3$.\\
+FORMULE:\\
+- $\forall G\colon \kappa(G) \leq n(G) - 1$. Enakost velja ntk. ko je $G$ polni graf.\\
+- $\forall G\colon \kappa(G) \leq \kappa'(G) \leq \delta(G)$.
+- $\forall$ kubičen graf $G$: $\kappa(G) = \kappa'(G)$.\\
+- $\forall$ $r$-regularen graf $G$ z $\kappa(G) = r$, je tudi $\kappa'(G) = r$.
+
+\textbf{Def:} Vozlišče $v$ grafa $G$ je \textbf{prerezno}, če ima $G - v$ več povezanih komponent kot $G$. \textbf{Blok} grafa je maksimalni podgraf brez prereznih vozlišč. Bloki grafa so torej: izolirana vozlišča, mostovi in maksimalni 2-povezani podgrafi. \textbf{Blok-graf} grafa $G$ je dvodelni graf z biparticijo $\{\text{bloki}\} \cup \{\text{prerezna vozlišča}\}$, povezave pa so $c \sim B$, kjer je $c$ vozlišče bloka $B$.\\
+\textbf{Trditev:} Blok-graf poljubnega grafa je gozd.\\
+\textbf{Def:} Če sta $u, v \in V(G)$, sta $P, Q$ \textbf{notranje-disjunktni $u, v$-poti}, če se ujemata le v vozliščih $u$ in $v$.\\
+\textbf{Izrek (Whitney):} Graf $G$ je 2-povezan $\iff$ ko za vsak par različnih vozlišč $u, v$ obstajata notranje-disjunktni $u, v$-poti.\\
+\textbf{LEMA (uporabna):} Če je $G$ $k$-povezan graf in $G'$ graf z $V(G') = V(G) \cup \{x\}$ in \\ $E(G') = E(G) \cup \{\text{povezave od $x$ do $k$ starih vozlišč}\}$, potem je tudi $G'$ $k$-povezan.\\
+\textbf{Izrek:} $G$ graf z vsaj 3 vozlišči. NTSE:
+\begin{enumerate*}
+\item $G$ je 2-povezan;
+\item vsak par vozlišč je povezan z dvema notranje-disjunktnima potema;
+\item vsak par vozlišč leži na skupnem ciklu;
+\item $\delta(G) \geq 1$ in vsak par različnih povezav leži na skupnem ciklu.
+\end{enumerate*}
+\textbf{Izrek:} $G$ je 2-povezan po povezavah $\iff$ vsaki dve povezavi ležita na skupnem ciklu.\\
+\textbf{Def:} \textbf{Uho} grafa je pot, katere notranja vozlišča so stopnje 2. \textbf{Ušesna dekompozicija} grafa $G$ je zaporedje $G_0, G_1, \ldots, G_k$, kjer je $G_0$ cikel, $G_i$ je uho grafa $G_0 \cup G_1 \cup \ldots \cup G_i$ in je dobljeni graf $G$. \textbf{Zaprto uho} je uho, katerega začetno in končno vozlišče sta enaka. \textbf{Zaprta ušesna dekompozicija} je ušesna dekompozicija, kjer lahko dodajamo tudi zaprta ušesa.\\
+\textbf{Izrek:} Graf $G$ je 2-povezan $\iff$ ko premore ušesno dekompozicijo. Za začetek ušesne dekompozicije lahko uporabimo poljuben cikel grafa $G$.\\
+\textbf{Izrek:} Graf $G$ je povezavno 2-povezan $\iff$ ko premore zaprto ušesno dekompozicijo.
+
+\textbf{Def:} Če sta $x, y \in V(G), x \neq y, xy \notin E(G)$, potem je $S \subseteq V(G)$ \textbf{$x, y$-prerez}, če vsaka $x,y$-pot vsebuje vozlišče iz $S$. Moč najmanjšega $x,y$-prereza označimo s \textbf{$\kappa(x, y)$}. Maksimalno število paroma notranje disjunktnih $x, y$ poti je \textbf{$\lambda(x, y)$}. Podobno je \textbf{$\kappa'(x, y)$} moč najmanjšega $x, y$-prereza povezav in \textbf{$\lambda'(x, y)$} maksimalno število po povezavah disjunktnih $x, y$-poti.\\
+\textbf{Izrek (Menger):} Če sta $x, y$ nesosednji vozlišči grafa, tedaj je $\kappa(x, y) = \lambda(x, y)$. Isto velja tudi za digrafe.\\
+\textbf{Izrek:} Če sta $x, y$ različni vozišči grafa $G$, tedaj je $\kappa'(x, y) = \lambda'(x, y)$.\\
+\textbf{Izrek (globalna verzija Mengerja):} Povezanost grafa je največji $k$, da za vsak par vozlišč $x, y$ velja $\lambda(x, y) \geq k$. Povezanost grafa po povezavah je največji $k$, da za vsak par vozlišč $x, y$ velja $\lambda'(x, y) \geq k$.
+
+\textbf{Def:} Digraf $D$ je \textbf{(krepko) povezan}, če za vsaki vozlišči $x, y$ obstaja usmerjena $x,y$-pot. \textbf{Povezanost digrafa $D$, $\kappa(D)$}, je moč najmanjše mn.\ $S$, da je $G-S$ nepovezan ali $K_1$. \textbf{Povezanost po povezavah digrafa $D$, $\kappa'(D)$}, je moč najmanjše prerezne množice povezav.\\
+\textbf{Def:} Če je $G$ graf, je njegova \textbf{usmeritev} prireditev smeri vsem njegovim povezavam. Usmeritev je \textbf{krepka}, če je dobljeni digraf krepko povezan.\\
+\textbf{Trditev:} Graf $G$ premore krepko usmeritev $\iff$ ko je $G$ 2-povezan po povezavah.\\
+\textbf{Izrek (globalni Menger za digrafe):} Povezanost digrafa $D$ je največji $k$, da za vsa vozlišča $x, y$ velja $\lambda(x, y) \geq k$. Povezavna povezanost je največji $k$, da za vsa vozlišča $x, y$ velja $\lambda'(x, y) \geq k$.\\
+%%%%%%%%%% SPODNJEGA NA VAJAH NISMO DELALI
+%\textbf{Def:} $A_1, \ldots, A_m$ množice. Elementi $a_1, \ldots, a_m$ so \textbf{sistem različnih predstavnikov}, če so to različni elementi in hkrati $a_i \in A_i$. Če imam množice $A_i$ in $B_i$ ($i \in [m]$), so elementi $a_i$ \textbf{skupen sistem različnih predstavinov}, če so paroma različni in si sitem različnih predstavnikov za obe družini množic. \\
+%Naredimo graf z biparticijo $\{A_i\} \cup \{\text{vsi elementi}\}$ in povežemo element z množicami, ki jim pripada. Imamo sistem različnih predstavnikov, ko ima ta dvodelni graf prirejanje, ki zasiči $\{A_i\}$.\\
+%\textbf{Izrek:} Družini množic $A_1, \ldots, A_m$ in $B_1, \ldots, B_m$ premoreta skupen sistem različnih predstavnikov $\iff$ za vsaka $I \subseteq [m], J \subseteq [m]$ velja $|(\bigcup_{i \in I} A_i) \cap (\bigcup_{j \in J} B_j)| \geq |I| + |J| - m$.\\
+\rlsep\\
+% NAUKI Z VAJ
+\textbf{Trditev (uporabna):} $\kappa'(G) < \delta(G)$, $P$ je minimalni povezavni prerez, razdeli $V(G)$ na $S$ in $S'$. Potem je $P = \sum_{v \in S} deg_G(v) - 2 |E(G[S])|$ in $|S| > \delta(G)$.\\
+\textbf{Trditev:} Simetrična razlika dveh povezavnih prerezov je povezavni prerez.\\
+\textbf{Def:} Graf $G$ je \textbf{minimalno $k$-povezan}, če je $k$-povezan in za vsako povezavo $e \in E(G)$ graf $G - e$ ni $k$-povezan.\\
+\textbf{Trditev:} V minimalnem 2-povezanem grafu velja $\delta(G) = 2$. Minimalno 2-povezan graf $G$ z vsaj 4 vozlišči ima največ $2 n(G) - 4$ povezav. Enakost velja le za $K_{2, n-1}$.\\
+\textbf{Def:} Naj bo $x$ vozlišče in $U$ množica vozlišč, $x \notin U$. \textbf{$x, U$-pahljača} je množica poti iz $x$ v $U$, ki se paroma stikajo le v $x$. Velikost pahljače je število disjunktnih poti.\\
+\textbf{Velja:} Graf je $k$-povezan $\iff$ za vsak izbor $x$ in $U$ ($x \notin U$) z $|U| \geq k$ obstaja $x, U$ pahljača velikosti vsaj $k$.\\
+\textbf{Trditev:} Graf $G$ je 2-povezan $\iff$ ko za vsako trojico vozlišč $x, y, z$ obstaja $x, z$-pot, ki gre skozi $y$.\\
+\textbf{Lema:} Če je graf $k$-povezan in mu odstranimo eno vozlišče, je preostanek vsaj $(k-1)$-povezan.\\
+\textbf{Trditev:} $G$ $k$-povezan. Za vsak izbor vozlišč $x_1, \ldots, x_k$ obstaja cikel, ki vsebuje $x_1, \ldots, x_k$.\\
+\textbf{Trditev:} $G$ $k$-povezan graf z vsaj $2k$ vozlišči. Tedaj v $G$ obstaja cikel dolžine vsaj $2k$.\\
+\textbf{Trditev:} $\kappa(G \square H) \leq (=) \min\{\delta(G) + \delta(H), \kappa(G) n(H), \kappa(H) n(G)\}$. Še več: $\kappa(G \square H) \geq \kappa(G) + \kappa(H)$.\\
+\rlsep\\
+% NAUKI IZ NALOG
+- $G$ ima bloke $B_1, \ldots, B_k$. Potem je $n(G) = (\sum n(B_i)) - k + 1$. Dokaz z indukcijo po $k$.\\
+- $\Delta(G) \leq 3 \implies \kappa(G) = \kappa'(G).$
+
+
+%%%%%%%% BARVANJA
+\subsection*{Barvanja grafov}
+\textbf{$\chi(G)$} = najmanjši $k$, za katerega obstaja dobro $k$-barvanje grafa $G$\\
+\textbf{$\omega(G)$} = moč največjega polnega podgrafa v $G$\\
+FORUMLE:\\
+- $\forall G\colon \chi(G) \geq \omega(G)$\\
+- $\forall G\colon \chi(G) \geq \frac{n(G)}{\alpha(G)}$\\
+- $\forall G, H\colon \chi(G \square H) = \max\{\chi(G), \chi(H)\}$\\
+- $\forall G\colon \chi(G) \leq \Delta(G) + 1$\\
+- $d_1 \geq \cdots \geq d_n$ stopnje vozlišč v $G$: $\chi(G) \leq 1 + \max_i \min\{ d_i, i-1 \}$\\
+-\textbf{Izrek: (Brooks)} $\forall G$ povezan graf, ki ni niti lih cikel niti polni graf: $\chi(G) \leq \Delta(G)$\\
+- $\forall G$ graf intervalov: $\chi(G) = \omega(G)$ (graf intervalov: presečni graf, vozl. so intervali, povezava, če je neprazen presek)\\
+\textbf{Def:} $G$ graf, $V(G) = \{v_1, \ldots, v_n\}$. \textbf{Graf Mycielskega, $M(G)$}: $V(M(G)) = \{v_1, \ldots, v_n\} \cup \{u_1, \ldots, u_n\} \cup \{w\}$, $E(M(G)) = E(G) \cup \{ wu_i; \; i \in [n] \} \cup \{ u_i v_j; \; v_i v_j \in E(G) \}$.\\
+\textbf{Izrek:} Če je $G$ graf brez $\triangle$, potem je tudi $M(G)$ brez $\triangle$ in velja $\chi(M(G)) = \chi(G) + 1$.\\
+\textbf{Trditev:} $\chi(G) = r \implies |E(G)| \geq \binom{r}{2}$. Enakost velja za polne grafe z dodanimi izoliranimi vozlišči.\\
+\textbf{Def:} \textbf{Turanov graf, $T_{n, r}$} je polni $r$-multipartitni graf z $n$ vozlišči, v katerem se kosi particije po velikosti paroma razlikujejo kvečjemu za 1. $T_{n, r}$ je natanko določen z izbiro $n$ in $r$; kosi so velikosti $\lfloor \frac{n}{r} \rfloor$ in $\lceil \frac{n}{r} \rceil$.\\
+\textbf{Trditev:} Med vsemi grafi $G$ z $n$ vozlišči in $\chi(G) = r$ je $T_{n, r}$ enolični graf z največjim številom povezav.\\
+\textbf{Izrek (Turan):} Med vsemi grafi $G$ z $n$ vozlišči, ki nimajo $K_{r+1}$, je $T_{n,r}$ enolični graf z največ možnimi povezavami.
+
+\textbf{$\chi(G; k)$} = število $k$-barvanj grafa $G$ (ne nujno surjektivnih; zamenjava barv da različo barvanje); to je polinom v $k$ z alternirajočimi koeficienti, še več: $\chi(G; k) = k^{n(G)} - m(G) k^{n-1} + \ldots$\\
+$\chi(G) = \min_k \{\chi(G; k) > 0\}$\\
+\textbf{Trditev:} $T$ drevo na $n$ vozliščih: $\chi(T; k) = k (k-1)^{n-1}$.\\
+\textbf{Trditev:} $\chi(G; k) = \sum_{r = 1}^{n(G)} p_r(G) k^{\underline{r}}$, kjer je $p_r(G)$ število particij $V(G)$ na $r$ neodvisnih množic.\\
+\textbf{Izrek:} Za vsak $G$ in $e$ njegova povezava: $\chi(G; k) = \chi(G-e; k) - \chi(G \cdot e; k)$.
+
+\textbf{Def:} Vozlišče $u$ je \textbf{simplicialno}, če $N(u)$ inducira poln graf. Zaporedje $u_n, \ldots, u_1$ je \textbf{simplicialna eliminacijaka ureditev}, če je $u_i$ simplicialni v grafu induciranem z $u_i, u_{i-1} \ldots, u_1$. Oznaka: $d(i) = |N(u_i) \cap \{u_1, \ldots, u_{i-1}\}|$.\\
+\textbf{Velja:} $\chi(G; k) = (k - d(1)) (k-d(2)) \cdots (k-d(n))$.\\
+\textbf{Def:} Graf $G$ je \textbf{tetivni}, če v vsakem ciklu dolžine vsaj 4 obstajata nezaporedni vozlišči cikla, ki sta sosednji.\\
+\textbf{Lema:} $G$ povezan tetivni graf, $x \in V(G)$. Tedaj med vsemi vozlišči, ki so najdlje od $x$, obstaja simplicialno vozl.\ grafa $G$.\\
+\textbf{Izrek:} Povezan graf je tetivni $\iff$ premore eliminacijsko ureditev.\\
+\textbf{Trditev:} $G$ tetivni $\implies \chi(G) = \omega(G)$.\\
+\textbf{Def:} Graf $G$ je \textbf{popoln graf}, če velja $\chi(H) = \omega(H)$ za vsak induciran podgraf $H$ grafa $G$.\\
+Tetivni grafi, grafi intervalov in drevesa so popolni grafi.\\
+\textbf{Izrek:} Graf $G$ je popoln natanko tedaj, ko ne vsebuje niti induciranega lihega cikla dolžine vsaj 5 niti induciranega komplementa lihega cikla dolžine vsaj 5.\\
+\rlsep\\
+% NAUKI Z VAJ
+\textbf{Def:} \textbf{$k$-kritičen graf} je minimalno $k$-obarvljiv (tj.\ $\chi(G) = k $), ampak vsak njegov podgraf je $(k-1)$-obarvljiv.\\
+Če je $G$ $k$-kritičen, velja: v vsakem optimalnem barvanju $G - e$ sta krajišči $e$ iste barve. Obstaja optimalno barvanje $G$, ki vsebuje natanko eno vozlišče barve $k$. $M(G)$ je $(k-1)$-kritičen graf.\\
+\textbf{Trditev:} $k \leq 2$: $k$-kritičen graf je povezan in $\delta(G) \leq k-1$.
+$\chi(G)$ je najmanjši $m$, da velja $\alpha(G \square K_m) = n(G)$.\\
+$\chi(K_2 \square P_n; k) = (k^2 - 3 k + 3)^{n-1} k (k-1)$.\\
+Dvodelni grafi so tranzitivno usmreljivi.\\
+Tranzitivno usmreljivi grafi so popolni.\\
+Grafi intervalov so tetivni in njihov komplement je tranzitivno usmerljiv.
+
+%%%%%%%%% RAVNINSKI
+\subsection*{Ravninski grafi}
+\textbf{Izrek:} 3-povezan graf ravninski graf ima enolično vložitev v ravnino.\\
+\textbf{$G^*$} = dual grafa (vozl. postanejo lica, in obratno); za povezan ravninski graf je $(G^*)^* \equiv G$.\\
+\textbf{Dolžina lica, $\ell(F)$}, je število povezav na najkrajšem zaprtem sprehodu, ki omejuje $F$.\\
+\textbf{Trditev:} $G$ ravninski graf: $2 m(G) = \sum_{F \text{ lice}} \ell(F)$.\\
+\textbf{Izrek:} $G$ vložen v ravnino. NTSE:
+\begin{enumerate*}
+\item $G$ je dvodelen;
+\item vsako lice je sode dolžine;
+\item $G^*$ je Eulerjev graf.
+\end{enumerate*}
+\textbf{Def:} Ravninski graf je \textbf{zunanje-ravninski}, če ga lahko vložimo v ravnino rako, da vsa njegova vozlišča ležijo na robu istega cikla. Zunanje-ravninski graf premore vozlišče stopnje $\leq 2$.\\
+\textbf{Izrek (Eulerjeva formula):} $G$ povezan graf, vložen v ravnino, $n$ vozlišč, $m$ povezav, $f$ lic: $n - m + f = 2$.\\
+\textbf{Posledica:} Če je $G$ ravninski in $n(G) \geq 3$, potem je $m(G) \leq 3 n(G) - 6$. Če dodatno $G$ nima $\triangle$, potem je $m(G) \leq 2 n(G) - 4$. Iz tega sledi, da vsak ravninski graf premore vozlišče stopnje $\leq 5$.\\
+\textbf{Def:} Graf $G$ je \textbf{maksimalen ravninski graf}, če ni pravi vpet podgraf nekega ravninskega grafa. Graf $G$ je \textbf{triangulacija}, če je vsako lice omejeno s 3-ciklom.\\
+\textbf{Trditev:} Za enostaven ravninski graf z vsaj 3 vozlišči. NTSE:
+\begin{enumerate*}
+\item $m(G) = 3 n(G) - 6$
+\item $G$ je triangulacija
+\item $G$ je maksimalen ravninski graf.
+\end{enumerate*}
+
+\textbf{Def:} Graf $H$ je \textbf{subdivizija} grafa $G$, če $H$ lahko dobimo iz $G$ tako, da nekdatere njegove povezave nadomestimo s paroma disjunktnimi potmi.\\
+\textbf{Izrek (Kuratowski):} Graf $G$ je ravninski $\iff$ ne vsebuje podgrafa, ki je subdivizija $K_5$ ali $K_{3,3}$.\\
+\textbf{Lema (Thomassen):} Če je $G$ 3-povezan graf na vsaj 5 vozliščih, tedaj $G$ premore tako povezavo $e$, da je $G \cdot e$ 3-povezan.\\
+\textbf{Def:} Vložitev grafa v ravnino je \textbf{konveksna}, če je vsako lice omejeno s konveksnim poligonom.\\
+\textbf{Izrek (Tutte):} Če je $G$ 3-povezan ravninski graf, potem $G$ premore konveksno vložitev v ravnino. (Za 2-povezane grafe to v splošnem ni res.)\\
+\textbf{Izrek (Fary):} Vsak ravninski graf premore vložitev v ravnino z ravnimi črtami.\\
+\textbf{Def:} Graf $H$ je \textbf{minor} grafa $G$, če $H$ lahko dobimo iz nekega podgrafa $G$ tako, da skrčimo nekaj povezav. Velja: Graf $H$ je minor grafa $G$ $\iff$ $H$ dobimo iz $G$ z zaporedjem operacij skrči povezavo, zbriši povezavo, zbriši izolirano vozlišče.\\
+\textbf{Izrek (Wagner):} Graf $G$ je ravninski $\iff$ niti $K_5$ niti $K_{3,3}$ nista njegova minorja.\\
+\textbf{Izrek:} Graf $H$ z vozlišči $x_1, \ldots, x_k$ je minor grafa $G$ $\iff$ $G$ premore disjunktna drevesa $T_1, \ldots, T_k$, tako da če je $x_i x_j \in  E(H)$, potem obstajata vozlišči $y_i \in T_i$ in $y_j \in T_j$, ki sta sosednji. (to pomeni: $G$ kvocientno po $T_1, \ldots, T_k$ je ravno $H$)
+
+\textbf{Izrek 4 barv:} Če je $G$ ravninski, je $\chi(G) \leq 4$.\\
+\textbf{Def:} \textbf{Prekrižno število, $\nu(G)$}, je najmanjše število križanj med vsemi risbami grafa $G$ v ravnini. \\ Risba grafa $G$ je \textbf{optimalna}, če ima $\nu(G)$ križanj.\\
+Lastnosti optimalnih risb:
+nobeni povezavi s skupnih krajiščem se ne križata;
+vsako križanje je pravo (ni tangentno);
+nobeni povezavi se ne križata več kot enkrat;
+nobene 3 povezave se ne križajo v isti točki;
+nobena povezava ne križa same sebe
+
+\textbf{Trditev:} Naj bo $G$ graf in $k$ največje število povezav v njegovem ravninskem podgrafu. Tedaj je $\nu(G) \geq m(G) - k$ in tudi $\nu(G) \geq \frac{m(G)^2}{2k} - \frac{m(G)}{2}$.\\
+\textbf{Posledica:} Za vsak graf $G$ velja: $\nu(G) \geq m(G) - 3 n(G) + 6$. Če je $G$ brez $\triangle$: $\nu(G) \geq m(G) - 2 n(G) + 4$.\\
+\rlsep\\
+% NAUKI Z VAJ
+- graf je zunanje-ravninski $\iff$ ne vsebuje minorja $K_4$ ali $K_{2,3}$.\\
+- zunanje-ravninski graf lahko pobarvamo s 3 barvami\\
+- vsak ravninski graf z $\delta(G) = 5$ ima povezavo med dvema vozliščema stopnje 5 ali povezavo med vozliščema stopnje 5 in 6
+
+% prazne vrstice pred naslovi niso samo zaradi lepsega; in kater barbar se je spomnil dodat -10 px pred vsak naslov? :)
+% Uh, ta barbar sem pa jaz. Če je pa delovalo :)
+%%%%%%% DOMINACIJA
+\subsection*{Dominacija v grafih}
+\textbf{Def:} $G$ graf, $D, X \subseteq V(G)$. $D$ \textbf{dominira množico} $X$, če je $X \subseteq N[D]$. Če $X = V(G)$: $D$ \textbf{dominira graf} $G$ (tj.\ vsako vozlišče iz $V(G) - D$ ima vsaj enega soseda iz $D$).\\
+\textbf{$\gamma(G)$} = moč najmanjše množice, ki dominira $G$\\
+Če je $G$ brez izoliranih vozlišč in $S$ minimalna dominacijska množica, potem je tudi $\overline{S}$ dominacijska množica.\\
+\textbf{Def:} Množica $X \subseteq V(G)$ je \textbf{2-pakiranje}, če je $d_G(x, y) \geq 3$ za vse $x, y \in X, x \neq y$. To pomeni: $N[x] \cap N[y] = \emptyset$. Za drevesa velja: $\gamma(T) = \rho(T)$.\\
+\textbf{$\rho(G)$} = moč največjega 2-pakiranja v $G$\\
+FORMULE:\\
+- Za vsak povezan graf $G$ je $\gamma(G) \geq \rho(G)$.\\
+- $G'$ vpet podgraf v $G$: $\gamma(G) \leq \gamma(G')$\\
+- $G$ povezan graf. Potem premore vpeto drevo $T$, da je $\gamma(G) = \gamma(T)$\\
+- $\forall G\colon \gamma(G) \leq \chi(\overline{G})$\\
+- $\forall G\colon \frac{n(G)}{\Delta(G) + 1} \leq \gamma(G) \leq n(G) - \Delta(G)$\\
+- $G$ brez izoliranih vozlišč: $\gamma(G) \leq n(G) \cdot \frac{1 + \log(1 + \delta(G))}{1 + \delta(G)}$\\
+- za vsak povezan $G$: $\gamma(G) \leq \alpha'(G)$\\
+- $\diam(G) = 2 \implies \gamma(G) \leq \delta(G)$, $\diam(G) = 5 \implies \gamma(G) \leq \delta(G) (1 + (\Delta(G) - 1)^3)$\\
+\textbf{Inačice dominacije:} Dominantna množica $D$ je povezana/neodvisna/totalna, če $D$ inducira povezan podgraf/neodvisen podgraf/podgraf brez izoliranih vozlišč. Oznaka: $\gamma_c, \gamma_i, \gamma_t$. Vse vedno obstajajo (v povezanih grafih/v vseh grafih /brez izoliranih vozlišč).\\
+\textbf{Lema:} Množica $D$ je neodvisna dominantna množica $\iff$ je maksimalna neodvisna množica.\\
+\textbf{Izrek:} Če je $G$ brez krempljev (= ne vsebuje \textit{induciranega} podgrafa $K_{1, 3}$), potem je $\gamma_i (G) = \gamma(G)$.\\
+Pravi grafi intervalov in grafi povezav so brez krempljev. Dvodelni graf in grafi brez $\triangle$ imajo lahko veliko krempljev.\\
+\textbf{Formule v kartezičnem produktu:} \\
+- $\gamma(G \square H) \leq \min\{ \gamma(G) n(H), n(G) \gamma(H) \}$\\
+- $\gamma(G \square H) \geq \min\{ n(G), n(H) \}$\\
+- $\gamma(G \square H) \geq \frac{n(H)}{\Delta(H) + 1} \gamma(G)$\\
+- $\gamma(G \square H) \geq \min\{ \gamma(G) \rho(H), \gamma(H) \rho(G) \}$\\
+- če je $T$ drevo: $\gamma(T \square H) \geq \gamma(T) \gamma(H)$\\
+- $\gamma(G \square H) \geq \frac{1}{2} \gamma(G) \gamma(H)$\\
+- $\gamma(C_{3n} \square H) \geq \gamma(C_{3n}) \gamma(H)$\\
+- $\gamma(C_n \square C_m) \geq \gamma(C_n) \gamma(C_m)$ za $n, m \geq 3$\\
+Primeri: $\gamma(K_n) = 1, \gamma(P_n) = \gamma(C_n) = \lceil \frac{n}{3} \rceil$, $\gamma(P) = 3$.
+
+
+% prazne vrstice pred naslovi niso samo zaradi lepsega :)
+\subsection*{Osnovne definicije}
+\textbf{Def:}  \textbf{Kartezični produkt grafov $G \square H$}:
+$V(G \square H) = V(G) \times V(H)$, \\
+$E(G \square H): (g,h) \sim (g',h') \iff (gg' \in E(G) \lor h=h') \land (hh' \in E(H) \lor g=g')$\\
+  \textbf{Def:}  \textbf{Spoj grafov $G \vee H$}:
+$V( G \vee H) = V(G) \cup V(H)$,
+$E(G \vee H) = E(G) \cup E(H) \cup \{gh; \; g \in V(G), h \in V(H)\}$
+
+\hfill Avtorji: Vesna Iršič, Jure Slak, Anja Petković
+
+\end{document}
+
