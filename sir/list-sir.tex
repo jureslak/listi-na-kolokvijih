@@ -1,0 +1,672 @@
+\documentclass[a4paper,oneside,10pt]{article}
+
+\usepackage[slovene]{babel}    % slovenian language and hyphenation
+\usepackage[utf8]{inputenc}    % make čšž work on input
+\usepackage[T1]{fontenc}       % make čšž work on output
+\usepackage[reqno]{amsmath}    % basic ams math environments and symbols
+\usepackage{amssymb,amsthm}    % ams symbols and theorems
+\usepackage{mathtools}         % extends ams with arrows and stuff
+\usepackage{url}               % \url and \href for links
+\usepackage{icomma}            % make comma a thousands separator with correct spacing
+\usepackage{units}             % \unit[1]{m} and unitfrac
+\usepackage{enumerate}         % enumerate style
+\usepackage{array}             % mutirow
+\usepackage[usenames]{color}   % colors with names
+\usepackage{graphicx}          % images
+\usepackage[all]{xy}
+
+\usepackage[bookmarks, colorlinks=true, linkcolor=black, anchorcolor=black,
+  citecolor=black, filecolor=black, menucolor=black, runcolor=black,
+  urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
+\usepackage[
+  paper=a4paper,
+  top=2cm,
+  bottom=2cm,
+  textwidth=15cm,
+% textheight=24cm,
+]{geometry}  % page geomerty
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+% basic sets
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\newcommand{\PP}{\ensuremath{\mathcal{P}}}
+\newcommand{\TT}{\ensuremath{\mathbb{T}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\Mon}{\ensuremath{\textrm{Mon}}}
+
+% linearna orgrinjača
+\newcommand{\LL}{\ensuremath{\mathcal{L}}}
+
+% vectors
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vu}{\vec{u}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\va}{\vec{a}}
+%\newcommand{\vb}{\vec{b}}
+% \newcommand{\vc}{\vec{c}}
+\newcommand{\vt}{\vec{t}}
+\newcommand{\vf}{\vec{f}}
+\newcommand{\vF}{\vec{F}}
+\newcommand{\vE}{\vec{E}}
+\newcommand{\ve}{\vec{e}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vi}{\vec{\imath}}
+\newcommand{\vj}{\vec{\jmath}}
+\newcommand{\vS}{\vec{S}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\vom}{\vec{\omega}}
+\newcommand{\vzeta}{\vec{\zeta}}
+\newcommand{\er}{\vec{e}_r}
+\newcommand{\ef}{\vec{e}_{\varphi}}
+\newcommand{\et}{\vec{e}_{\vartheta}}
+
+% greek letters
+\let\oldphi\phi
+\let\oldtheta\theta
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+
+% vector operators
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\rot}{\operatorname{rot}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\lap}{\Delta}
+
+% transpose
+\newcommand{\T}{\ensuremath{\mathsf{T}}}
+\renewcommand{\sl}{\ensuremath{\operatorname{sl}}}
+
+% partial derivatives
+\newcommand{\dpar}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dpr}[1]{\dpar{#1}{r}}
+\newcommand{\dpt}[1]{\dpar{#1}{t}}
+\newcommand{\dpx}[1]{\dpar{#1}{x}}
+\newcommand{\dpy}[1]{\dpar{#1}{y}}
+\newcommand{\dpz}[1]{\dpar{#1}{z}}
+\newcommand{\dpth}[1]{\dpar{#1}{\theta}}
+\newcommand{\dpfi}[1]{\dpar{#1}{\varphi}}
+
+% total derivatives
+\newcommand{\dd}[2]{\ensuremath{\frac{d #1}{d #2}}}
+\newcommand{\ddr}[1]{\dd{#1}{r}}
+\newcommand{\ddt}[1]{\dd{#1}{t}}
+\newcommand{\ddx}[1]{\dd{#1}{x}}
+\newcommand{\ddy}[1]{\dd{#1}{y}}
+\newcommand{\ddz}[1]{\dd{#1}{z}}
+\newcommand{\ddth}[1]{\dd{#1}{\theta}}
+
+% material derivatives
+\newcommand{\D}[1]{\ensuremath{\frac{D#1}{Dt}}}
+\newcommand{\Dn}[2]{\ensuremath{\frac{D^{#1}#2}{Dt^{#1}}}}
+\newcommand{\cor}[1]{\ensuremath{#1^\circ}}
+\newcommand{\con}[1]{\ensuremath{#1^\diamond}}
+
+% tensors
+\renewcommand{\t}[1]{\ensuremath{\underline{\underline{#1}}}}
+\newcommand{\ta}{\t{a}}
+\newcommand{\tl}{\t{\ell}}
+\newcommand{\tF}{\t{F}}
+\newcommand{\td}{\t{d}}
+\newcommand{\tw}{\t{w}}
+\newcommand{\tI}{\t{I}}
+\renewcommand{\tt}{\t{t}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-6pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-6pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-6pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+\newcommand{\Title}{List SIR}
+\newcommand{\Author}{Jure Slak}
+\title{\Title}
+\author{\Author}
+\date{\today}
+\hypersetup{pdftitle={\Title}, pdfauthor={\Author}, pdfcreator={\Author}, pdfproducer={\Author}, pdfsubject={}, pdfkeywords={}}  % setup pdf metadata
+
+% \pagestyle{empty}              % vse strani prazne
+\setlength{\parindent}{0pt}    % zamik vsakega odstavka
+\setlength{\parskip}{10pt}     % prazen prostor po odstavku
+% \setlength{\overfullrule}{30pt}  % oznaci predlogo vrstico z veliko črnine
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0px}{0px}{-2px}
+\titleformat*{\section}{\Large\bf}
+\titlespacing*{\subsection}{0px}{0px}{-2px}
+\titleformat*{\subsection}{\large\bf}
+
+\newcommand{\lstar}{\overset{*}{\gets}}
+\newcommand{\rstar}{\overset{*}{\to}}
+\newcommand{\istar}{\overset{*}{\leftrightarrow}}
+\newcommand{\red}{\downarrow}
+\newcommand{\st}{\operatorname{st}}
+\newcommand{\rez}{\operatorname{Rez}}
+\newcommand{\vk}{\operatorname{vk}}
+\newcommand{\mst}{\operatorname{mst}}
+\newcommand{\vc}{\operatorname{\text{vč}}}
+\newcommand{\vm}{\operatorname{vm}}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\floatname{algorithm}{Algoritem}
+\algnewcommand\algorithmicto{\textbf{to}}
+\algrenewtext{For}[3]{$\algorithmicfor\ #1 \gets #2\ \algorithmicto\ #3\ \algorithmicdo$}
+
+
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{\boldmath #1}}
+
+\begin{document}
+
+\section*{Prepisovalni sistemi} % slog nastaviš zgoraj
+Imejmo operacije $f_i$ mestnosti $d_i$ nad množico objektov $A$. \textbf{Konkretna predstavitev} te množice uporablja neko končno abecedo $\Sigma$ in odločljivo množico $T \subseteq \Sigma^*$ ter izračunljive operacije $g_i$ enakih mestnosti $d_i$. Poleg tega imamo vrednostno funkcijo $v\colon T \to A$, tako da je $v$ surjektivna in
+da $v(g_i(t_1, \dots, t_{d_r})) = f_i(v(t_1), \dots , v(t_r))$, oz.\ da komutira diagram
+\[
+\xymatrix{
+  T^{d_i} \ar[r]^{g_i} \ar[d]_{v^{d_i}} & T \ar[d]_{v} \\
+  A^{d_i} \ar[r]^{f_i} & \ A\ .
+}\]
+
+\textbf{Ekvivalenca termov:} Za dva terma $t_1, t_2 \in T$ definiramo
+$t_1\sim t_2 \iff v(t_1) = v(t_2)$.
+Struktura $(A, f_i)$ je izračunljiva, če obstaja poleg pogojev zgoraj tudi tak izračunljiv epimorfizem $v$.
+
+\textbf{Kanonska funkcija:} izbere po enega predstavnika iz vsakega ekvivalenčnega razreda. Funkcija $f$ je kanonska za $(T, \sim)$, če
+$f(t)  \sim t$, $t_1 \sim t_2 \implies f(t_1) = f(t_2)$, $f$ izračunljiva.
+
+\textbf{Redukcijska relacija: } Relacija $R \subseteq T\times T$. \\
+\begin{tabular}{lll}
+     oznaka & pomen & razlaga \\ \hline
+     $\to$ & $R$ & redukcijska relacija \\
+     $\overset{n}{\to}$ & $R^n$ & v $n$ korakih \\
+     $\gets$ & $R^{-1}$ & inverz redukcijske relacije \\
+     $\leftrightarrow$ & $R \cup R^{-1}$ & simetrična ovojnica \\
+     $\overset{+}{\to}$ & $R^+$ & tranzitivna ovojnica \\
+     $\rstar$ & $R^*$ & relf. in tranzitivna ovojnica \\
+     $\istar$ & $(R \cup R^{-1})^*$ & ekvivalenčna ovojnica \\
+\end{tabular} \\
+Za dva elementa definiramo \textbf{imata skupnega naslednika}: $a \red b \iff a \rstar c \lstar b$. \\
+Za element definiramo, da je \textbf{reduciran}: $a \red \iff \neg \exists b \in T\colon a \to b$. \\
+\textbf{Prepisovalni sistem:} je par $(T, \to)$, v katerem za $\sim$ vzamemo $\istar$.
+
+Relacija $\to$ je \textbf{Noetherska}, če ne vsebuje neskončnih redukcijskih verig. \\
+\textbf{Trd:} $\to$ Noetherska $\iff \exists f \colon T \to \N \ \forall t_1, t_2 \in T\colon t_1 \to t_2 \implies f(t_1) > f(t_2)$\\
+\textbf{Trd:} $\to$ Noetherska $\iff \forall t \in T\ \exists r \in T\colon t \rstar r\red$.
+
+\textbf{Def:} Relacija $\to$ ima \textbf{enolične reducirane oblike} (ERO), če
+$\forall a, b, c \in T\colon (\red b \lstar a \rstar c \red) \implies b=c$. \\
+Relacija $\to$ je \textbf{konfluentna} (KON), če $\forall a, b, c \in T\colon
+(b \lstar a \rstar c) \implies b \red c$. \\
+Relacija $\to$ je \textbf{lokalno konfluentna} (LKON), če $\forall a, b, c \in T\colon (b \gets a \to c) \implies b \red c$. \\
+Relacija $\to$ ima \textbf{Church-Rosserjevo} lastnost (CR), če $\forall a, b \in T\colon
+(a \istar b) \implies a \red b$.
+
+Velja: CR $\implies$ KON $\implies$ LKON in KON $\implies$ ERO. \\
+\textbf{Newmanova lema:} Če je $\to$ Noetherska, so KON, LKON, ERO in CR ekvivalentne.
+
+\textbf{Def: } $\to$ je \textbf{polna}, če je Noetherska in konfluentna.
+Problem napolnitve relacije: radi bi razširili $\to$ tako, da bo polna, relacija $\istar$ pa se bo ohranila. \\
+\textbf{Izrek: } Za vsako Noethersko $\to$ v $T$ obstaja napolnitev.
+Poiščemo jo tako, da najdemo izraz, ki ima dve ereducirani obliki
+in dodamo v relacijo pravilo, ki eno prevede na drugo.
+
+To naprej (kritični pari) je nagravžno in upamo da ne bo na izpitu.
+
+\textbf{Hint:} Kadar dokazujemo, da je zaporedje Noethersko, si lahko pogosto pomagamo s kakšno funkcijo (glej trditev pod defincijo Noetherskosti). Ker pogosto delamo na nizih števk, lahko pogosto uporabimo kar samo vrednost števila, ki nam ga zapis predstavlja (recimo za nize 0 in 1 uporabimo funkcijo, ki vrednoti dvojiški zapis). Pogosto moramo na začetek niza postaviti še 1 (0 in 000 oba kodirata 0, z dodajanjem pa dobimo 1 0 in 1 000, ki kodirata različni števili).\\
+Ko testiramo enolične reducirane oblike si lahko pogosto pomagamo z ugotovitvami narave `vsa pravila ohranjajo sodost oz. lihost števila ničel'. V nekaterih primerih, moramo gledati po kakšnem modulu.\\
+Če imajo pravila med sabo `prazen presek' (torej delujejo na disjunktnih podintervalih, recimo 00 in 11), iz tega sledi LKON. Če primerjamo za $P_1$ in $P_2$, nam redukcija $P_1$ in nato $P_2$ reducira v isti element kot $P_2$ in nato $P_1$, torej imata redukciji z $P_1$ oz. $P_2$ skupnega naslednika.
+
+\section*{Polinomska aritmetika}
+Vedno naj bo $K$ komutativen kolobar z $1 \neq 0$.
+
+\textbf{Rezultanta: } Naj bosta $p(x) = \sum_{i=0}^n a_ix^i$ in
+$q(x) = \sum_{i=0}^m b_i x^i$ polinoma iz $K[x]$, $a_n \neq 0$, $b_m \neq 0$, $\st p + \st q > 0$ (to velja skos). Potem je rezultanta determinanta te $(n+m) \times (n+m)$ matrike
+\[
+\rez(p, q) = \det
+\begin{bmatrix}
+      a_n & a_{n-1} & a_{n-2} & \cdots & 0 & 0 & 0 \\
+      0 & a_n & a_{n-1} & \cdots & 0 & 0 & 0 \\
+      \vdots & \vdots & \vdots & & \vdots & \vdots & \vdots \\
+      0 & 0 & 0 & \cdots & a_1 & a_0 & 0 \\
+      0 & 0 & 0 & \cdots & a_2 & a_1 & a_0  \\
+      b_m & b_{m-1} & b_{m-2} & \cdots & 0 & 0 & 0 \\
+      0 & b_m & b_{m-1} &  \cdots & 0 & 0 & 0 \\
+      \vdots & \vdots & \vdots & & \vdots & \vdots & \vdots \\
+      0 & 0 & 0 & \cdots & b_1 & b_0 & 0 \\
+      0 & 0 & 0 & \cdots & b_2 & b_1 & b_0  \\
+\end{bmatrix}.
+\]
+
+\textbf{Trd:} $\rez(q, p) = (-1)^{mn} Rez(p, q)$ \\
+\textbf{Trd:} $n = 0 \implies Rez(p, q) = a_0^m$ \\
+\textbf{Trd:} $\exists r, s \in K[x], r \neq 0, s \neq 0$, tako da $\st r < \st q, \st s < \st p$ in $\rez(p, q) = pr + qs$ \\
+\textbf{Izr:} Če $K$ Gaussov ali cel: $p$ in $q$ imata nekonstanten skupni faktor $\iff \rez(p, q) = 0$.  \\
+\textbf{Trd:} $K$ cel, $p, q, r \in K[x]$, $\st p + \st r > 0$, $\st q + \st r > 0$, potem velja
+$\rez(pq, r) = \rez(p, r)\rez(q, r)$ in $\rez(r, pq) = \rez(r, p)\rez(r, q)$.  \\
+\textbf{Trd:} $K$ cel, $p(x) = a \prod(x-\alpha_i), q(x) = b \prod (x-\beta_j)$. \\ Potem je $\rez(p, q) = a^m \prod_i q(\alpha_i) = b^n \prod_j p(\beta_j) = a^mb^n \prod_i \prod_j (\alpha_i - \beta_j)$.\\
+\textbf{Lema o homomorfizmu:} $K, K_1$ cela, $\varphi\colon K \to K_1$ homomorfizem, $\varphi(\vk(p)) \neq 0$. Potem $\varphi(\rez(p, q)) = \varphi(\vk(p))^{\st q - \st \varphi (q)} \rez(\varphi(p), \varphi(q))$ in $\varphi(\rez(p, q)) = 0 \iff \rez(\varphi(p), \varphi(q)) = 0$.
+
+Uporaba: eliminacija spremenljivk\\
+\textbf{Izr:} $K$ Gaussov, $p, q \in K[x_1, ...,x_d], R = \rez_{x_d}(p, q) \in K[x_1, \ldots x_{d-1}]$, $F$ alg. zaprtje ulomkov $K$. Potem lahko spremenljivko eliminiramo \\
+$\forall c \in F^d \colon p(c_1, \ldots, c_d) = q(c_1, \ldots, c_d) \implies R(c_1, \ldots, c_{d-1}) = 0$ in \\
+in rešitev prenesemo nazaj: $\forall c \in F^{d-1} \colon R(c_1, \ldots, c_{d-1}) = 0 \neq \vk_{x_d}(p)(c_1, \ldots, c_{d-1})\implies \exists c_d \in F \colon p(c_1, \ldots, c_d) = q(c_1, \ldots,c_d) = 0$\\
+Tako lahko namesto enačb $p(x_1, \ldots, x_d) = 0$ in $q(x_1, \ldots, x_d) = 0$ pišemo enao samo enačbo $\rez_{x_d}(p, q) = 0$. Pri tem se lahko pojavijo parazitske rešitve, če $\vk_{x_d}(p)(c_1, \ldots, c_{d-1}) = 0$.
+
+Uporaba: če imamo algebraični števili $a$ in $b$, potem s pomočjo rezultante dobimo polinome, ki uničijo $a+b$, $ab$, $1/a$, $a^r$,
+$r \in \Q^+$. Za vsako elgebraično število $a$ obstaja polinom z
+racionalnimi koeficienti (in z celimi), ki ga uniči. Takemu z
+minimalno stopnjo in vodilnim koeficientom 1, se reče
+\textbf{minimalni} polinom. Vsak drug polinom, ki uniči $a$, je
+deljiv z minimalnim.
+
+\begin{algorithm}[!ht]
+\caption{Evklidov algoritem (tudi za polinome) \newline
+\textbf{Vhod:} $a, b \in K$. \newline
+\textbf{Izhod:} Največji skupni delitelj $\gcd(a, b) \in K$}
+\label{alg:evk}
+\begin{algorithmic}[1]
+\Procedure{GCD}{$a, b$}
+\While{$b\neq 0$}
+\State $r \gets a \text{ mod } b$
+\State $a \gets b$
+\State $b \gets r$
+\EndWhile
+\State \Return $a$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Razstavljanje polinomov}
+$K$ ima karakteristiko 0. Polinom $f \in K[x]$ želimo razstaviti na
+$f = g \circ h$, $g, h \in K[x]$ in $1 < \st g,\st h < \st f$.
+
+\textbf{Trd: } Če je $\st f$ praštevilo, razstavitev ne obstaja.  \\
+Poljubno si lahko izberemo prosti člen (sicer: $g_1(x) = g(x-c), h_1(x) = h(x) + c$) in vodilni koeficient $h$ (sicer: $g_2(x) = g(x/c), h_2(x) = ch(x)$), izberemo $h(0) = 0$ in $h$ moničen.
+Glej algoritem~\ref{alg:razst}.
+
+\begin{algorithm}[!ht]
+\caption{Razstavljanje polinomov (Kozen, Landau). \newline
+\textbf{Vhod:} $f \in K[x]$, $f = x^{rs} + a_{rs-1} x^{rs- 1} + \cdots + a_0$, $r, s \geq 2$. \newline
+\textbf{Izhod:} $h, g \in K[x]$, tako da $f = g \circ h$,
+$g = x^r + b_{r-1} x^{r-1} + \cdots + b_0$, $h = x^s + c_{s-1} x^{s-1} + \cdots + c_0$,  ali ``Ni mogoče.''.}
+\label{alg:razst}
+\begin{algorithmic}[1]
+\Procedure{Razstavi}{$f, r, s$}
+\State $h_0 \gets x^s$ \Comment{Izračun $h$.}
+\For{k}{1}{s-1}
+    \State $h_k \gets h_{k-1} + \frac{1}{r}(a_{rs-k} - [x^{rs-k}]h_{k-1}^r) x^{s-k}$
+\EndFor
+\State $h \gets h_{s-1}$
+\State $b_r \gets 1$ \Comment{Izračun $g$.}
+\For{i}{r-1}{1} \Comment{Gaussova eliminacija za $Ub = a$.}
+\State $b_i \gets a_{is} - \sum_{j=i+1}^r ([x^{is}]h^j(x))b_j$
+\EndFor
+\State $b_0 \gets a_0$
+\State $g(x) \gets \sum_{i=0}^r b_ix^i$
+\If{$f(x) = g(h(x))$}
+\State \Return $(g, h)$ \Comment{Preverimo, če se izide.}
+\Else
+\State \Return ``Ni mogoče.''
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Razcep polinomov v $\Z_p$, $p$ praštevilo}
+Lastnosti $\Z_p$: $a^{p-1} = 1$, $(a+b)^p = a^p + b^p$, $v(x^p) = v(x)^p$, $u' = 0 \iff \exists v \in \Z[x]\colon v(x^p) = u(x)$.
+
+Želimo razcepiti $u$. Izračunamo $d = \gcd(u, u')$. Če je $0 < \st d < \st u$, potem je $u = d \cdot u/d$ netrivialen razcep, ki ga lahko razcepimo naprej.
+Če je $\st d = \st u > \st u'$, potem $d | u'$ torej $u'(x) =0$ in
+$u(x) = v(x^p) = v(x)^p$ in razcepimo $v$ naprej.
+Če je $\st d = 0$, potem je $u$ brez kvadratov in uporabimo algoritem~\ref{alg:razc}.
+
+\begin{algorithm}[!ht]
+\caption{Razcep polinomov (Berlekamp). \newline
+\textbf{Vhod:} $u \in \Z_p[x]$ brez kvadratov, $n = \st u \geq 2$. \newline
+\textbf{Izhod:} Netrivialen razcep polinoma $u$, če obstaja.}
+\label{alg:razc}
+\begin{algorithmic}[1]
+\Procedure{Razcepi}{$u, p$}
+\State Izračunaj $Q \in \Z_p^{n\times n}$ s koeficienti danimi z
+$x^{kp} = \sum_{i=0}^{n-1} q_{ik} x^k \pmod{u(x)}$.
+\State Poišči bazo $\{ v^{(1)} = [1,0,\ldots,0] \cong 1 + 0x + \cdots, v^{(2)}, \ldots, v^{(r)}\}$ jedra $Q - I$ nad $\Z_p$.
+\If{$r=1$}
+\State \Return $u$ nerazcepen.
+\Else
+\For{a}{0}{p-1}
+\State $d_a(x) = \gcd(u(x), v^{(2)}(x) - a)$
+\If{$\st d_a > 0$}
+\State \Return $(d_a(x), u(x) / d_a(x))$ je razcep.
+\Comment{Če želimo vseh $r$ faktorjev, potem ne}
+\EndIf
+\Comment{vrnemo takoj, ampak nadaljujemo}
+\EndFor
+\Comment{do $p-1$ in nato naprej z $v^{(3)}$ itd.,}
+\EndIf
+\Comment{ dokler jih nimamo $r$.}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Razcep polinomov nad $\Z$}
+\textbf{Def:} Polinom $p = \sum_i a_i x^i$ je primitiven, če je $\gcd(a_0, \ldots, a_n) = 1$. \\
+\textbf{Lema:} Produkt primitivnih je primitiven.
+
+Ideja 1: razcepimo polinom po modulu $p$, kjer je $p$ pračtevilo večje od $2M$ in $M$ je tak, da so vsi koeficienti v razcepu po abs.\ manjši od $M$ (obstajajo ocene).
+
+Ideja 2: Razcep po nekem manjšem modulu $p$ lahko dvignemo do razcepa
+nad $p^k < M$. Tukaj uporabimo Henslov dvig.
+Ko imamo faktorje nad $Z_{p^k}$. Potem gremo čez vse podmnožice faktorjev in poskusimo, če kakšen produkt deli $p$.
+
+\section*{Rešetke}
+\textbf{Celoštevilska ogrinjača} vektorjev $v_1, \ldots v_k \in \R^m$ je množica $L(v_1, \ldots, v_k) = \{ \sum \lambda_i v_i; \lambda_i \in \Z \}$. \\
+Množica $\Lambda \subseteq \R^m$ je $n$-razsežna \textbf{rešetka}, če obstajajo $b_1, \ldots, b_n \in \R^m$, tako da $\Lambda = L(b_1, \ldots, b_n)$.
+Množica $\{b_i\}$ je baza $\Lambda$, $m\times n$ matrika $B$ s stolpci $b_i$ pa bazna matrika.  \\
+Dve rešetki $\Lambda_1, \Lambda_2$ dim.\ $n$ sta \textbf{enaki} $\iff$ obstaja $U \in \Z^{n\times n}$, da $B_2 = B_1 U$ in $\det U = \pm 1$.\\
+\textbf{Determinanta rešetke} $\Lambda$ z bazo $B$ je $d(\Lambda) = \sqrt{\det(B^\T B)}$.\\
+\textbf{Pravokotnost} baze meri $\delta(b_1, \ldots, b_n) = \prod \|b_i\| / d(\Lambda)$. Vedno je $\delta(\Lambda) \geq 1$. \\
+\textbf{Lema: } Vsaka omejena podmnožica rešetke je končna.
+
+\textbf{SVP} je problem iskanja najkrajšega vektorja v rešetki.
+SVP v 2D je iskanje najbližjega vektorja pravokotni projekciji:
+$(u, v) \to (u, v-ku)$, optimalni $k$ je $\left[ \frac{\langle u, v \rangle}{\langle v, v \rangle} \right]$, kjer je $[x]$ najbližje celo število $x$. Od tod sledi algoritem~\ref{alg:60}. Posplošitev je algoritem~\ref{alg:theta}.
+
+\begin{algorithm}[!ht]
+\caption{Algoritem $60^\circ$ za iskanje najkrajšega vektorja v rešetki dimenzije 2. \newline
+\textbf{Vhod:} Baza $(u, v) \in \R^m$. \newline
+\textbf{Izhod:} Nova baza $(u, v)$, da je $\cos\measuredangle(u, v) \leq \frac{1}{2}$. Krajši izmed obeh je najkrajši vektor v rešetki.}
+\label{alg:60}
+\begin{algorithmic}[1]
+\Procedure{60deg}{$u, v$}
+\Repeat
+\State \textbf{swap}$(u, v)$
+\State $k \gets \left[ \frac{\langle u, v \rangle}{\langle v, v \rangle} \right]$
+\State $u \gets u - kv$.
+\Until{$\|v\|^2 \leq \|u\|^2$}
+\State \Return $(u, v)$.
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[!ht]
+\caption{Algoritem $\theta^\circ$. \newline
+\textbf{Vhod:} Baza $(u, v) \in \R^m$ in $t \in [1, 2)$. \newline
+\textbf{Izhod:} Nova baza $(u, v)$, da je $\cos\measuredangle(u, v) \leq \frac{t}{2}$.}
+\label{alg:theta}
+\begin{algorithmic}[1]
+\Procedure{thetadeg}{$u, v, t$}
+\Repeat
+\State \textbf{swap}$(u, v)$
+\State $k \gets \left[ \frac{\langle u, v \rangle}{\langle v, v \rangle} \right]$
+\State $u \gets u - kv$.
+\Until{$\|v\|^2 \leq t^2\|u\|^2$}
+\State \Return $(u, v)$.
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Def:} $(b_1,\ldots, b_n)$ baza rešetke $\Lambda$. Za \textbf{Gram-Schmidtovo bazo} $(b_1^*, \ldots, b_n^*)$ velja $b_i^* \perp b_j^*$ (za $i \neq j$) in $\LL(b_1, \ldots,b_i) = \LL(b_1^*, \ldots, b_i^*)$ za $i = 1, \ldots, n$. \\
+\textbf{Trd:} $(b_1,\ldots, b_n)$ baza rešetke $\Lambda$ potem je $\forall v \in \Lambda \colon \min\limits_{1 \leq i \leq n} \|b_i^*\| \leq \|v\|.$ \\
+\textbf{Def:} $(b_1,\ldots, b_n)$ baza rešetke $\Lambda$ potem je $b_j(i)$ \textbf{pravokotna projekcija vektorja} $b_j$ vzoldž $\LL(b_1^*, \ldots, b_i^*)$ na $\LL(b_i, \ldots, b_n)$.\\
+\textbf{Def:} Baza rešetke je \textbf{$t$-reducirana}, če velja $|\mu_{ij}| \leq \frac12$ in $\|b_i^\ast\|^2 \leq t \|b_{i+1}(i)\|^2$ za $1 \leq i \leq n$. \\
+\textbf{Trd:} Baza, ki jo vrne algoritem~\ref{alg:theta} je $t$-reducirana. Za splošno dimenzionalno rešetko uporabljamo algoritem~\ref{alg:lll}.
+
+
+\begin{algorithm}[!ht]
+\caption{Algoritem Lenstra–Lenstra–Lovász. \newline
+\textbf{Vhod:} Baza $b_1, \ldots,b_n \in \R^m$ rešetke $\Lambda$ in $t \in [1, 2)$. \newline
+\textbf{Izhod:} $t$-reducirana baza $(b_1, \ldots, b_n)$ rešetke $\Lambda$}
+\label{alg:lll}
+\begin{algorithmic}[1]
+\Procedure{LLL}{$\{b_i\}, t$}
+    \State $\mu_{i,k} := \frac{\left<b_i, b_k^*\right>}{\|b_k^*\|^2}$
+    \State $k \gets 1$
+    \While{$k < n$}
+        \State $b_{k+1} \gets b_{k+1} - [\mu_{k+1, k}]b_k$
+        \If{$\|b_k^*\|^2 > t^2 \|b_{k+1}(k)\|^2$}
+            \State zamenjaj $b_{k+1}$ in $b_k$
+            \State $k \gets \max(k-1, 1)$
+        \Else \For{j}{k-1}{1}
+            \State $b_{k+1} \gets b_{k+1} - [\mu_{k+1, j}]b_k$
+            \State $k \gets k+1$
+        \EndFor \EndIf
+    \EndWhile
+    \State \Return $(b_1, \ldots, b_n)$.
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\section*{Vsote in rekurzivne enačbe}
+
+\textbf{Def:} Zaporedje $a \in K^\N$ je \textbf{hipergeometrično}, če obstajata $n_0 \in \N$ in $r \in K(n)$ tako da $\forall n \geq n_0 \colon a_n \neq 0 \land \frac{a_{n+1}}{a_n} = r(n)$. Množico vseh hipergeometričnih zaporedij označimo s $\mathcal{H}(K)$.
+
+\textbf{Izr:} $\forall r \in K(k)\ \exists a, b, c \in K[k] \colon \\
+r(k) = \frac{a(k)}{b(k)}\frac{c(k+1)}{c(k)} \land
+\left(\forall i \in \N_0 \colon a(k) \perp b(k+i)\right) \land
+a(k) \perp c(k) \land b(k) \perp c(k+1)$
+
+Za dano hipergeometrično zaporedje $t \in K^\N $ želimo njegovo vsoto $\sum_{k=k_0}^{n} t_k$ izraziti v zaključeni obliki.
+
+\begin{algorithm}[!ht]
+\caption{Gosperjev algoritem. \newline
+\textbf{Vhod:} Hipergeometrično zaporedje $t_k$, tako da $\frac{t_{k+1}}{t_k} = r(k) \in K(k)$. \newline
+\textbf{Izhod:} Hipergeometrično zaporedje $s_k$, tako da $s_{k+1} - s_k = t_k$ s.p., če obstaja.}
+\label{alg:gosper}
+\begin{algorithmic}[1]
+\Procedure{GA}{$t$}
+    \State izračunaj $r(k) \gets \frac{t_{k+1}}{t_k}$
+    \State najdi $a, b, c \in K[k] \colon r(k) = \frac{a(k)}{b(k)}\frac{c(k+1)}{c(k)}$, tako da $a(k) \perp b(k+i), i = 0, 1, 2, \ldots$
+    \State najdi $x(k) \in K[k]$, ki reši $a(k) x(k+1) - b(k-1)x(k) = c(k)$.
+    \Comment{Lahko uporabimo poli.}
+    \If{$x(k)$ ne obstaja}
+        \State \Return rešitev ne obstaja
+    \Else
+        \State \Return $s_k = \frac{b(k-1)x(k)}{c(k)} t_k$
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Z Gosperjevim algoritmom lahko zapišemo vsoto hipergeometričnega zaporedja v zaključeni obliki $\sum_{k=k_0}^{n} t_k = s_{n+1} - s_{k_0}$. Gosperjev algoritem nam odpre nov problem, ki je reševanje linearne rekurzivne enačbe s polinomskimi koeficienti. Tega se bomo lotili z algoritmom Poli (alg.~\ref{alg:poli}). \\
+\textbf{Hint:} Včasih $s_{n+1}$ (ali kateri drugi člen) ni definiran, takrat uporabimo $\sum_{k=k_0}^{n} t_k = s_{n} - s_{k_0} + t_n$. V splošnem velja $\sum_{k=k_0}^{k_1} t_k = s_{k_1} - s_{k_0} + t_{k_1}$.
+
+\textbf{Def:} Operator $E \colon K^\N \rightarrow K^\N$ se imenuje \textbf{operator pomika} in premakne člene zaporedja za eno mesto $(Ea)_n = a_{n+1}$. \\
+\textbf{Def:} Operator $\lap = E-1$ je \textbf{diferenčni operator}, $(\lap a)_n = a_{n+1} - a_n$.\\
+\textbf{Def:} Množica $L[n; E] = \left\{\sum\limits_{i=0}^{r} p_i E^i \mid \ r \in \N, p_i \in K[n] \right\}$ je kolobar linearnih rekurzivnih operatorjev (LRO) s polinomskimi koeficienti.
+
+\begin{algorithm}[!ht]
+\caption{Algoritem poli. \newline
+\textbf{Vhod:} LRO $L = \sum_{j=0}^{r}q_j(n) \lap^j \in K[n;\lap]$ in polinom $f \in K[n]$. \newline
+\textbf{Izhod:} Baza $B$ afinega prostora $\{x \in K[n] \mid Lx = f \}$.}
+\label{alg:poli}
+\begin{algorithmic}[1]
+\Procedure{Poli}{$t$}
+    \State $b \gets \max\limits_{0 \leq j \leq r}(\st q_j - j)$
+    \State $p(z) \gets \sum\limits_{0 \leq j \leq r}\vk(q_j) z^{\underline{j}}$
+    \State $\alpha \gets \max(\{k \in \N\rvert\ p(k) = 0\} \cup \{-1\})$
+    \State $d \gets \max(\st f - b, \alpha)$
+    \If{$d < 0$}
+        \If{$f=0$}
+            \State \Return $\{0\}$
+        \Else
+            \State \Return $\{\}$
+        \EndIf
+    \Else
+        \State \Return $B = \{x \in K[n] \mid \ \st x \leq d, Lx = f\}$
+        \Comment z metodo nedoločenih koeficientov
+    \EndIf
+    \Comment za $c_i$ in nastavkom $x(n) = \sum_{i=0}^d c_i n^i$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Def:} $F\colon \N\times\N \to K$ je dvorazsežno hipergeomertijsko zaporedje, če obstajajo $p_1, p_2, q_1, q_2 \in K[n, k] \setminus \{0\}$, tako da $p_1(n, k)F(n+1, k) = q_1(n, k)F(n, k)$ in $p_2(n, k)F(n, k+1) = q_2(n, k)F(n, k)$.
+\textbf{Def:} $F\colon \N\times\N \to K$ je \emph{pravo} dvorazsežno hipergeometrijsko zaporedje, če je oblike $F(n,k) = P(n,k)y^nz^k\prod_{i=0}^p(a_i n+b_i k+\alpha_i)! /  \prod_{j=0}^q(c_j n+d_j k+\beta_j)!$ kjer $P\in \C[n,k]$, $y,z\in\C^*$, $a_i,b_i,c_j,d_j\in\Z$, $p,q\in\N$, $\alpha_i,\beta_j\in\C$, tako da $a_i n +b_i k+\alpha_i$ niso negativna cela števila.
+
+\begin{algorithm}[!ht]
+\caption{Zeilbergerjev algoritem (ni nujno, da se konča, razen za \emph{pravo}). \newline
+\textbf{Vhod:} Dvorazsežno hipergeometrijsko zaporedje $F(n,k)$. \newline
+\textbf{Izhod:} $L \in K(n)[E_n]$ in $G(n, k)$, tako da $(LF)(n, k) = G(n, k+1) - G(n, k)$.}
+\label{alg:za}
+\begin{algorithmic}[1]
+\Procedure{ZA}{$F$}
+    \For{d}{0}{\infty}
+        \State Uporabi GA nad $K(n)$ na produktu $t_k = F(n+d, k) - \sum_{i=0}^{d-1} r_i(n) F(n+i, k)$,
+        kjer so $r_0, \ldots, r_{d-1} \in K(n)$ nedoločene.
+        \If{GA uspe}
+            \State Naj GA vrne $s_k$ in $r_0, \ldots, r_{d-1}$, potem vrni $L = E_n^d - \sum_{i=0}^{d-1} r_i(n) F(n+i, k)$, $G(n, k) = s_k$.
+        \EndIf
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Na koncu ZA moramo rešiti hipergeometrijsko LRE. Za to imamo algoritem Hiper (alg.~\ref{alg:hiper}).\\
+\textbf{Hint:} Pogosto se splača čez celotno enačbo narediti $\sum_{k=0}^\infty$, saj tako dobimo hipergeometrijsko LRE za $S(n)$ (vsota $F$), pri tem, ko (npr. v primeru binomskih simbolov v $G(n,k)$) na eni strani dobimo 0. Velja tudi $\binom{0}{0}=1$ (koristno pri $S(0)$) in če $m>n$ potem $\binom{n}{m}=0$ (zato je $G(n,\infty)$ pogosto 0).
+
+\begin{algorithm}[!ht]
+\caption{Algoritem Hiper (Petkovškov algoritem). \newline
+\textbf{Vhod:} $p, q, r \in K[n], pr \neq 0$. \newline
+\textbf{Izhod:} Vse hipergeometrične rešitve LRE $p(n)y_{n+2} + q(n)y_{n+1} + r(n)y_n$.}
+\label{alg:hiper}
+\begin{algorithmic}[1]
+\Procedure{Hiper}{$p, q, r$}
+\ForAll{monične $a(n)\mid r(n)$ in $b(n) \mid p(n-1)$}
+\State $P(n) \gets a(n+1) p(n) / b(n+1)$
+\State $Q(n) \gets q(n)$
+\State $R(n) \gets b(n) r(n) / a(n)$
+\State $\rho \gets \max\{\st P, \st Q, \st R\}$
+\State $\alpha \gets [n^\rho]P(n)$
+\State $\beta \gets [n^\rho]Q(n)$
+\State $\gamma \gets [n^\rho]R(n)$
+\ForAll{rešitve $z \neq 0$ enačbe $\alpha z^2 + \beta z + \gamma = 0$}
+\ForAll{poli. rešitve $c(n)$ enačbe $z^2P(n)c(n+2) + zQ(n)c(n+1) + R(n)c(n)$}
+\State $f(n) \gets z\frac{a(n)}{b(n)} \frac{c(n+1)}{c(n)}$
+\State med vse rešitve dodaj rešitve LRE $y_{n+1} = f(n) y_n$.
+\EndFor
+\EndFor
+\EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection*{Znižanje reda enačbe}
+Če imamo neko hipergeometrično rešitev $La = 0$, potem lahko znižamo red enačbe, tako da gremo noter z nastavkom $y_n = a_n z_n$. To nam da enačbo za $z_n$: $L'z_n = 0$. Linearni operator $L'$ zapišemo po potencah $\Delta$, prosti člen se mora pokrajšat in dobimo enačbo za $(\Delta z)_n$, ki je enega reda manjša. Potem to rešimo in dobimo rešitev $(\Delta z)_n = b_n$, od tod pa dobimo $z_n = c_1 \sum_{k=k_0}^{n-1} b_k + c_2$, $c \in K$ in od tod končno $y_n = a_n (c_1 \sum_{k=k_0}^{n-1} b_k + c_2)$.
+
+\newpage
+
+\section*{Računanje v polinomskih idealih}
+
+\textbf{Oznake:} $x := (x_1, \ldots, x_n)$, $\alpha := (\alpha_1, \ldots, \alpha_n)$, $|\alpha| := \alpha_1 + \ldots + \alpha_n$, $x^\alpha = x_1^{\alpha_1}\ldots x_n^{\alpha_n}$.\\
+% vm, vc, mst ze obstajajo kot komande
+\textbf{Def:} Za $\alpha, \beta \in \N^n$ definiramo relacijo $\subseteq$ kot $\alpha \subseteq \beta \iff \forall i \ \alpha_i \leq \beta_i$. Velja $\alpha \subseteq \beta \implies x^\alpha | x^\beta$.\\
+\textbf{Def:} Relacija $\leq$ v $\N^n$ je \textbf{monomska urejenost}, če linearno ureja elemente, so vsi elementi večji od 0 in je tranzitivna. Primeri: $\leq_{LEX}, \leq_{TLEX}, \leq_{TRLEX}$. \\
+\textbf{Def:} Množica monomov $\Mon = \{x^\alpha \mid \alpha \in \N^n\}$. Z dano monomsko urejenostjo $\leq$ za $\N^n$, na $\Mon$ definiramo relacijo $\leq$ s predpisom $x^\alpha \leq x^\beta \iff \alpha \leq \beta$. \\
+\textbf{Lema (DL):} $\forall M \subseteq \Mon \ \exists B \subseteq M \colon |B| < \infty \land (\forall m \in M \ \exists b \in B\colon b|m)$.
+
+\textbf{Def:} Naj bo $\leq$ monomska urejenost na $\N^n$, $f \in K[x]\setminus \{0\}$ in pripadajoča $A \subseteq \N^n$ končna, tako da $f = \sum\limits_{\alpha \in A} c_\alpha x^\alpha$ in $\forall \alpha \in A \colon c_\alpha \neq 0$. Potem definiramo naslednje oznake: \\
+\vspace{-0.5cm}
+\begin{enumerate}[(i)]
+    \vspace{-0.3cm}
+    \item skupna stopnja $f$: $\st f := \max\limits_{\alpha \in A} |\alpha|$
+    \vspace{-0.3cm}
+    \item multistopnja $f$: $\mst f := \max_{\leq}A$
+    \vspace{-0.3cm}
+    \item vodilni koeficient $f$: $\vk_{\leq}f := c_{\mst_{\leq}f}$
+    \vspace{-0.3cm}
+    \item vodilni monom $f$: $\vm_{\leq}f := x^{\mst_{\leq}f}$
+    \vspace{-0.3cm}
+    \item vodilni člen $f$: $\vc_{\leq}f := \vk_{\leq}f \vm_{\leq}f$
+\end{enumerate}
+\textbf{Izr:} Naj bo $\leq$ monomska urejenost in $f_1, \ldots f_k \in K[x] \setminus \{0\}$, $g \in K[x]$. Potem obstajajo $h_1, \ldots, h_k, r \in K[x]$, tako da $g = \sum h_if_i + r$, noben člen $r_i$ ni deljiv z nodebim izmed členov $f_1, \ldots, f_k$ in, če $h_i \neq 0$, je $\mst (h_if_i) \leq \mst(g)$. Za algoritem za deljenje glej algoritem~\ref{alg:del}.
+
+\begin{algorithm}[!ht]
+\caption{Algoritem za deljenje v $K[x_1, \ldots, x_n]$. \newline
+\textbf{Vhod:} $\leq$ monomska urejenost, $f_1, \ldots, f_k, g$ kot zgoraj. \newline
+\textbf{Izhod:} $h_1, \ldots, h_k, r$ kot zgoraj.}
+\label{alg:del}
+\begin{algorithmic}[1]
+\Procedure{deli}{$g, f_1, \ldots, f_k$}
+\For{i}{1}{k} \State $h_i \gets 0$ \EndFor
+\State $r\gets 0$
+\State $p \gets g$
+\While{$p \neq 0$}
+    \State $i \gets 1$
+    \State $uspeh \gets 0$
+    \While{$i \leq k$ \textbf{ and } $uspeh \neq 1$}
+        \If{$\vc{f_i} \mid \vc{p}$}
+        \State $p \gets p - g \vc(p) / \vc(f_i)$
+        \State $h_i \gets h_i + \vc(p) / \vc(f_i)$
+        \State $uspeh \gets 1$
+        \Else
+        \State $i\gets i+1$
+        \EndIf
+    \EndWhile
+    \If {$uspeh = 0$}
+    \State $p \gets p - \vc(p)$
+    \State $r \gets r + \vc(p)$
+    \EndIf
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\textbf{Def: } Naj bo $I \subseteq K[x]$ ideal $G\subseteq I$ končna.
+Če za vsak $f \in I \setminus \{0\}$ obstaja $g \in G$, tako da $\vm(g) \mid \vm(f)$, potem je $G$ \textbf{Gr\"obnerjeva baza} za $I$.  \\
+\textbf{Trd: } Naj bo $\{g_1, \ldots, g_m\}$ Gr\"obnerjeva baza za $I$.
+Potem je $f \in I \iff f \mod (g_1, \ldots, g_m) = 0$ in $I = \langle g_1, \dots, g_m\rangle$. \\
+\textbf{Trd:} Vsak ideal ima Gr\"obnerjevo bazo. \\
+\textbf{Izr:} Vsak polinomski ideal je končno generiran. \\
+\textbf{Def:} Za dva neničelna polinoma $f, g \in K[x]$ in monomsko urejenost $\leq$ naj bo $S$-polinom polinomov $f$ in $g$ polinom
+$S(f, g) = \frac{m}{\vc(f)} f - \frac{m}{\vc(g)}g$, kjer je $m = \operatorname{lcm}(\vm f, \vm g)$. \\
+\textbf{Izrek:} $I$ ideal v $K[x]$ z bazo $G = \{g_1, \ldots, g_k\}$.
+Potem je $G$ Gr\"obnerjeva $\iff$ $\forall g_i, g_j \in G$ velja $S(g_i, g_j) \mod G = 0$. To je temeljni izrek za algoritem~\ref{alg:grob}, ki poišče Gr\"obnerjevo bazo.
+
+\begin{algorithm}[!ht]
+\caption{Buchbergerjev algoritem iskanje Gr\"obnerjeve baze. \newline
+\textbf{Vhod:} $\leq$ monomska urejenost, $f_1, \ldots, f_k \in K[x]$. \newline
+\textbf{Izhod:} Gr\"obnerjeva baza ideala $\langle f_1, \dots, f_k\rangle$ glede na $\leq$.}
+\label{alg:grob}
+\begin{algorithmic}[1]
+\Procedure{Groebner}{$f_1, \ldots, f_k$}
+\State $G' \gets \{f_1, \ldots, f_k\}$
+\Repeat
+    \State $G \gets G'$
+    \ForAll{pairs $(f, g) \in G^2$}
+        \State $r\gets S(f, g) \mod G$
+        \If{$r \neq 0$}
+            \State $G' \gets G' \cup \{r\}$
+        \EndIf
+    \EndFor
+\Until{$G' = G$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Def:} Gr\"obnerjeva baza je reducirana, če za vse $g \in G$ velja, da za vsak $h \in G \setminus \{g\}$ noben člen $h$ ni deljiv
+z $\vc(g)$ in $\vk(g) = 1$. Vsak ideal ima enolično reducirano Gr\"obnerjevo bazo.
+
+\hfill Avtorji: Jure Slak, Maks Kolman, Žiga Lukšič
+
+
+\end{document}
+% vim: syntax=tex:
+% vim set: spell spelllang=sl:
+% vim: foldlevel=99
+
+% Latex template: Jure Slak, jure.slak@gmail.com
