@@ -1,0 +1,291 @@
+\documentclass[a4paper,oneside,10pt]{article}
+
+\usepackage[slovene]{babel}    % slovenian language and hyphenation
+\usepackage[utf8]{inputenc}    % make čšž work on input
+\usepackage[T1]{fontenc}       % make čšž work on output
+\usepackage[reqno]{amsmath}    % basic ams math environments and symbols
+\usepackage{amssymb,amsthm}    % ams symbols and theorems
+\usepackage{mathtools}         % extends ams with arrows and stuff
+\usepackage{url}               % \url and \href for links
+\usepackage{icomma}            % make comma a thousands separator with correct spacing
+\usepackage{units}             % \unit[1]{m} and unitfrac
+\usepackage{enumerate}         % enumerate style
+\usepackage{array}             % mutirow
+\usepackage[usenames]{color}   % colors with names
+\usepackage{graphicx}          % images
+\usepackage[all]{xy}
+
+\usepackage[bookmarks, colorlinks=true, linkcolor=black, anchorcolor=black,
+  citecolor=black, filecolor=black, menucolor=black, runcolor=black,
+  urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
+\usepackage[
+  paper=a4paper,
+  top=2cm,
+  bottom=2cm,
+  textwidth=15cm,
+% textheight=24cm,
+]{geometry}  % page geomerty
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+% basic sets
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\newcommand{\PP}{\ensuremath{\mathcal{P}}}
+\newcommand{\TT}{\ensuremath{\mathbb{T}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\Mon}{\ensuremath{\textrm{Mon}}}
+
+% linearna orgrinjača
+\newcommand{\LL}{\ensuremath{\mathcal{L}}}
+
+% vectors
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vu}{\vec{u}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\va}{\vec{a}}
+%\newcommand{\vb}{\vec{b}}
+% \newcommand{\vc}{\vec{c}}
+\newcommand{\vt}{\vec{t}}
+\newcommand{\vf}{\vec{f}}
+\newcommand{\vF}{\vec{F}}
+\newcommand{\vE}{\vec{E}}
+\newcommand{\ve}{\vec{e}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vi}{\vec{\imath}}
+\newcommand{\vj}{\vec{\jmath}}
+\newcommand{\vS}{\vec{S}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\vom}{\vec{\omega}}
+\newcommand{\vzeta}{\vec{\zeta}}
+\newcommand{\er}{\vec{e}_r}
+\newcommand{\ef}{\vec{e}_{\varphi}}
+\newcommand{\et}{\vec{e}_{\vartheta}}
+
+% greek letters
+\let\oldphi\phi
+\let\oldtheta\theta
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+
+% vector operators
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\rot}{\operatorname{rot}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\lap}{\Delta}
+
+% transpose
+\newcommand{\T}{\ensuremath{\mathsf{T}}}
+\renewcommand{\sl}{\ensuremath{\operatorname{sl}}}
+
+% partial derivatives
+\newcommand{\dpar}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dpr}[1]{\dpar{#1}{r}}
+\newcommand{\dpt}[1]{\dpar{#1}{t}}
+\newcommand{\dpx}[1]{\dpar{#1}{x}}
+\newcommand{\dpy}[1]{\dpar{#1}{y}}
+\newcommand{\dpz}[1]{\dpar{#1}{z}}
+\newcommand{\dpth}[1]{\dpar{#1}{\theta}}
+\newcommand{\dpfi}[1]{\dpar{#1}{\varphi}}
+
+% total derivatives
+\newcommand{\dd}[2]{\ensuremath{\frac{d #1}{d #2}}}
+\newcommand{\ddr}[1]{\dd{#1}{r}}
+\newcommand{\ddt}[1]{\dd{#1}{t}}
+\newcommand{\ddx}[1]{\dd{#1}{x}}
+\newcommand{\ddy}[1]{\dd{#1}{y}}
+\newcommand{\ddz}[1]{\dd{#1}{z}}
+\newcommand{\ddth}[1]{\dd{#1}{\theta}}
+
+% material derivatives
+\newcommand{\D}[1]{\ensuremath{\frac{D#1}{Dt}}}
+\newcommand{\Dn}[2]{\ensuremath{\frac{D^{#1}#2}{Dt^{#1}}}}
+\newcommand{\cor}[1]{\ensuremath{#1^\circ}}
+\newcommand{\con}[1]{\ensuremath{#1^\diamond}}
+
+% tensors
+\renewcommand{\t}[1]{\ensuremath{\underline{\underline{#1}}}}
+\newcommand{\ta}{\t{a}}
+\newcommand{\tl}{\t{\ell}}
+\newcommand{\tF}{\t{F}}
+\newcommand{\td}{\t{d}}
+\newcommand{\tw}{\t{w}}
+\newcommand{\tI}{\t{I}}
+\renewcommand{\tt}{\t{t}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-6pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-6pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-6pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+\newcommand{\Title}{List ANA2 ISRM}
+\newcommand{\Author}{Rok Kos}
+\title{\Title}
+\author{\Author}
+\date{\today}
+\hypersetup{pdftitle={\Title}, pdfauthor={\Author}, pdfcreator={\Author}, pdfproducer={\Author}, pdfsubject={}, pdfkeywords={}}  % setup pdf metadata
+
+% \pagestyle{empty}              % vse strani prazne
+\setlength{\parindent}{0pt}    % zamik vsakega odstavka
+\setlength{\parskip}{10pt}     % prazen prostor po odstavku
+% \setlength{\overfullrule}{30pt}  % oznaci predlogo vrstico z veliko črnine
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0px}{0px}{-2px}
+\titleformat*{\section}{\Large\bf}
+\titlespacing*{\subsection}{0px}{0px}{-2px}
+\titleformat*{\subsection}{\large\bf}
+
+\newcommand{\lstar}{\overset{*}{\gets}}
+\newcommand{\rstar}{\overset{*}{\to}}
+\newcommand{\istar}{\overset{*}{\leftrightarrow}}
+\newcommand{\red}{\downarrow}
+\newcommand{\st}{\operatorname{st}}
+\newcommand{\rez}{\operatorname{Rez}}
+\newcommand{\vk}{\operatorname{vk}}
+\newcommand{\mst}{\operatorname{mst}}
+\newcommand{\vc}{\operatorname{\text{vč}}}
+\newcommand{\vm}{\operatorname{vm}}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\floatname{algorithm}{Algoritem}
+\algnewcommand\algorithmicto{\textbf{to}}
+\algrenewtext{For}[3]{$\algorithmicfor\ #1 \gets #2\ \algorithmicto\ #3\ \algorithmicdo$}
+
+
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{\boldmath #1}}
+
+
+\usepackage{multicol}  % Za razdeliti stran na pol
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{black}}
+
+% Hiperbolcne funkcije (obstajajo tudi simboli ampak imajo durgacen zapis)
+\DeclareMathOperator\ch{ch}
+\DeclareMathOperator\sh{sh}
+\DeclareMathOperator\Th{th}  % th komanda ze zavzeta z crko thorn (staro angleska crka)
+\DeclareMathOperator\cth{cth}
+\DeclareMathOperator\arsh{arsh}
+\DeclareMathOperator\arth{arth}
+
+% Absolutna vrednost
+\newcommand\abs[1]{\left|#1\right|}
+
+
+\begin{document}
+
+\begin{multicols}{2}
+	\section*{Odvodi}
+	\begin{tabular}[h]{|c|c|}
+		\hline
+		$f(x)$ & $f'(x)$ \\
+		\hline
+		$x^n$ & $nx^{n-1}$\\
+		$a^x$ & $a^x\ln(x)$\\
+		$e^x$ & $e^x$\\
+		$\ln{x}$ & $\frac{1}{x}$\\
+		$\sin{x}$ & $\cos{x}$\\
+		$\cos{x}$ & $-\sin{x}$\\
+		$\tan{x}$ & $\frac{1}{\cos^2{x}}$\\
+		$\cot{x}$ & $-\frac{1}{\sin^2{x}}$\\
+		$\arcsin{x}$ & $\frac{1}{\sqrt{1-x^2}}$\\
+		$\arccos{x}$ & $-\frac{1}{\sqrt{1-x^2}}$\\
+		$\arctan{x}$ & $\frac{1}{1+x^2}$\\
+		$\sh{x}$ & $\ch{x}$\\
+		$\ch{x}$ & $-\sh{x}$\\
+		$\Th{x}$ & $\frac{1}{\ch^2{x}}$\\
+		$\cth{x}$ & $-\frac{1}{\sh^2{x}}$\\
+		$\arsh{x}$ & $\frac{1}{\sqrt{x^2+1}}$\\
+		$\arsh{x}$ & $\frac{1}{\sqrt{x^2-1}}$\\
+		\hline 
+
+	\end{tabular}
+	% Mozni dodatki pravila, logaritemsko odvajanje tangenta/odvajanje
+
+	\section*{Integrali}
+	\begin{tabular}[h]{|c|c|}
+		\hline
+		$f(x)$ & $\int f(x)dx$ \\
+		\hline
+		$x^n$ & $\frac{x^{n+1}}{n+1} (n \neq 1)$ \\
+		$\frac{1}{x}$ & $\ln{\abs{x}}$ \\
+		$e^x$ & $e^x$\\
+		$\sin{x}$ & $-\cos{x}$\\
+		$\cos{x}$ & $\sin{x}$\\
+		$\frac{1}{\cos^2{x}}$ & $\tan{x}$\\
+		$\frac{1}{\sin^2{x}}$ & $-\cot{x}$\\
+		$\frac{1}{\sqrt{1-x^2}}$ & $\arcsin{x}$\\
+		$\frac{1}{1+x^2}$ & $\arctan{x}$\\
+
+		\hline 
+
+	\end{tabular}
+
+	\subsection*{Per Partes}
+	\begin{align*}
+		\int f(x)g'(x)dx &= f(x)g(x) - \int g(x)f'(x)dx\\
+		\int udv &= uv - \int vdu
+	\end{align*}
+	\subsection*{Racionalne funkcije}
+	$\int\frac{p(x)}{q(x)}dx$, \qquad $p(x)$, $q(x)$ sta polinoma
+	\begin{enumerate}
+		\item Če je $st(p(x)) <= st(p(x))$ polinoma delimo
+		\item $q(x)$ razdelimo na linearne in kvadratne faktorje
+		\item Izraz pod integralom razcepimo na parcialne ulomke
+		\item Integriramo vsakega zase
+	\end{enumerate}
+	
+	\begin{align*}
+		k \geq 2 & \qquad st(p(x)) \leq 2k - 1\\
+		st(q(x)) \leq 2k - 3 & \qquad (ax^2 + bx + c) \qquad \text{nerazcepen v \R}\\
+		I = \int \frac{p(x)}{(ax^2 + bx + c)^k} &= \int \frac{Ax+B}{ax^2 + bx + c} + \frac{q(x)}{(ax^2 + bx + c)^{k-1}}
+	\end{align*}
+	A,B, $q(x)$ poiščemo tako da enačbo odvajamo.
+	\subsection*{Korenske funkcije}
+
+	\begin{enumerate}
+		\item $\int f(\sqrt{ax + b})dx$ \qquad $t = \sqrt{ax + b}$\\
+		\item $\int f(\sqrt{ax^2 + bx + c})dx$\\
+		\begin{enumerate}[a]
+			\item $\int \frac{dx}{\sqrt{ax^2 + bx + c}}$ ga prevedemo na oblike:
+			\begin{itemize}
+				\item Če je $a < 0: \int \frac{dx}{\sqrt{1-x^2}} = \arcsin{x}$
+				\item Če je $a > 0: \int \frac{dx}{\sqrt{x^2 + c}} = \ln{\abs{x + \sqrt{x^2 + c}}}$
+			\end{itemize}
+			\item $\int \frac{p(x)}{\sqrt{ax^2 + bx + c}} = q(x)\sqrt{ax^2 + bx + c} + A\int\frac{dx}{\sqrt{ax^2 + bx + c}}$\\
+			$st(p(x)) - 1 = st(q(x))$ \quad A, q(x) poiščemo z odvanjanjem
+		
+		\end{enumerate}
+	\end{enumerate}
+
+
+	\section*{Kotne funkcije}
+	\begin{align*}
+		\cos^2{x} &= \frac{\cos{2x} + 1}{2} & \sin^2{x} &= \frac{1 - \cos{2x}}{2}
+	\end{align*}	
+
+
+\end{multicols}
+\end{document}
+% vim: syntax=tex:
+% vim set: spell spelllang=sl:
+% vim: foldlevel=99
+
+% Latex template: Jure Slak, jure.slak@gmail.com
+% Dodatki k templatu: Rok Kos, kosrok97@gmail.com
+
