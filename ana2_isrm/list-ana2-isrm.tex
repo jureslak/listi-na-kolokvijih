@@ -20,8 +20,10 @@
   urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
 \usepackage[
   paper=a4paper,
-  top=2cm,
-  bottom=2cm,
+  top=1cm,
+  bottom=1cm,
+  left=1cm,
+  right=cm,
   textwidth=15cm,
 % textheight=24cm,
 ]{geometry}  % page geomerty
@@ -185,7 +187,10 @@
 
 % Absolutna vrednost
 \newcommand\abs[1]{\left|#1\right|}
-
+% Oglati oklepaji 
+\newcommand\ogl[1]{\left[#1\right]}
+% Navadni oklepaji 
+\newcommand\okr[1]{\left(#1\right)}
 
 \begin{document}
 
@@ -211,12 +216,12 @@
 		$\Th{x}$ & $\frac{1}{\ch^2{x}}$\\
 		$\cth{x}$ & $-\frac{1}{\sh^2{x}}$\\
 		$\arsh{x}$ & $\frac{1}{\sqrt{x^2+1}}$\\
-		$\arsh{x}$ & $\frac{1}{\sqrt{x^2-1}}$\\
+		$\arth{x}$ & $\frac{1}{1-x^2}$\\
 		\hline 
 
 	\end{tabular}
 	% Mozni dodatki pravila, logaritemsko odvajanje tangenta/odvajanje
-
+%
 	\section*{Integrali}
 	\begin{tabular}[h]{|c|c|}
 		\hline
@@ -230,12 +235,13 @@
 		$\frac{1}{\cos^2{x}}$ & $\tan{x}$\\
 		$\frac{1}{\sin^2{x}}$ & $-\cot{x}$\\
 		$\frac{1}{\sqrt{1-x^2}}$ & $\arcsin{x}$\\
+		$\frac{1}{\sqrt{1+x^2}}$ & $\arsh{x} = \ln{\abs{x + \sqrt{x^2 + 1}}}$\\
 		$\frac{1}{1+x^2}$ & $\arctan{x}$\\
 
 		\hline 
 
 	\end{tabular}
-
+%
 	\subsection*{Per Partes}
 	\begin{align*}
 		\int f(x)g'(x)dx &= f(x)g(x) - \int g(x)f'(x)dx\\
@@ -246,10 +252,14 @@
 	\begin{enumerate}
 		\item Če je $st(p(x)) <= st(p(x))$ polinoma delimo
 		\item $q(x)$ razdelimo na linearne in kvadratne faktorje
-		\item Izraz pod integralom razcepimo na parcialne ulomke
+		\item Izraz pod integralom razcepimo na parcialne ulomke\\
+		$\frac{p(x)}{q(x)} = \ogl{\frac{A_1}{x-a_1} + \dots + \frac{A_{n_1}}{(x-a_1)^{{n_1}}} } + \dots +
+		\ogl{\frac{Z_1}{x-a_k}+ \dots + \frac{Z_{n_k}}{(x-a_k)^{{n_k}}} } + 
+		\ogl{\frac{\alpha_1x + \beta_1}{x^2 + b_1x + c_1} + \dots + \frac{\alpha_{m_1}x + \beta_{m_1}}{(x^2 + b_1x +c_1)^{m_1}} } + \dots + 
+		\ogl{\frac{\phi_1x + \omega_1}{x^2 + b_lx + c_l} + \dots + \frac{\phi_{m_l}x + \omega_{m_l}}{(x^2 + b_lx +c_l)^{m_l}} }$
 		\item Integriramo vsakega zase
 	\end{enumerate}
-	
+%	
 	\begin{align*}
 		k \geq 2 & \qquad st(p(x)) \leq 2k - 1\\
 		st(q(x)) \leq 2k - 3 & \qquad (ax^2 + bx + c) \qquad \text{nerazcepen v \R}\\
@@ -257,7 +267,6 @@
 	\end{align*}
 	A,B, $q(x)$ poiščemo tako da enačbo odvajamo.
 	\subsection*{Korenske funkcije}
-
 	\begin{enumerate}
 		\item $\int f(\sqrt{ax + b})dx$ \qquad $t = \sqrt{ax + b}$\\
 		\item $\int f(\sqrt{ax^2 + bx + c})dx$\\
@@ -272,9 +281,68 @@
 		
 		\end{enumerate}
 	\end{enumerate}
+%
+	\subsection*{Kotne funkcije}
+	\begin{enumerate}
 
+		\item 
+		\begin{align*}
+			\int \sin{(ax)}\sin{(bx)} dx &= \int -\frac{1}{2}\ogl{\cos{(a+b)x} - \cos{(a-b)x}}dx =\\ 
+			&=-\frac{1}{2}\ogl{\frac{sin{(a-b)x}}{(a-b)} - \frac{sin{(a+b)x}}{(a+b)}}\\
+			\int \cos{(ax)}\cos{(bx)} dx &= \int \frac{1}{2}\ogl{\cos{(a+b)x} + \cos{(a-b)x}}dx \dots\\
+			\int \sin{(ax)}\cos{(bx)} dx &= \int \frac{1}{2}\ogl{\sin{(a+b)x} + \sin{(a-b)x}}dx \dots
+		\end{align*}
+		\item $\int \cos^{m}{x}\sin^{n}{x}dx$
+		\begin{enumerate}
+			\item Eno od stevil $m$,$n$ je liho (npr. $m = 2k + 1$)\\
+			\begin{align*}
+				\int \cos^{2k}{x}\cos{x}\sin^{n}{x}dx &= \int t^n (1-t^2)^k dt\\
+				t = \sin{x} \quad dt =& \cos{x}dx\\
+				cos^{2k}{x} = (cos^{2}{x})^k =& (1-t^2)^k
+			\end{align*}
+			\item $m$, $n$ sta oba soda, $m = 2m_1$,$n = 2n_1$\\
+			\begin{align*}
+				\int \cos^{2m_1}{x}\sin^{2n_1}{x}dx = \int (\cos^{2}{x})^{m_1}(\sin^{2}{x})^{n_1}dx=\\
+				=\int \okr{\frac{1+\cos{2x}}{2}}^{m_1}\okr{\frac{1-\cos{2x}}{2}}^{n_1} =\\
+				=\text{vsota integralov oblike} \int \cos^k{2x}dx
+			\end{align*}
+			kjer je $k \leq m_1 + n_1 = \frac{1}{2}(m+n) < m + 1$\\
+			Ce je $k$ lih gremo po 1 tocki\\
+			Ce je $k$ sod ponovimo postopek\\
+			\item $\int R(\cos{x}, \sin{x})dx$ ($R \dots$ racinonalni izraz)\\
+			\begin{align*}
+				t  = \tan{\frac{x}{2}} \quad \cos{x} = \frac{1 - t^2}{t^2 + 1}\\
+				\sin{x} = \frac{2t}{t^2 + 1} \quad dx = \frac{2}{t^2 + 1}dt\\
+				t  = \tan{x} \quad \cos{x} = \frac{1}{\sqrt{t^2 + 1}}\\
+				\sin{x} = \frac{t}{\sqrt{t^2 + 1}} \quad dx = \frac{dt}{t^2 + 1}\\
+			\end{align*}
+		\end{enumerate}					
+		
 
+	\end{enumerate}	
+%
 	\section*{Kotne funkcije}
+	\subsection*{Adicijski izreki}
+	\begin{align*}
+		\sin{x \pm y} &= \sin{x}\cos{y} \pm \sin{y}\cos{x}\\
+		\cos{x \mp y} &= \cos{x}\cos{y} \mp \sin{x}\sin{y}\\
+		\tan{x \pm y} &= \frac{\tan{x} + \tan{y}}{1 - \tan{x}\tan{y}}
+	\end{align*}
+	%\subsection*{Dvojni koti}
+	\subsection*{Faktorizacija}
+	\begin{align*}
+		\sin{x} + \sin{y} &= 2\sin{\frac{x+y}{2}} \cos{\frac{x-y}{2}}\\
+		\sin{x} - \sin{y} &= 2\sin{\frac{x-y}{2}} \cos{\frac{x+y}{2}}\\
+		\cos{x} + \cos{y} &= 2\cos{\frac{x+y}{2}} \cos{\frac{x-y}{2}}\\
+		\cos{x} - \cos{y} &= 2\sin{\frac{x-y}{2}} \sin{\frac{x+y}{2}}
+	\end{align*}
+	\subsection*{Razclenevanje}
+	\begin{align*}
+		\sin{x}\sin{y} &= -\frac{1}{2}\left(\cos{(x+y)} - \cos{(x-y)} \right)\\
+		\cos{x}\cos{y} &= \frac{1}{2}\left(\cos{(x+y)} + \cos{(x-y)} \right)\\
+		\sin{x}\cos{y} &= \frac{1}{2}\left(\sin{(x+y)} + \sin{(x-y)} \right)
+	\end{align*}
+
 	\begin{align*}
 		\cos^2{x} &= \frac{\cos{2x} + 1}{2} & \sin^2{x} &= \frac{1 - \cos{2x}}{2}
 	\end{align*}	
