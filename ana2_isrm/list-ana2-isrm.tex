@@ -1,4 +1,4 @@
-\documentclass[a4paper,oneside,10pt]{article}
+\documentclass[a4paper,oneside,8pt]{extarticle}
 
 \usepackage[slovene]{babel}    % slovenian language and hyphenation
 \usepackage[utf8]{inputenc}    % make čšž work on input
@@ -24,8 +24,8 @@
   bottom=1cm,
   left=1cm,
   right=1cm,
-  textwidth=15cm,
-% textheight=24cm,
+  textwidth=10cm,
+  textheight=18cm,
 ]{geometry}  % page geomerty
 
 \newtheorem{izrek}{Izrek}
@@ -324,17 +324,94 @@
 		\item Ploscina ravnisnkih likov
 		\item Dolzina krivulj
 		\begin{align*}
-			s = \int_{b}^{a} \sqrt{1 + f'(x)^2} dx
+			s = \int_{a}^{b} \sqrt{1 + f'(x)^2} dx
 		\end{align*}
 		\item Prostornina vrtenine
 		\begin{align*}
-			V = \pi \int_{b}^{a} f(x)^2 dx
+			V = \pi \int_{a}^{b} f(x)^2 dx
 		\end{align*}
 		\item Povrsina vrtenine
 		\begin{align*}
-			S = 2\pi \int_{b}^{a} f(x)\sqrt{1+f(x)^2} dx
+			S = 2\pi \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx
+		\end{align*}
+		\item Tezisce ravninskih likov
+		\begin{align*}
+			M_x &= \phi g \int_{a}^{b} \frac{f(x)^2}{2} dx \quad \text{navor} \\
+			M_y &= \phi g \int_{a}^{b} x f(x) dx \\
+			x_T &= \frac{\int_{a}^{b} x f(x) dx}{P} \quad \text{tezisce}\\
+			y_T &= \frac{\int_{a}^{b} \frac{f(x)^2}{2} dx}{2P} = \frac{V}{2\pi P}\\
+			V &= 2\pi y_T P \quad \text{Guldinovo pravilo}\\
+			2\pi y_T &\dots \text {pot, ki jo pri vrtenju opise tezisce} \quad P \dots \text{Ploscina}
+		\end{align*}
+		\item Tezisce ravninskih krivulj
+		\begin{align*}
+			M_x &= \phi g \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx  = g \phi s y_T\\
+			y_T &= \frac{1}{s} \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx = \frac{1}{s} \frac{S}{2\pi}\\
+			S &= 2\pi y_T s \quad \text{Guldinovo pravilo}
 		\end{align*}
 	\end{enumerate}
+%
+	\subsection*{Numericna integracija}
+	\begin{enumerate}
+		\item Trapezna metoda
+		\begin{align*}
+			I = \sum_{i=0}^{n-1} \frac{y_i +y_{i+1}}{2} \frac{b - a}{4} &= \frac{b-a}{2n} (y_0 + 2y_1 + 2y_2 + \dots + 2y_{n-1} + y_{n})\\
+			\abs{R_n} &\leq \frac{(b-a)^3}{12n^2} \max_{x \in [a,b]} \abs{f''(x)} \quad \text{napaka}
+		\end{align*}
+		\item Simpsonova metoda\\
+		Izberemo $2n$ delilnih tock in na vsakem intervalu ploscino aproks. z kvad. parabolo.
+		\begin{align*}
+			x_i = a + i\frac{b-a}{2n}\\
+			I = \int_{a}^{b} f(x)dx &\doteq \frac{b-a}{6n} (y_0 + 4y_1 + 2y_2 + 4y_3 + 2y_4 + \dots + \\
+			+ 4y_{2n-1} + y_{2n})\\
+			\abs{R_n} &\leq \frac{(b-a)^5}{2880n^4} \max_{x \in [a,b]} \abs{f^{(4)}(x)} \quad \text{napaka}
+		\end{align*}
+	\end{enumerate}
+%
+	\subsection{Izlimitirani integrali}
+	\begin{enumerate}
+		\item $f$ ni omejena v krajiscih $a$ ALI $b$
+		\begin{align*}
+			\int_{a}^{b} f(x)dx = \lim_{c \to a} \int_{c}^{b} f(x)dx \quad \text{enako za b}
+		\end{align*}
+		\item $f$ ni omejena v krajiscih $a$ IN $b$
+		\begin{align*}
+			\int_{a}^{b} f(x)dx = \int_{a}^{c} f(x)dx + \int_{c}^{b} f(x)dx = \lim_{d\to a} \int_{d}^{c} f(x)dx + \lim_{e\to b} \int_{c}^{e} f(x)dx  
+		\end{align*}
+		\item $f$ ni omejena v krajiscu $c \in [a,b]$
+		\begin{align*}
+			\int_{a}^{b} f(x)dx = \int_{c}^{a} f(x)dx + \int_{b}^{c} f(x)dx = \lim_{d \to -c} \int_{d}^{a} f(x)dx + \lim_{e \to c} \int_{b}^{e} f(x)dx
+		\end{align*}
+		\item Ena od mej gre v neskoncnost
+		\begin{align*}
+			\int_{a}^{\infty} f(x)dx = \lim_{b \to \infty}\int_{a}^{b} f(x)dx\\
+			\int_{-\infty}^{b} f(x)dx = \lim_{a \to -\infty}\int_{a}^{b} f(x)dx\\
+			\int_{-\infty}^{\infty} = \int_{-\infty}^{0} + \int_{0}^{\infty}
+		\end{align*}
+	\end{enumerate}
+%
+	\subsection{Konvergenca integralov}
+		\begin{align*}
+			\int_{a}^{b} \frac{f(x)}{(x-a)^s}dx \quad f(x) \text{je zvezdna na} [a,b]\\
+		\end{align*}
+		\begin{itemize}
+			\item ce je $s < 1$ => integral konvergira
+			\item ce je $s \geq 1$ in $f(a) = 0$ => integral divergira
+		\end{itemize}
+		\begin{align*}
+			\int_{a}^{\infty} \frac{f(x)}{x^s}dx \quad f(x) \text{je zvezdna in omejena na} [a,b]\\
+		\end{align*}
+		\begin{itemize}
+			\item ce je $s > 1$ => integral konvergira
+			\item ce je $s \leq 1$ in $\abs{f(a)} \geq m > 0$ za vse x od nekje naprej => integral divergira
+		\end{itemize}
+%
+	\subsection{Pazi}
+	\begin{align*}
+		\int \text{soda funkcija} = \text{liha funkcija} &\quad \int \text{liha funkcija} = \text{soda funkcija}\\
+		\int_{a}^{b} f(x)dx = \int_{\beta}^{\alpha} f(g(t))g'(t)dx\\
+		x = g(t) \quad \text{za monotone funkcije} &\quad \alpha = g(a) \quad \beta = g(b)
+	\end{align*}
 %
 	\section*{Kotne funkcije}
 	\subsection*{Adicijski izreki}
