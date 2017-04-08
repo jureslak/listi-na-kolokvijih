@@ -20,10 +20,10 @@
   urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
 \usepackage[
   paper=a4paper,
-  top=1cm,
-  bottom=1cm,
-  left=1cm,
-  right=1cm,
+  top=0.1cm,
+  bottom=0.2cm,
+  left=0.5cm,
+  right=0.5cm,
   textwidth=10cm,
   textheight=18cm,
 ]{geometry}  % page geomerty
@@ -139,7 +139,7 @@
 \date{\today}
 \hypersetup{pdftitle={\Title}, pdfauthor={\Author}, pdfcreator={\Author}, pdfproducer={\Author}, pdfsubject={}, pdfkeywords={}}  % setup pdf metadata
 
-% \pagestyle{empty}              % vse strani prazne
+\pagestyle{empty}              % vse strani prazne
 \setlength{\parindent}{0pt}    % zamik vsakega odstavka
 \setlength{\parskip}{10pt}     % prazen prostor po odstavku
 % \setlength{\overfullrule}{30pt}  % oznaci predlogo vrstico z veliko črnine
@@ -218,7 +218,6 @@
 		$\arsh{x}$ & $\frac{1}{\sqrt{x^2+1}}$\\
 		$\arth{x}$ & $\frac{1}{1-x^2}$\\
 		\hline 
-
 	\end{tabular}
 	% Mozni dodatki pravila, logaritemsko odvajanje tangenta/odvajanje
 %
@@ -237,9 +236,7 @@
 		$\frac{1}{\sqrt{1-x^2}}$ & $\arcsin{x}$\\
 		$\frac{1}{\sqrt{1+x^2}}$ & $\arsh{x} = \ln{\abs{x + \sqrt{x^2 + 1}}}$\\
 		$\frac{1}{1+x^2}$ & $\arctan{x}$\\
-
 		\hline 
-
 	\end{tabular}
 %
 	\subsection*{Per Partes}
@@ -247,6 +244,7 @@
 		\int f(x)g'(x)dx &= f(x)g(x) - \int g(x)f'(x)dx\\
 		\int udv &= uv - \int vdu
 	\end{align*}
+%
 	\subsection*{Racionalne funkcije}
 	$\int\frac{p(x)}{q(x)}dx$, \qquad $p(x)$, $q(x)$ sta polinoma
 	\begin{enumerate}
@@ -266,6 +264,7 @@
 		I = \int \frac{p(x)}{(ax^2 + bx + c)^k} &= \int \frac{Ax+B}{ax^2 + bx + c} + \frac{q(x)}{(ax^2 + bx + c)^{k-1}}
 	\end{align*}
 	A,B, $q(x)$ poiščemo tako da enačbo odvajamo.
+%
 	\subsection*{Korenske funkcije}
 	\begin{enumerate}
 		\item $\int f(\sqrt{ax + b})dx$ \qquad $t = \sqrt{ax + b}$\\
@@ -278,13 +277,13 @@
 			\end{itemize}
 			\item $\int \frac{p(x)}{\sqrt{ax^2 + bx + c}} = q(x)\sqrt{ax^2 + bx + c} + A\int\frac{dx}{\sqrt{ax^2 + bx + c}}$\\
 			$st(p(x)) - 1 = st(q(x))$ \quad A, q(x) poiščemo z odvanjanjem
-		
 		\end{enumerate}
+		\item $\int \sqrt{a^2 - x^2}dx \quad t = a\sin{t} \quad dx = a\cos{t}dt \quad t = \arcsin{\frac{x}{a}}$
+		\item $\int \sqrt{a^2 + x^2}dx \quad t = a\sh{t} \quad dx=a\ch{t}dt \quad t = \arsh{\frac{x}{a}}$ 
 	\end{enumerate}
 %
 	\subsection*{Kotne funkcije}
 	\begin{enumerate}
-
 		\item 
 		\begin{align*}
 			\int \sin{(ax)}\sin{(bx)} dx &= \int -\frac{1}{2}\ogl{\cos{(a+b)x} - \cos{(a-b)x}}dx =\\ 
@@ -346,7 +345,8 @@
 		\item Tezisce ravninskih krivulj
 		\begin{align*}
 			M_x &= \phi g \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx  = g \phi s y_T\\
-			y_T &= \frac{1}{s} \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx = \frac{1}{s} \frac{S}{2\pi}\\
+			x_T &= \frac{\int_{a}^{b} x\sqrt{1+f'(x)^2}dx}{\int_{a}^{b} \sqrt{1+f'(x)^2}dx}\\
+			y_T &= \frac{\int_{a}^{b} f(x)\sqrt{1+f'(x)^2}dx}{\int_{a}^{b} \sqrt{1+f'(x)^2}dx} = \frac{1}{s} \int_{a}^{b} f(x)\sqrt{1+f'(x)^2} dx = \frac{1}{s} \frac{S}{2\pi}\\
 			S &= 2\pi y_T s \quad \text{Guldinovo pravilo}
 		\end{align*}
 	\end{enumerate}
@@ -362,13 +362,12 @@
 		Izberemo $2n$ delilnih tock in na vsakem intervalu ploscino aproks. z kvad. parabolo.
 		\begin{align*}
 			x_i = a + i\frac{b-a}{2n}\\
-			I = \int_{a}^{b} f(x)dx &\doteq \frac{b-a}{6n} (y_0 + 4y_1 + 2y_2 + 4y_3 + 2y_4 + \dots + \\
-			+ 4y_{2n-1} + y_{2n})\\
+			I = \int_{a}^{b} f(x)dx &\doteq \frac{b-a}{6n} (y_0 + 4y_1 + 2y_2 + 4y_3 + 2y_4 + \dots + 4y_{2n-1} + y_{2n})\\
 			\abs{R_n} &\leq \frac{(b-a)^5}{2880n^4} \max_{x \in [a,b]} \abs{f^{(4)}(x)} \quad \text{napaka}
 		\end{align*}
 	\end{enumerate}
 %
-	\subsection{Izlimitirani integrali}
+	\subsection*{Izlimitirani integrali}
 	\begin{enumerate}
 		\item $f$ ni omejena v krajiscih $a$ ALI $b$
 		\begin{align*}
@@ -390,7 +389,11 @@
 		\end{align*}
 	\end{enumerate}
 %
-	\subsection{Konvergenca integralov}
+	\subsection*{Konvergenca integralov}
+		Integralski kriterij\\
+		\begin{align*}
+			f \ge 0 \quad a \in \R: \quad \int_{a}^{\infty} \frac{1}{f(x)}dx \quad \text{obstaja} \Longleftrightarrow \sum_{n = a}^{\infty} \frac{1}{f(n)}
+		\end{align*}		
 		\begin{align*}
 			\int_{a}^{b} \frac{f(x)}{(x-a)^s}dx \quad f(x) \text{je zvezdna na} [a,b]\\
 		\end{align*}
@@ -406,12 +409,28 @@
 			\item ce je $s \leq 1$ in $\abs{f(a)} \geq m > 0$ za vse x od nekje naprej => integral divergira
 		\end{itemize}
 %
-	\subsection{Pazi}
+	\subsection*{Parametricno podane funkcije}
+		\begin{align*}
+			pl = \frac{1}{2} \abs{\int_{t_1}^{t_2}(x\dot{y} - \dot{x}y)dt}\\
+			pl = \abs{\int_{t_1}^{t_2}x\dot{y}dt} = \abs{\int_{t_1}^{t_2}\dot{x}ydt} \quad \text{enostavna sklenjena krivulja}\\
+			pl = \frac{1}{2} \int_{\phi_1}^{\phi_2} r^2 d\phi \quad \text{v polarnih kordinatah}\\
+			l = \int_{t_1}^{t_2} \sqrt{\dot{x}^2\dot{y}^2}dt \quad \text{dolzina krivulje}\\
+			V = \int_{z_1}^{z_2} S(z)dz \quad \text{Volumen vrtenine}
+		\end{align*}
+%
+	\subsection*{Pazi}
 	\begin{align*}
 		\int \text{soda funkcija} = \text{liha funkcija} &\quad \int \text{liha funkcija} = \text{soda funkcija}\\
 		\int_{a}^{b} f(x)dx = \int_{\beta}^{\alpha} f(g(t))g'(t)dx\\
 		x = g(t) \quad \text{za monotone funkcije} &\quad \alpha = g(a) \quad \beta = g(b)
 	\end{align*}
+%
+	\section*{Parcialni odvodi}
+	\begin{align*}
+		f_{x_i}\dpar{f(x)}{x_1} (a_1, \dots ,a_n) = \lim_{h \to 0} \frac{f(a_1,\dots,a_i + h, \dots , a_n) - f(a_1,\dots,a_n)}{h}\\
+		\text{grad} f = \okr{\dpar{f(x)}{x_1}, \dots, \dpar{f(x)}{x_n}} \quad \text{Smer najvecjega narascanje}\\
+		f_{\vec{u}}(\vec{a}) = \lim_{h \to 0} \frac{f(\vec{a} + h\vec{u}) - f(\vec{a})}{h} = <\text{grad} f(\vec{a}), \vec{u}>
+	\end{align*}	
 %
 	\section*{Kotne funkcije}
 	\subsection*{Adicijski izreki}
