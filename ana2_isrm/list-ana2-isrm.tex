@@ -212,7 +212,7 @@
 		$\arccos{x}$ & $-\frac{1}{\sqrt{1-x^2}}$\\
 		$\arctan{x}$ & $\frac{1}{1+x^2}$\\
 		$\sh{x}$ & $\ch{x}$\\
-		$\ch{x}$ & $-\sh{x}$\\
+		$\ch{x}$ & $\sh{x}$\\
 		$\Th{x}$ & $\frac{1}{\ch^2{x}}$\\
 		$\cth{x}$ & $-\frac{1}{\sh^2{x}}$\\
 		$\arsh{x}$ & $\frac{1}{\sqrt{x^2+1}}$\\
@@ -248,7 +248,7 @@
 	\subsection*{Racionalne funkcije}
 	$\int\frac{p(x)}{q(x)}dx$, \qquad $p(x)$, $q(x)$ sta polinoma
 	\begin{enumerate}
-		\item Če je $st(p(x)) <= st(p(x))$ polinoma delimo
+		\item Če je $st(q(x)) <= st(p(x))$ polinoma delimo
 		\item $q(x)$ razdelimo na linearne in kvadratne faktorje
 		\item Izraz pod integralom razcepimo na parcialne ulomke\\
 		$\frac{p(x)}{q(x)} = \ogl{\frac{A_1}{x-a_1} + \dots + \frac{A_{n_1}}{(x-a_1)^{{n_1}}} } + \dots +
@@ -355,11 +355,11 @@
 	\begin{enumerate}
 		\item Trapezna metoda
 		\begin{align*}
-			I = \sum_{i=0}^{n-1} \frac{y_i +y_{i+1}}{2} \frac{b - a}{4} &= \frac{b-a}{2n} (y_0 + 2y_1 + 2y_2 + \dots + 2y_{n-1} + y_{n})\\
+			I = \sum_{i=0}^{n-1} \frac{y_i +y_{i+1}}{2} \frac{b - a}{n} &= \frac{b-a}{2n} (y_0 + 2y_1 + 2y_2 + \dots + 2y_{n-1} + y_{n})\\
 			\abs{R_n} &\leq \frac{(b-a)^3}{12n^2} \max_{x \in [a,b]} \abs{f''(x)} \quad \text{napaka}
 		\end{align*}
 		\item Simpsonova metoda\\
-		Izberemo $2n$ delilnih tock in na vsakem intervalu ploscino aproks. z kvad. parabolo.
+		Izberemo $2n$ delilnih tock in na vsakem intervalu ploscino aproks. s kvad. parabolo.
 		\begin{align*}
 			x_i = a + i\frac{b-a}{2n}\\
 			I = \int_{a}^{b} f(x)dx &\doteq \frac{b-a}{6n} (y_0 + 4y_1 + 2y_2 + 4y_3 + 2y_4 + \dots + 4y_{2n-1} + y_{2n})\\
@@ -399,14 +399,14 @@
 		\end{align*}
 		\begin{itemize}
 			\item ce je $s < 1$ => integral konvergira
-			\item ce je $s \geq 1$ in $f(a) = 0$ => integral divergira
+			\item ce je $s \geq 1$ in $f(a) \neq 0$ => integral divergira
 		\end{itemize}
 		\begin{align*}
 			\int_{a}^{\infty} \frac{f(x)}{x^s}dx \quad f(x) \text{je zvezdna in omejena na} [a,b]\\
 		\end{align*}
 		\begin{itemize}
 			\item ce je $s > 1$ => integral konvergira
-			\item ce je $s \leq 1$ in $\abs{f(a)} \geq m > 0$ za vse x od nekje naprej => integral divergira
+			\item ce je $s \leq 1$ in $\abs{f(x)} \geq m > 0$ za vse x od nekje naprej => integral divergira
 		\end{itemize}
 %
 	\subsection*{Parametricno podane funkcije}
