@@ -1,0 +1,470 @@
+\documentclass[a4paper,oneside,8pt]{extarticle}
+
+\usepackage[slovene]{babel}    % slovenian language and hyphenation
+\usepackage[utf8]{inputenc}    % make čšž work on input
+\usepackage[T1]{fontenc}       % make čšž work on output
+\usepackage[reqno]{amsmath}    % basic ams math environments and symbols
+\usepackage{amssymb,amsthm}    % ams symbols and theorems
+\usepackage{mathtools}         % extends ams with arrows and stuff
+\usepackage{url}               % \url and \href for links
+\usepackage{icomma}            % make comma a thousands separator with correct spacing
+\usepackage{units}             % \unit[1]{m} and unitfrac
+\usepackage{enumerate}         % enumerate style
+\usepackage{array}             % mutirow
+\usepackage[usenames]{color}   % colors with names
+\usepackage{graphicx}          % images
+\usepackage[all]{xy}
+
+\usepackage[bookmarks, colorlinks=true, linkcolor=black, anchorcolor=black,
+  citecolor=black, filecolor=black, menucolor=black, runcolor=black,
+  urlcolor=black, pdfencoding=unicode]{hyperref}  % clickable references, pdf toc
+\usepackage[
+  paper=a4paper,
+  top=0.1cm,
+  bottom=0.2cm,
+  left=0.5cm,
+  right=0.5cm,
+  textwidth=10cm,
+  textheight=18cm,
+]{geometry}  % page geomerty
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{posledica}{Posledica}
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}
+\newtheorem{opomba}{Opomba}
+\newtheorem{zgled}{Zgled}
+
+% basic sets
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\newcommand{\PP}{\ensuremath{\mathcal{P}}}
+\newcommand{\TT}{\ensuremath{\mathbb{T}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\Mon}{\ensuremath{\textrm{Mon}}}
+
+% linearna orgrinjača
+\newcommand{\LL}{\ensuremath{\mathcal{L}}}
+
+% vectors
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vu}{\vec{u}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\va}{\vec{a}}
+%\newcommand{\vb}{\vec{b}}
+% \newcommand{\vc}{\vec{c}}
+\newcommand{\vt}{\vec{t}}
+\newcommand{\vf}{\vec{f}}
+\newcommand{\vF}{\vec{F}}
+\newcommand{\vE}{\vec{E}}
+\newcommand{\ve}{\vec{e}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vi}{\vec{\imath}}
+\newcommand{\vj}{\vec{\jmath}}
+\newcommand{\vS}{\vec{S}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\vom}{\vec{\omega}}
+\newcommand{\vzeta}{\vec{\zeta}}
+\newcommand{\er}{\vec{e}_r}
+\newcommand{\ef}{\vec{e}_{\varphi}}
+\newcommand{\et}{\vec{e}_{\vartheta}}
+
+% greek letters
+\let\oldphi\phi
+\let\oldtheta\theta
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+
+% vector operators
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\rot}{\operatorname{rot}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\lap}{\Delta}
+
+% transpose
+\newcommand{\T}{\ensuremath{\mathsf{T}}}
+\renewcommand{\sl}{\ensuremath{\operatorname{sl}}}
+
+% partial derivatives
+\newcommand{\dpar}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dpr}[1]{\dpar{#1}{r}}
+\newcommand{\dpt}[1]{\dpar{#1}{t}}
+\newcommand{\dpx}[1]{\dpar{#1}{x}}
+\newcommand{\dpy}[1]{\dpar{#1}{y}}
+\newcommand{\dpz}[1]{\dpar{#1}{z}}
+\newcommand{\dpth}[1]{\dpar{#1}{\theta}}
+\newcommand{\dpfi}[1]{\dpar{#1}{\varphi}}
+
+% total derivatives
+\newcommand{\dd}[2]{\ensuremath{\frac{d #1}{d #2}}}
+\newcommand{\ddr}[1]{\dd{#1}{r}}
+\newcommand{\ddt}[1]{\dd{#1}{t}}
+\newcommand{\ddx}[1]{\dd{#1}{x}}
+\newcommand{\ddy}[1]{\dd{#1}{y}}
+\newcommand{\ddz}[1]{\dd{#1}{z}}
+\newcommand{\ddth}[1]{\dd{#1}{\theta}}
+
+% material derivatives
+\newcommand{\D}[1]{\ensuremath{\frac{D#1}{Dt}}}
+\newcommand{\Dn}[2]{\ensuremath{\frac{D^{#1}#2}{Dt^{#1}}}}
+\newcommand{\cor}[1]{\ensuremath{#1^\circ}}
+\newcommand{\con}[1]{\ensuremath{#1^\diamond}}
+
+% tensors
+\renewcommand{\t}[1]{\ensuremath{\underline{\underline{#1}}}}
+\newcommand{\ta}{\t{a}}
+\newcommand{\tl}{\t{\ell}}
+\newcommand{\tF}{\t{F}}
+\newcommand{\td}{\t{d}}
+\newcommand{\tw}{\t{w}}
+\newcommand{\tI}{\t{I}}
+\renewcommand{\tt}{\t{t}}
+
+% lists with less vertical space
+\newenvironment{itemize*}{\vspace{-6pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{itemize}}
+\newenvironment{enumerate*}{\vspace{-6pt}\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{enumerate}}
+\newenvironment{description*}{\vspace{-6pt}\begin{description}\setlength{\itemsep}{0pt}\setlength{\parskip}{2pt}}{\end{description}}
+
+\newcommand{\Title}{List ANA2 ISRM}
+\newcommand{\Author}{Rok Kos}
+\title{\Title}
+\author{\Author}
+\date{\today}
+\hypersetup{pdftitle={\Title}, pdfauthor={\Author}, pdfcreator={\Author}, pdfproducer={\Author}, pdfsubject={}, pdfkeywords={}}  % setup pdf metadata
+
+\pagestyle{empty}              % vse strani prazne
+\setlength{\parindent}{0pt}    % zamik vsakega odstavka
+\setlength{\parskip}{10pt}     % prazen prostor po odstavku
+% \setlength{\overfullrule}{30pt}  % oznaci predlogo vrstico z veliko črnine
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0px}{0px}{-2px}
+\titleformat*{\section}{\Large\bf}
+\titlespacing*{\subsection}{0px}{0px}{-2px}
+\titleformat*{\subsection}{\large\bf}
+
+\newcommand{\lstar}{\overset{*}{\gets}}
+\newcommand{\rstar}{\overset{*}{\to}}
+\newcommand{\istar}{\overset{*}{\leftrightarrow}}
+\newcommand{\red}{\downarrow}
+\newcommand{\st}{\operatorname{st}}
+\newcommand{\rez}{\operatorname{Rez}}
+\newcommand{\vk}{\operatorname{vk}}
+\newcommand{\mst}{\operatorname{mst}}
+\newcommand{\vc}{\operatorname{\text{vč}}}
+\newcommand{\vm}{\operatorname{vm}}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\floatname{algorithm}{Algoritem}
+\algnewcommand\algorithmicto{\textbf{to}}
+\algrenewtext{For}[3]{$\algorithmicfor\ #1 \gets #2\ \algorithmicto\ #3\ \algorithmicdo$}
+
+
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{\boldmath #1}}
+
+
+\usepackage{multicol}  % Za razdeliti stran na pol
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{black}}
+
+% Hiperbolcne funkcije (obstajajo tudi simboli ampak imajo durgacen zapis)
+\DeclareMathOperator\ch{ch}
+\DeclareMathOperator\sh{sh}
+\DeclareMathOperator\Th{th}  % th komanda ze zavzeta z crko thorn (staro angleska crka)
+\DeclareMathOperator\cth{cth}
+\DeclareMathOperator\arsh{arsh}
+\DeclareMathOperator\arth{arth}
+
+% Absolutna vrednost
+\newcommand\abs[1]{\left|#1\right|}
+% Oglati oklepaji 
+\newcommand\ogl[1]{\left[#1\right]}
+% Navadni oklepaji 
+\newcommand\okr[1]{\left(#1\right)}
+
+\begin{document}
+
+\begin{multicols}{2}
+	\section*{Odvodi}
+	\begin{tabular}[h]{|c|c|}
+		\hline
+		$f(x)$ & $f'(x)$ \\
+		\hline
+		$x^n$ & $nx^{n-1}$\\
+		$a^x$ & $a^x\ln(a)$\\
+		$e^x$ & $e^x$\\
+		$\ln{x}$ & $\frac{1}{x}$\\
+		$\sin{x}$ & $\cos{x}$\\
+		$\cos{x}$ & $-\sin{x}$\\
+		$\tan{x}$ & $\frac{1}{\cos^2{x}}$\\
+		$\cot{x}$ & $-\frac{1}{\sin^2{x}}$\\
+		$\arcsin{x}$ & $\frac{1}{\sqrt{1-x^2}}$\\
+		$\arccos{x}$ & $-\frac{1}{\sqrt{1-x^2}}$\\
+		$\arctan{x}$ & $\frac{1}{1+x^2}$\\
+		$\sh{x}$ & $\ch{x}$\\
+		$\ch{x}$ & $\sh{x}$\\
+		$\Th{x}$ & $\frac{1}{\ch^2{x}}$\\
+		$\cth{x}$ & $-\frac{1}{\sh^2{x}}$\\
+		$\arsh{x}$ & $\frac{1}{\sqrt{x^2+1}}$\\
+		$\arth{x}$ & $\frac{1}{1-x^2}$\\
+		\hline 
+	\end{tabular}
+	% Mozni dodatki pravila, logaritemsko odvajanje tangenta/odvajanje
+%
+	\section*{Integrali}
+	\begin{tabular}[h]{|c|c|}
+		\hline
+		$f(x)$ & $\int f(x)dx$ \\
+		\hline
+		$x^n$ & $\frac{x^{n+1}}{n+1} (n \neq -1)$ \\
+		$\frac{1}{x}$ & $\ln{\abs{x}}$ \\
+		$e^x$ & $e^x$\\
+		$\sin{x}$ & $-\cos{x}$\\
+		$\cos{x}$ & $\sin{x}$\\
+		$\frac{1}{\cos^2{x}}$ & $\tan{x}$\\
+		$\frac{1}{\sin^2{x}}$ & $-\cot{x}$\\
+		$\frac{1}{\sqrt{1-x^2}}$ & $\arcsin{x}$\\
+		$\frac{1}{\sqrt{1+x^2}}$ & $\arsh{x} = \ln{\abs{x + \sqrt{x^2 + 1}}}$\\
+		$\frac{1}{1+x^2}$ & $\arctan{x}$\\
+		\hline 
+	\end{tabular}
+%
+	\subsection*{Per Partes}
+	\begin{align*}
+		\int f(x)g'(x)dx &= f(x)g(x) - \int g(x)f'(x)dx\\
+		\int udv &= uv - \int vdu
+	\end{align*}
+%
+	\subsection*{Racionalne funkcije}
+	$\int\frac{p(x)}{q(x)}dx$, \qquad $p(x)$, $q(x)$ sta polinoma
+	\begin{enumerate}
+		\item Če je $st(q(x)) <= st(p(x))$ polinoma delimo
+		\item $q(x)$ razdelimo na linearne in kvadratne faktorje
+		\item Izraz pod integralom razcepimo na parcialne ulomke\\
+		$\frac{p(x)}{q(x)} = \ogl{\frac{A_1}{x-a_1} + \dots + \frac{A_{n_1}}{(x-a_1)^{{n_1}}} } + \dots +
+		\ogl{\frac{Z_1}{x-a_k}+ \dots + \frac{Z_{n_k}}{(x-a_k)^{{n_k}}} } + 
+		\ogl{\frac{\alpha_1x + \beta_1}{x^2 + b_1x + c_1} + \dots + \frac{\alpha_{m_1}x + \beta_{m_1}}{(x^2 + b_1x +c_1)^{m_1}} } + \dots + 
+		\ogl{\frac{\phi_1x + \omega_1}{x^2 + b_lx + c_l} + \dots + \frac{\phi_{m_l}x + \omega_{m_l}}{(x^2 + b_lx +c_l)^{m_l}} }$
+		\item Integriramo vsakega zase
+	\end{enumerate}
+%	
+	\begin{align*}
+		k \geq 2 & \qquad st(p(x)) \leq 2k - 1\\
+		st(q(x)) \leq 2k - 3 & \qquad (ax^2 + bx + c) \qquad \text{nerazcepen v \R}\\
+		I = \int \frac{p(x)}{(ax^2 + bx + c)^k} &= \int \frac{Ax+B}{ax^2 + bx + c} + \frac{q(x)}{(ax^2 + bx + c)^{k-1}}
+	\end{align*}
+	A,B, $q(x)$ poiščemo tako da enačbo odvajamo.
+%
+	\subsection*{Korenske funkcije}
+	\begin{enumerate}
+		\item $\int f(\sqrt{ax + b})dx$ \qquad $t = \sqrt{ax + b}$\\
+		\item $\int f(\sqrt{ax^2 + bx + c})dx$\\
+		\begin{enumerate}[a]
+			\item $\int \frac{dx}{\sqrt{ax^2 + bx + c}}$ ga prevedemo na oblike:
+			\begin{itemize}
+				\item Če je $a < 0: \int \frac{dx}{\sqrt{1-x^2}} = \arcsin{x}$
+				\item Če je $a > 0: \int \frac{dx}{\sqrt{x^2 + c}} = \ln{\abs{x + \sqrt{x^2 + c}}}$
+			\end{itemize}
+			\item $\int \frac{p(x)}{\sqrt{ax^2 + bx + c}} = q(x)\sqrt{ax^2 + bx + c} + A\int\frac{dx}{\sqrt{ax^2 + bx + c}}$\\
+			$st(p(x)) - 1 = st(q(x))$ \quad A, q(x) poiščemo z odvanjanjem
+		\end{enumerate}
+		\item $\int \sqrt{a^2 - x^2}dx \quad x = a\sin{t} \quad dx = a\cos{t}dt \quad t = \arcsin{\frac{x}{a}}$
+		\item $\int \sqrt{a^2 + x^2}dx \quad x = a\sh{t} \quad dx=a\ch{t}dt \quad t = \arsh{\frac{x}{a}}$ 
+	\end{enumerate}
+%
+	\subsection*{Kotne funkcije}
+	\begin{enumerate}
+		\item 
+		\begin{align*}
+			\int \sin{(ax)}\sin{(bx)} dx &= \int -\frac{1}{2}\ogl{\cos{(a+b)x} - \cos{(a-b)x}}dx =\\ 
+			&=-\frac{1}{2}\ogl{\frac{sin{(a-b)x}}{(a-b)} - \frac{sin{(a+b)x}}{(a+b)}}\\
+			\int \cos{(ax)}\cos{(bx)} dx &= \int \frac{1}{2}\ogl{\cos{(a+b)x} + \cos{(a-b)x}}dx \dots\\
+			\int \sin{(ax)}\cos{(bx)} dx &= \int \frac{1}{2}\ogl{\sin{(a+b)x} + \sin{(a-b)x}}dx \dots
+		\end{align*}
+		\item $\int \cos^{m}{x}\sin^{n}{x}dx$
+		\begin{enumerate}
+			\item Eno od stevil $m$,$n$ je liho (npr. $m = 2k + 1$)\\
+			\begin{align*}
+				\int \cos^{2k}{x}\cos{x}\sin^{n}{x}dx &= \int t^n (1-t^2)^k dt\\
+				t = \sin{x} \quad dt =& \cos{x}dx\\
+				cos^{2k}{x} = (cos^{2}{x})^k =& (1-t^2)^k
+			\end{align*}
+			\item $m$, $n$ sta oba soda, $m = 2m_1$,$n = 2n_1$\\
+			\begin{align*}
+				\int \cos^{2m_1}{x}\sin^{2n_1}{x}dx = \int (\cos^{2}{x})^{m_1}(\sin^{2}{x})^{n_1}dx=\\
+				=\int \okr{\frac{1+\cos{2x}}{2}}^{m_1}\okr{\frac{1-\cos{2x}}{2}}^{n_1} =\\
+				=\text{vsota integralov oblike} \int \cos^k{2x}dx
+			\end{align*}
+			kjer je $k \leq m_1 + n_1 = \frac{1}{2}(m+n) < m + 1$\\
+			Ce je $k$ lih gremo po 1 tocki\\
+			Ce je $k$ sod ponovimo postopek\\
+			\item $\int R(\cos{x}, \sin{x})dx$ ($R \dots$ racinonalni izraz)\\
+			\begin{align*}
+				t  = \tan{\frac{x}{2}} \quad \cos{x} = \frac{1 - t^2}{t^2 + 1}\\
+				\sin{x} = \frac{2t}{t^2 + 1} \quad dx = \frac{2}{t^2 + 1}dt\\
+				t  = \tan{x} \quad \cos{x} = \frac{1}{\sqrt{t^2 + 1}}\\
+				\sin{x} = \frac{t}{\sqrt{t^2 + 1}} \quad dx = \frac{dt}{t^2 + 1}\\
+			\end{align*}
+		\end{enumerate}					
+	\end{enumerate}	
+%
+	\subsection*{Uporaba integralov}
+	\begin{enumerate}
+		\item Ploscina ravnisnkih likov
+		\item Dolzina krivulj
+		\begin{align*}
+			s = \int_{a}^{b} \sqrt{1 + f'(x)^2} dx
+		\end{align*}
+		\item Prostornina vrtenine
+		\begin{align*}
+			V = \pi \int_{a}^{b} f(x)^2 dx
+		\end{align*}
+		\item Povrsina vrtenine
+		\begin{align*}
+			S = 2\pi \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx
+		\end{align*}
+		\item Tezisce ravninskih likov
+		\begin{align*}
+			M_x &= \phi g \int_{a}^{b} \frac{f(x)^2}{2} dx \quad \text{navor} \\
+			M_y &= \phi g \int_{a}^{b} x f(x) dx \\
+			x_T &= \frac{\int_{a}^{b} x f(x) dx}{P} \quad \text{tezisce}\\
+			y_T &= \frac{\int_{a}^{b} \frac{f(x)^2}{2} dx}{2P} = \frac{V}{2\pi P}\\
+			V &= 2\pi y_T P \quad \text{Guldinovo pravilo}\\
+			2\pi y_T &\dots \text {pot, ki jo pri vrtenju opise tezisce} \quad P \dots \text{Ploscina}
+		\end{align*}
+		\item Tezisce ravninskih krivulj
+		\begin{align*}
+			M_x &= \phi g \int_{a}^{b} f(x)\sqrt{1+f(x)^2} dx  = g \phi s y_T\\
+			x_T &= \frac{\int_{a}^{b} x\sqrt{1+f'(x)^2}dx}{\int_{a}^{b} \sqrt{1+f'(x)^2}dx}\\
+			y_T &= \frac{\int_{a}^{b} f(x)\sqrt{1+f'(x)^2}dx}{\int_{a}^{b} \sqrt{1+f'(x)^2}dx} = \frac{1}{s} \int_{a}^{b} f(x)\sqrt{1+f'(x)^2} dx = \frac{1}{s} \frac{S}{2\pi}\\
+			S &= 2\pi y_T s \quad \text{Guldinovo pravilo}
+		\end{align*}
+	\end{enumerate}
+%
+	\subsection*{Numericna integracija}
+	\begin{enumerate}
+		\item Trapezna metoda
+		\begin{align*}
+			I = \sum_{i=0}^{n-1} \frac{y_i +y_{i+1}}{2} \frac{b - a}{n} &= \frac{b-a}{2n} (y_0 + 2y_1 + 2y_2 + \dots + 2y_{n-1} + y_{n})\\
+			\abs{R_n} &\leq \frac{(b-a)^3}{12n^2} \max_{x \in [a,b]} \abs{f''(x)} \quad \text{napaka}
+		\end{align*}
+		\item Simpsonova metoda\\
+		Izberemo $2n$ delilnih tock in na vsakem intervalu ploscino aproks. s kvad. parabolo.
+		\begin{align*}
+			x_i = a + i\frac{b-a}{2n}\\
+			I = \int_{a}^{b} f(x)dx &\doteq \frac{b-a}{6n} (y_0 + 4y_1 + 2y_2 + 4y_3 + 2y_4 + \dots + 4y_{2n-1} + y_{2n})\\
+			\abs{R_n} &\leq \frac{(b-a)^5}{2880n^4} \max_{x \in [a,b]} \abs{f^{(4)}(x)} \quad \text{napaka}
+		\end{align*}
+	\end{enumerate}
+%
+	\subsection*{Izlimitirani integrali}
+	\begin{enumerate}
+		\item $f$ ni omejena v krajiscih $a$ ALI $b$
+		\begin{align*}
+			\int_{a}^{b} f(x)dx = \lim_{c \to a} \int_{c}^{b} f(x)dx \quad \text{enako za b}
+		\end{align*}
+		\item $f$ ni omejena v krajiscih $a$ IN $b$
+		\begin{align*}
+			\int_{a}^{b} f(x)dx = \int_{a}^{c} f(x)dx + \int_{c}^{b} f(x)dx = \lim_{d\to a} \int_{d}^{c} f(x)dx + \lim_{e\to b} \int_{c}^{e} f(x)dx  
+		\end{align*}
+		\item $f$ ni omejena v krajiscu $c \in [a,b]$
+		\begin{align*}
+			\int_{a}^{b} f(x)dx = \int_{c}^{a} f(x)dx + \int_{b}^{c} f(x)dx = \lim_{d \to -c} \int_{d}^{a} f(x)dx + \lim_{e \to c} \int_{b}^{e} f(x)dx
+		\end{align*}
+		\item Ena od mej gre v neskoncnost
+		\begin{align*}
+			\int_{a}^{\infty} f(x)dx = \lim_{b \to \infty}\int_{a}^{b} f(x)dx\\
+			\int_{-\infty}^{b} f(x)dx = \lim_{a \to -\infty}\int_{a}^{b} f(x)dx\\
+			\int_{-\infty}^{\infty} = \int_{-\infty}^{0} + \int_{0}^{\infty}
+		\end{align*}
+	\end{enumerate}
+%
+	\subsection*{Konvergenca integralov}
+		Integralski kriterij\\
+		\begin{align*}
+			f \ge 0 \quad a \in \R: \quad \int_{a}^{\infty} \frac{1}{f(x)}dx \quad \text{obstaja} \Longleftrightarrow \sum_{n = a}^{\infty} \frac{1}{f(n)}
+		\end{align*}		
+		\begin{align*}
+			\int_{a}^{b} \frac{f(x)}{(x-a)^s}dx \quad f(x) \text{je zvezdna na} [a,b]\\
+		\end{align*}
+		\begin{itemize}
+			\item ce je $s < 1$ => integral konvergira
+			\item ce je $s \geq 1$ in $f(a) \neq 0$ => integral divergira
+		\end{itemize}
+		\begin{align*}
+			\int_{a}^{\infty} \frac{f(x)}{x^s}dx \quad f(x) \text{je zvezdna in omejena na} [a,b]\\
+		\end{align*}
+		\begin{itemize}
+			\item ce je $s > 1$ => integral konvergira
+			\item ce je $s \leq 1$ in $\abs{f(x)} \geq m > 0$ za vse x od nekje naprej => integral divergira
+		\end{itemize}
+%
+	\subsection*{Parametricno podane funkcije}
+		\begin{align*}
+			pl = \frac{1}{2} \abs{\int_{t_1}^{t_2}(x\dot{y} - \dot{x}y)dt}\\
+			pl = \abs{\int_{t_1}^{t_2}x\dot{y}dt} = \abs{\int_{t_1}^{t_2}\dot{x}ydt} \quad \text{enostavna sklenjena krivulja}\\
+			pl = \frac{1}{2} \int_{\phi_1}^{\phi_2} r^2 d\phi \quad \text{v polarnih kordinatah}\\
+			l = \int_{t_1}^{t_2} \sqrt{\dot{x}^2 + \dot{y}^2}dt \quad \text{dolzina krivulje}\\
+			V = \int_{z_1}^{z_2} S(z)dz \quad \text{Volumen vrtenine}
+		\end{align*}
+%
+	\subsection*{Pazi}
+	\begin{align*}
+		\int \text{soda funkcija} = \text{liha funkcija} &\quad \int \text{liha funkcija} = \text{soda funkcija}\\
+		\int_{a}^{b} f(x)dx = \int_{\beta}^{\alpha} f(g(t))g'(t)dx\\
+		x = g(t) \quad \text{za monotone funkcije} &\quad \alpha = g(a) \quad \beta = g(b)
+	\end{align*}
+%
+	\section*{Parcialni odvodi}
+	\begin{align*}
+		f_{x_i}\dpar{f(x)}{x_1} (a_1, \dots ,a_n) = \lim_{h \to 0} \frac{f(a_1,\dots,a_i + h, \dots , a_n) - f(a_1,\dots,a_n)}{h}\\
+		\text{grad} f = \okr{\dpar{f(x)}{x_1}, \dots, \dpar{f(x)}{x_n}} \quad \text{Smer najvecjega narascanje}\\
+		f_{\vec{u}}(\vec{a}) = \lim_{h \to 0} \frac{f(\vec{a} + h\vec{u}) - f(\vec{a})}{h} = <\text{grad} f(\vec{a}), \vec{u}>
+	\end{align*}	
+%
+	\section*{Kotne funkcije}
+	\subsection*{Adicijski izreki}
+	\begin{align*}
+		\sin{x \pm y} &= \sin{x}\cos{y} \pm \sin{y}\cos{x}\\
+		\cos{x \mp y} &= \cos{x}\cos{y} \pm \sin{x}\sin{y}\\
+		\tan{x \pm y} &= \frac{\tan{x} \pm \tan{y}}{1 \mp \tan{x}\tan{y}}
+	\end{align*}
+	%\subsection*{Dvojni koti}
+	\subsection*{Faktorizacija}
+	\begin{align*}
+		\sin{x} + \sin{y} &= 2\sin{\frac{x+y}{2}} \cos{\frac{x-y}{2}}\\
+		\sin{x} - \sin{y} &= 2\sin{\frac{x-y}{2}} \cos{\frac{x+y}{2}}\\
+		\cos{x} + \cos{y} &= 2\cos{\frac{x+y}{2}} \cos{\frac{x-y}{2}}\\
+		\cos{x} - \cos{y} &= -2\sin{\frac{x-y}{2}} \sin{\frac{x+y}{2}}
+	\end{align*}
+	\subsection*{Razclenevanje}
+	\begin{align*}
+		\sin{x}\sin{y} &= -\frac{1}{2}\left(\cos{(x+y)} - \cos{(x-y)} \right)\\
+		\cos{x}\cos{y} &= \frac{1}{2}\left(\cos{(x+y)} + \cos{(x-y)} \right)\\
+		\sin{x}\cos{y} &= \frac{1}{2}\left(\sin{(x+y)} + \sin{(x-y)} \right)
+	\end{align*}
+
+	\begin{align*}
+		\cos^2{x} &= \frac{\cos{2x} + 1}{2} & \sin^2{x} &= \frac{1 - \cos{2x}}{2}
+	\end{align*}	
+
+
+\end{multicols}
+\end{document}
+% vim: syntax=tex:
+% vim set: spell spelllang=sl:
+% vim: foldlevel=99
+
+% Latex template: Jure Slak, jure.slak@gmail.com
+% Dodatki k templatu: Rok Kos, kosrok97@gmail.com
+
